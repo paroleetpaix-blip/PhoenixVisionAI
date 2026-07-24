@@ -7,42 +7,66 @@ Model Manager
 Gestionnaire des modèles IA
 
 Phoenix Security Technologies
+SDK v0.5.0 Enterprise
 ========================================================
 """
 
-from ai.backends.yolo_backend import YOLOBackend
+from ai.backend_manager import BackendManager
+
 
 class ModelManager:
 
     def __init__(self):
 
-        self.current_model = None
+        self.backend = None
+
+        self.backend_name = "YOLO"
 
         self.model_name = "Aucun modèle"
 
-    
     def load(self, model_path):
 
-        self.current_model = YOLOBackend()
+        self.backend = BackendManager(
+            self.backend_name
+        )
 
-        self.current_model.load(model_path)
+        self.backend.load(model_path)
 
         self.model_name = model_path
 
-        print(f"Modèle chargé : {self.model_name}")
+        print(
+            f"Backend : {self.backend_name}"
+        )
 
-        return self.current_model
-        
+        print(
+            f"Modèle chargé : {self.model_name}"
+        )
+
+    def predict(self, frame):
+
+        if self.backend is None:
+
+            raise RuntimeError(
+                "Aucun backend chargé."
+            )
+
+        return self.backend.predict(frame)
+
     def unload(self):
 
-        self.current_model = None
+        if self.backend:
+
+            self.backend.unload()
+
+        self.backend = None
 
         self.model_name = "Aucun modèle"
-
 
     def info(self):
 
         return {
+
+            "backend": self.backend_name,
 
             "model": self.model_name
 

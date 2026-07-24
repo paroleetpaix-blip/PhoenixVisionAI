@@ -1,132 +1,138 @@
 """
 ========================================================
 PHOENIX VISION AI
-
 engine.py
 
-Moteur principal du système
+Moteur principal
 
 Phoenix Security Technologies
-Version SDK 0.4.0
+SDK v0.5.0 Enterprise
 ========================================================
 """
+
+from core import config
+from core.utils import print_banner, ensure_directories
 
 from core.detector import Detector
 from core.tracker import Tracker
 from core.counter import Counter
 from core.reporter import Reporter
-from core import config
-from core.utils import print_banner, ensure_directories
 from core.exporter import Exporter
 from core.logger import PhoenixLogger
+
 from core.video_reader import VideoReader
 from core.video_writer import VideoWriter
 from core.annotator import Annotator
-from core.importer import Importer
+from core.health_check import HealthCheck
 
 
 class PhoenixEngine:
 
-    """
-    Orchestrateur principal de Phoenix Vision AI.
-    """
-
-
     def __init__(self):
-
-        self.name = config.APP_NAME
-
-        self.version = config.VERSION
 
         self.status = "Initialisé"
 
-
-        # Modules internes
-
         self.detector = Detector()
-
         self.tracker = Tracker()
-
         self.counter = Counter()
-
         self.reporter = Reporter()
-
         self.exporter = Exporter()
-
         self.logger = PhoenixLogger()
-
-        self.importer = Importer()
-
         self.annotator = Annotator()
 
-
     def start(self):
-
-        """
-        Démarre le moteur.
-        """
 
         print_banner()
 
         ensure_directories()
 
-
         print("Initialisation du moteur...")
 
-
         self.detector.load()
+
+        health = HealthCheck(self.detector)
+
+        if not health.run():
+            raise RuntimeError(
+                "Health Check échoué."
+            )
 
         self.status = "Actif"
 
         self.logger.info("PhoenixEngine démarré")
 
-
         print("✓ PhoenixEngine prêt.")
-
-
 
     def analyze(self, source):
 
-        """
-        Lance une analyse complète.
-        """
-
         if self.status != "Actif":
-
             raise RuntimeError(
-                "Le moteur doit être démarré avant l'analyse."
+                "Le moteur doit être démarré."
             )
 
-
         print()
+        print(f"Analyse de : {source}")
 
-        print("Analyse de :", source)
+        reader = VideoReader(source)
+        reader.open()
 
+        info = reader.info()
 
-        # 1 - Détection
-
-        detections = self.detector.detect(source)
-
-
-
-        # 2 - Tracking
-
-        tracked_objects = self.tracker.update(
-            detections
+        print(
+            f"Vidéo : "
+            f"{info['width']}x{info['height']} "
+            f"{info['fps']} FPS"
         )
 
-
-
-        # 3 - Comptage
-
-        self.counter.process(
-            detections
+        writer = VideoWriter(
+            "outputs/output.mp4",
+            info["fps"],
+            info["width"],
+            info["height"]
         )
 
+        frame_index = 0
+
+        self.counter.reset()
+
+        while True:
+
+            success, frame = reader.read()
+
+            if not success:
+                break
+
+            detections = self.detector.detect(frame)
+
+            tracked = self.tracker.update(
+                detections
+            )
+
+            self.counter.process(tracked)
+
+            annotated = self.annotator.draw(
+                frame,
+                tracked
+            )
+
+            writer.write(annotated)
+
+            frame_index += 1
+
+            if frame_index % 30 == 0:
+
+                print(
+                    f"Frame : "
+                    f"{frame_index}/"
+                    f"{info['frames']}"
+                )
+
+        reader.release()
+        writer.release()
 
         report = self.reporter.build(
             source,
-            tracked_objects,
+            frame_index,
             self.counter.report()
         )
 
@@ -135,32 +141,29 @@ class PhoenixEngine:
             report
         )
 
-        self.logger.info(f"Analyse lancée : {source}")
-
-        self.logger.info("Rapport JSON enregistré")
-
-        return report
-
-
-
-    def stop(self):
-
-        """
-        Arrête le moteur.
-        """
-
-        self.status = "Arrêté"
-
-        self.logger.info("PhoenixEngine arrêté")
-
-        self.detector.unload()
-
+        self.logger.info(
+            "Analyse terminée"
+        )
 
         print()
 
+        print("✓ Vidéo exportée : outputs/output.mp4")
+        print("✓ Rapport JSON enregistré")
+
+        return report
+
+    def stop(self):
+
+        self.detector.unload()
+
+        self.status = "Arrêté"
+
+        self.logger.info(
+            "PhoenixEngine arrêté"
+        )
+
+        print()
         print("PhoenixEngine arrêté.")
-
-
 
     def get_status(self):
 

@@ -2,89 +2,69 @@
 ========================================================
 PHOENIX VISION AI
 
-YOLO Backend
-
-Interface entre Phoenix Vision AI
-et les modèles YOLO.
+YOLO Backend Enterprise
 
 Phoenix Security Technologies
+SDK v0.5.0 Enterprise
 ========================================================
 """
 
 from core.detection import Detection
 
-class YOLOBackend:
 
+class YOLOBackend:
 
     def __init__(self):
 
         self.model = None
 
-        self.name = "YOLO Backend"
-
-
+        self.name = "YOLOv8"
 
     def load(self, model_path):
 
-        """
-        Chargement du modèle YOLO.
-        
-        Pour le moment :
-        préparation de l'interface.
-        """
-
         self.model = model_path
 
-        print(
-            f"{self.name} prêt : {model_path}"
-        )
+        print(f"YOLO Backend prêt : {model_path}")
 
-
-
-    def predict(self, source):
+    def predict(self, frame):
 
         """
-        Lance une détection.
+        Version Foundation.
 
-        Retourne une liste standardisée
-        pour Phoenix Vision AI.
+        Aujourd'hui :
+            Simulation.
+
+        Plus tard :
+            YOLO réel (Google Colab)
+            puis YOLO local.
         """
 
         if self.model is None:
 
             raise RuntimeError(
-                "Modèle YOLO non chargé."
+                "Aucun modèle chargé."
             )
-
-
-        # Simulation temporaire
-        # remplacée par YOLO réel ensuite
 
         detections = [
 
             Detection(
                 label="car",
-                confidence=0.90,
-                bbox=[100, 120, 300, 400]
+                confidence=0.94,
+                bbox=[120, 150, 340, 420]
             ),
 
             Detection(
                 label="person",
-                confidence=0.85,
-                bbox=[200, 150, 260, 350]
+                confidence=0.88,
+                bbox=[520, 140, 620, 390]
             )
 
         ]
 
-
         return detections
-
-
 
     def unload(self):
 
         self.model = None
 
-        print(
-            "YOLO Backend arrêté."
-        )
+        print("YOLO Backend arrêté.")

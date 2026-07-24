@@ -15,30 +15,35 @@ from ai.model_manager import ModelManager
 
 
 class Detector:
+    """
+    Interface entre Phoenix Vision AI
+    et les modèles d'Intelligence Artificielle.
+    """
 
     def __init__(self):
 
-        self.manager = ModelManager()
-
-        self.model = None
+        self.model_name = config.MODEL_NAME
+        self.model_path = config.MODEL_PATH
 
         self.loaded = False
 
-        self.model_name = config.MODEL_NAME
-
+        self.manager = ModelManager()
 
     def load(self):
 
-        print(f"Chargement du modèle : {self.model_name}")
+        print(
+            f"Chargement du modèle : {self.model_name}"
+        )
 
-        self.model = self.manager.load(self.model_name)
+        self.manager.load(
+            self.model_path
+        )
 
         self.loaded = True
 
         print("✓ Modèle chargé.")
 
-
-    def detect(self, source):
+    def detect(self, frame):
 
         if not self.loaded:
 
@@ -46,21 +51,16 @@ class Detector:
                 "Le modèle IA n'est pas chargé."
             )
 
-        print(f"Analyse de : {source}")
-
-        detections = self.model.predict(source)
-
-        print("✓ Analyse terminée.")
-
-        return detections
-
+        return self.manager.predict(frame)
 
     def unload(self):
 
         self.manager.unload()
 
-        self.model = None
-
         self.loaded = False
 
         print("Modèle déchargé.")
+
+    def info(self):
+
+        return self.manager.info()

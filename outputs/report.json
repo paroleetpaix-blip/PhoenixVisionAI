@@ -5,32 +5,9 @@
     "analysis": {
         "source": "videos/route.mp4",
         "date": "2026-07-24",
-        "time": "01:38:42"
+        "time": "20:48:55",
+        "frames_processed": 750
     },
-    "objects": [
-        {
-            "id": 1,
-            "label": "car",
-            "confidence": 0.9,
-            "bbox": [
-                100,
-                120,
-                300,
-                400
-            ]
-        },
-        {
-            "id": 2,
-            "label": "person",
-            "confidence": 0.85,
-            "bbox": [
-                200,
-                150,
-                260,
-                350
-            ]
-        }
-    ],
     "statistics": {
         "objects": {
             "car": 1,

@@ -1,12 +1,12 @@
 """
 ========================================================
 PHOENIX VISION AI
-
 reporter.py
 
 Création des rapports d'analyse.
 
 Phoenix Security Technologies
+SDK v0.5.0 Enterprise
 ========================================================
 """
 
@@ -16,7 +16,10 @@ from core import config
 
 class Reporter:
 
-    def build(self, source, tracked_objects, statistics):
+    def build(self, source, frames, statistics):
+        """
+        Génère un rapport d'analyse.
+        """
 
         now = datetime.now()
 
@@ -34,11 +37,11 @@ class Reporter:
 
                 "date": now.strftime("%Y-%m-%d"),
 
-                "time": now.strftime("%H:%M:%S")
+                "time": now.strftime("%H:%M:%S"),
+
+                "frames_processed": frames
 
             },
-
-            "objects": tracked_objects,
 
             "statistics": statistics
 
