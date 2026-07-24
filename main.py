@@ -1,37 +1,37 @@
-import cv2
-from camera.camera import Camera
+from launcher.splash import SplashScreen
 
-print("=" * 50)
-print("PHOENIX VISION AI")
-print("=" * 50)
+from core.engine import PhoenixEngine
 
-camera = Camera()
 
-if not camera.is_open():
-    print("Impossible d'ouvrir la caméra.")
-    exit()
 
-while True:
+# =====================================
+# Phoenix Vision AI
+# Application Entry Point
+# =====================================
 
-    ret, frame = camera.read()
 
-    if not ret:
-        break
+# 1 - Splash Screen
 
-    cv2.putText(
-        frame,
-        "Phoenix Vision AI",
-        (20, 40),
-        cv2.FONT_HERSHEY_SIMPLEX,
-        1,
-        (0, 255, 0),
-        2,
-    )
+splash = SplashScreen()
 
-    cv2.imshow("Phoenix Vision AI", frame)
+splash.show()
 
-    if cv2.waitKey(1) & 0xFF == ord("q"):
-        break
 
-camera.release()
-cv2.destroyAllWindows()
+
+# 2 - Démarrage du moteur
+
+engine = PhoenixEngine()
+
+engine.start()
+
+
+
+# 3 - Analyse
+
+engine.analyze("videos/route.mp4")
+
+
+
+# 4 - Arrêt
+
+engine.stop()

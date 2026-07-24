@@ -1,0 +1,54 @@
+{
+    "project": "Phoenix Vision AI",
+    "version": "0.4.0",
+    "company": "Phoenix Security Technologies",
+    "analysis": {
+        "source": "videos/route.mp4",
+        "date": "2026-07-23",
+        "time": "06:43:41"
+    },
+    "objects": [
+        {
+            "id": 1,
+            "class": "car"
+        },
+        {
+            "id": 2,
+            "class": "car"
+        },
+        {
+            "id": 3,
+            "class": "person"
+        },
+        {
+            "id": 4,
+            "class": "truck"
+        },
+        {
+            "id": 5,
+            "class": "bus"
+        },
+        {
+            "id": 6,
+            "class": "motorcycle"
+        },
+        {
+            "id": 7,
+            "class": "car"
+        },
+        {
+            "id": 8,
+            "class": "person"
+        }
+    ],
+    "statistics": {
+        "objects": {
+            "car": 3,
+            "motorcycle": 1,
+            "bus": 1,
+            "truck": 1,
+            "person": 2
+        },
+        "total": 8
+    }
+}
