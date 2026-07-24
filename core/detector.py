@@ -6,6 +6,7 @@ detector.py
 Gestionnaire de détection IA
 
 Phoenix Security Technologies
+SDK v0.5.0 Enterprise
 ========================================================
 """
 
@@ -14,28 +15,19 @@ from ai.model_manager import ModelManager
 
 
 class Detector:
-    """
-    Interface entre Phoenix Vision AI
-    et les modèles d'intelligence artificielle.
-    """
 
     def __init__(self):
 
+        self.manager = ModelManager()
+
         self.model = None
-
-        self.model_name = config.MODEL_NAME
-
-        self.model_path = config.MODEL_PATH
 
         self.loaded = False
 
-        self.manager = ModelManager()
+        self.model_name = config.MODEL_NAME
 
 
     def load(self):
-        """
-        Charge le modèle IA.
-        """
 
         print(f"Chargement du modèle : {self.model_name}")
 
@@ -45,15 +37,11 @@ class Detector:
 
         print("✓ Modèle chargé.")
 
-    def detect(self, source):
-        """
-        Lance une détection.
 
-        Pour la version Foundation,
-        nous simulons des résultats.
-        """
+    def detect(self, source):
 
         if not self.loaded:
+
             raise RuntimeError(
                 "Le modèle IA n'est pas chargé."
             )
@@ -66,15 +54,13 @@ class Detector:
 
         return detections
 
+
     def unload(self):
-        """
-        Libère le modèle mémoire.
-        """
-
-        self.model = ...
-
-        self.loaded = False
 
         self.manager.unload()
+
+        self.model = None
+
+        self.loaded = False
 
         print("Modèle déchargé.")

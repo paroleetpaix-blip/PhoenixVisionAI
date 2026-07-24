@@ -4,51 +4,41 @@
     "company": "Phoenix Security Technologies",
     "analysis": {
         "source": "videos/route.mp4",
-        "date": "2026-07-23",
-        "time": "06:43:41"
+        "date": "2026-07-24",
+        "time": "01:38:42"
     },
     "objects": [
         {
             "id": 1,
-            "class": "car"
+            "label": "car",
+            "confidence": 0.9,
+            "bbox": [
+                100,
+                120,
+                300,
+                400
+            ]
         },
         {
             "id": 2,
-            "class": "car"
-        },
-        {
-            "id": 3,
-            "class": "person"
-        },
-        {
-            "id": 4,
-            "class": "truck"
-        },
-        {
-            "id": 5,
-            "class": "bus"
-        },
-        {
-            "id": 6,
-            "class": "motorcycle"
-        },
-        {
-            "id": 7,
-            "class": "car"
-        },
-        {
-            "id": 8,
-            "class": "person"
+            "label": "person",
+            "confidence": 0.85,
+            "bbox": [
+                200,
+                150,
+                260,
+                350
+            ]
         }
     ],
     "statistics": {
         "objects": {
-            "car": 3,
-            "motorcycle": 1,
-            "bus": 1,
-            "truck": 1,
-            "person": 2
+            "car": 1,
+            "motorcycle": 0,
+            "bus": 0,
+            "truck": 0,
+            "person": 1
         },
-        "total": 8
+        "total": 2
     }
 }

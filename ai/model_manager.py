@@ -29,9 +29,7 @@ class ModelManager:
 
         self.model_name = model_path
 
-        print(
-            f"Modèle chargé : {self.model_name}"
-        )
+        print(f"Modèle chargé : {self.model_name}")
 
         return self.current_model
         
