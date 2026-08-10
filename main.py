@@ -2,6 +2,7 @@ from launcher.splash import SplashScreen
 
 from core.engine import PhoenixEngine
 
+from core import runtime
 
 
 # =====================================
@@ -21,6 +22,8 @@ splash.show()
 # 2 - Démarrage du moteur
 
 engine = PhoenixEngine()
+
+runtime.engine = engine
 
 engine.start()
 
