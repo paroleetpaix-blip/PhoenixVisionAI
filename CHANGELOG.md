@@ -1,134 +1,95 @@
-# CHANGELOG
+# CHANGELOG — Phoenix Vision AI
 
-Toutes les modifications importantes du projet **Phoenix Vision AI** seront documentées dans ce fichier.
+Toutes les modifications significatives du projet Phoenix Vision AI sont documentées ici.
 
-Le projet suit les principes du **Semantic Versioning (SemVer)** :
-MAJOR.MINOR.PATCH
-
-Exemple :
-- 1.0.0
-- 1.1.0
-- 1.1.1
+Le projet est encore en développement. Les entrées **Unreleased** ne constituent pas une version de production.
 
 ---
 
-# [0.1.0] - 2026-07-18
+## [Unreleased] — SDK v0.5.0 Enterprise
 
-## 🎉 Première version officielle
+### Interface Enterprise
+- Launcher Enterprise.
+- Login sécurisé.
+- Formulaire professionnel de demande de compte.
+- Phoenix Admin pour validation des demandes.
+- Attribution d’identifiants Phoenix.
+- Upload et affichage des photos de profil.
+- Rôles `ADMIN`, `SUPERVISOR`, `OPERATOR`, `ANALYST`.
+- Changement obligatoire du mot de passe temporaire.
+- Dashboard Enterprise : topbar, sidebar, grille 3×3, événements, véhicule, localisation, statut système et plein écran.
+- Session utilisateur réelle via `/api/session/me`.
+- Utilisation de `logoS.png` pour le symbole Phoenix.
 
-### Ajout
-- Initialisation du projet Phoenix Vision AI.
-- Création de l'architecture professionnelle.
-- Configuration de Python.
-- Configuration de l'environnement virtuel.
-- Installation d'OpenCV.
-- Création des modules Camera et Detection.
-- Création de main.py.
-- Lecture de la webcam.
-- Lecture de vidéos locales.
-- Création du dépôt Git.
-- Premier commit officiel.
-- Publication du projet sur GitHub.
+### Sécurité
+- Cookie de session `HttpOnly`.
+- `SameSite=Strict`.
+- Contrôle serveur des sessions.
+- Protection des routes administratives.
+- PBKDF2-HMAC-SHA256 pour les comptes approuvés.
+- Nouvelle session après changement de mot de passe.
 
-### Technique
-- Python 3.12
-- OpenCV 4.8.1
-- NumPy 1.26.4
+### Vehicle Intelligence
+- `Vehicle`.
+- `VehicleManager`.
+- `VehicleAdapter`.
+- vitesse relative, direction, zone, menace, historique et franchissements.
+- suppression d’un bloc dupliqué dans `VehicleManager.update()`.
 
----
+### ANPR
+- `detection/plate_reader.py` devient l’implémentation canonique.
+- suppression de l’ancien `core/plate_reader.py` vide après audit.
+- OpenCV + Tesseract.
+- normalisation, confiance et statuts ANPR.
+- enrichissement de `Vehicle` avec `plate_raw`, `plate_confidence`, `plate_status`, `plate_last_seen`.
+- raccordement ANPR au moteur et à l’API.
+- état ANPR affiché dans le Dashboard.
+- Tesseract 5.3.4 validé.
+- smoke test : `2431AB01`, 89.5 %, `VALIDATED`.
+- test routier réel en cours.
 
-# [0.2.0] - En préparation
+### Problème technique identifié
+- `ai/backends/yolo_backend.py` est encore une simulation Foundation.
+- ses détections sont fixes et ne proviennent pas d’une vraie inférence YOLO.
+- le test réel ANPR ne pourra être évalué correctement qu’après connexion d’un backend de détection réel.
 
-## Objectif
+### Caméras / Streaming
+- CameraManager, FrameHub, Pipeline, StreamService.
+- grille Enterprise légère afin d’éviter neuf flux MJPEG simultanés sur la machine de développement.
 
-Première Intelligence Artificielle.
+### Web / API
+- API grille caméras.
+- API résumé Dashboard.
+- API session.
+- API véhicule courant.
+- routes Launcher, Login, Enterprise, Admin, changement de mot de passe et demande de compte.
 
-### Prévu
-- Installation de YOLOv8.
-- Détection des véhicules.
-- Affichage des rectangles.
-- Score de confiance.
-- Première démonstration IA.
+### Gouvernance
+Adoption de :
 
----
-
-# [0.3.0] - Planifié
-
-## Objectif
-
-Tracking intelligent.
-
-### Prévu
-- Attribution d'un identifiant unique à chaque véhicule.
-- Suivi des véhicules entre les images.
-- Comptage automatique.
-
----
-
-# [0.4.0] - Planifié
-
-## Objectif
-
-Lecture automatique des plaques.
-
-### Prévu
-- Intégration de PaddleOCR.
-- Détection des plaques.
-- Lecture du texte.
-- Affichage du score de confiance.
-
----
-
-# [0.5.0] - Planifié
-
-## Objectif
-
-Base de données.
-
-### Prévu
-- Historique des véhicules.
-- Recherche.
-- Export des données.
-- Gestion des véhicules signalés.
+```text
+SEARCH → COMPARE → MIGRATE → TEST → DELETE → RETEST → COMMIT
+```
 
 ---
 
-# [0.6.0] - Planifié
-
-## Objectif
-
-Alertes intelligentes.
-
-### Prévu
-- Véhicules recherchés.
-- Alerte sonore.
-- Capture automatique.
-- Journal des événements.
+## [0.4.0] — Foundation
+- PhoenixEngine.
+- health check.
+- lecteur/écriture vidéo.
+- détecteur, tracker, compteur, annotateur, reporter et exporter.
+- traitement de `videos/route.mp4`.
+- génération de `outputs/output.mp4` et `outputs/report.json`.
 
 ---
 
-# [0.7.0] - Planifié
-
-## Objectif
-
-Dashboard professionnel.
-
-### Prévu
-- Tableau de bord.
-- Statistiques.
-- Cartes.
-- Rapports.
-- Interface utilisateur complète.
+## [0.1.0] — Initial Project Structure
+- structure initiale du dépôt ;
+- environnement Python ;
+- webcam et vidéo de test ;
+- premiers modules detection/tracking/plate reader ;
+- README, requirements et `.gitignore`.
 
 ---
 
-# Vision 1.0
-
-Première version professionnelle de Phoenix Vision AI capable de :
-
-- Détecter les véhicules.
-- Lire les plaques.
-- Suivre les déplacements.
-- Générer des alertes.
-- Enregistrer les événements.
-- Produire des rapports exploitables.
+© 2026 Phoenix Security Technologies — Tous droits réservés.

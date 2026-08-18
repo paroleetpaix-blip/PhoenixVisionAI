@@ -1,13 +1,58 @@
+# ============================================================
+# PHOENIX VISION AI
+# Python dependencies — Enterprise development
+# ============================================================
+
+# Core numerical / computer vision
 numpy==1.26.4
 opencv-python==4.8.1.78
+tqdm>=4.66,<5
 
-# IA
-ultralytics
-torch
-torchvision
+# Web / Enterprise UI
+fastapi>=0.115,<1
+uvicorn[standard]>=0.30,<1
+jinja2>=3.1,<4
+python-multipart>=0.0.9,<1
 
-# OCR
-paddleocr
+# Runtime / system monitoring
+psutil>=5.9,<8
 
-# Utilitaires
-tqdm
+# HTTP / cloud integration
+requests>=2.31,<3
+
+# Testing (optional for development)
+# pytest>=8,<9
+
+# ============================================================
+# ANPR — SYSTEM DEPENDENCY
+# ============================================================
+# Tesseract is installed separately, not through pip.
+#
+# Ubuntu / Lubuntu:
+# sudo apt update
+# sudo apt install -y tesseract-ocr tesseract-ocr-eng
+#
+# Current validated development environment:
+# Tesseract 5.3.4
+# eng language data available
+# ============================================================
+
+# ============================================================
+# OPTIONAL / FUTURE AI BACKENDS
+# ============================================================
+# Current ai/backends/yolo_backend.py is still a Foundation
+# simulation and does not yet perform real local YOLO inference.
+#
+# Add only after target-machine compatibility validation:
+#
+# ultralytics>=8,<9
+# torch
+# torchvision
+#
+# Future OCR alternative:
+# paddleocr
+# paddlepaddle
+#
+# PaddleOCR is intentionally not required by the current
+# Tesseract-based PlateReader.
+# ============================================================

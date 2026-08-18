@@ -1,29 +1,92 @@
-Phoenix Vision AI
-Commercial Software License v1.0
+PHOENIX VISION AI — PROPRIETARY SOFTWARE LICENSE
 
-Copyright (c) 2026 Ritchi Biongo.
+Copyright (c) 2026 Phoenix Security Technologies.
 All rights reserved.
 
-This software, including its source code, documentation,
-architecture, models, graphics and related materials,
-is the exclusive property of Ritchi Biongo.
+Project: Phoenix Vision AI
+Project owner: Phoenix Security Technologies
+Project lead / creator: Ritchi Biongo
 
-No person or organization may:
+1. PROPRIETARY STATUS
 
-- copy this software;
-- modify this software;
-- redistribute this software;
-- publish the source code;
-- create derivative works;
-- reverse engineer the software;
-- use any part of this project for commercial purposes
+Phoenix Vision AI, including its original source code, user interfaces,
+documentation, architecture, project-specific algorithms, branding, designs,
+workflows and other original materials created specifically for the project,
+is proprietary software.
 
-without prior written permission from the copyright owner.
+Except where expressly authorized in writing by Phoenix Security Technologies,
+no license is granted to copy, reproduce, publish, distribute, sublicense,
+sell, rent, lease, commercialize, host, deploy, modify, create derivative
+works from, reverse engineer, decompile, disassemble or otherwise exploit
+the proprietary portions of Phoenix Vision AI.
 
-A commercial license may be granted only by the copyright owner.
+2. AUTHORIZED USE
 
-Unauthorized use may result in legal action.
+Use of Phoenix Vision AI is permitted only by Phoenix Security Technologies,
+persons expressly authorized by it, or parties covered by a written agreement.
 
-Phoenix Vision AI™
-Developed by Ritchi Biongo.
-All rights reserved.
+Access to source code or documentation does not by itself grant a right to
+reuse, redistribute or commercialize the software.
+
+3. CONFIDENTIAL AND SECURITY-SENSITIVE MATERIAL
+
+Non-public source code, security configurations, credentials, architecture
+details, deployment information, customer data, camera data, ANPR data,
+evidence, logs and administrative information must be treated as confidential
+when designated as confidential or reasonably understood to be sensitive.
+
+No credential, private key, secret, personal data, operational video or
+protected customer information may be published with the source code unless
+expressly authorized and legally permitted.
+
+4. THIRD-PARTY COMPONENTS
+
+Third-party libraries, models, frameworks, datasets and other components
+remain governed by their own licenses. Nothing in this license replaces or
+restricts rights granted by applicable third-party licenses.
+
+5. BRANDING
+
+The names “Phoenix Vision AI” and “Phoenix Security Technologies”, their
+logos and related brand assets may not be used to imply sponsorship,
+endorsement, partnership or authorization without prior written permission.
+
+6. DATA AND DEPLOYMENT RESPONSIBILITY
+
+Any deployment involving cameras, vehicle information, license plates,
+biometric information, security evidence, employee information or other
+personal or sensitive data must comply with applicable contracts, policies
+and laws.
+
+Possession of the software does not itself authorize surveillance,
+identification, data collection or processing.
+
+7. NO WARRANTY
+
+To the maximum extent permitted by applicable law, Phoenix Vision AI is
+provided without warranties of any kind unless a separate written agreement
+expressly states otherwise.
+
+Development, prototype, evaluation and pre-production versions may contain
+defects, incomplete functions or experimental components and must not be
+treated as certified safety, law-enforcement or mission-critical systems.
+
+8. WRITTEN AGREEMENTS
+
+A separate signed agreement may grant additional rights and may supersede
+relevant parts of this license for the parties covered by that agreement.
+
+9. AUTHORIZATION
+
+Requests for licensing, evaluation, partnership, investment, deployment or
+written authorization must be addressed to Phoenix Security Technologies
+through its officially designated communication channels.
+
+NOTICE
+
+This license expresses the intended proprietary status of Phoenix Vision AI.
+Before relying on it for a major commercial, governmental or cross-border
+deployment, Phoenix Security Technologies should have the final licensing
+and contractual framework reviewed by qualified legal counsel.
+
+© 2026 Phoenix Security Technologies. All rights reserved.

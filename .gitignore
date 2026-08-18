@@ -1,19 +1,71 @@
+# ============================================================
+# PHOENIX VISION AI
+# Git Ignore — Enterprise
+# ============================================================
+
+# Python
 venv/
+.venv/
+env/
 __pycache__/
-*.pyc
+**/__pycache__/
+*.py[cod]
+.pytest_cache/
 
+# IDE / OS
 .vscode/
+.idea/
+.DS_Store
+Thumbs.db
 
+# Secrets
 .env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
 
+# Logs
 logs/
+*.log
 
-captures/
-
+# Local databases
 *.sqlite3
-
+*.sqlite
 *.db
 
-.DS_Store
+# Sensitive Phoenix user data
+data/account_requests.json
+data/approved_users.json
+web/static/uploads/users/
 
-Thumbs.db
+# Generated outputs
+outputs/*
+!outputs/.gitkeep
+
+# Captures / recordings
+captures/
+Enregistrements\ vidéos/
+
+# Packaging
+build/
+dist/
+*.egg-info/
+
+# Temporary files
+*.swp
+*.swo
+*~
+*.tmp
+
+# Generated annotated videos
+videos/*.avi
+
+# Generated documentation packs
+Documentation\ Phoenix\ Vision\ AI/
+
+# Controlled test fixtures
+!tests/fixtures/
+!tests/fixtures/**

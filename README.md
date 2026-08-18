@@ -1,484 +1,361 @@
-# 🛡️ Phoenix Vision AI
+<div align="center">
 
-<p align="center">
+<img src="web/static/images/logoS.png" alt="Phoenix Vision AI" width="170">
 
-**Une plateforme intelligente de surveillance routière alimentée par l'Intelligence Artificielle**
+# PHOENIX VISION AI
 
-### Développé par Phoenix Security Technologies
-
-**"L'innovation au service de la protection."**
-
-</p>
-
----
-
-# 📖 Présentation
-
-Phoenix Vision AI est une plateforme d'analyse vidéo conçue pour améliorer la sécurité routière grâce à l'intelligence artificielle.
-
-Le système est capable d'analyser automatiquement des flux vidéo provenant de caméras de surveillance afin de détecter les véhicules, identifier leurs plaques d'immatriculation, suivre leurs déplacements et assister les autorités dans leurs missions de sécurité.
-
-Notre ambition est de développer une technologie moderne, adaptée aux réalités africaines, pouvant évoluer vers une solution nationale de surveillance intelligente.
-
----
-
-# 🎯 Objectifs
-
-- Améliorer la sécurité routière.
-- Faciliter la recherche des véhicules signalés.
-- Automatiser la lecture des plaques d'immatriculation.
-- Produire des statistiques sur la circulation.
-- Fournir une plateforme d'aide à la décision pour les autorités.
-
----
-
-# 🚀 Fonctionnalités prévues
-
-## Détection intelligente
-
-- 🚗 Voitures
-- 🏍️ Motos
-- 🚚 Camions
-- 🚌 Bus
-
----
-
-## Lecture automatique des plaques
-
-- OCR intelligent
-- Plaques multiples
-- Vérification dans la base de données
-
----
-
-## Alertes
-
-- Véhicule recherché
-- Plaque signalée
-- Historique
-- Capture automatique
-
----
-
-## Tableau de bord
-
-- Nombre de véhicules
-- Nombre de motos
-- Alertes en temps réel
-- Historique des événements
-- Statistiques
-
----
-
-## Compatibilité
-
-- Webcam USB
-- Vidéos MP4
-- Caméras IP
-- Flux RTSP
-- Caméras de circulation
-
----
-
-# 🏗️ Architecture
-
-```
-Caméra
-
-↓
-
-Détection IA
-
-↓
-
-Tracking
-
-↓
-
-Lecture des plaques
-
-↓
-
-Base de données
-
-↓
-
-Alertes
-
-↓
-
-Dashboard Phoenix Vision AI
-```
-
----
-
-# 🧠 Technologies utilisées
-
-- Python
-- OpenCV
-- YOLO (prévu)
-- ByteTrack (prévu)
-- PaddleOCR (prévu)
-- SQLite
-- PostgreSQL (prévu)
-- Git
-- GitHub
-
----
-
-# 📂 Structure du projet
-
-```
-PhoenixVisionAI/
-
-camera/
-detection/
-videos/
-models/
-database/
-config/
-docs/
-logs/
-tests/
-
-main.py
-video_test.py
-README.md
-requirements.txt
-```
-
----
-
-# 📈 Feuille de route
-
-## ✅ Version 0.1.0
-
-- Initialisation du projet
-- Architecture logicielle
-- Webcam
-- Lecture vidéo
-- Git
-- GitHub
-
----
-
-## 🔄 Version 0.2.0
-
-Détection automatique :
-
-- Voitures
-- Motos
-- Camions
-- Bus
-
----
-
-## 🔄 Version 0.3.0
-
-Tracking intelligent.
-
----
-
-## 🔄 Version 0.4.0
-
-Lecture automatique des plaques.
-
----
-
-## 🔄 Version 0.5.0
-
-Base de données des véhicules.
-
----
-
-## 🔄 Version 0.6.0
-
-Alertes intelligentes.
-
----
-
-## 🎉 Version 1.0.0
-
-Prototype démontrable.
-
----
-
-# 🌍 Vision
-
-Notre objectif est de contribuer au développement de solutions technologiques capables d'améliorer la sécurité routière et d'accompagner les institutions dans leur transformation numérique.
-
-Phoenix Vision AI est pensé comme une plateforme évolutive pouvant intégrer, à terme, d'autres modules tels que l'analyse du trafic, la reconnaissance de comportements anormaux et des tableaux de bord avancés.
-
----
-
-# 🤝 Contribution
-
-Le projet est actuellement en développement.
-
-Les contributions, suggestions et retours seront les bienvenus lorsque le projet atteindra une version suffisamment stable.
-
----
-
-# 📄 Licence
-
-La licence sera définie avant la première publication officielle.
-
----
-
-# 👨‍💻 Développeur
-
-**Ritchi Biongo**
-
-Fondateur de
+### Plateforme intelligente de supervision routière, sécurité vidéo et ANPR
 
 **Phoenix Security Technologies**
+*L’innovation au service de la protection.*
+
+</div>
 
 ---
 
-# 📧 Contact
+## 1. Présentation
 
-À venir.
+**Phoenix Vision AI** est une plateforme de vision par ordinateur et de supervision conçue pour centraliser l’analyse vidéo de la circulation, le suivi des véhicules, la lecture automatisée des plaques d’immatriculation (ANPR), les alertes intelligentes, l’historique, les rapports et l’administration des utilisateurs.
 
----
+Le projet est porté par **Phoenix Security Technologies** avec l’ambition de construire une solution adaptée aux réalités opérationnelles de la République démocratique du Congo, puis extensible à d’autres marchés africains.
 
-# ⭐ Phoenix Security Technologies
+Phoenix Vision AI est actuellement en **phase de développement Enterprise / SDK v0.5.0-dev**. Certaines briques sont fonctionnelles, d’autres sont encore en cours d’intégration ou de validation terrain.
 
-**L'innovation au service de la protection.**
-
-Construire aujourd'hui les solutions de sécurité de demain.
-
-
-# 🚦 Phoenix Vision AI
-
-<p align="center">
-
-# 🚦 Phoenix Vision AI
-
-### L'intelligence artificielle au service de la sécurité routière.
-
-Développé par **Phoenix Security Technologies**
-
-Version actuelle : **0.1.0**
-
-</p>
+> **Important :** le dépôt ne doit pas présenter comme “terminées” les fonctions qui ne sont pas encore validées sur données réelles.
 
 ---
 
-## 📖 Présentation
+## 2. Objectifs du logiciel
 
-Phoenix Vision AI est une plateforme de surveillance routière intelligente utilisant l'intelligence artificielle pour analyser automatiquement les flux vidéo.
+Phoenix Vision AI vise notamment à permettre :
 
-Le projet vise à :
-
-- 🚗 Détecter les véhicules
-- 🔢 Lire automatiquement les plaques d'immatriculation
-- 📍 Suivre les déplacements des véhicules
-- 🚨 Générer des alertes en temps réel
-- 📊 Produire des statistiques et des rapports
-- 🛡️ Aider les autorités à améliorer la sécurité routière
-
----
-
-# Vision du projet
-
-```
-                 Phoenix Vision AI
-
-                     Caméras
-                        │
-                        ▼
-                 Détection IA (YOLO)
-                        │
-                        ▼
-               Suivi des véhicules
-                  (ByteTrack)
-                        │
-                        ▼
-             Lecture des plaques
-                 (PaddleOCR)
-                        │
-                        ▼
-                Base de données
-                        │
-                        ▼
-         Alertes • Dashboard • Rapports
-```
+- la supervision de plusieurs caméras depuis un centre de contrôle ;
+- la détection et le suivi de véhicules ;
+- l’identification d’événements routiers et de comportements suspects ;
+- la lecture automatisée de plaques d’immatriculation ;
+- la consultation de l’historique des véhicules et événements ;
+- la génération de rapports et preuves ;
+- la recherche par plaque, caméra, date ou événement ;
+- la gestion sécurisée des utilisateurs et des rôles ;
+- l’intégration future avec cartes, centres de commandement et infrastructures publiques ou privées.
 
 ---
 
-# Fonctionnalités prévues
+## 3. État actuel du projet
 
-| Fonction | Statut |
-|----------|--------|
-| Webcam | ✅ |
-| Lecture vidéo | ✅ |
-| Architecture professionnelle | ✅ |
-| Git & GitHub | ✅ |
-| Détection IA (YOLO) | 🔄 |
-| Tracking | ⏳ |
-| OCR Plaques | ⏳ |
-| Base de données | ⏳ |
-| Dashboard | ⏳ |
-| Alertes | ⏳ |
+### Interface Enterprise
+
+| Module | État |
+|---|---|
+| Launcher Enterprise | ✅ Fonctionnel |
+| Login sécurisé | ✅ Fonctionnel |
+| Demande de compte | ✅ Fonctionnel |
+| Validation des comptes par administrateur | ✅ Fonctionnel |
+| Mot de passe temporaire + changement obligatoire | ✅ Fonctionnel |
+| Sessions HTTPOnly | ✅ Fonctionnel |
+| Photos de profil des comptes approuvés | ✅ Fonctionnel |
+| Dashboard Enterprise | ✅ Interface fonctionnelle |
+| Grille 3×3 caméras | ✅ Interface/API |
+| Profil et rôles | ✅ Session serveur |
+| Vue véhicule courant | ✅ VehicleManager |
+| Statut ANPR | ✅ Connecté au moteur |
+| Événements réels | 🔄 À connecter complètement |
+| Carte réelle | 🔄 À connecter |
+| Rapports Enterprise | 🔄 À finaliser |
+| Sauvegardes Enterprise | 🔄 À construire |
+
+### Vision IA et ANPR
+
+| Élément | État |
+|---|---|
+| Vehicle / VehicleManager | ✅ |
+| VehicleAdapter | ✅ |
+| Tracking / historique véhicule | ✅ Fondation |
+| PlateReader canonique | ✅ `detection/plate_reader.py` |
+| Tesseract OCR | ✅ Installé et détecté |
+| Smoke test ANPR contrôlé | ✅ `2431AB01` — 89,5 % |
+| Test image routière réelle | 🔄 En cours |
+| Détection locale YOLO réelle | ⚠️ Backend local actuellement simulé |
+| Détecteur spécialisé de plaques | ⏳ Futur |
+| Consensus ANPR multi-frame | ⏳ Futur |
+| PaddleOCR | ⏳ Option future |
+
+### Point technique important
+
+Le backend `ai/backends/yolo_backend.py` utilisé localement est encore une **implémentation Foundation simulée** : il renvoie actuellement des détections fixes pour tester l’architecture. Les résultats de détection locaux ne doivent donc pas être présentés comme une inférence YOLO réelle tant que ce backend n’a pas été remplacé ou connecté à un backend réel.
 
 ---
 
-# Structure du projet
+## 4. Architecture générale
 
-```
+```text
 PhoenixVisionAI/
-
+│
 ├── ai/
-├── camera/
-├── config/
-├── database/
-├── dashboard/
+├── cloud/
+├── colab_server/
+├── core/
+│   ├── application/
+│   ├── camera/
+│   ├── database/
+│   ├── events/
+│   ├── evidence/
+│   ├── framehub/
+│   ├── intelligence/
+│   ├── journey/
+│   ├── lines/
+│   ├── memory/
+│   ├── pipeline/
+│   ├── search/
+│   ├── security/
+│   ├── server/
+│   ├── storage/
+│   ├── streaming/
+│   ├── timeline/
+│   ├── ui/
+│   ├── users/
+│   ├── vehicle/
+│   ├── workspace/
+│   └── zones/
+│
 ├── detection/
-├── docs/
-├── logs/
-├── models/
+│   ├── detector.py
+│   ├── tracker.py
+│   └── plate_reader.py
+│
+├── web/
+│   ├── app.py
+│   ├── routes/
+│   ├── static/
+│   └── templates/
+│
 ├── tests/
+├── tools/
+├── docs/
+├── frames/
 ├── videos/
+├── outputs/
+├── run.py
+└── requirements.txt
+```
 
-├── main.py
-├── requirements.txt
-├── README.md
-├── CHANGELOG.md
-├── LICENSE
-└── .gitignore
+### Règle de nettoyage architectural
+
+```text
+SEARCH → COMPARE → MIGRATE → TEST → DELETE → RETEST → COMMIT
 ```
 
 ---
 
-# Technologies utilisées
+## 5. Flux de traitement cible
 
-| Technologie | Utilisation |
-|-------------|-------------|
-| Python | Langage principal |
-| OpenCV | Traitement vidéo |
-| YOLOv8 | Détection des véhicules |
-| ByteTrack | Tracking |
-| PaddleOCR | Lecture des plaques |
-| PyTorch | Intelligence artificielle |
-| Git | Gestion du code |
-| GitHub | Hébergement |
-
----
-
-# Roadmap
-
-## Version 0.1
-
-- Architecture
-- Webcam
-- Vidéo
-- Git
-- GitHub
-
----
-
-## Version 0.2
-
-- Détection IA
-- Rectangles verts
-- Comptage
-
----
-
-## Version 0.3
-
-- Tracking
-
----
-
-## Version 0.4
-
-- OCR
-
----
-
-## Version 0.5
-
-- Base de données
-
----
-
-## Version 0.6
-
-- Alertes intelligentes
-
----
-
-## Version 0.7
-
-- Dashboard professionnel
-
----
-
-# Philosophie
-
-Nous ne cherchons pas à réinventer l'intelligence artificielle.
-
-Nous intégrons les meilleures technologies open source afin de construire une solution fiable, performante et adaptée aux besoins de la sécurité routière.
-
----
-
-# Développement
-
-Environnement local :
-
-- Lubuntu
-- Python
-- OpenCV
-- VS Code
-
-Laboratoire IA :
-
-- Google Colab
-- GPU Tesla T4
-- PyTorch
-- YOLO
-
----
-
-# État du projet
-
-```
-Architecture         ██████████ 100%
-
-OpenCV               ██████████ 100%
-
-Git                  ██████████ 100%
-
-GitHub               ██████████ 100%
-
-Google Colab         ██████████ 100%
-
-YOLO                 ███░░░░░░░ 30%
-
-Tracking             ░░░░░░░░░░ 0%
-
-OCR                  ░░░░░░░░░░ 0%
-
-Dashboard            ░░░░░░░░░░ 0%
+```text
+CAMÉRA / VIDÉO
+      │
+      ▼
+DÉTECTION IA
+      │
+      ▼
+TRACKING
+      │
+      ▼
+VEHICLE ADAPTER
+      │
+      ▼
+VEHICLE MANAGER
+      │
+      ├───────────────┐
+      ▼               ▼
+ANPR / OCR        INTELLIGENCE
+      │               │
+      └───────┬───────┘
+              ▼
+        ÉVÉNEMENTS / MÉMOIRE
+              │
+              ▼
+          API FASTAPI
+              │
+              ▼
+      DASHBOARD ENTERPRISE
 ```
 
 ---
 
-# Auteur
+## 6. ANPR
 
-**Ritchi Biongo**
+Le module ANPR V1 repose actuellement sur :
 
-Fondateur de **Phoenix Security Technologies**
+- OpenCV pour le recadrage et le prétraitement ;
+- Tesseract OCR pour la lecture ;
+- normalisation des chaînes ;
+- score de confiance ;
+- conservation de la meilleure lecture dans `Vehicle`.
 
-Projet : **Phoenix Vision AI**
+### Validation actuelle
+
+```bash
+python tools/anpr_smoke_test.py
+```
+
+Résultat validé :
+
+```text
+Plaque          : 2431AB01
+Texte OCR brut  : 2431AB01
+Confiance       : 89.5 %
+Statut          : VALIDATED
+```
+
+Le test sur `frames/frame_000013.jpg` a atteint Tesseract mais retourne actuellement `OCR_EMPTY`. L’analyse a montré que le backend YOLO local renvoie des coordonnées simulées et fixes. La prochaine étape est donc de connecter un backend de détection réel avant d’évaluer la précision ANPR terrain.
 
 ---
 
-# Licence
+## 7. `route.mp4` et `route.avi`
 
-Ce projet est distribué sous la **Phoenix Vision AI Commercial License v1.0**.
+Les deux fichiers ont actuellement :
 
-Tous droits réservés.
+```text
+640×360
+25 FPS
+750 frames
+```
 
-© 2026 Ritchi Biongo.
+`route.avi` contient déjà des annotations/rectangles issus d’un traitement antérieur. Pour l’ANPR, `route.mp4` reste préférable car il s’agit de la source la plus propre, sans overlays susceptibles de masquer des pixels utiles.
+
+`route.avi` reste utile comme **référence visuelle de détection**.
+
+---
+
+## 8. Dashboard Enterprise
+
+Chaque bouton doit progressivement ouvrir une fonction réelle.
+
+| Élément | Fonction cible |
+|---|---|
+| Tableau de bord | Vue générale temps réel |
+| Caméras | État, recherche, vue individuelle, plein écran |
+| Événements | Franchissements, véhicules, événements système |
+| Alertes IA | Suspect, recherché, comportement anormal |
+| Historique | Recherche par date, véhicule, caméra, événement |
+| Carte | Caméras, zones et événements géolocalisés |
+| ANPR / Plaques | Dernières lectures, recherche et historique |
+| Rapports | PDF / CSV / JSON et statistiques |
+| Paramètres | Configuration générale |
+| Utilisateurs | Comptes, rôles, approbation, suspension |
+| Système | CPU, RAM, stockage, moteurs et services |
+| Sauvegardes | Sauvegarde et restauration |
+| Notifications | Centre de notifications |
+| Profil | Identité, photo et sécurité du compte |
+
+---
+
+## 9. Sécurité
+
+Phoenix Vision AI applique déjà plusieurs principes :
+
+- cookie de session `HttpOnly` ;
+- `SameSite=Strict` ;
+- rôles utilisateur ;
+- validation des comptes par administrateur ;
+- PBKDF2-HMAC-SHA256 pour les comptes approuvés ;
+- changement obligatoire du mot de passe temporaire ;
+- contrôle d’accès aux pages administratives.
+
+### À renforcer avant production
+
+- HTTPS obligatoire ;
+- expiration et rotation des sessions ;
+- stockage de session persistant ;
+- journalisation d’audit ;
+- politique de rétention ;
+- chiffrement des sauvegardes ;
+- secrets hors du code ;
+- protection CSRF ;
+- revue de sécurité et tests d’intrusion.
+
+---
+
+## 10. Installation
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+### Tesseract
+
+```bash
+sudo apt update
+sudo apt install -y tesseract-ocr tesseract-ocr-eng
+```
+
+### Lancement
+
+```bash
+python run.py
+```
+
+Interface :
+
+```text
+http://127.0.0.1:8000
+```
+
+---
+
+## 11. Tests utiles
+
+```bash
+python -m compileall -q core detection web tools
+python tools/anpr_smoke_test.py
+python tools/anpr_real_frame_test.py
+```
+
+Si `pytest` est installé :
+
+```bash
+python -m pytest tests -q
+```
+
+---
+
+## 12. Roadmap
+
+### V1 — Foundation / Enterprise Prototype
+Moteur vidéo, détection/tracking, Vehicle Intelligence, Dashboard Enterprise, comptes/rôles, ANPR V1, événements, historique, rapports et administration.
+
+### V2 — Smart Traffic & Security
+Détecteur de plaques spécialisé, ANPR multi-frame, alertes IA avancées, multi-site, cartes, recherche avancée, API d’intégration et haute disponibilité.
+
+### V3 — National / African Platform
+Centre de commandement multi-ville, corrélation inter-caméras, analyses avancées, Edge + Cloud et déploiements nationaux/régionaux.
+
+---
+
+## 13. Propriété
+
+**Phoenix Vision AI** est un projet de **Phoenix Security Technologies**.
+
+**Porteur du projet : Ritchi Biongo**
+Conception, vision produit, pilotage stratégique et développement du projet Phoenix Vision AI.
+
+Les composants tiers conservent leurs licences respectives.
+
+---
+
+## 14. Statut de production
+
+Phoenix Vision AI est actuellement un **logiciel en développement**. Il ne doit pas être présenté comme un système de sécurité publique, d’identification ou d’ANPR certifié tant que les validations terrain, sécurité, charge, résilience et conformité ne sont pas terminées.
+
+---
+
+<div align="center">
+
+**PHOENIX SECURITY TECHNOLOGIES**
+
+*L’innovation au service de la protection.*
+
+© 2026 Phoenix Security Technologies. Tous droits réservés.
+
+</div>
