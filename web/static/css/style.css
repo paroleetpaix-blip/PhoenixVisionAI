@@ -1,0 +1,653 @@
+*{
+
+margin:0;
+
+padding:0;
+
+box-sizing:border-box;
+
+}
+
+body{
+
+background:#10151d;
+
+font-family:Arial, Helvetica, sans-serif;
+
+color:white;
+
+height:100vh;
+
+overflow:hidden;
+
+}
+
+.topbar{
+
+height:60px;
+
+background:#181f2a;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:0 20px;
+
+border-bottom:1px solid #2d3646;
+
+}
+
+.logo{
+
+font-size:28px;
+
+font-weight:bold;
+
+letter-spacing:1px;
+
+}
+
+.status{
+
+color:#2cff62;
+
+font-weight:bold;
+
+font-size:18px;
+
+}
+
+.main-layout{
+
+display:grid;
+
+grid-template-columns:minmax(0,1fr) 290px;
+
+height:calc(100vh - 60px);
+
+overflow:hidden;
+
+}
+
+.video-grid{
+
+display:grid;
+
+grid-template-columns:repeat(2,minmax(0,1fr));
+
+grid-template-rows:repeat(2,minmax(0,1fr));
+
+gap:10px;
+
+padding:10px;
+
+height:100%;
+
+overflow:hidden;
+
+}
+
+.camera{
+
+background:#1b2330;
+
+border-radius:8px;
+
+display:flex;
+
+flex-direction:column;
+
+overflow:hidden;
+
+min-height:0;
+
+}
+
+.camera-title{
+
+height:40px;
+
+display:flex;
+
+align-items:center;
+
+padding-left:15px;
+
+font-weight:bold;
+
+background:#232d3d;
+
+}
+
+.camera-stream{
+
+width:100%;
+
+height:100%;
+
+flex:1;
+
+object-fit:cover;
+
+display:block;
+
+background:black;
+
+min-height:0;
+
+}
+
+.video-placeholder{
+
+flex:1;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:38px;
+
+color:#666;
+
+background:#2b3647;
+
+}
+
+.right-panel{
+
+background:rgba(22,30,42,.82);
+
+backdrop-filter:blur(8px);
+
+border-left:1px solid #2d3646;
+
+padding:15px;
+
+overflow:auto;
+
+}
+
+.right-panel h2{
+
+margin-bottom:15px;
+
+font-size:20px;
+
+}
+
+#events{
+
+font-size:15px;
+
+line-height:1.6;
+
+color:#d0d0d0;
+
+}
+
+.vehicle-panel{
+
+position:absolute;
+
+right:320px;
+
+top:80px;
+
+width:320px;
+
+height:620px;
+
+background:rgba(18,25,35,.94);
+
+backdrop-filter:blur(8px);
+
+border-radius:10px;
+
+padding:15px;
+
+box-shadow:0 0 30px rgba(0,0,0,.45);
+
+z-index:999;
+
+overflow:auto;
+
+}
+
+.hidden{
+
+display:none;
+
+}
+
+.panel-header{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:20px;
+
+}
+
+.panel-header button{
+
+background:#e53935;
+
+border:none;
+
+color:white;
+
+padding:6px 12px;
+
+border-radius:5px;
+
+cursor:pointer;
+
+}
+
+.panel-body{
+
+font-size:15px;
+
+line-height:1.7;
+
+}
+
+.panel-body hr{
+
+margin:10px 0;
+
+border:0;
+
+border-top:1px solid #39485b;
+
+}
+
+/* =======================================================
+   TOPBAR ENTERPRISE
+======================================================= */
+
+.topbar{
+
+    height:70px;
+
+    background:#111827;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:0 25px;
+
+    border-bottom:1px solid #1f2937;
+
+}
+
+.topbar-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+.logo-image{
+
+    width:48px;
+
+    height:48px;
+
+}
+
+.software-title{
+
+    color:white;
+
+    font-size:22px;
+
+    font-weight:bold;
+
+}
+
+.software-version{
+
+    color:#8aa4d6;
+
+    font-size:12px;
+
+}
+
+.topbar-center{
+
+    display:flex;
+
+    gap:30px;
+
+}
+
+.status-item{
+
+    color:white;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    font-size:14px;
+
+}
+
+.green-dot{
+
+    width:10px;
+
+    height:10px;
+
+    border-radius:50%;
+
+    background:#2ecc71;
+
+}
+
+.topbar-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:25px;
+
+    color:white;
+
+}
+
+#clock{
+
+    font-size:16px;
+
+    font-weight:bold;
+
+}
+
+.current-user{
+
+    color:#58a6ff;
+
+}
+
+/* =======================================================
+SIDEBAR ENTERPRISE
+======================================================= */
+
+.dashboard-container{
+
+    display:flex;
+
+}
+
+.sidebar{
+
+    width:240px;
+
+    background:#0d1522;
+
+    border-right:1px solid #1f2937;
+
+    min-height:calc(100vh - 70px);
+
+}
+
+.menu-title{
+
+    color:#6aa8ff;
+
+    font-size:13px;
+
+    letter-spacing:2px;
+
+    padding:20px;
+
+    font-weight:bold;
+
+}
+
+.sidebar-menu{
+
+    list-style:none;
+
+    margin:0;
+
+    padding:0;
+
+}
+
+.sidebar-menu li{
+
+    color:white;
+
+    padding:16px 22px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.sidebar-menu li:hover{
+
+    background:#162235;
+
+}
+
+.sidebar-menu .active{
+
+    background:#1b4fd8;
+
+    font-weight:bold;
+
+}
+
+.main-layout{
+
+    flex:1;
+
+}
+
+/* =======================================================
+SIDEBAR ENTERPRISE V2
+======================================================= */
+
+
+.sidebar-brand{
+
+    color:white;
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    padding:25px 20px;
+
+}
+
+
+.sidebar-brand span{
+
+    display:block;
+
+    color:#4da3ff;
+
+    font-size:11px;
+
+    letter-spacing:2px;
+
+}
+
+
+
+.operator-card{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:20px;
+
+    border-top:1px solid #1f2937;
+
+    border-bottom:1px solid #1f2937;
+
+}
+
+
+
+.operator-avatar{
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:50%;
+
+    background:#1261ff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:white;
+
+    font-weight:bold;
+
+}
+
+
+
+.operator-name{
+
+    color:white;
+
+    font-weight:bold;
+
+}
+
+
+
+.operator-role{
+
+    color:#8fa8cc;
+
+    font-size:12px;
+
+}
+
+
+
+.sidebar-status{
+
+    color:#b8c7df;
+
+    padding:15px 20px;
+
+    font-size:13px;
+
+}
+
+
+
+.sidebar-footer{
+
+    position:absolute;
+
+    bottom:20px;
+
+    padding:20px;
+
+    color:#68758a;
+
+    font-size:12px;
+
+}
+
+.camera-card{
+
+    background:#162235;
+
+    border:1px solid #2c3e50;
+
+    border-radius:10px;
+
+    overflow:hidden;
+
+}
+
+.camera-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    padding:10px;
+
+    background:#0d1522;
+
+    color:white;
+
+    font-weight:bold;
+
+}
+
+.camera-preview{
+
+    height:180px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:#202b3a;
+
+    color:#8aa4d6;
+
+}
+
+.camera-footer{
+
+    padding:8px;
+
+    color:#c9d1d9;
+
+    font-size:13px;
+
+}
+
+.online{
+
+    color:#2ecc71;
+
+}
+
+.offline{
+
+    color:#e74c3c;
+
+}

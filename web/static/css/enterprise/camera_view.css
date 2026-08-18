@@ -1,0 +1,115 @@
+body{
+
+    margin:0;
+
+    background:#111;
+
+    color:white;
+
+    overflow:hidden;
+
+    font-family:Arial;
+
+}
+
+.camera-layout{
+
+    display:grid;
+
+    grid-template-columns:3fr 1fr;
+
+    height:100vh;
+
+}
+
+.camera-video{
+
+    background:black;
+
+}
+
+.camera-stream{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+}
+
+.vehicle-panel{
+
+    background:#1d1d1d;
+
+    border-left:2px solid #2d7df5;
+
+    padding:20px;
+
+    overflow:auto;
+
+}
+
+.vehicle-panel h2{
+
+    margin-top:0;
+
+}
+
+.info-item{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    padding:12px;
+
+    margin-bottom:8px;
+
+    background:#252525;
+
+    border-radius:8px;
+
+}
+
+
+.info-item span{
+
+    color:#aaa;
+
+}
+
+
+.info-item b{
+
+    color:white;
+
+}
+
+
+.threat-low b{
+
+    color:#00ff88;
+
+}
+
+
+.threat-medium b{
+
+    color:#ffaa00;
+
+}
+
+
+.threat-high b{
+
+    color:#ff6600;
+
+}
+
+
+.threat-critical b{
+
+    color:red;
+
+}

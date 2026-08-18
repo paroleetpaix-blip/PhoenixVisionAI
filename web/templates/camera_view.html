@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>{{CAMERA_NAME}}</title>
+
+<link rel="stylesheet"
+href="/static/css/enterprise/camera_view.css">
+
+</head>
+
+<body>
+
+<div class="camera-layout">
+
+    <div class="camera-video">
+
+        <img
+
+            src="/video/{{CAMERA_NAME}}"
+
+            class="camera-stream"
+
+        >
+
+    </div>
+
+    <aside class="vehicle-panel">
+
+        <h2>Véhicule suivi</h2>
+
+        <div id="vehicle-info">
+
+            Chargement...
+
+        </div>
+
+    </aside>
+
+</div>
+
+<script>
+
+const CAMERA="{{CAMERA_NAME}}";
+
+</script>
+
+<script src="/static/js/enterprise/camera_view.js"></script>
+
+</body>
+
+</html>

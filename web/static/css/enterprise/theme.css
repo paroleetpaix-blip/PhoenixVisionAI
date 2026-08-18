@@ -1,0 +1,134 @@
+/*
+========================================================
+PHOENIX VISION AI
+Enterprise Theme
+Phoenix Security Technologies
+========================================================
+*/
+
+:root{
+
+    /* Couleurs principales */
+
+    --phoenix-blue:#1663FF;
+    --phoenix-blue-light:#3AA9FF;
+
+    --phoenix-dark:#07111F;
+    --phoenix-dark-2:#101B2F;
+    --phoenix-dark-3:#1A263A;
+
+    /* Etats */
+
+    --success:#32D74B;
+    --warning:#FF9F0A;
+    --danger:#FF453A;
+
+    /* Texte */
+
+    --text:#FFFFFF;
+    --text-secondary:#A7B3C7;
+    --text-muted:#6E7A8C;
+
+    /* Bordures */
+
+    --border:#26364F;
+
+    /* Ombres */
+
+    --shadow:
+        0 10px 25px rgba(0,0,0,.35);
+
+    /* Arrondis */
+
+    --radius:12px;
+
+    /* Espacements */
+
+    --space-xs:6px;
+    --space-s:12px;
+    --space-m:18px;
+    --space-l:24px;
+    --space-xl:32px;
+
+    /* Animation */
+
+    --transition:.25s;
+}
+
+
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+}
+
+
+body{
+
+    background:var(--phoenix-dark);
+
+    color:var(--text);
+
+    font-family:
+
+        "Segoe UI",
+
+        Arial,
+
+        sans-serif;
+
+}
+
+#topbar{
+
+    height:70px;
+
+    background:#101B2F;
+
+    border-bottom:1px solid var(--border);
+
+}
+
+
+#application{
+
+    display:flex;
+
+    height:calc(100vh - 110px);
+
+}
+
+
+#sidebar{
+
+    width:260px;
+
+    background:#101B2F;
+
+    border-right:1px solid var(--border);
+
+}
+
+
+#content{
+
+    flex:1;
+
+    background:#07111F;
+
+}
+
+
+#footer{
+
+    height:40px;
+
+    background:#101B2F;
+
+    border-top:1px solid var(--border);
+
+}

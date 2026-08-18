@@ -1,0 +1,83 @@
+#topbar{
+
+    height:70px;
+
+    background:#101B2F;
+
+    border-bottom:1px solid #26364F;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 20px;
+
+}
+
+.topbar-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+.topbar-logo{
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:8px;
+
+}
+
+.topbar-title{
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    color:white;
+
+}
+
+.topbar-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+.status-dot{
+
+    width:10px;
+
+    height:10px;
+
+    border-radius:50%;
+
+    background:#32D74B;
+
+}
+
+.status-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:6px;
+
+    color:white;
+
+    font-size:14px;
+
+}

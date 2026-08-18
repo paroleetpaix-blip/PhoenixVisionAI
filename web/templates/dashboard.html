@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Phoenix Vision AI</title>
+
+<link rel="stylesheet" href="/static/css/style.css">
+
+<link rel="stylesheet" href="/static/css/vehicle_panel.css">
+
+</head>
+
+<body>
+
+<div class="topbar">
+
+    <div class="topbar-left">
+
+        <img
+            src="/static/images/logoS.png"
+            class="logo-image"
+            alt="Phoenix Logo">
+
+        <div>
+
+            <div class="software-title">
+                PHOENIX VISION AI
+            </div>
+
+            <div class="software-version">
+                Version 1.0 Enterprise
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="topbar-center">
+
+        <div class="status-item">
+
+            IA
+
+            <span class="green-dot"></span>
+
+        </div>
+
+        <div class="status-item">
+
+            DB
+
+            <span class="green-dot"></span>
+
+        </div>
+
+        <div class="status-item">
+
+            API
+
+            <span class="green-dot"></span>
+
+        </div>
+
+        <div class="status-item">
+
+            CAM
+
+            <span class="green-dot"></span>
+
+        </div>
+
+    </div>
+
+    <div class="topbar-right">
+
+        <div id="clock">
+
+            --:--:--
+
+        </div>
+
+        <div class="current-user">
+
+            Opérateur 01
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="dashboard-container">
+
+<aside class="sidebar">
+
+
+<div class="sidebar-brand">
+
+    PHOENIX
+
+    <span>
+        COMMAND CENTER
+    </span>
+
+</div>
+
+
+<div class="operator-card">
+
+    <div class="operator-avatar">
+
+        OP
+
+    </div>
+
+
+    <div>
+
+        <div class="operator-name">
+
+            Opérateur 01
+
+        </div>
+
+
+        <div class="operator-role">
+
+            ROLE : OPERATOR
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+<div class="sidebar-status">
+
+    <span class="green-dot"></span>
+
+    Système connecté
+
+</div>
+
+
+
+<div class="menu-title">
+
+    SUPERVISION
+
+</div>
+
+
+<ul class="sidebar-menu">
+
+
+<li class="active">
+
+📊 Tableau de bord
+
+</li>
+
+
+<li>
+
+📹 Caméras
+
+</li>
+
+
+<li>
+
+🚗 Véhicules
+
+</li>
+
+
+<li>
+
+🚨 Alertes
+
+</li>
+
+
+<li>
+
+🗺 Cartographie
+
+</li>
+
+
+<li>
+
+📄 Rapports
+
+</li>
+
+
+</ul>
+
+
+
+<div class="menu-title">
+
+ADMINISTRATION
+
+</div>
+
+
+<ul class="sidebar-menu">
+
+
+<li>
+
+👥 Utilisateurs
+
+</li>
+
+
+<li>
+
+⚙ Paramètres
+
+</li>
+
+
+<li>
+
+🔒 Sécurité
+
+</li>
+
+
+</ul>
+
+
+
+<div class="sidebar-footer">
+
+
+<div>
+
+Phoenix Vision AI
+
+</div>
+
+
+<div>
+
+Version 1.0 Enterprise
+
+</div>
+
+
+</div>
+
+
+</aside>
+
+    <div class="main-layout">
+
+<div class="video-grid" id="camera-grid">
+
+</div>
+
+<img
+src="/video"
+class="camera-stream">
+
+</div>
+
+<div class="camera">
+
+<div class="camera-title">
+
+CAMÉRA 2
+
+</div>
+
+<div class="video-placeholder">
+
+VIDEO
+
+</div>
+
+</div>
+
+<div class="camera">
+
+<div class="camera-title">
+
+CAMÉRA 3
+
+</div>
+
+<div class="video-placeholder">
+
+VIDEO
+
+</div>
+
+</div>
+
+<div class="camera">
+
+<div class="camera-title">
+
+CAMÉRA 4
+
+</div>
+
+<div class="video-placeholder">
+
+VIDEO
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="right-panel">
+
+<h2>
+
+ÉVÉNEMENTS
+
+</h2>
+
+<div id="events">
+
+Aucun événement
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="/static/js/dashboard.js"></script>
+
+{% include "vehicle_panel.html" %}
+
+</body>
+
+</html>

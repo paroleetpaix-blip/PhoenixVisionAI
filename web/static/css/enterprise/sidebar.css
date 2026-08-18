@@ -1,0 +1,182 @@
+/*
+========================================================
+PHOENIX VISION AI
+Enterprise Sidebar
+========================================================
+*/
+
+
+#sidebar{
+
+    width:260px;
+
+    background:var(--phoenix-dark-2);
+
+    border-right:1px solid var(--border);
+
+    display:flex;
+
+    flex-direction:column;
+
+    padding:20px;
+
+}
+
+
+/* Logo section */
+
+.sidebar-brand{
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    color:white;
+
+    margin-bottom:25px;
+
+}
+
+
+.sidebar-brand span{
+
+    display:block;
+
+    font-size:11px;
+
+    color:var(--text-secondary);
+
+    margin-top:5px;
+
+}
+
+
+
+/* Opérateur */
+
+.operator-card{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    background:var(--phoenix-dark-3);
+
+    padding:12px;
+
+    border-radius:var(--radius);
+
+    margin-bottom:20px;
+
+}
+
+
+.operator-avatar{
+
+    width:40px;
+
+    height:40px;
+
+    background:var(--phoenix-blue);
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-weight:bold;
+
+}
+
+
+.operator-name{
+
+    color:white;
+
+    font-size:14px;
+
+}
+
+
+.operator-role{
+
+    color:var(--text-secondary);
+
+    font-size:11px;
+
+}
+
+
+
+/* Menu */
+
+.menu-title{
+
+    color:var(--text-muted);
+
+    font-size:11px;
+
+    margin:15px 0 8px;
+
+}
+
+
+.sidebar-menu{
+
+    list-style:none;
+
+}
+
+
+.sidebar-menu li{
+
+    padding:12px;
+
+    margin-bottom:5px;
+
+    border-radius:8px;
+
+    color:var(--text-secondary);
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+
+.sidebar-menu li:hover{
+
+    background:var(--phoenix-dark-3);
+
+    color:white;
+
+}
+
+
+.sidebar-menu .active{
+
+    background:var(--phoenix-blue);
+
+    color:white;
+
+}
+
+
+
+/* Footer sidebar */
+
+.sidebar-footer{
+
+    margin-top:auto;
+
+    color:var(--text-muted);
+
+    font-size:12px;
+
+}

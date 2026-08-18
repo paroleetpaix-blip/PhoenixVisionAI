@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Phoenix Vision AI — Demande de compte
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/account_request.css?v=3.7"
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="/static/images/favicon.png?v=1"
+    >
+
+</head>
+
+<body>
+
+<main class="request-page">
+
+<section class="request-card">
+
+
+    <div class="request-logo">
+
+        <div class="account-request-logo-wrap">
+
+            <img
+                id="account-request-logo"
+                src="/static/images/logoS.png"
+                alt="Phoenix"
+            >
+
+        </div>
+
+        <div class="request-phoenix">
+            PHOENIX
+        </div>
+
+        <div class="request-vision">
+            VISION AI
+        </div>
+
+    </div>
+
+
+    <div class="form-title">
+        FORMULAIRE
+    </div>
+
+    <p class="form-description">
+        Demande de création d'un compte professionnel sécurisé
+    </p>
+
+
+    <form id="account-request-form">
+
+
+        <div class="section-title">
+            Informations personnelles
+        </div>
+
+
+        <div class="form-grid">
+
+
+            <div class="request-field">
+
+                <label for="nom">
+                    Nom *
+                </label>
+
+                <input
+                    id="nom"
+                    name="nom"
+                    type="text"
+                    required
+                >
+
+            </div>
+
+
+            <div class="request-field">
+
+                <label for="postnom">
+                    Postnom *
+                </label>
+
+                <input
+                    id="postnom"
+                    name="postnom"
+                    type="text"
+                    required
+                >
+
+            </div>
+
+
+            <div class="request-field">
+
+                <label for="prenom">
+                    Prénom *
+                </label>
+
+                <input
+                    id="prenom"
+                    name="prenom"
+                    type="text"
+                    required
+                >
+
+            </div>
+
+
+            <div class="request-field">
+
+                <label for="sexe">
+                    Sexe *
+                </label>
+
+                <select
+                    id="sexe"
+                    name="sexe"
+                    required
+                >
+
+                    <option value="">
+                        Sélectionner
+                    </option>
+
+                    <option value="M">
+                        Masculin
+                    </option>
+
+                    <option value="F">
+                        Féminin
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="request-field">
+
+                <label for="date_naissance">
+                    Date de naissance *
+                </label>
+
+                <input
+                    id="date_naissance"
+                    name="date_naissance"
+                    type="date"
+                    required
+                >
+
+            </div>
+
+
+            <div class="request-field">
+
+                <label for="telephone">
+                    Numéro de téléphone *
+                </label>
+
+                <input
+                    id="telephone"
+                    name="telephone"
+                    type="tel"
+                    required
+                >
+
+            </div>
+
+
+            <div class="request-field full">
+
+                <label for="email">
+                    Adresse email professionnelle *
+                </label>
+
+                <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="section-title">
+            Informations professionnelles
+        </div>
+
+
+        <div class="form-grid">
+
+
+            <div class="request-field">
+
+                <label for="organisation">
+                    Société / Organisation *
+                </label>
+
+                <input
+                    id="organisation"
+                    name="organisation"
+                    type="text"
+                    required
+                >
+
+            </div>
+
+
+            <div class="request-field">
+
+                <label for="matricule">
+                    Matricule employé
+                </label>
+
+                <input
+                    id="matricule"
+                    name="matricule"
+                    type="text"
+                    placeholder="Si disponible"
+                >
+
+            </div>
+
+
+            <div class="request-field">
+
+                <label for="departement">
+                    Département / Service *
+                </label>
+
+                <input
+                    id="departement"
+                    name="departement"
+                    type="text"
+                    required
+                >
+
+            </div>
+
+
+            <div class="request-field">
+
+                <label for="fonction">
+                    Fonction / Poste *
+                </label>
+
+                <input
+                    id="fonction"
+                    name="fonction"
+                    type="text"
+                    required
+                >
+
+            </div>
+
+
+            <div class="request-field">
+
+                <label for="site_affectation">
+                    Site d'affectation *
+                </label>
+
+                <input
+                    id="site_affectation"
+                    name="site_affectation"
+                    type="text"
+                    required
+                >
+
+            </div>
+
+
+            <div class="request-field">
+
+                <label for="responsable">
+                    Responsable hiérarchique
+                </label>
+
+                <input
+                    id="responsable"
+                    name="responsable"
+                    type="text"
+                >
+
+            </div>
+
+
+            <div class="request-field full">
+
+                <label for="acces_demande">
+                    Type d'accès demandé *
+                </label>
+
+                <select
+                    id="acces_demande"
+                    name="acces_demande"
+                    required
+                >
+
+                    <option value="">
+                        Sélectionner
+                    </option>
+
+                    <option value="STANDARD">
+                        Accès opérationnel standard
+                    </option>
+
+                    <option value="SUPERVISION">
+                        Supervision
+                    </option>
+
+                    <option value="ANALYSE">
+                        Analyse / Consultation
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="request-field full">
+
+                <label for="motif">
+                    Motif de la demande *
+                </label>
+
+                <textarea
+                    id="motif"
+                    name="motif"
+                    rows="4"
+                    maxlength="600"
+                    placeholder="Expliquez brièvement pourquoi cet accès est nécessaire..."
+                    required
+                ></textarea>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="request-message"
+            class="request-message"
+        ></div>
+
+
+        <button
+            type="submit"
+            id="request-submit"
+        >
+            Envoyer ma demande
+        </button>
+
+
+    </form>
+
+
+    <a
+        class="back-login"
+        href="/login"
+    >
+        Retour à la connexion
+    </a>
+
+
+</section>
+
+</main>
+
+
+<script
+    src="/static/js/enterprise/account_request.js"
+></script>
+
+</body>
+
+</html>

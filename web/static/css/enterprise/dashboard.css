@@ -1,0 +1,3059 @@
+/*
+========================================================
+PHOENIX VISION AI ENTERPRISE
+Dashboard Enterprise
+Phoenix Security Technologies
+========================================================
+*/
+
+
+:root{
+
+    --phoenix-bg:#01050c;
+
+    --phoenix-bg-2:#020a13;
+
+    --phoenix-panel:#04111d;
+
+    --phoenix-panel-2:#061724;
+
+    --phoenix-border:#11334f;
+
+    --phoenix-border-light:#15517f;
+
+    --phoenix-blue:#078cff;
+
+    --phoenix-blue-light:#34a8ff;
+
+    --phoenix-green:#1cc57a;
+
+    --phoenix-orange:#ff9f1c;
+
+    --phoenix-gold:#ffb400;
+
+    --phoenix-red:#ff5267;
+
+    --phoenix-text:#eef3f8;
+
+    --phoenix-muted:#8492a1;
+
+}
+
+
+*{
+
+    box-sizing:border-box;
+
+}
+
+
+html,
+body{
+
+    width:100%;
+
+    height:100%;
+
+    margin:0;
+
+}
+
+
+body{
+
+    overflow:hidden;
+
+    background:var(--phoenix-bg);
+
+    color:var(--phoenix-text);
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        Helvetica,
+        sans-serif;
+
+}
+
+
+button,
+input,
+select{
+
+    font-family:inherit;
+
+}
+
+
+#enterprise-dashboard{
+
+    width:100vw;
+
+    height:100vh;
+
+    display:grid;
+
+    grid-template-rows:
+
+        60px
+        minmax(0,1fr)
+        28px;
+
+    overflow:hidden;
+
+}
+
+
+
+/* ======================================================
+   TOPBAR
+====================================================== */
+
+
+.topbar{
+
+    min-width:0;
+
+    display:grid;
+
+    grid-template-columns:
+
+        245px
+        minmax(400px,1fr)
+        330px;
+
+    align-items:center;
+
+    padding:
+
+        0
+        16px;
+
+    border-bottom:
+
+        1px solid
+        #123a5a;
+
+    background:
+
+        linear-gradient(
+            180deg,
+            #04131f 0%,
+            #020a12 100%
+        );
+
+    box-shadow:
+
+        0 5px 22px
+        rgba(0,0,0,.38);
+
+    z-index:20;
+
+}
+
+
+/* BRAND */
+
+.topbar-brand{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+}
+
+
+.topbar-logo{
+
+    position:relative;
+
+    width:57px;
+
+    height:52px;
+
+    overflow:hidden;
+
+    flex-shrink:0;
+
+}
+
+
+.topbar-logo img{
+
+    position:absolute;
+
+    width:86px;
+
+    max-width:none;
+
+    top:-11px;
+
+    left:50%;
+
+    transform:
+        translateX(-50%);
+
+}
+
+
+.topbar-phoenix{
+
+    color:#f2f6fa;
+
+    font-size:17px;
+
+    font-weight:700;
+
+    letter-spacing:3px;
+
+}
+
+
+.topbar-vision{
+
+    margin-top:2px;
+
+    color:#0b8dff;
+
+    font-size:10px;
+
+    font-weight:600;
+
+    letter-spacing:5px;
+
+}
+
+
+/* SYSTEM */
+
+.topbar-system{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:27px;
+
+}
+
+
+.system-indicator{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:7px;
+
+}
+
+
+.indicator-dot{
+
+    width:7px;
+
+    height:7px;
+
+    border-radius:50%;
+
+    flex-shrink:0;
+
+}
+
+
+.indicator-dot.online{
+
+    background:var(--phoenix-green);
+
+    box-shadow:
+
+        0 0 8px
+        rgba(28,197,122,.55);
+
+}
+
+
+.indicator-dot.warning{
+
+    background:var(--phoenix-orange);
+
+}
+
+
+.system-indicator div{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+.system-indicator small{
+
+    color:#657587;
+
+    font-size:7px;
+
+    letter-spacing:.5px;
+
+}
+
+
+.system-indicator strong{
+
+    margin-top:1px;
+
+    color:#c9d2db;
+
+    font-size:9px;
+
+    font-weight:600;
+
+}
+
+
+/* RIGHT */
+
+.topbar-right{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:flex-end;
+
+    gap:10px;
+
+}
+
+
+.datetime{
+
+    min-width:105px;
+
+    padding-right:14px;
+
+    border-right:
+
+        1px solid
+        rgba(49,82,111,.55);
+
+    text-align:right;
+
+}
+
+
+.datetime strong{
+
+    display:block;
+
+    color:#fff;
+
+    font-size:16px;
+
+    letter-spacing:1px;
+
+}
+
+
+.datetime span{
+
+    display:block;
+
+    margin-top:1px;
+
+    color:#718093;
+
+    font-size:8px;
+
+}
+
+
+.topbar-button{
+
+    width:31px;
+
+    height:31px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border:
+
+        1px solid
+        #143550;
+
+    border-radius:6px;
+
+    background:#05121e;
+
+    color:#8999aa;
+
+    font-size:12px;
+
+    cursor:pointer;
+
+}
+
+
+.topbar-button:hover{
+
+    border-color:#0878d2;
+
+    color:#65baff;
+
+}
+
+
+.topbar-user{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin-left:3px;
+
+}
+
+
+.topbar-avatar{
+
+    width:31px;
+
+    height:31px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border:
+
+        1px solid
+        #0d76c6;
+
+    border-radius:50%;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #075ca2,
+            #063158
+        );
+
+    color:#e8f5ff;
+
+    font-size:9px;
+
+    font-weight:700;
+
+}
+
+
+.topbar-user-text{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+.topbar-user-text strong{
+
+    color:#dce4ec;
+
+    font-size:9px;
+
+}
+
+
+.topbar-user-text small{
+
+    margin-top:1px;
+
+    color:#5f7184;
+
+    font-size:7px;
+
+}
+
+
+
+/* ======================================================
+   BODY
+====================================================== */
+
+
+.dashboard-body{
+
+    min-height:0;
+
+    display:grid;
+
+    grid-template-columns:
+
+        205px
+        minmax(0,1fr);
+
+}
+
+
+
+/* ======================================================
+   SIDEBAR
+====================================================== */
+
+
+.sidebar{
+
+    min-height:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    border-right:
+
+        1px solid
+        var(--phoenix-border);
+
+    background:
+
+        linear-gradient(
+            180deg,
+            #03101a,
+            #020811
+        );
+
+}
+
+
+.operator-card{
+
+    position:relative;
+
+    margin:
+        12px
+        10px
+        10px;
+
+    padding:
+        10px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    border:
+        1px solid
+        rgba(16,91,145,.65);
+
+    border-radius:7px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #061b2c,
+            #04121e
+        );
+
+    box-shadow:
+        inset 0 0 18px
+        rgba(0,111,220,.035);
+
+}
+
+
+.operator-avatar{
+
+    width:35px;
+
+    height:35px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex-shrink:0;
+
+    border:
+
+        1px solid
+        #0879d7;
+
+    border-radius:50%;
+
+    background:#062c4a;
+
+    color:#78c4ff;
+
+    font-size:10px;
+
+    font-weight:700;
+
+}
+
+
+.operator-info{
+
+    min-width:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+.operator-info strong{
+
+    max-width:112px;
+
+    overflow:hidden;
+
+    color:#dce4ed;
+
+    font-size:10px;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+
+}
+
+
+.operator-info span{
+
+    margin-top:3px;
+
+    color:#617487;
+
+    font-size:7px;
+
+    letter-spacing:.7px;
+
+}
+
+
+.operator-online{
+
+    position:absolute;
+
+    right:10px;
+
+    top:50%;
+
+    width:7px;
+
+    height:7px;
+
+    border-radius:50%;
+
+    background:var(--phoenix-green);
+
+    transform:
+        translateY(-50%);
+
+}
+
+
+.sidebar-navigation{
+
+    flex:1;
+
+    overflow-y:auto;
+
+    padding:
+
+        1px
+        9px
+        12px;
+
+    scrollbar-width:thin;
+
+}
+
+
+.navigation-label{
+
+    padding:
+
+        10px
+        10px
+        6px;
+
+    color:#3d566c;
+
+    font-size:7px;
+
+    font-weight:700;
+
+    letter-spacing:1.3px;
+
+}
+
+
+.administration-label{
+
+    margin-top:8px;
+
+}
+
+
+.sidebar-item{
+
+    position:relative;
+
+    min-height:31px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+    margin-bottom:2px;
+
+    padding:
+        0
+        9px;
+
+    border:
+        1px solid
+        transparent;
+
+    border-radius:5px;
+
+    color:#8291a2;
+
+    text-decoration:none;
+
+    font-size:9px;
+
+    transition:
+        background .15s ease,
+        color .15s ease,
+        border-color .15s ease;
+
+}
+
+
+.sidebar-item:hover{
+
+    color:#cce7fb;
+
+    background:#061523;
+
+}
+
+
+.sidebar-item.active{
+
+    border-color:
+
+        rgba(7,140,255,.24);
+
+    background:
+
+        linear-gradient(
+            90deg,
+            rgba(7,140,255,.16),
+            rgba(7,140,255,.035)
+        );
+
+    color:#e6f2fc;
+
+}
+
+
+.sidebar-item.active::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:-9px;
+
+    width:3px;
+
+    height:24px;
+
+    border-radius:
+
+        0
+        3px
+        3px
+        0;
+
+    background:var(--phoenix-blue);
+
+}
+
+
+.menu-icon{
+
+    width:18px;
+
+    color:#4b91c7;
+
+    text-align:center;
+
+    font-size:12px;
+
+}
+
+
+.sidebar-item.active
+.menu-icon{
+
+    color:#1b9cff;
+
+}
+
+
+.menu-badge{
+
+    min-width:17px;
+
+    height:17px;
+
+    margin-left:auto;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:20px;
+
+    background:
+
+        rgba(255,82,103,.13);
+
+    color:#ff697d;
+
+    font-size:7px;
+
+}
+
+
+.sidebar-bottom{
+
+    padding:
+
+        10px
+        12px
+        13px;
+
+    border-top:
+
+        1px solid
+        rgba(17,51,79,.75);
+
+}
+
+
+.logout-button{
+
+    height:34px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    border:
+
+        1px solid
+        rgba(255,82,103,.25);
+
+    border-radius:6px;
+
+    color:#bd6673;
+
+    text-decoration:none;
+
+    font-size:9px;
+
+}
+
+
+.logout-button:hover{
+
+    border-color:#b44455;
+
+    color:#ff697d;
+
+}
+
+
+
+/* ======================================================
+   WORKSPACE
+====================================================== */
+
+
+.dashboard-workspace{
+
+    min-width:0;
+
+    min-height:0;
+
+    display:grid;
+
+    grid-template-columns:
+        minmax(0,1fr)
+        265px;
+
+    gap:8px;
+
+    padding:8px;
+
+    overflow:hidden;
+
+    background:
+        radial-gradient(
+            circle at 38% 0%,
+            rgba(0,92,190,.07),
+            transparent 34%
+        ),
+        #01050c;
+
+}
+
+
+.dashboard-center{
+
+    min-width:0;
+
+    min-height:0;
+
+    display:grid;
+
+    grid-template-rows:
+        minmax(360px,1fr)
+        170px;
+
+    gap:8px;
+
+}
+
+
+.dashboard-panel{
+
+    min-width:0;
+
+    min-height:0;
+
+    overflow:hidden;
+
+    border:
+
+        1px solid
+        var(--phoenix-border);
+
+    border-radius:7px;
+
+    background:
+
+        linear-gradient(
+            180deg,
+            rgba(5,18,30,.98),
+            rgba(3,11,20,.98)
+        );
+
+}
+
+
+
+/* ======================================================
+   PANEL HEADER
+====================================================== */
+
+
+.panel-header{
+
+    height:48px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:
+
+        0
+        13px;
+
+    border-bottom:
+
+        1px solid
+        var(--phoenix-border);
+
+}
+
+
+.panel-header h2,
+.events-header h2{
+
+    margin:0;
+
+    color:#dbe4ec;
+
+    font-size:10px;
+
+    font-weight:700;
+
+    letter-spacing:.8px;
+
+}
+
+
+.panel-header p,
+.events-header p{
+
+    margin:
+
+        3px
+        0
+        0;
+
+    color:#536679;
+
+    font-size:7px;
+
+}
+
+
+.camera-summary{
+
+    display:flex;
+
+    align-items:baseline;
+
+    gap:5px;
+
+}
+
+
+.camera-online-count{
+
+    color:var(--phoenix-green);
+
+    font-size:15px;
+
+    font-weight:700;
+
+}
+
+
+.camera-summary small{
+
+    color:#607184;
+
+    font-size:7px;
+
+}
+
+
+
+/* ======================================================
+   CAMERA GRID
+====================================================== */
+
+
+.camera-section{
+
+    display:grid;
+
+    grid-template-rows:
+
+        48px
+        minmax(0,1fr);
+
+}
+
+
+.camera-grid{
+
+    min-height:0;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,minmax(0,1fr));
+
+    grid-template-rows:
+        repeat(3,minmax(0,1fr));
+
+    gap:5px;
+
+    padding:5px;
+
+}
+
+
+.grid-loading{
+
+    grid-column:
+
+        1 / -1;
+
+    grid-row:
+
+        1 / -1;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#637589;
+
+    font-size:10px;
+
+}
+
+
+.camera-card{
+
+    position:relative;
+
+    min-width:0;
+
+    min-height:0;
+
+    overflow:hidden;
+
+    border:
+        1px solid
+        #173c5a;
+
+    border-radius:4px;
+
+    background:#050c13;
+
+    cursor:pointer;
+
+    box-shadow:
+        inset 0 0 18px
+        rgba(0,0,0,.22);
+
+    transition:
+        border-color .16s ease,
+        transform .16s ease,
+        box-shadow .16s ease;
+
+}
+
+
+.camera-card:hover{
+
+    border-color:#087edb;
+
+    transform:
+        translateY(-1px);
+
+}
+
+
+.camera-preview{
+
+    position:absolute;
+
+    inset:0;
+
+    overflow:hidden;
+
+    background:
+
+        radial-gradient(
+            ellipse at 50% 78%,
+            rgba(13,39,58,.8),
+            transparent 42%
+        ),
+
+        linear-gradient(
+            180deg,
+            #12293b 0%,
+            #102333 39%,
+            #0b151e 40%,
+            #05080c 100%
+        );
+
+}
+
+/* Route en perspective */
+
+
+.camera-preview::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:-20%;
+
+    width:70%;
+
+    height:95%;
+
+    transform:
+        translateX(-50%);
+
+    clip-path:
+        polygon(
+            40% 0,
+            60% 0,
+            100% 100%,
+            0 100%
+        );
+
+    background:
+
+        repeating-linear-gradient(
+            90deg,
+            transparent 0%,
+            transparent 47%,
+            rgba(225,236,245,.38) 48%,
+            rgba(225,236,245,.38) 51%,
+            transparent 52%,
+            transparent 100%
+        ),
+
+        linear-gradient(
+            180deg,
+            #243442,
+            #090d11
+        );
+
+}
+
+
+/* Lumières routières */
+
+.camera-preview::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+
+    top:53%;
+
+    width:4px;
+
+    height:4px;
+
+    border-radius:50%;
+
+    background:#fff;
+
+    box-shadow:
+
+        -32px 12px 0 #df3146,
+
+        27px 17px 0 #f4d348,
+
+        -10px 30px 0 #e9edf0,
+
+        40px 37px 0 #e14a55,
+
+        -55px 45px 0 #e9edf0,
+
+        7px 52px 0 #f4d348;
+
+}
+
+
+
+.camera-card.offline
+.camera-preview{
+
+    background:
+        linear-gradient(
+            180deg,
+            #081018,
+            #03070b
+        );
+
+}
+
+
+.camera-card.offline
+.camera-preview::before{
+
+    opacity:.16;
+
+}
+
+
+.camera-card.offline
+.camera-preview::after{
+
+    display:none;
+
+}
+
+.camera-no-signal{
+
+    position:absolute;
+
+    z-index:2;
+
+    left:50%;
+
+    top:54%;
+
+    transform:
+        translate(-50%,-50%);
+
+    padding:
+        4px
+        7px;
+
+    border:
+        1px solid
+        rgba(80,101,118,.25);
+
+    border-radius:3px;
+
+    background:
+        rgba(0,0,0,.38);
+
+    color:#465767;
+
+    font-size:6px;
+
+    letter-spacing:1px;
+
+    white-space:nowrap;
+
+}
+
+
+.camera-overlay-top{
+
+    position:absolute;
+
+    z-index:3;
+
+    top:0;
+
+    left:0;
+
+    right:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:
+        5px
+        6px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0,4,9,.88),
+            rgba(0,4,9,.15)
+        );
+
+}
+
+
+.camera-name{
+
+    color:#eef5fb;
+
+    font-size:7px;
+
+    font-weight:700;
+
+    letter-spacing:.7px;
+
+    text-shadow:
+        0 1px 3px
+        rgba(0,0,0,.8);
+
+}
+
+
+.camera-status{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:4px;
+
+    font-size:6px;
+
+}
+
+
+.camera-status-dot{
+
+    width:5px;
+
+    height:5px;
+
+    border-radius:50%;
+
+}
+
+
+.camera-status.online{
+
+    color:#63dca1;
+
+}
+
+
+.camera-status.online
+.camera-status-dot{
+
+    background:var(--phoenix-green);
+
+}
+
+
+.camera-status.offline{
+
+    color:#788592;
+
+}
+
+
+.camera-status.offline
+.camera-status-dot{
+
+    background:#596570;
+
+}
+
+
+.camera-overlay-bottom{
+
+    position:absolute;
+
+    z-index:3;
+
+    left:0;
+
+    right:0;
+
+    bottom:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:
+
+        7px;
+
+    background:
+
+        linear-gradient(
+            0deg,
+            rgba(0,0,0,.8),
+            transparent
+        );
+
+}
+
+
+.camera-location{
+
+    max-width:75%;
+
+    overflow:hidden;
+
+    color:#8c9cab;
+
+    font-size:6px;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+
+}
+
+
+.camera-fullscreen-icon{
+
+    color:#8598a9;
+
+    font-size:10px;
+
+}
+
+
+
+/* ======================================================
+   BOTTOM PANELS
+====================================================== */
+
+
+.bottom-panels{
+
+    min-width:0;
+
+    display:grid;
+
+    grid-template-columns:
+        1.08fr
+        1fr
+        .96fr;
+
+    gap:8px;
+
+}
+
+
+.vehicle-panel,
+.location-panel,
+.system-panel{
+
+    padding:
+        10px
+        11px;
+
+    background:
+        linear-gradient(
+            150deg,
+            #051520,
+            #020b13
+        );
+
+}
+
+
+.small-panel-header{
+
+    height:25px;
+
+    display:flex;
+
+    align-items:flex-start;
+
+    justify-content:space-between;
+
+    border-bottom:
+
+        1px solid
+        rgba(17,51,79,.72);
+
+}
+
+
+.small-panel-header h3{
+
+    margin:0;
+
+    color:#aab8c5;
+
+    font-size:8px;
+
+    font-weight:700;
+
+    letter-spacing:.8px;
+
+}
+
+
+.panel-status{
+
+    padding:
+
+        3px
+        6px;
+
+    border-radius:20px;
+
+    font-size:6px;
+
+}
+
+
+.panel-status.neutral{
+
+    border:
+
+        1px solid
+        #33495d;
+
+    color:#6e8192;
+
+}
+
+
+.online-status{
+
+    border:
+
+        1px solid
+        rgba(28,197,122,.35);
+
+    color:#54d69a;
+
+    background:
+
+        rgba(28,197,122,.05);
+
+}
+
+
+/* VEHICLE */
+
+.vehicle-content{
+
+    height:
+
+        calc(100% - 25px);
+
+    display:flex;
+
+    align-items:center;
+
+    gap:13px;
+
+}
+
+
+.vehicle-visual{
+
+    width:43%;
+
+    height:80px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border:
+
+        1px solid
+        #12354f;
+
+    border-radius:5px;
+
+    background:
+
+        radial-gradient(
+            circle,
+            #101c27,
+            #050b12
+        );
+
+}
+
+
+.vehicle-shape{
+
+    position:relative;
+
+    width:90px;
+
+    height:40px;
+
+}
+
+
+.vehicle-roof{
+
+    position:absolute;
+
+    top:5px;
+
+    left:25px;
+
+    width:44px;
+
+    height:17px;
+
+    border-radius:
+
+        14px
+        14px
+        2px
+        2px;
+
+    background:#182733;
+
+}
+
+
+.vehicle-body{
+
+    position:absolute;
+
+    left:8px;
+
+    bottom:6px;
+
+    width:75px;
+
+    height:20px;
+
+    border-radius:
+
+        10px
+        13px
+        5px
+        5px;
+
+    background:#1e303e;
+
+}
+
+
+.vehicle-wheel{
+
+    position:absolute;
+
+    bottom:0;
+
+    width:13px;
+
+    height:13px;
+
+    border:
+
+        3px solid
+        #1a222a;
+
+    border-radius:50%;
+
+    background:#05080c;
+
+}
+
+
+.wheel-left{
+
+    left:20px;
+
+}
+
+
+.wheel-right{
+
+    right:14px;
+
+}
+
+
+.vehicle-details{
+
+    min-width:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+.vehicle-details strong{
+
+    color:#35a7ff;
+
+    font-family:monospace;
+
+    font-size:16px;
+
+}
+
+
+.vehicle-details span{
+
+    margin-top:6px;
+
+    color:#a2afbc;
+
+    font-size:8px;
+
+}
+
+
+.vehicle-details small{
+
+    margin-top:5px;
+
+    color:#556a7d;
+
+    font-size:7px;
+
+}
+
+
+/* LOCATION */
+
+.location-content{
+
+    height:
+
+        calc(100% - 25px);
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+
+.mini-map{
+
+    position:relative;
+
+    width:45%;
+
+    height:83px;
+
+    overflow:hidden;
+
+    border:
+
+        1px solid
+        #12354f;
+
+    border-radius:5px;
+
+    background:#061421;
+
+}
+
+
+.map-road{
+
+    position:absolute;
+
+    height:6px;
+
+    border:
+
+        1px solid
+        rgba(55,96,128,.34);
+
+    background:#0b2234;
+
+    transform-origin:center;
+
+}
+
+
+.road-one{
+
+    width:140%;
+
+    left:-20%;
+
+    top:35%;
+
+    transform:
+        rotate(14deg);
+
+}
+
+
+.road-two{
+
+    width:125%;
+
+    left:-14%;
+
+    top:55%;
+
+    transform:
+        rotate(-17deg);
+
+}
+
+
+.road-three{
+
+    width:100%;
+
+    left:18%;
+
+    top:18%;
+
+    transform:
+        rotate(58deg);
+
+}
+
+
+.map-pin{
+
+    position:absolute;
+
+    top:43%;
+
+    left:53%;
+
+    width:10px;
+
+    height:10px;
+
+    border:
+
+        2px solid
+        #e34c5f;
+
+    border-radius:
+
+        50%
+        50%
+        50%
+        0;
+
+    background:#ff6073;
+
+    transform:
+        rotate(-45deg);
+
+    box-shadow:
+
+        0 0 10px
+        rgba(255,82,103,.4);
+
+}
+
+
+.location-details{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+.location-details strong{
+
+    color:#cbd5df;
+
+    font-size:9px;
+
+}
+
+
+.location-details span{
+
+    margin-top:6px;
+
+    color:#168ffe;
+
+    font-size:8px;
+
+}
+
+
+.location-details small{
+
+    margin-top:4px;
+
+    color:#55697b;
+
+    font-size:6px;
+
+}
+
+
+/* SYSTEM */
+
+.system-list{
+
+    padding-top:7px;
+
+}
+
+
+.system-row{
+
+    min-height:29px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    border-bottom:
+
+        1px solid
+        rgba(17,51,79,.45);
+
+    color:#738496;
+
+    font-size:8px;
+
+}
+
+
+.system-row strong{
+
+    color:#a6b5c3;
+
+    font-size:7px;
+
+    font-weight:600;
+
+}
+
+
+.system-row
+.status-online{
+
+    color:#4cd493;
+
+}
+
+
+.system-row
+.status-warning{
+
+    color:#d5a049;
+
+}
+
+
+
+/* ======================================================
+   EVENTS
+====================================================== */
+
+
+.events-panel{
+
+    display:grid;
+
+    grid-template-rows:
+
+        58px
+        minmax(0,1fr)
+        40px;
+
+}
+
+
+.events-header{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:
+
+        0
+        13px;
+
+    border-bottom:
+
+        1px solid
+        var(--phoenix-border);
+
+}
+
+
+.events-count{
+
+    min-width:24px;
+
+    height:24px;
+
+    padding:
+
+        0
+        6px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border:
+
+        1px solid
+        #1a486e;
+
+    border-radius:20px;
+
+    color:#6daedc;
+
+    font-size:8px;
+
+}
+
+
+.events-list{
+
+    min-height:0;
+
+    overflow-y:auto;
+
+    padding:8px;
+
+}
+
+
+.events-empty{
+
+    height:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px;
+
+    text-align:center;
+
+}
+
+
+.events-empty-icon{
+
+    width:42px;
+
+    height:42px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin-bottom:12px;
+
+    border:
+
+        1px solid
+        #173b58;
+
+    border-radius:50%;
+
+    color:#41627d;
+
+    font-size:20px;
+
+}
+
+
+.events-empty strong{
+
+    color:#8696a6;
+
+    font-size:9px;
+
+}
+
+
+.events-empty span{
+
+    margin-top:6px;
+
+    color:#4d6072;
+
+    font-size:7px;
+
+    line-height:1.5;
+
+}
+
+
+.event-item{
+
+    position:relative;
+
+    margin-bottom:7px;
+
+    padding:
+
+        10px
+        9px
+        10px
+        13px;
+
+    border:
+
+        1px solid
+        #12334e;
+
+    border-radius:5px;
+
+    background:#05121d;
+
+}
+
+
+.event-item::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:7px;
+
+    bottom:7px;
+
+    left:0;
+
+    width:2px;
+
+    border-radius:3px;
+
+    background:#078cff;
+
+}
+
+
+.event-item.warning::before{
+
+    background:var(--phoenix-orange);
+
+}
+
+
+.event-item.danger::before{
+
+    background:var(--phoenix-red);
+
+}
+
+
+.event-title{
+
+    color:#c8d3dd;
+
+    font-size:8px;
+
+    font-weight:600;
+
+}
+
+
+.event-meta{
+
+    margin-top:5px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    color:#566a7d;
+
+    font-size:6px;
+
+}
+
+
+.view-all-events{
+
+    margin:
+
+        6px
+        9px
+        8px;
+
+    border:
+
+        1px solid
+        #153a59;
+
+    border-radius:5px;
+
+    background:#06131f;
+
+    color:#6ba7d5;
+
+    font-size:8px;
+
+    cursor:pointer;
+
+}
+
+
+
+/* ======================================================
+   FOOTER
+====================================================== */
+
+
+.dashboard-footer{
+
+    min-width:0;
+
+    display:grid;
+
+    grid-template-columns:
+
+        1fr
+        1fr
+        1fr;
+
+    align-items:center;
+
+    padding:
+
+        0
+        15px;
+
+    border-top:
+
+        1px solid
+        var(--phoenix-border);
+
+    background:#020810;
+
+    color:#536476;
+
+    font-size:7px;
+
+}
+
+
+.dashboard-footer div:nth-child(2){
+
+    text-align:center;
+
+}
+
+
+.dashboard-footer div:nth-child(3){
+
+    text-align:right;
+
+}
+
+
+.footer-dot{
+
+    display:inline-block;
+
+    width:5px;
+
+    height:5px;
+
+    margin-right:5px;
+
+    border-radius:50%;
+
+    background:var(--phoenix-green);
+
+}
+
+/* ======================================================
+   DASHBOARD FINAL VISUAL POLISH — V2.2
+====================================================== */
+
+
+/* Plus de lisibilité générale */
+
+.panel-header h2,
+.events-header h2{
+
+    font-size:11px;
+
+}
+
+
+.panel-header p,
+.events-header p{
+
+    font-size:8px;
+
+}
+
+
+/* TOPBAR */
+
+.topbar-phoenix{
+
+    font-size:18px;
+
+}
+
+.topbar-vision{
+
+    font-size:10px;
+
+}
+
+.system-indicator small{
+
+    font-size:8px;
+
+}
+
+.system-indicator strong{
+
+    font-size:10px;
+
+}
+
+.datetime strong{
+
+    font-size:18px;
+
+}
+
+
+/* SIDEBAR */
+
+.sidebar-item{
+
+    font-size:10px;
+
+}
+
+.navigation-label{
+
+    font-size:8px;
+
+}
+
+.operator-info strong{
+
+    font-size:11px;
+
+}
+
+.operator-info span{
+
+    font-size:8px;
+
+}
+
+
+/* CAMÉRAS */
+
+.camera-name{
+
+    font-size:8px;
+
+}
+
+.camera-status{
+
+    font-size:7px;
+
+}
+
+.camera-location{
+
+    font-size:7px;
+
+}
+
+.camera-no-signal{
+
+    font-size:7px;
+
+}
+
+
+/* PANNEAUX INFÉRIEURS */
+
+.small-panel-header h3{
+
+    font-size:9px;
+
+}
+
+.vehicle-details strong{
+
+    font-size:17px;
+
+}
+
+.vehicle-details span{
+
+    font-size:9px;
+
+}
+
+.location-details strong{
+
+    font-size:10px;
+
+}
+
+.location-details span{
+
+    font-size:9px;
+
+}
+
+
+/* ÉVÉNEMENTS */
+
+.event-title{
+
+    font-size:9px;
+
+}
+
+.event-meta{
+
+    font-size:7px;
+
+}
+
+
+/* Légère profondeur */
+
+.dashboard-panel{
+
+    box-shadow:
+
+        inset 0 0 22px rgba(0,25,48,.14),
+
+        0 3px 9px rgba(0,0,0,.12);
+
+}
+
+/* ======================================================
+   RESPONSIVE
+====================================================== */
+
+
+@media(max-width:1250px){
+
+    .topbar{
+
+        grid-template-columns:
+
+            220px
+            minmax(310px,1fr)
+            auto;
+
+    }
+
+
+    .topbar-system{
+
+        gap:14px;
+
+    }
+
+
+    .dashboard-body{
+
+        grid-template-columns:
+
+            185px
+            minmax(0,1fr);
+
+    }
+
+
+    .dashboard-workspace{
+
+        grid-template-columns:
+
+            minmax(0,1fr)
+            235px;
+
+    }
+
+
+    .sidebar-item{
+
+        font-size:9px;
+
+    }
+
+}
+
+
+@media(max-height:720px){
+
+    #enterprise-dashboard{
+
+        grid-template-rows:
+
+            52px
+            minmax(0,1fr)
+            23px;
+
+    }
+
+
+    .topbar-logo{
+
+        width:38px;
+
+        height:41px;
+
+    }
+
+
+    .topbar-logo img{
+
+        width:58px;
+
+    }
+
+
+    .dashboard-center{
+
+        grid-template-rows:
+
+            minmax(300px,1fr)
+            160px;
+
+    }
+
+
+    .operator-card{
+
+        margin-top:9px;
+
+        padding:8px;
+
+    }
+
+
+    .sidebar-item{
+
+        min-height:29px;
+
+    }
+
+
+    .navigation-label{
+
+        padding-top:6px;
+
+    }
+
+
+    .vehicle-visual,
+    .mini-map{
+
+        height:67px;
+
+    }
+
+}
+
+.vehicle-plate-placeholder{
+
+    display:inline-flex;
+
+    width:max-content;
+
+    padding:
+        4px
+        8px;
+
+    border:
+        1px solid
+        rgba(60,157,255,.45);
+
+    border-radius:3px;
+
+    background:
+        rgba(0,93,170,.10);
+
+    letter-spacing:1px;
+
+}
+
+.events-preview-label{
+
+    margin:
+        2px
+        0
+        8px;
+
+    padding:
+        5px
+        7px;
+
+    border:
+        1px solid
+        rgba(255,180,0,.18);
+
+    border-radius:4px;
+
+    color:#8b7440;
+
+    background:
+        rgba(255,180,0,.025);
+
+    font-size:6px;
+
+    letter-spacing:1px;
+
+    text-align:center;
+
+}
+
+
+.events-empty.compact{
+
+    height:auto;
+
+    padding:10px;
+
+}
+
+/* ======================================================
+   LIVE VEHICLE DATA
+====================================================== */
+
+
+.vehicle-content{
+
+    align-items:center;
+
+}
+
+
+.vehicle-details{
+
+    flex:1;
+
+    min-width:0;
+
+}
+
+
+.vehicle-live-data{
+
+    width:100%;
+
+    margin-top:9px;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,minmax(0,1fr));
+
+    gap:
+        5px
+        8px;
+
+}
+
+
+.vehicle-live-data div{
+
+    min-width:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:5px;
+
+    padding-bottom:3px;
+
+    border-bottom:
+        1px solid
+        rgba(17,51,79,.40);
+
+}
+
+
+.vehicle-live-data span{
+
+    margin:0;
+
+    color:#52677b;
+
+    font-size:6px;
+
+}
+
+
+.vehicle-live-data strong{
+
+    min-width:0;
+
+    overflow:hidden;
+
+    color:#98a9b9;
+
+    font-family:inherit;
+
+    font-size:7px;
+
+    font-weight:600;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+
+}
+
+
+.vehicle-live-data div:last-child
+strong{
+
+    color:#5bd49a;
+
+}
+
+
+.vehicle-active-status{
+
+    border:
+        1px solid
+        rgba(28,197,122,.40);
+
+    background:
+        rgba(28,197,122,.06);
+
+    color:#55d799;
+
+}
+
+
+.vehicle-alert-status{
+
+    border:
+        1px solid
+        rgba(255,82,103,.42);
+
+    background:
+        rgba(255,82,103,.06);
+
+    color:#ff6b7d;
+
+}
+
+.topbar-avatar.has-photo,
+.operator-avatar.has-photo{
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-repeat:no-repeat;
+
+    color:transparent;
+
+    border-color:#078cff;
+
+}
+
+/* ======================================================
+   PHOENIX LOGO SYMBOL — V3.4
+====================================================== */
+
+.topbar-logo{
+
+    width:42px;
+
+    height:42px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex-shrink:0;
+
+    overflow:visible;
+
+}
+
+
+.topbar-logo img{
+
+    position:static;
+
+    width:100%;
+
+    height:100%;
+
+    max-width:100%;
+
+    object-fit:contain;
+
+    object-position:center;
+
+    display:block;
+
+    transform:none;
+
+    top:auto;
+
+    left:auto;
+
+}
+
+
+/* Photo réelle utilisateur */
+
+.topbar-avatar.has-photo,
+.operator-avatar.has-photo{
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-repeat:no-repeat;
+
+    color:transparent;
+
+    border-color:#078cff;
+
+}
+
+/* ======================================================
+   PHOENIX DASHBOARD V3.4
+   LOGO + PROFIL UTILISATEUR
+====================================================== */
+
+
+/* ======================================================
+   LOGO PHOENIX
+====================================================== */
+
+.topbar-logo{
+
+    position:relative;
+
+    width:42px;
+
+    height:42px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex-shrink:0;
+
+    overflow:visible;
+
+}
+
+
+.topbar-logo img{
+
+    position:static;
+
+    display:block;
+
+    width:100%;
+
+    height:100%;
+
+    max-width:100%;
+
+    max-height:100%;
+
+    object-fit:contain;
+
+    object-position:center;
+
+    margin:0;
+
+    padding:0;
+
+    top:auto;
+
+    left:auto;
+
+    right:auto;
+
+    bottom:auto;
+
+    transform:none;
+
+}
+
+
+/* ======================================================
+   PHOTO PROFIL
+====================================================== */
+
+.topbar-avatar.has-photo,
+.operator-avatar.has-photo{
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-repeat:no-repeat;
+
+    color:transparent;
+
+}
+
+
+.topbar-avatar.has-photo{
+
+    border-color:#078cff;
+
+}
+
+
+.operator-avatar.has-photo{
+
+    border-color:#078cff;
+
+}
+
+
+/* Empêche la photo de sortir du cercle */
+
+.topbar-avatar,
+.operator-avatar{
+
+    overflow:hidden;
+
+}

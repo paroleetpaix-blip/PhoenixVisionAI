@@ -1,0 +1,599 @@
+/*
+========================================================
+PHOENIX VISION AI
+Account Request
+========================================================
+*/
+
+*{
+
+    box-sizing:border-box;
+
+    margin:0;
+
+    padding:0;
+
+}
+
+
+html,
+body{
+
+    width:100%;
+    min-height:100%;
+
+}
+
+
+body{
+
+    background:
+
+        radial-gradient(
+            circle at 50% 15%,
+            rgba(0,91,230,.18),
+            transparent 35%
+        ),
+
+        #01040b;
+
+    color:#f4f7fa;
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+}
+
+
+.request-page{
+
+    min-height:100vh;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:35px 20px;
+
+}
+
+
+.request-card{
+
+    width:100%;
+
+    max-width:760px;
+
+    padding:
+
+        30px
+        38px
+        31px;
+
+    border:
+
+        1px solid
+        rgba(10,100,187,.55);
+
+    border-radius:15px;
+
+    background:
+
+        linear-gradient(
+            180deg,
+            #061522,
+            #020a15
+        );
+
+    box-shadow:
+
+        0 30px 80px
+        rgba(0,0,0,.48);
+
+}
+
+
+.request-logo{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+}
+
+
+.request-logo-crop{
+
+    position:relative;
+
+    width:120px;
+    height:105px;
+
+    overflow:hidden;
+
+}
+
+
+.request-logo-crop img{
+
+    position:absolute;
+
+    width:175px;
+
+    max-width:none;
+
+    left:50%;
+
+    top:-21px;
+
+    transform:
+
+        translateX(-50%);
+
+}
+
+
+.request-phoenix{
+
+    margin-top:5px;
+
+    font-size:25px;
+
+    font-weight:700;
+
+    letter-spacing:5px;
+
+}
+
+
+.request-vision{
+
+    margin-top:4px;
+
+    color:#0788ff;
+
+    font-size:13px;
+
+    letter-spacing:6px;
+
+}
+
+
+.form-title{
+
+    margin-top:25px;
+
+    text-align:center;
+
+    color:#ffb400;
+
+    font-size:21px;
+
+    font-weight:700;
+
+    letter-spacing:3px;
+
+}
+
+
+.form-description{
+
+    margin:
+
+        7px
+        0
+        28px;
+
+    text-align:center;
+
+    color:#9ea9b7;
+
+    font-size:13px;
+
+}
+
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:
+
+        1fr
+        1fr;
+
+    gap:
+
+        18px
+        20px;
+
+}
+
+
+.request-field.full{
+
+    grid-column:
+
+        1 / -1;
+
+}
+
+
+.request-field label{
+
+    display:block;
+
+    margin-bottom:7px;
+
+    color:#e4eaf1;
+
+    font-size:12px;
+
+}
+
+
+.request-field input,
+.request-field select{
+
+    width:100%;
+
+    height:46px;
+
+    border:
+
+        1px solid
+        #086bb7;
+
+    border-radius:6px;
+
+    outline:0;
+
+    padding:
+
+        0
+        12px;
+
+    background:#020b16;
+
+    color:#fff;
+
+    font-family:inherit;
+
+}
+
+
+.request-field input:focus,
+.request-field select:focus{
+
+    border-color:#078fff;
+
+    box-shadow:
+
+        0 0 12px
+        rgba(0,120,255,.12);
+
+}
+
+
+.request-message{
+
+    min-height:20px;
+
+    margin-top:18px;
+
+    text-align:center;
+
+    color:#14c777;
+
+    font-size:13px;
+
+}
+
+
+#request-submit{
+
+    width:100%;
+
+    height:52px;
+
+    margin-top:8px;
+
+    border:
+
+        1px solid
+        #078fff;
+
+    border-radius:7px;
+
+    background:
+
+        linear-gradient(
+            180deg,
+            #0a8cff,
+            #0051d7
+        );
+
+    color:white;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+}
+
+
+.back-login{
+
+    display:block;
+
+    margin-top:18px;
+
+    text-align:center;
+
+    color:#0a8cff;
+
+    text-decoration:none;
+
+    font-size:12px;
+
+}
+
+
+@media(max-width:650px){
+
+    .form-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .request-field.full{
+
+        grid-column:auto;
+
+    }
+
+}
+
+.section-title{
+
+    margin:
+        28px
+        0
+        17px;
+
+    padding-bottom:9px;
+
+    border-bottom:
+        1px solid rgba(8,117,210,.35);
+
+    color:#078cff;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    letter-spacing:.8px;
+
+    text-transform:uppercase;
+
+}
+
+
+.request-field textarea{
+
+    width:100%;
+
+    resize:vertical;
+
+    min-height:100px;
+
+    border:
+        1px solid #086bb7;
+
+    border-radius:6px;
+
+    outline:0;
+
+    padding:12px;
+
+    background:#020b16;
+
+    color:#fff;
+
+    font-family:inherit;
+
+}
+
+
+.request-field textarea:focus{
+
+    border-color:#078fff;
+
+    box-shadow:
+        0 0 12px
+        rgba(0,120,255,.12);
+
+}
+
+/* ======================================================
+   PHOENIX LOGO SYMBOL — ACCOUNT REQUEST FIX
+====================================================== */
+
+img[src="/static/images/logoS.png"]{
+
+    position:static !important;
+
+    display:block !important;
+
+    width:125px !important;
+
+    height:125px !important;
+
+    max-width:125px !important;
+
+    max-height:125px !important;
+
+    margin:0 auto !important;
+
+    padding:0 !important;
+
+    object-fit:contain !important;
+
+    object-position:center !important;
+
+    transform:none !important;
+
+    clip-path:none !important;
+
+}
+
+
+/* Empêcher le conteneur de couper le logo */
+
+*:has(> img[src="/static/images/logoS.png"]){
+
+    overflow:visible !important;
+
+    height:auto !important;
+
+    max-height:none !important;
+
+}
+
+/* ======================================================
+   PHOENIX ACCOUNT REQUEST — FINAL LOGO ALIGNMENT
+====================================================== */
+
+img[src="/static/images/logoS.png"]{
+
+    width:150px !important;
+
+    height:150px !important;
+
+    max-width:150px !important;
+
+    max-height:150px !important;
+
+    transform:translateX(-10px) !important;
+
+    object-fit:contain !important;
+
+}
+
+/* ======================================================
+   PHOENIX ACCOUNT REQUEST
+   LOGO FINAL V3.5
+====================================================== */
+
+#account-request-logo{
+
+    position:relative !important;
+
+    display:block !important;
+
+    width:155px !important;
+
+    height:155px !important;
+
+    min-width:155px !important;
+
+    min-height:155px !important;
+
+    max-width:none !important;
+
+    max-height:none !important;
+
+    margin-left:auto !important;
+
+    margin-right:auto !important;
+
+    object-fit:contain !important;
+
+    object-position:center !important;
+
+    transform:translateX(-12px) !important;
+
+    clip-path:none !important;
+
+}
+
+/* ======================================================
+   PHOENIX ACCOUNT REQUEST
+   LOGO FINAL V3.6
+====================================================== */
+
+.account-request-logo-wrap{
+
+    width:100% !important;
+
+    height:185px !important;
+
+    display:flex !important;
+
+    align-items:center !important;
+
+    justify-content:center !important;
+
+    position:relative !important;
+
+    overflow:visible !important;
+
+    margin:
+        0
+        auto
+        5px !important;
+
+    padding:0 !important;
+
+}
+
+
+#account-request-logo{
+
+    position:relative !important;
+
+    display:block !important;
+
+    width:185px !important;
+
+    height:185px !important;
+
+    min-width:185px !important;
+
+    min-height:185px !important;
+
+    max-width:none !important;
+
+    max-height:none !important;
+
+    left:-4px !important;
+
+    right:auto !important;
+
+    top:auto !important;
+
+    bottom:auto !important;
+
+    margin:0 !important;
+
+    padding:0 !important;
+
+    transform:none !important;
+
+    object-fit:contain !important;
+
+    object-position:center !important;
+
+    clip-path:none !important;
+
+}

@@ -1,0 +1,748 @@
+/*
+========================================================
+PHOENIX VISION AI
+Launcher Enterprise — Simplified Professional Edition
+========================================================
+*/
+
+:root{
+
+    --background:#00040b;
+    --background-soft:#020b18;
+
+    --blue:#0788ff;
+    --blue-light:#00a6ff;
+
+    --gold:#ffb400;
+
+    --green:#18bd70;
+
+    --white:#f4f7fb;
+    --muted:#aeb7c4;
+
+}
+
+*{
+
+    margin:0;
+    padding:0;
+
+    box-sizing:border-box;
+
+}
+
+html,
+body{
+
+    width:100%;
+    height:100%;
+
+}
+
+body{
+
+    overflow:hidden;
+
+    background:#00040b;
+
+    color:var(--white);
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        Helvetica,
+        sans-serif;
+
+}
+
+
+/* ======================================================
+   ÉCRAN PRINCIPAL
+====================================================== */
+
+.launcher{
+
+    position:relative;
+
+    width:100vw;
+    height:100vh;
+
+    overflow:hidden;
+
+    background:
+
+        radial-gradient(
+            circle at 50% 34%,
+            rgba(0,76,190,.18),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            circle at 50% 70%,
+            rgba(0,98,255,.09),
+            transparent 35%
+        ),
+
+        linear-gradient(
+            180deg,
+            #010713 0%,
+            #00040b 100%
+        );
+
+}
+
+
+/* ======================================================
+   PETIT PANNEAU EN HAUT À GAUCHE
+====================================================== */
+
+.boot-status{
+
+    position:absolute;
+
+    z-index:20;
+
+    top:24px;
+    left:28px;
+
+    width:230px;
+
+    padding:
+
+        14px
+        17px
+        13px;
+
+    border:
+
+        1px solid
+        rgba(7,99,181,.25);
+
+    border-radius:9px;
+
+    background:
+
+        rgba(
+            1,
+            9,
+            21,
+            .72
+        );
+
+    backdrop-filter:
+
+        blur(5px);
+
+    box-shadow:
+
+        0 12px 35px
+        rgba(0,0,0,.20);
+
+    transition:
+
+        opacity .9s ease,
+        transform .9s ease,
+        visibility .9s;
+
+}
+
+.boot-status.hidden{
+
+    opacity:0;
+
+    transform:
+
+        translateX(-25px);
+
+    visibility:hidden;
+
+}
+
+
+.boot-status-title{
+
+    margin-bottom:10px;
+
+    color:#dfe8f4;
+
+    font-size:12px;
+
+    font-weight:600;
+
+    letter-spacing:.5px;
+
+}
+
+
+.boot-item{
+
+    height:25px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    border-bottom:
+
+        1px solid
+        rgba(10,64,120,.20);
+
+    color:#8f9dad;
+
+    font-size:11px;
+
+    opacity:.27;
+
+    transition:
+
+        opacity .35s ease,
+        color .35s ease;
+
+}
+
+
+.boot-item.active{
+
+    opacity:1;
+
+    color:#dce5ef;
+
+}
+
+
+.boot-check{
+
+    width:16px;
+    height:16px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    background:var(--green);
+
+    color:white;
+
+    font-size:10px;
+    font-weight:bold;
+
+    opacity:0;
+
+    transform:scale(.2);
+
+    transition:
+
+        opacity .3s ease,
+        transform .3s ease;
+
+}
+
+
+.boot-item.active
+.boot-check{
+
+    opacity:1;
+
+    transform:scale(1);
+
+}
+
+
+.boot-message{
+
+    margin-top:10px;
+
+    color:#168cff;
+
+    font-size:10px;
+
+}
+
+
+/* ======================================================
+   PARTIE CENTRALE
+====================================================== */
+
+.launcher-center{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:flex-start;
+
+    padding-top:20vh;
+}
+
+
+/* ======================================================
+   IDENTITÉ PHOENIX
+====================================================== */
+
+.phoenix-emblem{
+
+    position:relative;
+
+    z-index:10;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+}
+
+
+.shield-crop{
+
+    position:relative;
+
+    width:280px;
+    height:245px;
+
+    overflow:hidden;
+
+    filter:
+
+        drop-shadow(
+            0 17px 23px
+            rgba(0,0,0,.65)
+        );
+
+}
+
+
+.shield-crop img{
+
+    position:absolute;
+
+    width:405px;
+
+    max-width:none;
+
+    height:auto;
+
+    top:-48px;
+
+    left:50%;
+
+    transform:
+
+        translateX(-50%);
+
+}
+
+
+.phoenix-name{
+
+    margin-top:3px;
+
+    color:#edf2f7;
+
+    font-size:58px;
+
+    line-height:1;
+
+    font-weight:700;
+
+    letter-spacing:9px;
+
+    text-shadow:
+
+        0 4px 3px
+        #242d37,
+
+        0 8px 15px
+        rgba(0,0,0,.72);
+
+}
+
+
+.vision-name{
+
+    margin-top:11px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:14px;
+
+    color:#087fff;
+
+    font-size:27px;
+
+    font-weight:600;
+
+    letter-spacing:10px;
+
+}
+
+
+.gold-line{
+
+    width:45px;
+    height:3px;
+
+    border-radius:10px;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            #f69c00,
+            #ffd561
+        );
+
+}
+
+
+.version{
+
+    margin-top:28px;
+
+    color:#e8edf3;
+
+    font-size:20px;
+
+}
+
+
+/* ======================================================
+   VILLE
+====================================================== */
+
+.city{
+
+    position:absolute;
+
+    z-index:3;
+
+    left:50%;
+
+    bottom:15%;
+
+    width:min(
+        950px,
+        80vw
+    );
+
+    height:36vh;
+
+    transform:
+
+        translateX(-50%);
+
+    overflow:hidden;
+
+}
+
+
+.city::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+        linear-gradient(
+            180deg,
+            rgba(0,4,11,.02) 0%,
+            rgba(0,4,11,.02) 70%,
+            rgba(0,4,11,.25) 100%
+        );
+
+}
+
+
+.city img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:contain;
+
+    object-position:center bottom;
+
+    filter:
+
+        brightness(.90)
+        contrast(1.08)
+        saturate(1.10);
+
+}
+
+
+/* ======================================================
+   FOOTER
+====================================================== */
+
+.launcher-footer{
+
+    position:absolute;
+
+    z-index:20;
+
+    bottom:25px;
+
+    left:50%;
+
+    transform:
+
+        translateX(-50%);
+
+    width:100%;
+
+    text-align:center;
+
+}
+
+
+.powered{
+
+    color:#ccd4df;
+
+    font-size:14px;
+
+}
+
+
+.company{
+
+    margin-top:5px;
+
+    color:var(--gold);
+
+    font-size:17px;
+
+}
+
+
+.copyright{
+
+    margin-top:9px;
+
+    color:#8793a1;
+
+    font-size:12px;
+
+}
+
+
+/* ======================================================
+   TRANSITION AVANT LOGIN
+====================================================== */
+
+.launcher.fade-out{
+
+    animation:
+
+        launcherDisappear
+        1.1s
+        ease
+        forwards;
+
+}
+
+
+@keyframes launcherDisappear{
+
+    from{
+
+        opacity:1;
+
+    }
+
+    to{
+
+        opacity:0;
+
+    }
+
+}
+
+
+/* ======================================================
+   RESPONSIVE MACBOOK
+====================================================== */
+
+@media
+(max-width:1200px),
+(max-height:760px){
+
+    .launcher-center{
+
+        padding-top:7vh;
+
+    }
+
+
+    .shield-crop{
+
+        width:210px;
+        height:180px;
+
+    }
+
+
+    .shield-crop img{
+
+        width:310px;
+
+        top:-39px;
+
+    }
+
+
+    .phoenix-name{
+
+        font-size:43px;
+
+        letter-spacing:7px;
+
+    }
+
+
+    .vision-name{
+
+        font-size:20px;
+
+        letter-spacing:7px;
+
+    }
+
+
+    .gold-line{
+
+        width:32px;
+
+    }
+
+
+    .version{
+
+        margin-top:18px;
+
+        font-size:15px;
+
+    }
+
+
+    .city{
+
+        width:76vw;
+
+        height:32vh;
+
+        bottom:17%;
+
+    }
+
+
+    .boot-status{
+
+        top:16px;
+        left:18px;
+
+        width:190px;
+
+        padding:10px 13px;
+
+    }
+
+
+    .boot-item{
+
+        height:21px;
+
+        font-size:9px;
+
+    }
+
+
+    .boot-status-title{
+
+        font-size:10px;
+
+    }
+
+
+    .company{
+
+        font-size:14px;
+
+    }
+
+}
+
+/* ======================================================
+   PHOENIX LOGO SYMBOL — LAUNCHER FIX
+====================================================== */
+
+img[src="/static/images/logoS.png"]{
+
+    position:static !important;
+
+    display:block !important;
+
+    width:230px !important;
+
+    height:230px !important;
+
+    max-width:230px !important;
+
+    max-height:230px !important;
+
+    margin:0 auto !important;
+
+    padding:0 !important;
+
+    object-fit:contain !important;
+
+    object-position:center !important;
+
+    transform:none !important;
+
+    clip-path:none !important;
+
+}
+
+
+/* Le conteneur du symbole ne doit plus couper le logo */
+
+*:has(> img[src="/static/images/logoS.png"]){
+
+    overflow:visible !important;
+
+    height:auto !important;
+
+    max-height:none !important;
+
+}
+
+/* ======================================================
+   PHOENIX LAUNCHER — FINAL LOGO ALIGNMENT
+====================================================== */
+
+img[src="/static/images/logoS.png"]{
+
+    transform:translateX(-12px) !important;
+
+}

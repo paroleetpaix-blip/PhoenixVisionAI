@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Phoenix Vision AI — Connexion
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/login.css"
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="/static/images/favicon.png?v=1"
+    >
+
+</head>
+
+<body>
+
+
+<div class="login-shell">
+
+
+    <header class="login-header">
+
+        CENTRE DE SUPERVISION
+
+    </header>
+
+
+    <main class="login-main">
+
+
+        <!-- ==========================================
+             CENTRE DE SUPERVISION
+        =========================================== -->
+
+        <section class="supervision-side">
+
+
+            <img
+
+                src="/static/images/centre3.png"
+
+                class="supervision-background"
+
+                alt="Centre de supervision"
+
+            >
+
+
+            <div class="supervision-overlay"></div>
+
+
+            <!-- LOGO + TEXTE -->
+
+            <div class="supervision-brand">
+
+
+                <div class="brand-shield">
+
+                    <img
+                        src="/static/images/logoS.png"
+                        alt=""
+                    >
+
+                </div>
+
+
+                <div class="brand-text">
+
+                    <div class="brand-phoenix">
+                        PHOENIX
+                    </div>
+
+                    <div class="brand-vision">
+
+                        <span></span>
+
+                        VISION AI
+
+                        <span></span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- ==========================================
+             CONNEXION
+        =========================================== -->
+
+        <section class="login-side">
+
+
+            <div class="login-card">
+
+
+                <h1>
+                    Bienvenue
+                </h1>
+
+
+                <p class="login-description">
+
+                    Connectez-vous à votre espace sécurisé
+
+                </p>
+
+
+                <form
+                    id="login-form"
+                    novalidate
+                >
+
+
+                    <div class="field">
+
+                        <label for="username">
+
+                            Identifiant / utilisateur
+
+                        </label>
+
+
+                        <div class="input-container">
+
+                            <span class="field-icon">
+                                ♙
+                            </span>
+
+
+                            <input
+                                id="username"
+                                name="username"
+                                type="text"
+                                autocomplete="username"
+                                placeholder="Entrez votre identifiant"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label for="password">
+
+                            Mot de passe
+
+                        </label>
+
+
+                        <div class="input-container">
+
+                            <span class="field-icon">
+                                ▣
+                            </span>
+
+
+                            <input
+                                id="password"
+                                name="password"
+                                type="password"
+                                autocomplete="current-password"
+                                placeholder="Entrez votre mot de passe"
+                            >
+
+
+                            <button
+
+                                id="toggle-password"
+
+                                class="toggle-password"
+
+                                type="button"
+
+                                aria-label="Afficher le mot de passe"
+
+                            >
+                                ◉
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="login-error"
+                        class="login-error"
+                    ></div>
+
+
+                    <button
+                        id="login-button"
+                        class="login-button"
+                        type="submit"
+                    >
+
+                        Se connecter
+
+                    </button>
+
+
+                    <div class="request-separator">
+
+                        <span></span>
+
+                        <small>OU</small>
+
+                        <span></span>
+
+                    </div>
+
+
+                    <a
+                        href="/request-account"
+                        class="request-account"
+                    >
+
+                        Demander un compte
+
+                    </a>
+
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer class="login-footer">
+
+
+        <div class="footer-feature">
+
+            <span>♢</span>
+
+            Protection avancée
+
+        </div>
+
+
+        <div class="footer-feature">
+
+            <span>▣</span>
+
+            Surveillance 24/7
+
+        </div>
+
+
+        <div class="footer-feature">
+
+            <span>◫</span>
+
+            Données sécurisées
+
+        </div>
+
+
+        <div class="login-copyright">
+
+            © 2026 Phoenix Security Technologies.
+            Tous droits réservés.
+
+        </div>
+
+    </footer>
+
+</div>
+
+
+<script
+    src="/static/js/enterprise/login.js"
+></script>
+
+</body>
+
+</html>

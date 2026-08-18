@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Phoenix Admin — Demandes de comptes
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/admin_requests.css"
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="/static/images/favicon.png?v=1"
+    >
+
+</head>
+
+<body>
+
+<div class="admin-shell">
+
+
+    <!-- ==================================================
+         HEADER
+    =================================================== -->
+
+    <header class="admin-header">
+
+        <div class="admin-brand">
+
+            <div class="admin-logo">
+
+                <img
+                    src="/static/images/logo.png"
+                    alt="Phoenix Vision AI"
+                >
+
+            </div>
+
+            <div>
+
+                <div class="admin-product">
+                    PHOENIX ADMIN
+                </div>
+
+                <div class="admin-subtitle">
+                    Gestion des demandes utilisateurs
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <a
+            href="/enterprise"
+            class="dashboard-link"
+        >
+            Dashboard
+        </a>
+
+    </header>
+
+
+    <!-- ==================================================
+         PRINCIPAL
+    =================================================== -->
+
+    <main class="admin-main">
+
+
+        <!-- ==============================================
+             LISTE DES DEMANDES
+        =============================================== -->
+
+        <aside class="requests-panel">
+
+            <div class="panel-heading">
+
+                <div>
+
+                    <h2>
+                        Demandes
+                    </h2>
+
+                    <p>
+                        Comptes en attente
+                    </p>
+
+                </div>
+
+                <span
+                    id="pending-count"
+                    class="pending-count"
+                >
+                    0
+                </span>
+
+            </div>
+
+
+            <div
+                id="requests-list"
+                class="requests-list"
+            >
+
+                <div class="empty-message">
+                    Chargement...
+                </div>
+
+            </div>
+
+        </aside>
+
+
+        <!-- ==============================================
+             DÉTAIL DE LA DEMANDE
+        =============================================== -->
+
+        <section class="request-details">
+
+
+            <div
+                id="no-selection"
+                class="no-selection"
+            >
+                Sélectionnez une demande utilisateur.
+            </div>
+
+
+            <form
+                id="admin-request-form"
+                class="admin-request-form hidden"
+            >
+
+
+                <input
+                    id="request-id"
+                    type="hidden"
+                >
+
+
+                <!-- ======================================
+                     PHOTO ET IDENTITÉ
+                ======================================= -->
+
+                <div class="profile-section">
+
+
+                    <div
+                        id="photo-preview"
+                        class="photo-preview"
+                    >
+
+                        <span>
+                            PHOTO
+                        </span>
+
+                    </div>
+
+
+                    <div class="photo-actions">
+
+                        <h2 id="request-full-name">
+                            Utilisateur
+                        </h2>
+
+
+                        <div
+                            id="request-status"
+                            class="request-status"
+                        >
+                            PENDING
+                        </div>
+
+
+                        <label
+                            for="user-photo"
+                            class="photo-button"
+                        >
+                            Ajouter une photo
+                        </label>
+
+
+                        <input
+                            id="user-photo"
+                            type="file"
+                            accept="image/jpeg,image/png,image/webp"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- ======================================
+                     DONNÉES
+                ======================================= -->
+
+                <div class="details-grid">
+
+
+                    <!-- NOM -->
+
+                    <div class="admin-field">
+
+                        <label for="admin-nom">
+                            Nom
+                        </label>
+
+                        <input
+                            id="admin-nom"
+                            type="text"
+                            disabled
+                        >
+
+                    </div>
+
+
+                    <!-- POSTNOM -->
+
+                    <div class="admin-field">
+
+                        <label for="admin-postnom">
+                            Postnom
+                        </label>
+
+                        <input
+                            id="admin-postnom"
+                            type="text"
+                            disabled
+                        >
+
+                    </div>
+
+
+                    <!-- PRÉNOM -->
+
+                    <div class="admin-field">
+
+                        <label for="admin-prenom">
+                            Prénom
+                        </label>
+
+                        <input
+                            id="admin-prenom"
+                            type="text"
+                            disabled
+                        >
+
+                    </div>
+
+
+                    <!-- SEXE -->
+
+                    <div class="admin-field">
+
+                        <label for="admin-sexe">
+                            Sexe
+                        </label>
+
+                        <select
+                            id="admin-sexe"
+                            disabled
+                        >
+
+                            <option value="">
+                                Non renseigné
+                            </option>
+
+                            <option value="M">
+                                Masculin
+                            </option>
+
+                            <option value="F">
+                                Féminin
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- DATE DE NAISSANCE -->
+
+                    <div class="admin-field">
+
+                        <label for="admin-naissance">
+                            Date de naissance
+                        </label>
+
+                        <input
+                            id="admin-naissance"
+                            type="date"
+                            disabled
+                        >
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div class="admin-field">
+
+                        <label for="admin-email">
+                            Email
+                        </label>
+
+                        <input
+                            id="admin-email"
+                            type="email"
+                            disabled
+                        >
+
+                    </div>
+
+
+                    <!-- TÉLÉPHONE -->
+
+                    <div class="admin-field">
+
+                        <label for="admin-telephone">
+                            Téléphone
+                        </label>
+
+                        <input
+                            id="admin-telephone"
+                            type="text"
+                            disabled
+                        >
+
+                    </div>
+
+
+                    <!-- ORGANISATION -->
+
+                    <div class="admin-field">
+
+                        <label for="admin-organisation">
+                            Société / Organisation
+                        </label>
+
+                        <input
+                            id="admin-organisation"
+                            type="text"
+                            disabled
+                        >
+
+                    </div>
+
+
+                    <!-- MATRICULE -->
+
+                    <div class="admin-field">
+
+                        <label for="admin-matricule">
+                            Matricule
+                        </label>
+
+                        <input
+                            id="admin-matricule"
+                            type="text"
+                            disabled
+                        >
+
+                    </div>
+
+
+                    <!-- DÉPARTEMENT -->
+
+                    <div class="admin-field">
+
+                        <label for="admin-departement">
+                            Département / Service
+                        </label>
+
+                        <input
+                            id="admin-departement"
+                            type="text"
+                            disabled
+                        >
+
+                    </div>
+
+
+                    <!-- FONCTION -->
+
+                    <div class="admin-field">
+
+                        <label for="admin-fonction">
+                            Fonction / Poste
+                        </label>
+
+                        <input
+                            id="admin-fonction"
+                            type="text"
+                            disabled
+                        >
+
+                    </div>
+
+
+                    <!-- SITE -->
+
+                    <div class="admin-field">
+
+                        <label for="admin-site">
+                            Site d'affectation
+                        </label>
+
+                        <input
+                            id="admin-site"
+                            type="text"
+                            disabled
+                        >
+
+                    </div>
+
+
+                    <!-- RESPONSABLE -->
+
+                    <div class="admin-field">
+
+                        <label for="admin-responsable">
+                            Responsable hiérarchique
+                        </label>
+
+                        <input
+                            id="admin-responsable"
+                            type="text"
+                            disabled
+                        >
+
+                    </div>
+
+
+                    <!-- MOTIF -->
+
+                    <div class="admin-field important-field">
+
+                        <label for="admin-motif">
+                            Motif de la demande
+                        </label>
+
+                        <textarea
+                            id="admin-motif"
+                            rows="4"
+                            disabled
+                        ></textarea>
+
+                    </div>
+
+
+                    <!-- ==================================
+                         PARAMÈTRES RÉSERVÉS À L'ADMIN
+                    =================================== -->
+
+
+                    <!-- IDENTIFIANT -->
+
+                    <div class="admin-field important-field">
+
+                        <label for="assigned-username">
+                            Identifiant Phoenix
+                        </label>
+
+                        <input
+                            id="assigned-username"
+                            type="text"
+                            maxlength="20"
+                            placeholder="Exemple : alpha16"
+                        >
+
+                        <small>
+                            5 à 20 caractères avec au moins
+                            une lettre et un chiffre.
+                            Ne pas utiliser le nom ou le prénom.
+                        </small>
+
+                    </div>
+
+
+                    <!-- RÔLE -->
+
+                    <div class="admin-field">
+
+                        <label for="assigned-role">
+                            Rôle attribué
+                        </label>
+
+                        <select id="assigned-role">
+
+                            <option value="OPERATOR">
+                                Opérateur
+                            </option>
+
+                            <option value="SUPERVISOR">
+                                Superviseur
+                            </option>
+
+                            <option value="ANALYST">
+                                Analyste
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- NIVEAU D'ACCÈS -->
+
+                    <div class="admin-field">
+
+                        <label for="access-level">
+                            Niveau d'accès
+                        </label>
+
+                        <select id="access-level">
+
+                            <option value="STANDARD">
+                                Standard
+                            </option>
+
+                            <option value="SENSITIVE">
+                                Sensible
+                            </option>
+
+                            <option value="RESTRICTED">
+                                Restreint
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- EXPIRATION -->
+
+                    <div class="admin-field">
+
+                        <label for="account-expiry">
+                            Expiration du compte
+                        </label>
+
+                        <input
+                            id="account-expiry"
+                            type="date"
+                        >
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- ======================================
+                     MESSAGE
+                ======================================= -->
+
+                <div
+                    id="admin-message"
+                    class="admin-message"
+                ></div>
+
+
+                <!-- ======================================
+                     IDENTIFIANTS CRÉÉS
+                ======================================= -->
+
+                <div
+                    id="credentials-box"
+                    class="credentials-box hidden"
+                >
+
+                    <div class="credentials-title">
+                        Compte Phoenix créé
+                    </div>
+
+
+                    <div class="credential-row">
+
+                        <span>
+                            Identifiant
+                        </span>
+
+                        <strong id="created-username">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div class="credential-row">
+
+                        <span>
+                            Mot de passe temporaire
+                        </span>
+
+                        <strong id="temporary-password">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <button
+                        id="copy-credentials"
+                        type="button"
+                    >
+                        Copier les identifiants
+                    </button>
+
+
+                    <small>
+                        Ce mot de passe est affiché uniquement
+                        lors de la création du compte.
+                    </small>
+
+                </div>
+
+
+                <!-- ======================================
+                     ACTIONS
+                ======================================= -->
+
+                <div class="admin-actions">
+
+
+                    <button
+                        id="edit-request"
+                        class="secondary-action"
+                        type="button"
+                    >
+                        Modifier
+                    </button>
+
+
+                    <button
+                        id="save-request"
+                        class="primary-action"
+                        type="submit"
+                    >
+                        Enregistrer
+                    </button>
+
+
+                </div>
+
+
+            </form>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script
+    src="/static/js/enterprise/admin_requests.js"
+></script>
+
+</body>
+
+</html>

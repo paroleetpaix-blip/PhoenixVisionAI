@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Phoenix Vision AI Enterprise</title>
+
+
+    <!-- FAVICON PHOENIX -->
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="/static/images/favicon.png?v=1"
+    >
+
+
+    <!-- THEME -->
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/theme.css"
+    >
+
+
+    <!-- DASHBOARD -->
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/dashboard.css?v=3.4"
+    >
+
+</head>
+
+
+<body>
+
+
+<div id="enterprise-dashboard">
+
+
+    <!-- ==================================================
+         TOPBAR
+    =================================================== -->
+
+    <header class="topbar">
+
+
+        <!-- PHOENIX BRAND -->
+
+        <div class="topbar-brand">
+
+
+            <div class="topbar-logo">
+
+                <img
+                    src="/static/images/logoS.png"
+                    alt="Phoenix"
+                >
+
+            </div>
+
+
+            <div class="topbar-brand-text">
+
+                <div class="topbar-phoenix">
+                    PHOENIX
+                </div>
+
+                <div class="topbar-vision">
+                    VISION AI
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ==================================================
+             ÉTAT SYSTÈME
+        =================================================== -->
+
+        <div class="topbar-system">
+
+
+            <div class="system-indicator">
+
+                <span class="indicator-dot online"></span>
+
+                <div>
+
+                    <small>
+                        CPU
+                    </small>
+
+                    <strong>
+                        READY
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="system-indicator">
+
+                <span class="indicator-dot online"></span>
+
+                <div>
+
+                    <small>
+                        RAM
+                    </small>
+
+                    <strong>
+                        READY
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="system-indicator">
+
+                <span class="indicator-dot warning"></span>
+
+                <div>
+
+                    <small>
+                        GPU
+                    </small>
+
+                    <strong>
+                        CPU MODE
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="system-indicator">
+
+                <span
+                    id="camera-indicator"
+                    class="indicator-dot online"
+                ></span>
+
+                <div>
+
+                    <small>
+                        CAM
+                    </small>
+
+                    <strong id="topbar-camera-count">
+                        0 / 9
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ==================================================
+             TOPBAR DROITE
+        =================================================== -->
+
+        <div class="topbar-right">
+
+
+            <div class="datetime">
+
+                <strong id="current-time">
+                    --:--
+                </strong>
+
+                <span id="current-date">
+                    --
+                </span>
+
+            </div>
+
+
+
+            <button
+                id="notification-button"
+                class="topbar-button"
+                type="button"
+                title="Notifications"
+            >
+                ●
+            </button>
+
+
+
+            <button
+                id="fullscreen-button"
+                class="topbar-button"
+                type="button"
+                title="Plein écran"
+            >
+                ⛶
+            </button>
+
+
+
+            <button
+                class="topbar-button"
+                type="button"
+                title="Paramètres"
+            >
+                ⚙
+            </button>
+
+
+
+            <!-- UTILISATEUR -->
+
+            <div class="topbar-user">
+
+
+                <div
+                    id="topbar-user-avatar"
+                    class="topbar-avatar"
+                >
+                    OP
+                </div>
+
+
+                <div class="topbar-user-text">
+
+                    <strong id="topbar-username">
+                        Opérateur
+                    </strong>
+
+                    <small id="topbar-role">
+                        OPERATOR
+                    </small>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </header>
+
+
+
+    <!-- ==================================================
+         BODY
+    =================================================== -->
+
+    <div class="dashboard-body">
+
+
+        <!-- ==================================================
+             SIDEBAR
+        =================================================== -->
+
+        <aside class="sidebar">
+
+
+            <!-- PROFIL UTILISATEUR -->
+
+            <div class="operator-card">
+
+
+                <div
+                    id="sidebar-avatar"
+                    class="operator-avatar"
+                >
+                    OP
+                </div>
+
+
+                <div class="operator-info">
+
+                    <strong id="sidebar-username">
+                        Opérateur
+                    </strong>
+
+                    <span id="sidebar-role">
+                        OPERATOR
+                    </span>
+
+                </div>
+
+
+                <span class="operator-online"></span>
+
+
+            </div>
+
+
+
+            <!-- ==================================================
+                 NAVIGATION
+            =================================================== -->
+
+            <nav class="sidebar-navigation">
+
+
+                <div class="navigation-label">
+                    SUPERVISION
+                </div>
+
+
+
+                <a
+                    href="/enterprise"
+                    class="sidebar-item active"
+                >
+
+                    <span class="menu-icon">
+                        ▦
+                    </span>
+
+                    <span>
+                        Tableau de bord
+                    </span>
+
+                </a>
+
+
+
+                <a
+                    href="#cameras"
+                    class="sidebar-item"
+                >
+
+                    <span class="menu-icon">
+                        ◫
+                    </span>
+
+                    <span>
+                        Caméras
+                    </span>
+
+                </a>
+
+
+
+                <a
+                    href="#events"
+                    class="sidebar-item"
+                >
+
+                    <span class="menu-icon">
+                        ◉
+                    </span>
+
+                    <span>
+                        Événements
+                    </span>
+
+                </a>
+
+
+
+                <a
+                    href="#alerts"
+                    class="sidebar-item"
+                >
+
+                    <span class="menu-icon">
+                        △
+                    </span>
+
+                    <span>
+                        Alertes IA
+                    </span>
+
+                    <span class="menu-badge">
+                        0
+                    </span>
+
+                </a>
+
+
+
+                <a
+                    href="#history"
+                    class="sidebar-item"
+                >
+
+                    <span class="menu-icon">
+                        ◷
+                    </span>
+
+                    <span>
+                        Historique
+                    </span>
+
+                </a>
+
+
+
+                <a
+                    href="#map"
+                    class="sidebar-item"
+                >
+
+                    <span class="menu-icon">
+                        ◇
+                    </span>
+
+                    <span>
+                        Carte
+                    </span>
+
+                </a>
+
+
+
+                <a
+                    href="#anpr"
+                    class="sidebar-item"
+                >
+
+                    <span class="menu-icon">
+                        ▤
+                    </span>
+
+                    <span>
+                        ANPR / Plaques
+                    </span>
+
+                </a>
+
+
+
+                <a
+                    href="#reports"
+                    class="sidebar-item"
+                >
+
+                    <span class="menu-icon">
+                        ▧
+                    </span>
+
+                    <span>
+                        Rapports
+                    </span>
+
+                </a>
+
+
+
+                <!-- ADMINISTRATION -->
+
+                <div class="navigation-label administration-label">
+                    ADMINISTRATION
+                </div>
+
+
+
+                <a
+                    href="#settings"
+                    class="sidebar-item"
+                >
+
+                    <span class="menu-icon">
+                        ⚙
+                    </span>
+
+                    <span>
+                        Paramètres
+                    </span>
+
+                </a>
+
+
+
+                <a
+                    href="/admin/requests"
+                    class="sidebar-item admin-only"
+                >
+
+                    <span class="menu-icon">
+                        ♙
+                    </span>
+
+                    <span>
+                        Utilisateurs
+                    </span>
+
+                </a>
+
+
+
+                <a
+                    href="#system"
+                    class="sidebar-item"
+                >
+
+                    <span class="menu-icon">
+                        ◈
+                    </span>
+
+                    <span>
+                        Système
+                    </span>
+
+                </a>
+
+
+
+                <a
+                    href="#backups"
+                    class="sidebar-item admin-only"
+                >
+
+                    <span class="menu-icon">
+                        ▣
+                    </span>
+
+                    <span>
+                        Sauvegardes
+                    </span>
+
+                </a>
+
+
+            </nav>
+
+
+
+            <!-- ==================================================
+                 LOGOUT
+            =================================================== -->
+
+            <div class="sidebar-bottom">
+
+
+                <a
+                    href="/logout"
+                    class="logout-button"
+                >
+
+                    <span>
+                        ↪
+                    </span>
+
+                    Déconnexion
+
+                </a>
+
+
+            </div>
+
+
+        </aside>
+
+
+
+        <!-- ==================================================
+             DASHBOARD WORKSPACE
+        =================================================== -->
+
+        <main class="dashboard-workspace">
+
+
+            <!-- ==================================================
+                 CENTRE
+            =================================================== -->
+
+            <section class="dashboard-center">
+
+
+                <!-- ==================================================
+                     CAMÉRAS
+                =================================================== -->
+
+                <section
+                    id="cameras"
+                    class="dashboard-panel camera-section"
+                >
+
+
+                    <div class="panel-header">
+
+
+                        <div>
+
+                            <h2>
+                                SUPERVISION CAMÉRAS
+                            </h2>
+
+                            <p>
+                                Vue générale du réseau vidéo
+                            </p>
+
+                        </div>
+
+
+                        <div class="camera-summary">
+
+                            <span
+                                id="camera-online-count"
+                                class="camera-online-count"
+                            >
+                                0
+                            </span>
+
+                            <small>
+                                EN LIGNE
+                            </small>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div
+                        id="camera-grid"
+                        class="camera-grid"
+                    >
+
+                        <div class="grid-loading">
+                            Chargement des caméras...
+                        </div>
+
+                    </div>
+
+
+                </section>
+
+
+
+                <!-- ==================================================
+                     PANNEAUX INFÉRIEURS
+                =================================================== -->
+
+                <section class="bottom-panels">
+
+
+                    <!-- ==================================================
+                         VÉHICULE
+                    =================================================== -->
+
+                    <article class="dashboard-panel vehicle-panel">
+
+
+                        <div class="small-panel-header">
+
+
+                            <h3>
+                                VÉHICULE DÉTECTÉ
+                            </h3>
+
+
+                            <span
+                                id="vehicle-panel-status"
+                                class="panel-status neutral"
+                            >
+                                ATTENTE
+                            </span>
+
+
+                        </div>
+
+
+
+                        <div class="vehicle-content">
+
+
+                            <div class="vehicle-visual">
+
+
+                                <div class="vehicle-shape">
+
+                                    <div class="vehicle-roof"></div>
+
+                                    <div class="vehicle-body"></div>
+
+                                    <div
+                                        class="vehicle-wheel wheel-left"
+                                    ></div>
+
+                                    <div
+                                        class="vehicle-wheel wheel-right"
+                                    ></div>
+
+                                </div>
+
+
+                            </div>
+
+
+
+                            <div class="vehicle-details">
+
+
+                                <strong
+                                    id="vehicle-plate"
+                                    class="vehicle-plate-placeholder"
+                                >
+                                    —
+                                </strong>
+
+
+                                <span id="vehicle-type">
+                                    Aucun véhicule actif
+                                </span>
+
+
+                                <small id="vehicle-confidence">
+                                    Détection en attente
+                                </small>
+
+
+
+                                <div class="vehicle-live-data">
+
+
+                                    <div>
+
+                                        <span>
+                                            ID Tracker
+                                        </span>
+
+                                        <strong id="vehicle-tracker-id">
+                                            —
+                                        </strong>
+
+                                    </div>
+
+
+
+                                    <div>
+
+                                        <span>
+                                            Zone
+                                        </span>
+
+                                        <strong id="vehicle-zone">
+                                            —
+                                        </strong>
+
+                                    </div>
+
+
+
+                                    <div>
+
+                                        <span>
+                                            Vitesse
+                                        </span>
+
+                                        <strong id="vehicle-speed">
+                                            —
+                                        </strong>
+
+                                    </div>
+
+
+
+                                    <div>
+
+                                        <span>
+                                            Direction
+                                        </span>
+
+                                        <strong id="vehicle-direction">
+                                            —
+                                        </strong>
+
+                                    </div>
+
+
+
+                                    <div>
+
+                                        <span>
+                                            Menace
+                                        </span>
+
+                                        <strong id="vehicle-threat">
+                                            —
+                                        </strong>
+
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+
+
+                    </article>
+
+
+
+                    <!-- ==================================================
+                         LOCALISATION
+                    =================================================== -->
+
+                    <article class="dashboard-panel location-panel">
+
+
+                        <div class="small-panel-header">
+
+                            <h3>
+                                LOCALISATION
+                            </h3>
+
+                            <span class="panel-status neutral">
+                                GPS
+                            </span>
+
+                        </div>
+
+
+
+                        <div class="location-content">
+
+
+                            <div class="mini-map">
+
+                                <div class="map-road road-one"></div>
+
+                                <div class="map-road road-two"></div>
+
+                                <div class="map-road road-three"></div>
+
+                                <div class="map-pin"></div>
+
+                            </div>
+
+
+
+                            <div class="location-details">
+
+
+                                <strong id="location-name">
+                                    Avenue Lumumba
+                                </strong>
+
+
+                                <span id="location-city">
+                                    Kinshasa
+                                </span>
+
+
+                                <small>
+                                    Kinshasa, RDC — Aperçu interface
+                                </small>
+
+
+                            </div>
+
+
+                        </div>
+
+
+                    </article>
+
+
+
+                    <!-- ==================================================
+                         STATUT SYSTÈME
+                    =================================================== -->
+
+                    <article class="dashboard-panel system-panel">
+
+
+                        <div class="small-panel-header">
+
+
+                            <h3>
+                                STATUT SYSTÈME
+                            </h3>
+
+
+                            <span class="panel-status online-status">
+                                OPÉRATIONNEL
+                            </span>
+
+
+                        </div>
+
+
+
+                        <div class="system-list">
+
+
+                            <div class="system-row">
+
+                                <span>
+                                    IA Engine
+                                </span>
+
+                                <strong
+                                    id="system-ai"
+                                    class="status-online"
+                                >
+                                    En ligne
+                                </strong>
+
+                            </div>
+
+
+
+                            <div class="system-row">
+
+                                <span>
+                                    Base de données
+                                </span>
+
+                                <strong
+                                    id="system-database"
+                                    class="status-warning"
+                                >
+                                    Local
+                                </strong>
+
+                            </div>
+
+
+
+                            <div class="system-row">
+
+                                <span>
+                                    Caméras
+                                </span>
+
+                                <strong id="system-cameras">
+                                    0 / 9
+                                </strong>
+
+                            </div>
+
+
+
+                            <div class="system-row">
+
+                                <span>
+                                    ANPR Server
+                                </span>
+
+                                <strong
+                                    id="system-anpr"
+                                    class="status-warning"
+                                >
+                                    En attente
+                                </strong>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </article>
+
+
+                </section>
+
+
+            </section>
+
+
+
+            <!-- ==================================================
+                 ÉVÉNEMENTS
+            =================================================== -->
+
+            <aside
+                id="events"
+                class="dashboard-panel events-panel"
+            >
+
+
+                <div class="events-header">
+
+
+                    <div>
+
+                        <h2>
+                            ÉVÉNEMENTS RÉCENTS
+                        </h2>
+
+                        <p>
+                            Activité du système
+                        </p>
+
+                    </div>
+
+
+
+                    <span
+                        id="events-count"
+                        class="events-count"
+                    >
+                        0
+                    </span>
+
+
+                </div>
+
+
+
+                <div
+                    id="events-list"
+                    class="events-list"
+                >
+
+
+                    <div class="events-empty">
+
+
+                        <div class="events-empty-icon">
+                            ◌
+                        </div>
+
+
+                        <strong>
+                            Aucun événement récent
+                        </strong>
+
+
+                        <span>
+                            Les événements réels apparaîtront ici.
+                        </span>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <button
+                    class="view-all-events"
+                    type="button"
+                >
+                    Voir tout
+                </button>
+
+
+            </aside>
+
+
+        </main>
+
+
+    </div>
+
+
+
+    <!-- ==================================================
+         FOOTER
+    =================================================== -->
+
+    <footer class="dashboard-footer">
+
+
+        <div>
+
+            <span class="footer-dot"></span>
+
+            Phoenix Vision AI Enterprise
+
+        </div>
+
+
+        <div>
+            Phoenix Security Technologies
+        </div>
+
+
+        <div>
+            Version 1.0 Enterprise
+        </div>
+
+
+    </footer>
+
+
+</div>
+
+
+
+<!-- ==================================================
+     DASHBOARD CONTROLLER
+=================================================== -->
+
+<script
+    src="/static/js/enterprise/camera_grid.js?v=3.4"
+></script>
+
+
+</body>
+
+</html>
