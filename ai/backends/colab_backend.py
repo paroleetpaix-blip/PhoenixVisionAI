@@ -5,48 +5,219 @@ PHOENIX VISION AI
 Google Colab Backend
 
 Phoenix Security Technologies
-SDK v0.5.0 Enterprise
+SDK v0.6.0 Enterprise
 ========================================================
 """
 
-from core.detection import Detection
+from cloud.client import CloudClient
+from cloud.protocol import CloudProtocol
 
 
 class ColabBackend:
 
-    def __init__(self):
+    def __init__(
+        self,
+        server_url=None
+    ):
+
+        self.client = CloudClient(
+            server_url
+        )
+
 
         self.connected = False
 
-    def connect(self):
+        self.server_info = None
+
+
+    # ====================================================
+    # CONNECTION
+    # ====================================================
+
+    def connect(
+        self
+    ):
+
+        if not self.client.is_configured():
+
+            raise RuntimeError(
+
+                "URL du serveur Colab absente. "
+                "Définissez PHOENIX_AI_SERVER_URL."
+
+            )
+
+
+        health = (
+            self.client.health()
+        )
+
+
+        if not isinstance(
+            health,
+            dict
+        ):
+
+            raise RuntimeError(
+                "Réponse health invalide."
+            )
+
+
+        if (
+            health.get(
+                "status"
+            )
+            !=
+            "online"
+        ):
+
+            raise RuntimeError(
+                "Serveur IA indisponible."
+            )
+
 
         self.connected = True
 
-        print("Connexion à Google Colab établie.")
+        self.server_info = health
 
-    def predict(self, frame):
+
+        print(
+            "Connexion au serveur IA établie."
+        )
+
+
+        print(
+            "Modèle distant :",
+            health.get(
+                "model",
+                "inconnu"
+            )
+        )
+
+
+    # ====================================================
+    # PREDICTION
+    # ====================================================
+
+    def predict(
+        self,
+        frame
+    ):
 
         if not self.connected:
 
             raise RuntimeError(
-                "Colab non connecté."
+                "Serveur IA non connecté."
             )
 
-        # Simulation temporaire
-        # remplacée par l'API Colab
 
-        return [
+        response = (
+            self.client
+            .predict_frame(
+                frame
+            )
+        )
 
-            Detection(
-                label="car",
-                confidence=0.95,
-                bbox=[100, 150, 320, 400]
+
+        detections = (
+            CloudProtocol
+            .parse_prediction(
+                response
+            )
+        )
+
+
+        # Sécurité supplémentaire :
+        # aucune bbox ne doit dépasser la frame.
+
+        height, width = (
+            frame.shape[:2]
+        )
+
+
+        for detection in detections:
+
+            bbox = getattr(
+                detection,
+                "bbox",
+                None
             )
 
-        ]
 
-    def disconnect(self):
+            if (
+                bbox is None
+                or
+                len(bbox) != 4
+            ):
+
+                continue
+
+
+            x1, y1, x2, y2 = bbox
+
+
+            x1 = max(
+                0.0,
+                min(
+                    float(x1),
+                    float(width - 1)
+                )
+            )
+
+
+            y1 = max(
+                0.0,
+                min(
+                    float(y1),
+                    float(height - 1)
+                )
+            )
+
+
+            x2 = max(
+                0.0,
+                min(
+                    float(x2),
+                    float(width)
+                )
+            )
+
+
+            y2 = max(
+                0.0,
+                min(
+                    float(y2),
+                    float(height)
+                )
+            )
+
+
+            detection.bbox = [
+
+                x1,
+                y1,
+                x2,
+                y2
+
+            ]
+
+
+        return detections
+
+
+    # ====================================================
+    # DISCONNECT
+    # ====================================================
+
+    def disconnect(
+        self
+    ):
 
         self.connected = False
 
-        print("Connexion Colab fermée.")
+        self.server_info = None
+
+
+        print(
+            "Connexion IA distante fermée."
+        )

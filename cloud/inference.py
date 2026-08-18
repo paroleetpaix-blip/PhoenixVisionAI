@@ -5,7 +5,7 @@ PHOENIX VISION AI
 Cloud Inference
 
 Phoenix Security Technologies
-SDK v1.0 Enterprise
+SDK v0.6.0 Enterprise
 ========================================================
 """
 
@@ -15,14 +15,57 @@ from cloud.protocol import CloudProtocol
 
 class CloudInference:
 
-    def __init__(self, server_url=None):
+    def __init__(
+        self,
+        server_url=None
+    ):
 
-        self.client = CloudClient(server_url)
+        self.client = CloudClient(
+            server_url
+        )
 
-    def predict(self, image_path):
 
-        response = self.client.predict(image_path)
+    def health(
+        self
+    ):
 
-        return CloudProtocol.parse_prediction(
-            response
+        return self.client.health()
+
+
+    def predict(
+        self,
+        image_path
+    ):
+
+        response = self.client.predict(
+            image_path
+        )
+
+
+        return (
+            CloudProtocol
+            .parse_prediction(
+                response
+            )
+        )
+
+
+    def predict_frame(
+        self,
+        frame
+    ):
+
+        response = (
+            self.client
+            .predict_frame(
+                frame
+            )
+        )
+
+
+        return (
+            CloudProtocol
+            .parse_prediction(
+                response
+            )
         )
