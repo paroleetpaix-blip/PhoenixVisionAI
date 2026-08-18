@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Événements — Phoenix Vision AI Enterprise
+    </title>
+
+    <link
+        rel="icon"
+        href="/static/images/favicon.png?v=1"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/theme.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/icons.css?v=4.1"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/cameras_console.css?v=4.2.3"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/events_console.css?v=4.3"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="camera-console">
+
+
+    <aside class="console-sidebar">
+
+
+        <div class="console-brand">
+
+            <img
+                src="/static/images/logoS.png"
+                alt="Phoenix Vision AI"
+            >
+
+            <div>
+
+                <strong>
+                    PHOENIX
+                </strong>
+
+                <span>
+                    VISION AI
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="console-product">
+
+            <span class="product-status"></span>
+
+            <div>
+
+                <strong>
+                    ENTERPRISE
+                </strong>
+
+                <span>
+                    Security Operations
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <nav class="console-navigation">
+
+
+            <div class="console-label">
+                SUPERVISION
+            </div>
+
+
+            <a href="/enterprise" class="console-nav-item">
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-dashboard"></use>
+                </svg>
+
+                <span>Tableau de bord</span>
+
+            </a>
+
+
+            <a href="/cameras" class="console-nav-item">
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-camera"></use>
+                </svg>
+
+                <span>Caméras</span>
+
+            </a>
+
+
+            <a
+                href="/events"
+                class="console-nav-item active"
+                aria-current="page"
+            >
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-events"></use>
+                </svg>
+
+                <span>Événements</span>
+
+            </a>
+
+
+            <a href="/enterprise#alerts" class="console-nav-item">
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-alert"></use>
+                </svg>
+
+                <span>Alertes IA</span>
+
+            </a>
+
+
+            <a href="/enterprise#history" class="console-nav-item">
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-history"></use>
+                </svg>
+
+                <span>Historique</span>
+
+            </a>
+
+
+            <a href="/enterprise#map" class="console-nav-item">
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-map"></use>
+                </svg>
+
+                <span>Carte</span>
+
+            </a>
+
+
+            <a href="/enterprise#anpr" class="console-nav-item">
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-anpr"></use>
+                </svg>
+
+                <span>ANPR / Plaques</span>
+
+            </a>
+
+
+            <a href="/enterprise#reports" class="console-nav-item">
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-reports"></use>
+                </svg>
+
+                <span>Rapports</span>
+
+            </a>
+
+
+            <div class="console-label administration">
+                ADMINISTRATION
+            </div>
+
+
+            <a href="/enterprise#settings" class="console-nav-item">
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-settings"></use>
+                </svg>
+
+                <span>Paramètres</span>
+
+            </a>
+
+
+            <a href="/admin/requests" class="console-nav-item">
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-users"></use>
+                </svg>
+
+                <span>Utilisateurs</span>
+
+            </a>
+
+
+            <a href="/enterprise#system" class="console-nav-item">
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-system"></use>
+                </svg>
+
+                <span>Système</span>
+
+            </a>
+
+
+        </nav>
+
+
+        <div class="console-sidebar-bottom">
+
+            <a href="/logout" class="console-logout">
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-logout"></use>
+                </svg>
+
+                <span>Déconnexion</span>
+
+            </a>
+
+        </div>
+
+
+    </aside>
+
+
+    <main class="console-main">
+
+
+        <header class="console-topbar">
+
+            <div>
+
+                <div class="page-path">
+                    SUPERVISION / ÉVÉNEMENTS
+                </div>
+
+                <h1>
+                    Journal des événements
+                </h1>
+
+            </div>
+
+
+            <div class="topbar-actions">
+
+                <a
+                    href="/enterprise"
+                    class="return-dashboard"
+                >
+
+                    <svg class="phoenix-icon">
+                        <use href="/static/icons/phoenix-ui.svg#icon-dashboard"></use>
+                    </svg>
+
+                    Dashboard
+
+                </a>
+
+            </div>
+
+        </header>
+
+
+        <section class="camera-summary events-summary">
+
+
+            <article class="summary-card">
+
+                <div class="summary-icon">
+
+                    <svg class="phoenix-icon">
+                        <use href="/static/icons/phoenix-ui.svg#icon-events"></use>
+                    </svg>
+
+                </div>
+
+                <div>
+                    <span>TOTAL</span>
+                    <strong id="events-total">0</strong>
+                </div>
+
+            </article>
+
+
+            <article class="summary-card">
+
+                <div class="status-point online"></div>
+
+                <div>
+                    <span>AUJOURD'HUI</span>
+                    <strong id="events-today">0</strong>
+                </div>
+
+            </article>
+
+
+            <article class="summary-card">
+
+                <div class="status-point connecting"></div>
+
+                <div>
+                    <span>WARNING</span>
+                    <strong id="events-warning">0</strong>
+                </div>
+
+            </article>
+
+
+            <article class="summary-card">
+
+                <div class="status-point critical-point"></div>
+
+                <div>
+                    <span>CRITICAL</span>
+                    <strong id="events-critical">0</strong>
+                </div>
+
+            </article>
+
+
+        </section>
+
+
+        <section class="camera-toolbar events-toolbar">
+
+
+            <div class="camera-search">
+
+                <svg class="search-icon">
+                    <circle cx="11" cy="11" r="6"></circle>
+                    <path d="M16 16l4 4"></path>
+                </svg>
+
+                <input
+                    id="event-search"
+                    type="search"
+                    placeholder="Rechercher un événement..."
+                >
+
+            </div>
+
+
+            <select
+                id="event-level-filter"
+                class="event-select"
+            >
+
+                <option value="ALL">
+                    Tous niveaux
+                </option>
+
+                <option value="INFO">
+                    Info
+                </option>
+
+                <option value="WARNING">
+                    Warning
+                </option>
+
+                <option value="DANGER">
+                    Danger
+                </option>
+
+                <option value="CRITICAL">
+                    Critical
+                </option>
+
+            </select>
+
+
+            <select
+                id="event-type-filter"
+                class="event-select"
+            >
+
+                <option value="ALL">
+                    Tous types
+                </option>
+
+            </select>
+
+
+            <div
+                id="events-refresh-time"
+                class="last-refresh"
+            >
+                Actualisation : --
+            </div>
+
+
+        </section>
+
+
+        <div
+            id="events-message"
+            class="camera-message hidden"
+        ></div>
+
+
+        <section class="events-table-shell">
+
+
+            <div class="events-table-header">
+
+                <span>HEURE</span>
+
+                <span>TYPE</span>
+
+                <span>NIVEAU</span>
+
+                <span>TRACKER</span>
+
+                <span>DÉTAIL</span>
+
+            </div>
+
+
+            <div
+                id="events-list"
+                class="events-list"
+            ></div>
+
+
+            <div
+                id="events-empty"
+                class="events-empty"
+            >
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-events"></use>
+                </svg>
+
+                <strong>
+                    Aucun événement enregistré
+                </strong>
+
+                <span>
+                    Les événements réels détectés par Phoenix apparaîtront ici.
+                </span>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+<script
+    src="/static/js/enterprise/events_console.js?v=4.3"
+></script>
+
+
+</body>
+
+</html>

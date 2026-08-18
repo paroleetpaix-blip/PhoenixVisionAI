@@ -1,0 +1,287 @@
+/*
+========================================================
+PHOENIX VISION AI
+Enterprise Events Console
+========================================================
+*/
+
+.events-summary {
+    flex: 0 0 auto;
+}
+
+
+.events-toolbar {
+    flex: 0 0 auto;
+}
+
+
+.critical-point {
+    background: #df536c;
+
+    box-shadow:
+        0 0 10px rgba(223, 83, 108, .35);
+}
+
+
+.event-select {
+    height: 32px;
+
+    padding: 0 30px 0 10px;
+
+    border:
+        1px solid rgba(61, 104, 134, .30);
+
+    border-radius: 4px;
+
+    outline: none;
+
+    background: #07131c;
+
+    color: #718b9d;
+
+    font-size: 9px;
+}
+
+
+.events-table-shell {
+    flex: 1 1 auto;
+
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+
+    border:
+        1px solid rgba(55, 101, 132, .27);
+
+    border-radius: 6px;
+
+    background:
+        rgba(6, 18, 27, .90);
+}
+
+
+.events-table-header {
+    flex: 0 0 36px;
+
+    display: grid;
+
+    grid-template-columns:
+        90px
+        minmax(130px, .9fr)
+        90px
+        90px
+        minmax(220px, 2fr);
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 0 14px;
+
+    border-bottom:
+        1px solid rgba(61, 103, 132, .24);
+
+    color: #486276;
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+
+.events-list {
+    flex: 1 1 auto;
+
+    min-height: 0;
+
+    overflow-y: auto;
+
+    scrollbar-width: thin;
+
+    scrollbar-color:
+        rgba(56, 111, 149, .42)
+        rgba(4, 13, 20, .25);
+}
+
+
+.event-row {
+    min-height: 48px;
+
+    display: grid;
+
+    grid-template-columns:
+        90px
+        minmax(130px, .9fr)
+        90px
+        90px
+        minmax(220px, 2fr);
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 8px 14px;
+
+    border-bottom:
+        1px solid rgba(50, 86, 111, .16);
+
+    color: #8097a8;
+
+    font-size: 9px;
+}
+
+
+.event-row:hover {
+    background:
+        rgba(18, 54, 77, .22);
+}
+
+
+.event-time {
+    color: #668297;
+}
+
+
+.event-type {
+    color: #bfd0db;
+
+    font-weight: 600;
+}
+
+
+.event-level {
+    width: max-content;
+
+    padding: 4px 7px;
+
+    border:
+        1px solid rgba(74, 111, 137, .24);
+
+    border-radius: 3px;
+
+    font-size: 7px;
+
+    letter-spacing: .6px;
+}
+
+
+.event-level.INFO {
+    color: #69a4c8;
+}
+
+
+.event-level.WARNING {
+    color: #e1a348;
+
+    border-color:
+        rgba(225, 163, 72, .30);
+}
+
+
+.event-level.DANGER,
+.event-level.CRITICAL {
+    color: #e66b7d;
+
+    border-color:
+        rgba(230, 107, 125, .32);
+}
+
+
+.event-description {
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+
+.events-empty {
+    flex: 1 1 auto;
+
+    min-height: 180px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    color: #425f73;
+
+    text-align: center;
+}
+
+
+.events-empty .phoenix-icon {
+    width: 28px;
+    height: 28px;
+
+    margin-bottom: 5px;
+}
+
+
+.events-empty strong {
+    color: #718b9c;
+
+    font-size: 11px;
+}
+
+
+.events-empty span {
+    font-size: 8px;
+}
+
+
+.events-empty.hidden {
+    display: none;
+}
+
+
+@media (max-width: 950px) {
+
+    .events-table-header,
+    .event-row {
+        grid-template-columns:
+            75px
+            minmax(120px, .8fr)
+            80px
+            minmax(180px, 2fr);
+    }
+
+
+    .events-table-header span:nth-child(4),
+    .event-row > *:nth-child(4) {
+        display: none;
+    }
+
+}
+
+
+@media (max-width: 620px) {
+
+    .events-table-header,
+    .event-row {
+        grid-template-columns:
+            68px
+            100px
+            1fr;
+    }
+
+
+    .events-table-header span:nth-child(3),
+    .events-table-header span:nth-child(4),
+    .event-row > *:nth-child(3),
+    .event-row > *:nth-child(4) {
+        display: none;
+    }
+
+}

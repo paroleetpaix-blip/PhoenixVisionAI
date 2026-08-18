@@ -49,6 +49,9 @@ from core.streaming.stream_service import StreamService
 
 
 
+from core.events.event_manager import event_manager
+
+
 class PhoenixEngine:
 
     def __init__(self):
@@ -494,6 +497,17 @@ class PhoenixEngine:
                 )
 
                 crossing_events.extend(events)
+
+            # ====================================================
+            # Enregistrement des événements réels
+            # ====================================================
+
+            for event in crossing_events:
+
+                event_manager.add(
+                    event
+                )
+
 
             # ====================================================
             # Synchronisation de la flotte

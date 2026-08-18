@@ -452,7 +452,8 @@ class Vehicle:
         event = CrossingEvent(
             self.uuid,
             line_name,
-            direction
+            direction,
+            tracker_id=self.tracker_id
         )
 
         self.crossing_events.append(event)
