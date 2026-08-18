@@ -1,0 +1,107 @@
+/*
+========================================================
+PHOENIX VISION AI
+Enterprise Vector Icon System
+Phoenix Security Technologies
+========================================================
+*/
+
+.phoenix-icon {
+    width: 20px;
+    height: 20px;
+
+    display: block;
+
+    fill: none;
+    stroke: currentColor;
+
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+
+    pointer-events: none;
+}
+
+
+.menu-icon {
+    width: 30px;
+    height: 30px;
+
+    flex: 0 0 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: rgba(180, 197, 216, 0.72);
+
+    transition:
+        color 160ms ease,
+        transform 160ms ease,
+        opacity 160ms ease;
+}
+
+
+.sidebar-item:hover .menu-icon {
+    color: rgba(235, 245, 255, 0.96);
+}
+
+
+.sidebar-item.active .menu-icon {
+    color: var(--phoenix-blue);
+}
+
+
+.sidebar-item.active .phoenix-icon {
+    stroke-width: 2;
+}
+
+
+.sidebar-item:hover .menu-icon {
+    transform: translateX(1px);
+}
+
+
+.logout-button {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+
+.logout-button .phoenix-icon {
+    width: 19px;
+    height: 19px;
+}
+
+
+.topbar-button {
+    position: relative;
+}
+
+
+.topbar-button .phoenix-icon {
+    width: 19px;
+    height: 19px;
+
+    margin: auto;
+}
+
+
+.topbar-button:hover .phoenix-icon {
+    stroke-width: 2;
+}
+
+
+.menu-badge {
+    margin-left: auto;
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+    .menu-icon {
+        transition: none;
+    }
+
+}

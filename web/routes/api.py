@@ -24,7 +24,8 @@ router = APIRouter()
 # ========================================================
 
 @router.get(
-    "/api/cameras"
+    "/api/legacy/cameras",
+    include_in_schema=False
 )
 def get_cameras():
 
