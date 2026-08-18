@@ -69,3 +69,15 @@ Documentation\ Phoenix\ Vision\ AI/
 # Controlled test fixtures
 !tests/fixtures/
 !tests/fixtures/**
+
+# Local design/reference assets
+images\ validées/
+launcher.png
+login.jpg
+screen\ comparaison.jpg
+
+# Local Phoenix runtime data
+data/cameras.json
+data/config.json
+data/test.json
+data/workspaces.json
