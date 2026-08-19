@@ -12,7 +12,7 @@
     >
 
     <title>
-        Événements — Phoenix Vision AI Enterprise
+        Alertes IA — Phoenix Vision AI Enterprise
     </title>
 
     <link
@@ -42,6 +42,11 @@
 
     <link
         rel="stylesheet"
+        href="/static/css/enterprise/alerts_console.css?v=4.4"
+    >
+
+    <link
+        rel="stylesheet"
         href="/static/css/enterprise/enterprise_polish.css?v=4.4.2"
     >
 
@@ -49,7 +54,6 @@
 
 
 <body>
-
 
 <div class="camera-console">
 
@@ -65,15 +69,8 @@
             >
 
             <div>
-
-                <strong>
-                    PHOENIX
-                </strong>
-
-                <span>
-                    VISION AI
-                </span>
-
+                <strong>PHOENIX</strong>
+                <span>VISION AI</span>
             </div>
 
         </div>
@@ -84,15 +81,8 @@
             <span class="product-status"></span>
 
             <div>
-
-                <strong>
-                    ENTERPRISE
-                </strong>
-
-                <span>
-                    Security Operations
-                </span>
-
+                <strong>ENTERPRISE</strong>
+                <span>Security Operations</span>
             </div>
 
         </div>
@@ -128,11 +118,7 @@
             </a>
 
 
-            <a
-                href="/events"
-                class="console-nav-item active"
-                aria-current="page"
-            >
+            <a href="/events" class="console-nav-item">
 
                 <svg class="phoenix-icon">
                     <use href="/static/icons/phoenix-ui.svg#icon-events"></use>
@@ -143,7 +129,11 @@
             </a>
 
 
-            <a href="/alerts" class="console-nav-item">
+            <a
+                href="/alerts"
+                class="console-nav-item active"
+                aria-current="page"
+            >
 
                 <svg class="phoenix-icon">
                     <use href="/static/icons/phoenix-ui.svg#icon-alert"></use>
@@ -265,11 +255,11 @@
             <div>
 
                 <div class="page-path">
-                    SUPERVISION / ÉVÉNEMENTS
+                    INTELLIGENCE / ALERTES IA
                 </div>
 
                 <h1>
-                    Journal des événements
+                    Centre d'alertes intelligentes
                 </h1>
 
             </div>
@@ -277,10 +267,7 @@
 
             <div class="topbar-actions">
 
-                <a
-                    href="/enterprise"
-                    class="return-dashboard"
-                >
+                <a href="/enterprise" class="return-dashboard">
 
                     <svg class="phoenix-icon">
                         <use href="/static/icons/phoenix-ui.svg#icon-dashboard"></use>
@@ -295,34 +282,22 @@
         </header>
 
 
-        <section class="camera-summary events-summary">
+        <section class="camera-summary">
 
 
             <article class="summary-card">
 
-                <div class="summary-icon">
+                <div class="summary-icon alert-summary-icon">
 
                     <svg class="phoenix-icon">
-                        <use href="/static/icons/phoenix-ui.svg#icon-events"></use>
+                        <use href="/static/icons/phoenix-ui.svg#icon-alert"></use>
                     </svg>
 
                 </div>
 
                 <div>
-                    <span>TOTAL</span>
-                    <strong id="events-total">0</strong>
-                </div>
-
-            </article>
-
-
-            <article class="summary-card">
-
-                <div class="status-point online"></div>
-
-                <div>
-                    <span>AUJOURD'HUI</span>
-                    <strong id="events-today">0</strong>
+                    <span>OUVERTES</span>
+                    <strong id="alerts-open">0</strong>
                 </div>
 
             </article>
@@ -333,8 +308,8 @@
                 <div class="status-point connecting"></div>
 
                 <div>
-                    <span>WARNING</span>
-                    <strong id="events-warning">0</strong>
+                    <span>HIGH</span>
+                    <strong id="alerts-high">0</strong>
                 </div>
 
             </article>
@@ -346,7 +321,19 @@
 
                 <div>
                     <span>CRITICAL</span>
-                    <strong id="events-critical">0</strong>
+                    <strong id="alerts-critical">0</strong>
+                </div>
+
+            </article>
+
+
+            <article class="summary-card">
+
+                <div class="ack-point"></div>
+
+                <div>
+                    <span>ACQUITTÉES</span>
+                    <strong id="alerts-ack">0</strong>
                 </div>
 
             </article>
@@ -355,7 +342,7 @@
         </section>
 
 
-        <section class="camera-toolbar events-toolbar">
+        <section class="camera-toolbar">
 
 
             <div class="camera-search">
@@ -366,33 +353,22 @@
                 </svg>
 
                 <input
-                    id="event-search"
+                    id="alert-search"
                     type="search"
-                    placeholder="Rechercher un événement..."
+                    placeholder="Rechercher une alerte..."
                 >
 
             </div>
 
 
-            <select
-                id="event-level-filter"
-                class="event-select"
-            >
+            <select id="alert-level-filter" class="event-select">
 
                 <option value="ALL">
-                    Tous niveaux
+                    Toutes sévérités
                 </option>
 
-                <option value="INFO">
-                    Info
-                </option>
-
-                <option value="WARNING">
-                    Warning
-                </option>
-
-                <option value="DANGER">
-                    Danger
+                <option value="HIGH">
+                    High
                 </option>
 
                 <option value="CRITICAL">
@@ -402,22 +378,32 @@
             </select>
 
 
-            <select
-                id="event-type-filter"
-                class="event-select"
-            >
+            <select id="alert-status-filter" class="event-select">
+
+                <option value="OPEN">
+                    Alertes ouvertes
+                </option>
 
                 <option value="ALL">
-                    Tous types
+                    Tous les états
+                </option>
+
+                <option value="ACTIVE">
+                    Actives
+                </option>
+
+                <option value="ACKNOWLEDGED">
+                    Acquittées
+                </option>
+
+                <option value="RESOLVED">
+                    Résolues
                 </option>
 
             </select>
 
 
-            <div
-                id="events-refresh-time"
-                class="last-refresh"
-            >
+            <div id="alerts-refresh-time" class="last-refresh">
                 Actualisation : --
             </div>
 
@@ -426,50 +412,48 @@
 
 
         <div
-            id="events-message"
+            id="alerts-message"
             class="camera-message hidden"
         ></div>
 
 
-        <section class="events-table-shell">
+        <section class="events-table-shell alerts-table-shell">
 
 
-            <div class="events-table-header">
+            <div class="alerts-table-header">
 
                 <span>HEURE</span>
-
-                <span>TYPE</span>
-
                 <span>NIVEAU</span>
-
+                <span>ÉTAT</span>
                 <span>TRACKER</span>
-
-                <span>DÉTAIL</span>
+                <span>SCORE</span>
+                <span>MESSAGE</span>
+                <span>ACTION</span>
 
             </div>
 
 
             <div
-                id="events-list"
+                id="alerts-list"
                 class="events-list"
             ></div>
 
 
             <div
-                id="events-empty"
+                id="alerts-empty"
                 class="events-empty"
             >
 
                 <svg class="phoenix-icon">
-                    <use href="/static/icons/phoenix-ui.svg#icon-events"></use>
+                    <use href="/static/icons/phoenix-ui.svg#icon-alert"></use>
                 </svg>
 
                 <strong>
-                    Aucun événement enregistré
+                    Aucune alerte active
                 </strong>
 
                 <span>
-                    Les événements réels détectés par Phoenix apparaîtront ici.
+                    Phoenix affichera ici uniquement les menaces réelles HIGH ou CRITICAL.
                 </span>
 
             </div>
@@ -485,7 +469,7 @@
 
 
 <script
-    src="/static/js/enterprise/events_console.js?v=4.3"
+    src="/static/js/enterprise/alerts_console.js?v=4.4"
 ></script>
 
 

@@ -1,0 +1,464 @@
+/*
+========================================================
+PHOENIX VISION AI
+Enterprise UI Polish
+Readability + Navigation State
+========================================================
+*/
+
+
+/* ======================================================
+   LISIBILITÉ GÉNÉRALE
+====================================================== */
+
+.sidebar-item,
+.console-nav-item {
+    color: #8fa5b5;
+}
+
+
+.sidebar-item:hover,
+.console-nav-item:hover {
+    color: #d7e5ee;
+}
+
+
+.sidebar-item.active,
+.console-nav-item.active {
+    color: #eef8ff;
+}
+
+
+.navigation-label,
+.console-label {
+    color: #6f8798;
+}
+
+
+.page-path {
+    color: #7194ab;
+}
+
+
+.summary-card span {
+    color: #7890a1;
+}
+
+
+.camera-meta span {
+    color: #698294;
+}
+
+
+.camera-meta strong {
+    color: #a9bcc9;
+}
+
+
+.camera-status {
+    color: #8397a5;
+}
+
+
+.last-refresh {
+    color: #708696;
+}
+
+
+.camera-search input {
+    color: #d3e2ec;
+}
+
+
+.camera-search input::placeholder {
+    color: #708697;
+}
+
+
+.filter-button {
+    color: #7f96a6;
+}
+
+
+.filter-button:hover {
+    color: #d2e1eb;
+}
+
+
+.event-select {
+    color: #91a7b6;
+}
+
+
+.events-table-header,
+.alerts-table-header {
+    color: #718a9c;
+}
+
+
+.event-row,
+.alert-row {
+    color: #9bafbc;
+}
+
+
+.event-time {
+    color: #8199aa;
+}
+
+
+.event-description,
+.alert-message {
+    color: #a9bdc9;
+}
+
+
+.events-empty {
+    color: #718899;
+}
+
+
+.events-empty strong {
+    color: #a4b8c5;
+}
+
+
+.events-empty span {
+    color: #718899;
+}
+
+
+/* ======================================================
+   INDICATEUR DE MODULE ACTIF
+====================================================== */
+
+.sidebar-item,
+.console-nav-item {
+    position: relative;
+}
+
+
+.sidebar-item.active::before,
+.console-nav-item.active::before {
+    content: "";
+
+    position: absolute;
+
+    left: -12px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 3px;
+    height: 26px;
+
+    border-radius: 0 3px 3px 0;
+
+    background: #1da2ff;
+
+    box-shadow:
+        0 0 8px rgba(29, 162, 255, .65),
+        0 0 18px rgba(29, 162, 255, .18);
+}
+
+
+/* ======================================================
+   BADGE ALERTES RÉEL
+====================================================== */
+
+.menu-badge,
+.live-alert-badge {
+    margin-left: auto;
+
+    min-width: 18px;
+    height: 18px;
+
+    padding: 0 5px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: #a82d49;
+
+    border:
+        1px solid rgba(242, 80, 111, .44);
+
+    color: #ffdbe2;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    line-height: 1;
+
+    box-shadow:
+        0 0 9px rgba(224, 56, 89, .34);
+}
+
+
+.menu-badge.alert-badge-hidden,
+.live-alert-badge.alert-badge-hidden {
+    display: none;
+}
+
+
+/*
+========================================================
+PHOENIX ENTERPRISE POLISH v4.4.2
+Investor readability + stable navigation indicators
+========================================================
+*/
+
+
+/* ======================================================
+   LISIBILITÉ RENFORCÉE
+====================================================== */
+
+.sidebar-item,
+.console-nav-item {
+    color: #a4b6c3;
+}
+
+
+.sidebar-item:hover,
+.console-nav-item:hover {
+    color: #edf7fd;
+}
+
+
+.sidebar-item.active,
+.console-nav-item.active {
+    color: #f4fbff;
+}
+
+
+.navigation-label,
+.console-label {
+    color: #8399a8;
+
+    font-size: 9px;
+}
+
+
+.page-path {
+    color: #86a5b9;
+
+    font-size: 9px;
+}
+
+
+.summary-card span {
+    color: #91a5b2;
+
+    font-size: 9px;
+}
+
+
+.camera-meta span {
+    color: #8197a6;
+
+    font-size: 8px;
+}
+
+
+.camera-meta strong {
+    color: #b8c9d3;
+
+    font-size: 9px;
+}
+
+
+.camera-status {
+    color: #91a4b1;
+
+    font-size: 8px;
+}
+
+
+.camera-signal {
+    color: #8297a5;
+
+    border-color:
+        rgba(105, 142, 166, .32);
+}
+
+
+.last-refresh {
+    color: #8398a7;
+
+    font-size: 9px;
+}
+
+
+.camera-search input {
+    color: #e0ebf2;
+
+    font-size: 10px;
+}
+
+
+.camera-search input::placeholder {
+    color: #8296a5;
+}
+
+
+.filter-button {
+    color: #8fa3b1;
+
+    font-size: 9px;
+}
+
+
+.filter-button:hover,
+.filter-button.active {
+    color: #e6f2f9;
+}
+
+
+.event-select {
+    color: #a1b4c0;
+
+    font-size: 9px;
+}
+
+
+.events-table-header,
+.alerts-table-header {
+    color: #8499a8;
+
+    font-size: 8px;
+}
+
+
+.event-row,
+.alert-row {
+    color: #a7bac6;
+
+    font-size: 9px;
+}
+
+
+.event-time {
+    color: #91a6b5;
+}
+
+
+.event-description,
+.alert-message {
+    color: #b6c7d1;
+}
+
+
+.events-empty {
+    color: #8296a4;
+}
+
+
+.events-empty strong {
+    color: #b2c3cd;
+
+    font-size: 11px;
+}
+
+
+.events-empty span {
+    color: #8498a6;
+
+    font-size: 8px;
+}
+
+
+/* ======================================================
+   BARRE BLEUE DU MODULE ACTIF
+   Elle reste DANS le bouton pour ne plus être coupée.
+====================================================== */
+
+.sidebar-item,
+.console-nav-item {
+    position: relative;
+}
+
+
+.sidebar-item.active::before,
+.console-nav-item.active::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 3px;
+    height: 26px;
+
+    border-radius:
+        0 3px 3px 0;
+
+    background: #1da2ff;
+
+    box-shadow:
+        0 0 9px rgba(29, 162, 255, .80),
+        0 0 20px rgba(29, 162, 255, .25);
+
+    z-index: 3;
+
+    pointer-events: none;
+}
+
+
+/* ======================================================
+   BADGE ALERTES
+   IMPORTANT :
+   caché PAR DÉFAUT pour éliminer le flash rouge.
+====================================================== */
+
+.menu-badge,
+.live-alert-badge {
+    display: none;
+
+    margin-left: auto;
+
+    min-width: 18px;
+    height: 18px;
+
+    padding: 0 5px;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: #b52f4d;
+
+    border:
+        1px solid rgba(247, 86, 118, .55);
+
+    color: #ffe5ea;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    line-height: 1;
+
+    box-shadow:
+        0 0 10px rgba(228, 57, 92, .42);
+}
+
+
+.menu-badge.alert-badge-visible,
+.live-alert-badge.alert-badge-visible {
+    display: inline-flex;
+}
+
+
+.menu-badge.alert-badge-hidden,
+.live-alert-badge.alert-badge-hidden {
+    display: none !important;
+}

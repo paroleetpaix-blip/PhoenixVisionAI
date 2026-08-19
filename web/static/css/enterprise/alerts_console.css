@@ -1,0 +1,232 @@
+/*
+========================================================
+PHOENIX VISION AI
+Enterprise AI Alerts Console
+========================================================
+*/
+
+.alert-summary-icon {
+    color: #e0677c;
+
+    border-color:
+        rgba(224, 103, 124, .25);
+
+    background:
+        rgba(132, 42, 61, .10);
+}
+
+
+.ack-point {
+    width: 9px;
+    height: 9px;
+
+    margin: 0 8px;
+
+    border-radius: 50%;
+
+    background: #4a9fd1;
+
+    box-shadow:
+        0 0 10px rgba(74, 159, 209, .30);
+}
+
+
+.alerts-table-shell {
+    flex: 1 1 auto;
+
+    min-height: 0;
+}
+
+
+.alerts-table-header,
+.alert-row {
+
+    display: grid;
+
+    grid-template-columns:
+        80px
+        80px
+        105px
+        75px
+        65px
+        minmax(220px, 1fr)
+        92px;
+
+    gap: 10px;
+
+    align-items: center;
+}
+
+
+.alerts-table-header {
+    flex: 0 0 36px;
+
+    padding: 0 14px;
+
+    border-bottom:
+        1px solid rgba(61, 103, 132, .24);
+
+    color: #486276;
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+
+.alert-row {
+    min-height: 51px;
+
+    padding: 8px 14px;
+
+    border-bottom:
+        1px solid rgba(50, 86, 111, .16);
+
+    color: #8097a8;
+
+    font-size: 9px;
+}
+
+
+.alert-row:hover {
+    background:
+        rgba(18, 54, 77, .22);
+}
+
+
+.alert-level,
+.alert-status {
+    width: max-content;
+
+    padding: 4px 7px;
+
+    border-radius: 3px;
+
+    border:
+        1px solid rgba(75, 110, 136, .26);
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+    letter-spacing: .6px;
+}
+
+
+.alert-level.HIGH {
+    color: #e5a746;
+
+    border-color:
+        rgba(229, 167, 70, .34);
+}
+
+
+.alert-level.CRITICAL {
+    color: #ee637b;
+
+    border-color:
+        rgba(238, 99, 123, .38);
+
+    background:
+        rgba(117, 29, 47, .10);
+}
+
+
+.alert-status.ACTIVE {
+    color: #e36a7f;
+}
+
+
+.alert-status.ACKNOWLEDGED {
+    color: #68acd2;
+}
+
+
+.alert-status.RESOLVED {
+    color: #708495;
+}
+
+
+.alert-score {
+    font-variant-numeric:
+        tabular-nums;
+
+    color: #a5bbc9;
+}
+
+
+.alert-message {
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    color: #a8bbc7;
+}
+
+
+.alert-action {
+    height: 27px;
+
+    padding: 0 8px;
+
+    border:
+        1px solid rgba(51, 133, 184, .32);
+
+    border-radius: 4px;
+
+    background:
+        rgba(18, 85, 127, .10);
+
+    color: #6ba8cd;
+
+    cursor: pointer;
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+    letter-spacing: .5px;
+}
+
+
+.alert-action:hover {
+    color: #d5efff;
+
+    border-color:
+        rgba(40, 157, 226, .55);
+}
+
+
+.alert-action:disabled {
+    opacity: .35;
+
+    cursor: default;
+}
+
+
+@media (max-width: 1050px) {
+
+    .alerts-table-header,
+    .alert-row {
+
+        grid-template-columns:
+            75px
+            75px
+            95px
+            65px
+            minmax(200px, 1fr)
+            85px;
+
+    }
+
+
+    .alerts-table-header span:nth-child(5),
+    .alert-row > *:nth-child(5) {
+        display: none;
+    }
+
+}

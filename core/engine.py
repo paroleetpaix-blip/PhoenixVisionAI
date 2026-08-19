@@ -52,6 +52,9 @@ from core.streaming.stream_service import StreamService
 from core.events.event_manager import event_manager
 
 
+from core.intelligence.intelligence_center import intelligence_center
+
+
 class PhoenixEngine:
 
     def __init__(self):
@@ -517,13 +520,60 @@ class PhoenixEngine:
                 vehicles
             )
 
+            # ====================================================
+            # Intelligence / Alertes opérateur
+            # ====================================================
+
+            for vehicle in vehicles:
+
+                alert = (
+                    intelligence_center
+                    .analyze_vehicle(
+                        vehicle
+                    )
+                )
+
+
+                if alert is None:
+
+                    continue
+
+
+                alert_event = (
+                    event_manager.create(
+
+                        "AI_ALERT",
+
+                        vehicle,
+
+                        alert.message
+
+                    )
+                )
+
+
+                if alert.level == "CRITICAL":
+
+                    alert_event.critical()
+
+                elif alert.level == "HIGH":
+
+                    alert_event.warning()
+
+
+                print(
+                    "[PHOENIX ALERT]",
+                    alert.to_dict()
+                )
+
+
             self.dashboard.update(
 
                 self.camera_manager.get_all(),
 
                 self.vehicle_manager.total(),
 
-                len(crossing_events)
+                intelligence_center.stats()["open"]
 
             )
 
