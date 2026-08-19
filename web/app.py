@@ -13,6 +13,8 @@ from web.routes.camera import router as camera_router
 from web.routes.events import router as events_router
 
 from web.routes.alerts import router as alerts_router
+
+from web.routes.history import router as history_router
 from web.routes.enterprise import router as enterprise_router
 
 from web.routes.current_vehicle import router as current_vehicle_router
@@ -65,6 +67,8 @@ app.include_router(camera_router)
 app.include_router(events_router)
 
 app.include_router(alerts_router)
+
+app.include_router(history_router)
 app.include_router(current_vehicle_router)
 
 app.include_router(auth_router)

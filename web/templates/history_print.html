@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Fiche historique Phoenix
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/history_print.css?v=1"
+    >
+
+</head>
+
+
+<body>
+
+
+<main class="print-document">
+
+
+    <header class="print-header">
+
+        <div class="print-brand">
+
+            <img
+                src="/static/images/logoS.png"
+                alt=""
+            >
+
+            <div>
+
+                <strong>
+                    PHOENIX
+                </strong>
+
+                <span>
+                    VISION AI
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="print-classification">
+
+            PHOENIX SECURITY TECHNOLOGIES
+
+            <strong>
+                FICHE HISTORIQUE / PREUVE
+            </strong>
+
+        </div>
+
+    </header>
+
+
+    <section class="print-reference">
+
+        <div>
+            <span>RÉFÉRENCE</span>
+            <strong id="print-reference">
+                —
+            </strong>
+        </div>
+
+        <div>
+            <span>IMPRIMÉ PAR</span>
+            <strong id="print-user">
+                —
+            </strong>
+        </div>
+
+        <div>
+            <span>RÔLE</span>
+            <strong id="print-role">
+                —
+            </strong>
+        </div>
+
+        <div>
+            <span>DATE D'IMPRESSION</span>
+            <strong id="print-date">
+                —
+            </strong>
+        </div>
+
+    </section>
+
+
+    <section class="print-section">
+
+        <h2>
+            Identification
+        </h2>
+
+        <div class="print-grid">
+
+            <div>
+                <span>UUID Phoenix</span>
+                <strong id="p-uuid">—</strong>
+            </div>
+
+            <div>
+                <span>Tracker</span>
+                <strong id="p-tracker">—</strong>
+            </div>
+
+            <div>
+                <span>Type</span>
+                <strong id="p-type">—</strong>
+            </div>
+
+            <div>
+                <span>Plaque</span>
+                <strong id="p-plate">—</strong>
+            </div>
+
+            <div>
+                <span>Couleur</span>
+                <strong id="p-color">—</strong>
+            </div>
+
+            <div>
+                <span>Marque / Modèle</span>
+                <strong id="p-brand">—</strong>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="print-section">
+
+        <h2>
+            Observation
+        </h2>
+
+        <div class="print-grid">
+
+            <div>
+                <span>Première détection</span>
+                <strong id="p-first">—</strong>
+            </div>
+
+            <div>
+                <span>Dernière détection</span>
+                <strong id="p-last">—</strong>
+            </div>
+
+            <div>
+                <span>Frames</span>
+                <strong id="p-frames">—</strong>
+            </div>
+
+            <div>
+                <span>Direction</span>
+                <strong id="p-direction">—</strong>
+            </div>
+
+            <div>
+                <span>Dernière caméra</span>
+                <strong id="p-camera">—</strong>
+            </div>
+
+            <div>
+                <span>Zones traversées</span>
+                <strong id="p-zones">—</strong>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="print-section">
+
+        <h2>
+            Intelligence & sécurité
+        </h2>
+
+        <div class="print-grid">
+
+            <div>
+                <span>Niveau menace</span>
+                <strong id="p-threat">—</strong>
+            </div>
+
+            <div>
+                <span>Score menace</span>
+                <strong id="p-score">—</strong>
+            </div>
+
+            <div>
+                <span>Statut</span>
+                <strong id="p-status">—</strong>
+            </div>
+
+            <div>
+                <span>Vitesse max relative</span>
+                <strong id="p-speed">—</strong>
+            </div>
+
+            <div>
+                <span>Alertes associées</span>
+                <strong id="p-alerts">—</strong>
+            </div>
+
+            <div>
+                <span>Franchissements</span>
+                <strong id="p-crossings">—</strong>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <footer class="print-footer">
+
+        <div>
+            Document généré par
+            Phoenix Vision AI Enterprise.
+        </div>
+
+        <div>
+            Données issues de l'historique persistant SQLite.
+        </div>
+
+    </footer>
+
+
+    <div class="print-actions">
+
+        <button
+            id="print-button"
+            type="button"
+        >
+            IMPRIMER LA FICHE
+        </button>
+
+    </div>
+
+
+</main>
+
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    async () => {
+
+        const parts =
+            window.location.pathname
+            .split("/")
+            .filter(Boolean);
+
+
+        const uuid =
+            parts.length >= 3
+            ?
+            parts[
+                parts.length - 2
+            ]
+            :
+            null;
+
+
+        if(!uuid) {
+
+            document.body.textContent =
+                "Identifiant historique invalide.";
+
+            return;
+        }
+
+
+        const response =
+            await fetch(
+
+                "/api/history/"
+                +
+                encodeURIComponent(
+                    uuid
+                )
+                +
+                "/printable",
+
+                {
+                    credentials:
+                        "same-origin",
+
+                    cache:
+                        "no-store"
+                }
+
+            );
+
+
+        if(response.status === 403) {
+
+            document.body.textContent =
+                "Accès refusé : permission d'impression requise.";
+
+            return;
+        }
+
+
+        if(!response.ok) {
+
+            document.body.textContent =
+                "Impossible de charger la fiche.";
+
+            return;
+        }
+
+
+        const data =
+            await response.json();
+
+
+        const record =
+            data.record;
+
+
+        function value(
+            item,
+            fallback="—"
+        ) {
+
+            if(
+                item === null
+                ||
+                item === undefined
+                ||
+                String(item).trim() === ""
+            ) {
+
+                return fallback;
+            }
+
+
+            return String(item);
+        }
+
+
+        function set(
+            id,
+            item
+        ) {
+
+            document.getElementById(
+                id
+            ).textContent =
+                value(item);
+        }
+
+
+        set(
+            "print-reference",
+            "PHX-HIS-"
+            +
+            String(
+                record.uuid
+            ).slice(
+                0,
+                8
+            ).toUpperCase()
+        );
+
+
+        set(
+            "print-user",
+            data.printed_by
+        );
+
+
+        set(
+            "print-role",
+            data.role
+        );
+
+
+        set(
+            "print-date",
+            new Date()
+            .toLocaleString(
+                "fr-FR"
+            )
+        );
+
+
+        set("p-uuid", record.uuid);
+        set("p-tracker", record.tracker_id);
+        set("p-type", record.label);
+        set("p-plate", record.plate, "NON LUE");
+        set("p-color", record.color);
+        set(
+            "p-brand",
+            [
+                record.brand,
+                record.model
+            ]
+            .filter(Boolean)
+            .join(" ")
+            ||
+            "—"
+        );
+
+        set("p-first", record.first_seen);
+        set("p-last", record.last_seen);
+        set("p-frames", record.total_frames);
+        set("p-direction", record.direction);
+        set("p-camera", record.last_camera);
+
+        set(
+            "p-zones",
+            Array.isArray(
+                record.zones_history
+            )
+            ?
+            record.zones_history.join(
+                " → "
+            )
+            :
+            "—"
+        );
+
+        set("p-threat", record.threat_level);
+
+        set(
+            "p-score",
+            value(
+                record.threat_score,
+                "0"
+            )
+            +
+            " / 100"
+        );
+
+        set("p-status", record.status);
+
+        set(
+            "p-speed",
+            value(
+                record.max_speed,
+                "0"
+            )
+            +
+            " px/frame"
+        );
+
+        set("p-alerts", record.alerts);
+        set("p-crossings", record.crossings);
+
+
+        document.getElementById(
+            "print-button"
+        ).addEventListener(
+            "click",
+            () => {
+
+                window.print();
+
+            }
+        );
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

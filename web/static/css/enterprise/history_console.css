@@ -1,0 +1,1480 @@
+/*
+========================================================
+PHOENIX VISION AI
+Enterprise Vehicle History Console
+========================================================
+*/
+
+.history-plate-point {
+    width: 9px;
+    height: 9px;
+    margin: 0 8px;
+    border-radius: 50%;
+    background: #42a9df;
+    box-shadow:
+        0 0 10px rgba(66, 169, 223, .35);
+}
+
+
+.history-table-shell {
+    flex: 1 1 auto;
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+
+    border:
+        1px solid rgba(55, 101, 132, .27);
+
+    border-radius: 6px;
+
+    background:
+        rgba(6, 18, 27, .90);
+}
+
+
+.history-table-header,
+.history-row {
+    display: grid;
+
+    grid-template-columns:
+        135px
+        70px
+        85px
+        100px
+        minmax(95px, .8fr)
+        95px
+        90px
+        90px;
+
+    gap: 10px;
+
+    align-items: center;
+}
+
+
+.history-table-header {
+    flex: 0 0 36px;
+
+    padding: 0 14px;
+
+    border-bottom:
+        1px solid rgba(61, 103, 132, .24);
+
+    color: #8499a8;
+
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: .7px;
+}
+
+
+.history-list {
+    flex: 1 1 auto;
+
+    min-height: 0;
+
+    overflow-y: auto;
+
+    scrollbar-width: thin;
+}
+
+
+.history-row {
+    min-height: 49px;
+
+    padding: 8px 14px;
+
+    border-bottom:
+        1px solid rgba(50, 86, 111, .16);
+
+    color: #a7bac6;
+
+    font-size: 9px;
+}
+
+
+.history-row:hover {
+    background:
+        rgba(18, 54, 77, .22);
+}
+
+
+.history-date {
+    color: #91a6b5;
+}
+
+
+.history-tracker {
+    color: #bed0db;
+    font-weight: 600;
+}
+
+
+.history-plate {
+    color: #d0e0e9;
+
+    font-weight: 600;
+    letter-spacing: .6px;
+}
+
+
+.history-plate.empty {
+    color: #647b8b;
+    font-weight: 400;
+}
+
+
+.history-threat {
+    width: max-content;
+
+    padding: 4px 7px;
+
+    border:
+        1px solid rgba(75, 110, 136, .26);
+
+    border-radius: 3px;
+
+    font-size: 7px;
+    font-weight: 700;
+}
+
+
+.history-threat.LOW {
+    color: #79a7c0;
+}
+
+
+.history-threat.MEDIUM {
+    color: #d2b35f;
+}
+
+
+.history-threat.HIGH {
+    color: #e5a746;
+    border-color:
+        rgba(229, 167, 70, .34);
+}
+
+
+.history-threat.CRITICAL {
+    color: #ee637b;
+    border-color:
+        rgba(238, 99, 123, .38);
+}
+
+
+/*
+========================================================
+PHOENIX HISTORY DETAIL v4.5.1
+Professional forensic vehicle record
+========================================================
+*/
+
+.history-row {
+    position: relative;
+    cursor: pointer;
+
+    transition:
+        background .15s ease,
+        box-shadow .15s ease;
+}
+
+
+.history-row::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 8px;
+    bottom: 8px;
+
+    width: 2px;
+
+    border-radius: 0 2px 2px 0;
+
+    background: #1da2ff;
+
+    opacity: 0;
+
+    transition: opacity .15s ease;
+}
+
+
+.history-row:hover,
+.history-row:focus-visible {
+    background:
+        rgba(18, 60, 88, .32);
+
+    box-shadow:
+        inset 0 0 0 1px
+        rgba(36, 137, 198, .10);
+
+    outline: none;
+}
+
+
+.history-row:hover::before,
+.history-row:focus-visible::before {
+    opacity: 1;
+}
+
+
+body.history-detail-open {
+    overflow: hidden;
+}
+
+
+.history-detail-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 2000;
+
+    background:
+        rgba(1, 7, 12, .72);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        opacity .18s ease;
+}
+
+
+.history-detail-overlay.open {
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+
+.history-detail-drawer {
+    position: absolute;
+
+    top: 0;
+    right: 0;
+    bottom: 0;
+
+    width:
+        min(
+            690px,
+            calc(100vw - 220px)
+        );
+
+    display: flex;
+    flex-direction: column;
+
+    background:
+        #07131c;
+
+    border-left:
+        1px solid rgba(53, 126, 172, .34);
+
+    box-shadow:
+        -20px 0 50px
+        rgba(0, 0, 0, .36);
+
+    transform:
+        translateX(24px);
+
+    transition:
+        transform .18s ease;
+}
+
+
+.history-detail-overlay.open
+.history-detail-drawer {
+    transform:
+        translateX(0);
+}
+
+
+.history-detail-header {
+    flex: 0 0 78px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding:
+        0 24px;
+
+    border-bottom:
+        1px solid rgba(57, 105, 136, .24);
+
+    background:
+        #081722;
+}
+
+
+.history-detail-kicker {
+    margin-bottom: 5px;
+
+    color: #4f8bae;
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.6px;
+}
+
+
+.history-detail-header h2 {
+    margin: 0;
+
+    color: #e3edf3;
+
+    font-size: 18px;
+
+    font-weight: 600;
+}
+
+
+.history-detail-close {
+    position: relative;
+
+    width: 36px;
+    height: 36px;
+
+    border:
+        1px solid rgba(73, 117, 145, .28);
+
+    border-radius: 5px;
+
+    background:
+        rgba(12, 35, 50, .50);
+
+    cursor: pointer;
+}
+
+
+.history-detail-close span {
+    position: absolute;
+
+    left: 10px;
+    top: 17px;
+
+    width: 14px;
+    height: 1px;
+
+    background:
+        #8fa8b8;
+}
+
+
+.history-detail-close span:first-child {
+    transform:
+        rotate(45deg);
+}
+
+
+.history-detail-close span:last-child {
+    transform:
+        rotate(-45deg);
+}
+
+
+.history-detail-close:hover {
+    border-color:
+        rgba(42, 152, 216, .58);
+}
+
+
+.history-detail-close:hover span {
+    background:
+        #e1f2fc;
+}
+
+
+.history-detail-content {
+    flex: 1 1 auto;
+
+    min-height: 0;
+
+    overflow-y: auto;
+
+    padding:
+        22px 24px 28px;
+
+    scrollbar-width: thin;
+}
+
+
+.history-record-hero {
+    display: grid;
+
+    grid-template-columns:
+        52px
+        minmax(0, 1fr)
+        auto;
+
+    gap: 15px;
+
+    align-items: center;
+
+    padding:
+        18px;
+
+    border:
+        1px solid rgba(50, 111, 150, .28);
+
+    border-radius: 6px;
+
+    background:
+        linear-gradient(
+            110deg,
+            rgba(10, 37, 54, .76),
+            rgba(7, 23, 34, .64)
+        );
+}
+
+
+.history-record-symbol {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border:
+        1px solid rgba(35, 143, 209, .35);
+
+    border-radius: 6px;
+
+    background:
+        rgba(16, 81, 121, .15);
+
+    color: #39a9eb;
+}
+
+
+.history-record-symbol
+.phoenix-icon {
+    width: 22px;
+    height: 22px;
+}
+
+
+.history-record-state {
+    color: #4ba5d5;
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+
+.history-record-identity h3 {
+    margin:
+        5px 0;
+
+    color: #e7f0f5;
+
+    font-size: 17px;
+
+    font-weight: 600;
+}
+
+
+.history-record-identity h3 span {
+    margin-left: 7px;
+
+    color: #668397;
+
+    font-size: 8px;
+
+    font-weight: 600;
+
+    letter-spacing: .7px;
+}
+
+
+.history-record-uuid {
+    overflow: hidden;
+
+    color: #698597;
+
+    font-size: 8px;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+
+.history-record-plate {
+    min-width: 112px;
+
+    padding:
+        10px 12px;
+
+    border:
+        1px solid rgba(62, 112, 143, .28);
+
+    border-radius: 5px;
+
+    text-align: center;
+
+    background:
+        rgba(3, 15, 23, .48);
+}
+
+
+.history-record-plate span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #6f899a;
+
+    font-size: 7px;
+
+    letter-spacing: 1px;
+}
+
+
+.history-record-plate strong {
+    color: #c7d9e3;
+
+    font-size: 11px;
+
+    letter-spacing: 1px;
+}
+
+
+.history-detail-metrics {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 9px;
+
+    margin-top: 12px;
+}
+
+
+.history-detail-metrics article {
+    padding:
+        12px;
+
+    border:
+        1px solid rgba(51, 95, 124, .24);
+
+    border-radius: 5px;
+
+    background:
+        rgba(6, 22, 32, .68);
+}
+
+
+.history-detail-metrics span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #708a9b;
+
+    font-size: 7px;
+
+    letter-spacing: .8px;
+}
+
+
+.history-detail-metrics strong {
+    color: #c1d2dc;
+
+    font-size: 11px;
+}
+
+
+.history-detail-section {
+    margin-top: 18px;
+
+    padding:
+        16px;
+
+    border:
+        1px solid rgba(48, 90, 118, .22);
+
+    border-radius: 6px;
+
+    background:
+        rgba(5, 18, 27, .62);
+}
+
+
+.history-section-title {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 14px;
+
+    padding-bottom: 10px;
+
+    border-bottom:
+        1px solid rgba(52, 94, 122, .18);
+}
+
+
+.history-section-title div {
+    color: #a7bdca;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+
+.history-section-title span {
+    color: #4f6e81;
+
+    font-size: 6px;
+
+    font-weight: 700;
+
+    letter-spacing: .9px;
+}
+
+
+.history-detail-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap:
+        9px 18px;
+}
+
+
+.history-detail-field {
+    min-width: 0;
+
+    padding:
+        9px 10px;
+
+    border-left:
+        2px solid rgba(44, 120, 166, .28);
+
+    background:
+        rgba(7, 27, 39, .43);
+}
+
+
+.history-detail-field span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #708b9c;
+
+    font-size: 7px;
+
+    letter-spacing: .6px;
+}
+
+
+.history-detail-field strong {
+    display: block;
+
+    overflow: hidden;
+
+    color: #b4c7d2;
+
+    font-size: 9px;
+
+    font-weight: 500;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+
+.history-timeline {
+    display: grid;
+
+    grid-template-columns:
+        1fr 70px 1fr;
+
+    align-items: center;
+
+    margin:
+        5px 5px 15px;
+}
+
+
+.history-timeline-event {
+    display: flex;
+
+    gap: 9px;
+
+    align-items: center;
+}
+
+
+.history-timeline-dot {
+    flex: 0 0 auto;
+
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: #249fe3;
+
+    box-shadow:
+        0 0 8px rgba(36, 159, 227, .40);
+}
+
+
+.history-timeline-dot.end {
+    background: #56b885;
+
+    box-shadow:
+        0 0 8px rgba(86, 184, 133, .35);
+}
+
+
+.history-timeline-event span:not(
+    .history-timeline-dot
+) {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #648294;
+
+    font-size: 6px;
+
+    letter-spacing: .7px;
+}
+
+
+.history-timeline-event strong {
+    color: #a8bdc9;
+
+    font-size: 8px;
+
+    font-weight: 500;
+}
+
+
+.history-timeline-line {
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #249fe3,
+            rgba(75, 130, 164, .34),
+            #56b885
+        );
+}
+
+
+.history-security-panel {
+    min-width: 0;
+}
+
+
+.history-threat-gauge {
+    margin-bottom: 13px;
+
+    padding:
+        11px 12px;
+
+    background:
+        rgba(5, 21, 31, .58);
+
+    border-radius: 4px;
+}
+
+
+.history-threat-gauge > div:first-child {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 8px;
+}
+
+
+.history-threat-gauge span {
+    color: #728c9d;
+
+    font-size: 7px;
+
+    letter-spacing: .8px;
+}
+
+
+.history-threat-gauge strong {
+    font-size: 8px;
+}
+
+
+.history-threat-track {
+    height: 4px;
+
+    overflow: hidden;
+
+    border-radius: 2px;
+
+    background:
+        #142934;
+}
+
+
+.history-threat-track span {
+    display: block;
+
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #279edb,
+            #dca843,
+            #e44e6a
+        );
+}
+
+
+.threat-text.LOW,
+.history-threat-gauge strong.LOW {
+    color: #69aacd;
+}
+
+
+.threat-text.MEDIUM,
+.history-threat-gauge strong.MEDIUM {
+    color: #d0b45d;
+}
+
+
+.threat-text.HIGH,
+.history-threat-gauge strong.HIGH {
+    color: #e2a74c;
+}
+
+
+.threat-text.CRITICAL,
+.history-threat-gauge strong.CRITICAL {
+    color: #ed6379;
+}
+
+
+.threat-text.UNKNOWN,
+.history-threat-gauge strong.UNKNOWN {
+    color: #758c9a;
+}
+
+
+.history-media-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 10px;
+}
+
+
+.history-media-card {
+    display: grid;
+
+    grid-template-columns:
+        78px 1fr;
+
+    gap: 12px;
+
+    align-items: center;
+
+    min-height: 90px;
+
+    padding: 10px;
+
+    border:
+        1px solid rgba(53, 97, 126, .22);
+
+    border-radius: 5px;
+
+    background:
+        rgba(5, 20, 30, .50);
+}
+
+
+.history-media-placeholder {
+    height: 68px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        1px dashed rgba(67, 115, 145, .30);
+
+    border-radius: 4px;
+
+    background:
+        rgba(7, 31, 45, .50);
+
+    color: #4a7f9f;
+}
+
+
+.history-media-placeholder
+.phoenix-icon {
+    width: 22px;
+    height: 22px;
+}
+
+
+.history-media-card strong {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #a8bdc9;
+
+    font-size: 9px;
+}
+
+
+.history-media-card span {
+    color: #657f90;
+
+    font-size: 7px;
+
+    line-height: 1.5;
+}
+
+
+.history-evidence-status {
+    display: flex;
+
+    gap: 10px;
+
+    align-items: center;
+
+    margin-top: 10px;
+
+    padding:
+        10px 12px;
+
+    border:
+        1px solid rgba(56, 101, 131, .20);
+
+    border-radius: 4px;
+
+    background:
+        rgba(5, 19, 28, .50);
+}
+
+
+.history-evidence-dot {
+    flex: 0 0 auto;
+
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #657d8c;
+}
+
+
+.history-evidence-status strong {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #9fb4c1;
+
+    font-size: 8px;
+}
+
+
+.history-evidence-status span {
+    color: #647f90;
+
+    font-size: 7px;
+}
+
+
+.history-detail-footer {
+    display: flex;
+
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-top: 18px;
+
+    padding:
+        13px 15px;
+
+    border:
+        1px solid rgba(52, 94, 120, .20);
+
+    border-radius: 5px;
+
+    background:
+        rgba(4, 16, 24, .58);
+}
+
+
+.history-detail-footer > div:first-child {
+    min-width: 0;
+}
+
+
+.history-detail-footer span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #58758a;
+
+    font-size: 6px;
+
+    letter-spacing: .8px;
+}
+
+
+.history-detail-footer code {
+    display: block;
+
+    overflow: hidden;
+
+    color: #8da8b8;
+
+    font-size: 7px;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+
+.history-persistence-badge {
+    flex: 0 0 auto;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    color: #5c9e7b;
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+    letter-spacing: .5px;
+}
+
+
+.history-persistence-badge span {
+    width: 6px;
+    height: 6px;
+
+    margin: 0;
+
+    border-radius: 50%;
+
+    background: #47c582;
+
+    box-shadow:
+        0 0 7px rgba(71, 197, 130, .35);
+}
+
+
+.history-detail-loading,
+.history-detail-error {
+    min-height: 300px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    color: #7891a1;
+
+    font-size: 9px;
+}
+
+
+.history-detail-loading > span {
+    width: 20px;
+    height: 20px;
+
+    border:
+        2px solid rgba(59, 116, 151, .22);
+
+    border-top-color:
+        #299fe1;
+
+    border-radius: 50%;
+
+    animation:
+        history-spin .7s linear infinite;
+}
+
+
+.history-detail-error strong {
+    color: #d07182;
+
+    font-size: 11px;
+}
+
+
+@keyframes history-spin {
+
+    to {
+        transform:
+            rotate(360deg);
+    }
+
+}
+
+
+@media (max-width: 900px) {
+
+    .history-detail-drawer {
+        width: 100vw;
+    }
+
+
+    .history-detail-metrics {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    .history-media-grid,
+    .history-detail-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+}
+
+/*
+========================================================
+PHOENIX HISTORY TRAJECTORY v4.5.2
+========================================================
+*/
+
+.history-trajectory-block {
+    margin-top: 14px;
+
+    padding: 12px;
+
+    border:
+        1px solid rgba(51, 101, 132, .22);
+
+    border-radius: 5px;
+
+    background:
+        rgba(4, 18, 27, .55);
+}
+
+
+.history-trajectory-title {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 10px;
+}
+
+
+.history-trajectory-title div {
+    color: #8fa9b8;
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+    letter-spacing: .8px;
+}
+
+
+.history-trajectory-title span {
+    color: #537286;
+
+    font-size: 6px;
+
+    font-weight: 700;
+
+    letter-spacing: .6px;
+}
+
+
+.history-trajectory-visual {
+    overflow: hidden;
+
+    border:
+        1px solid rgba(53, 100, 131, .20);
+
+    border-radius: 4px;
+
+    background:
+        #06141d;
+}
+
+
+.history-trajectory-visual svg {
+    display: block;
+
+    width: 100%;
+    height: 160px;
+}
+
+
+.trajectory-grid line {
+    stroke:
+        rgba(66, 107, 133, .12);
+
+    stroke-width: .7;
+}
+
+
+.trajectory-path {
+    fill: none;
+
+    stroke:
+        url(#phoenixTrajectory);
+
+    stroke-width: 2.2;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+
+    filter:
+        drop-shadow(
+            0 0 3px
+            rgba(41, 161, 225, .28)
+        );
+}
+
+
+.trajectory-start {
+    fill: #1da2ff;
+
+    stroke: #b8e5ff;
+
+    stroke-width: 1;
+}
+
+
+.trajectory-end {
+    fill: #55c58a;
+
+    stroke: #c6f3dc;
+
+    stroke-width: 1;
+}
+
+
+.history-trajectory-legend {
+    display: flex;
+
+    justify-content: space-between;
+
+    padding:
+        7px 10px;
+
+    border-top:
+        1px solid rgba(51, 95, 125, .18);
+
+    color: #627f91;
+
+    font-size: 6px;
+}
+
+
+.history-trajectory-empty {
+    padding: 28px;
+
+    border:
+        1px dashed rgba(63, 106, 134, .25);
+
+    border-radius: 4px;
+
+    color: #657f90;
+
+    font-size: 8px;
+
+    text-align: center;
+}
+
+
+/*
+========================================================
+PHOENIX HISTORY READABILITY v4.5.3
+Investor / forensic readability
+========================================================
+*/
+
+.history-detail-kicker {
+    color: #79a9c5;
+    font-size: 8px;
+}
+
+.history-detail-header h2 {
+    color: #edf6fb;
+    font-size: 19px;
+}
+
+.history-record-state {
+    color: #62b5e2;
+    font-size: 8px;
+}
+
+.history-record-identity h3 {
+    color: #eef7fb;
+    font-size: 18px;
+}
+
+.history-record-identity h3 span {
+    color: #8aa3b3;
+    font-size: 9px;
+}
+
+.history-record-uuid {
+    color: #819aaa;
+    font-size: 9px;
+}
+
+.history-record-plate span {
+    color: #8ca3b2;
+    font-size: 8px;
+}
+
+.history-record-plate strong {
+    color: #e0edf4;
+    font-size: 12px;
+}
+
+.history-detail-metrics span {
+    color: #8ba2b1;
+    font-size: 8px;
+}
+
+.history-detail-metrics strong {
+    color: #d6e4ec;
+    font-size: 12px;
+}
+
+.history-section-title div {
+    color: #c1d2dc;
+    font-size: 9px;
+}
+
+.history-section-title span {
+    color: #7891a1;
+    font-size: 7px;
+}
+
+.history-detail-field span {
+    color: #8da5b4;
+    font-size: 8px;
+}
+
+.history-detail-field strong {
+    color: #d0dee6;
+    font-size: 10px;
+}
+
+.history-timeline-event span:not(
+    .history-timeline-dot
+) {
+    color: #839dac;
+    font-size: 7px;
+}
+
+.history-timeline-event strong {
+    color: #c3d4dd;
+    font-size: 9px;
+}
+
+.history-threat-gauge span {
+    color: #8ca4b3;
+    font-size: 8px;
+}
+
+.history-media-card strong {
+    color: #c4d5de;
+    font-size: 10px;
+}
+
+.history-media-card span {
+    color: #849dad;
+    font-size: 8px;
+}
+
+.history-evidence-status strong {
+    color: #bdd0da;
+    font-size: 9px;
+}
+
+.history-evidence-status span {
+    color: #819aaa;
+    font-size: 8px;
+}
+
+.history-trajectory-title div {
+    color: #aac0cc;
+    font-size: 8px;
+}
+
+.history-trajectory-title span {
+    color: #7892a2;
+    font-size: 7px;
+}
+
+.history-trajectory-legend {
+    color: #819bab;
+    font-size: 7px;
+}
+
+.history-detail-footer span {
+    color: #7892a3;
+    font-size: 7px;
+}
+
+.history-detail-footer code {
+    color: #a6bdca;
+    font-size: 8px;
+}
+
+.history-persistence-badge {
+    font-size: 8px;
+}

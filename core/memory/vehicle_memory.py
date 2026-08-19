@@ -79,9 +79,18 @@ class VehicleMemory:
 
         if vehicle.zone:
 
-            self.zone_history.append(
+            if (
+                not self.zone_history
+                or
+                self.zone_history[-1]
+                !=
                 vehicle.zone
-            )
+            ):
+
+                self.zone_history.append(
+                    vehicle.zone
+                )
+
 
             self.time_in_system += 1
 

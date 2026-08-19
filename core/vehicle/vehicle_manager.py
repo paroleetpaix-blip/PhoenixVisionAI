@@ -108,11 +108,29 @@ class VehicleManager:
         )
 
 
+        disappeared_vehicles = []
+
+
         for tracker_id in disappeared:
+
+            vehicle = self.get(
+                tracker_id
+            )
+
+
+            if vehicle is not None:
+
+                disappeared_vehicles.append(
+                    vehicle
+                )
+
 
             self.remove_vehicle(
                 tracker_id
             )
+
+
+        return disappeared_vehicles
 
 
     def remove_vehicle(self, tracker_id):

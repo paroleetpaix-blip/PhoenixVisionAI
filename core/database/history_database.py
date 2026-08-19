@@ -5,253 +5,976 @@ PHOENIX VISION AI
 Vehicle History Database
 
 Phoenix Security Technologies
+SDK v0.6.0 Enterprise
 ========================================================
 """
 
+from datetime import date
+from pathlib import Path
+from threading import RLock
+
+import json
+import math
 import sqlite3
 
 
 class HistoryDatabase:
 
-    def __init__(self):
+    COLUMNS = (
+        "uuid",
+        "tracker_id",
+        "label",
+        "plate",
+        "color",
+        "brand",
+        "model",
+        "first_seen",
+        "last_seen",
+        "total_frames",
+        "max_speed",
+        "direction",
+        "zone",
+        "threat_level",
+        "threat_score",
+        "status",
+        "alerts",
+        "crossings",
+        "created_at",
+        "last_camera",
+        "cameras_seen",
+        "zones_history",
+        "trajectory",
+    )
 
-        self.connection = sqlite3.connect(
-            "database/vehicle_history.db"
+
+    def __init__(
+        self,
+        database_path="database/vehicle_history.db"
+    ):
+
+        self.database_path = Path(
+            database_path
         )
 
-        self.cursor = self.connection.cursor()
+        self.database_path.parent.mkdir(
+            parents=True,
+            exist_ok=True
+        )
+
+        self.lock = RLock()
+
+        self.connection = sqlite3.connect(
+            str(self.database_path),
+            check_same_thread=False
+        )
+
+        self.connection.row_factory = (
+            sqlite3.Row
+        )
+
+        self.cursor = (
+            self.connection.cursor()
+        )
 
         self.create_tables()
 
-    def create_tables(self):
 
-        self.cursor.execute("""
+    def create_tables(
+        self
+    ):
 
-        CREATE TABLE IF NOT EXISTS vehicle_history(
+        with self.lock:
 
-            uuid TEXT PRIMARY KEY,
+            self.cursor.execute(
+                """
+                CREATE TABLE IF NOT EXISTS vehicle_history(
 
-            tracker_id INTEGER,
+                    uuid TEXT PRIMARY KEY,
+                    tracker_id INTEGER,
+                    label TEXT,
+                    plate TEXT,
+                    color TEXT,
+                    brand TEXT,
+                    model TEXT,
+                    first_seen TEXT,
+                    last_seen TEXT,
+                    total_frames INTEGER,
+                    max_speed REAL,
+                    direction TEXT,
+                    zone TEXT,
+                    threat_level TEXT,
+                    threat_score INTEGER,
+                    status TEXT,
+                    alerts INTEGER,
+                    crossings INTEGER,
+                    created_at TEXT,
+                    last_camera TEXT,
+                    cameras_seen TEXT,
+                    zones_history TEXT,
+                    trajectory TEXT
 
-            label TEXT,
+                )
+                """
+            )
 
-            plate TEXT,
+            self.connection.commit()
 
-            color TEXT,
 
-            brand TEXT,
+        self.migrate_schema()
 
-            model TEXT,
 
-            first_seen TEXT,
+    def migrate_schema(
+        self
+    ):
 
-            last_seen TEXT,
+        required_columns = {
 
-            total_frames INTEGER,
+            "uuid": "TEXT",
+            "tracker_id": "INTEGER",
+            "label": "TEXT",
+            "plate": "TEXT",
+            "color": "TEXT",
+            "brand": "TEXT",
+            "model": "TEXT",
+            "first_seen": "TEXT",
+            "last_seen": "TEXT",
+            "total_frames": "INTEGER DEFAULT 0",
+            "max_speed": "REAL DEFAULT 0",
+            "direction": "TEXT",
+            "zone": "TEXT",
+            "threat_level": "TEXT",
+            "threat_score": "INTEGER DEFAULT 0",
+            "status": "TEXT",
+            "alerts": "INTEGER DEFAULT 0",
+            "crossings": "INTEGER DEFAULT 0",
+            "created_at": "TEXT",
 
-            max_speed REAL,
+            "last_camera": "TEXT",
+            "cameras_seen": "TEXT",
+            "zones_history": "TEXT",
+            "trajectory": "TEXT",
+        }
 
-            direction TEXT,
 
-            zone TEXT,
+        with self.lock:
 
-            threat_level TEXT,
+            rows = self.connection.execute(
+                """
+                PRAGMA table_info(
+                    vehicle_history
+                )
+                """
+            ).fetchall()
 
-            threat_score INTEGER,
 
-            status TEXT,
+            existing_columns = {
+                row["name"]
+                for row in rows
+            }
 
-            alerts INTEGER,
 
-            crossings INTEGER,
+            added_columns = []
 
-            created_at TEXT
 
+            for (
+                column_name,
+                column_type
+            ) in required_columns.items():
+
+                if (
+                    column_name
+                    in existing_columns
+                ):
+
+                    continue
+
+
+                self.connection.execute(
+                    f"""
+                    ALTER TABLE vehicle_history
+                    ADD COLUMN {column_name}
+                    {column_type}
+                    """
+                )
+
+
+                added_columns.append(
+                    column_name
+                )
+
+
+            if (
+                "created_at"
+                in added_columns
+            ):
+
+                self.connection.execute(
+                    """
+                    UPDATE vehicle_history
+
+                    SET created_at =
+                        COALESCE(
+                            first_seen,
+                            last_seen
+                        )
+
+                    WHERE created_at IS NULL
+                       OR TRIM(created_at) = ''
+                    """
+                )
+
+
+            self.connection.commit()
+
+
+        if added_columns:
+
+            print(
+                "[HISTORY] Migration SQLite :",
+                ", ".join(
+                    added_columns
+                )
+            )
+
+
+    @staticmethod
+    def _compact_sequence(
+        values
+    ):
+
+        compact = []
+
+
+        for value in values or []:
+
+            if value is None:
+
+                continue
+
+
+            value = str(
+                value
+            ).strip()
+
+
+            if not value:
+
+                continue
+
+
+            if (
+                compact
+                and
+                compact[-1] == value
+            ):
+
+                continue
+
+
+            compact.append(
+                value
+            )
+
+
+        return compact
+
+
+    @staticmethod
+    def _trajectory(
+        positions,
+        max_points=120
+    ):
+
+        valid = []
+
+
+        for position in positions or []:
+
+            if (
+                not isinstance(
+                    position,
+                    (
+                        tuple,
+                        list
+                    )
+                )
+                or
+                len(position) < 2
+            ):
+
+                continue
+
+
+            try:
+
+                x = float(
+                    position[0]
+                )
+
+                y = float(
+                    position[1]
+                )
+
+            except (
+                TypeError,
+                ValueError
+            ):
+
+                continue
+
+
+            if (
+                not math.isfinite(x)
+                or
+                not math.isfinite(y)
+            ):
+
+                continue
+
+
+            valid.append(
+                [
+                    round(x, 2),
+                    round(y, 2)
+                ]
+            )
+
+
+        if (
+            len(valid)
+            <=
+            max_points
+        ):
+
+            return valid
+
+
+        step = max(
+            1,
+            math.ceil(
+                len(valid)
+                /
+                max_points
+            )
         )
 
-        """)
 
-        self.connection.commit()
+        sampled = valid[
+            ::step
+        ]
 
-    def save_vehicle(self, vehicle, memory):
 
-        self.cursor.execute("""
+        if (
+            sampled
+            and
+            sampled[-1]
+            !=
+            valid[-1]
+        ):
 
-        INSERT OR REPLACE INTO vehicle_history(
+            sampled.append(
+                valid[-1]
+            )
 
-            uuid,
 
-            tracker_id,
+        return sampled
 
-            label,
 
-            plate,
+    @staticmethod
+    def should_persist_source(
+        source
+    ):
 
-            color,
+        """
+        Les fichiers vidéo locaux sont considérés
+        comme sources de développement / test.
 
-            brand,
+        Ils peuvent être analysés par Phoenix,
+        mais ne doivent pas alimenter l'historique
+        opérationnel persistant.
+        """
 
-            model,
+        if source is None:
 
-            first_seen,
+            return True
 
-            last_seen,
 
-            total_frames,
+        if isinstance(
+            source,
+            int
+        ):
 
-            max_speed,
+            return True
 
-            direction,
 
-            zone,
+        source_text = str(
+            source
+        ).strip()
 
-            threat_level,
 
-            threat_score,
+        if not source_text:
 
-            status,
+            return True
 
-            alerts,
 
-            crossings,
+        # Index caméra transmis sous forme de texte.
+        if source_text.isdigit():
 
-            created_at
+            return True
 
+
+        # RTSP / HTTP / HTTPS = source réseau.
+        if "://" in source_text:
+
+            return True
+
+
+        try:
+
+            source_path = Path(
+                source_text
+            )
+
+            if source_path.is_file():
+
+                return False
+
+        except OSError:
+
+            pass
+
+
+        return True
+
+
+    def save_vehicle(
+        self,
+        vehicle,
+        memory,
+        source=None
+    ):
+
+        if (
+            vehicle is None
+            or
+            memory is None
+        ):
+
+            return False
+
+
+        if not self.should_persist_source(
+            source
+        ):
+
+            return False
+
+
+        cameras_seen = list(
+            getattr(
+                memory,
+                "cameras_seen",
+                []
+            )
+            or
+            []
         )
 
-        VALUES(
 
-            ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
-
+        zones_history = (
+            self._compact_sequence(
+                getattr(
+                    memory,
+                    "zone_history",
+                    []
+                )
+            )
         )
 
-        """, (
 
-            vehicle.uuid,
-
-            vehicle.tracker_id,
-
-            vehicle.label,
-
-            vehicle.plate,
-
-            vehicle.color,
-
-            vehicle.brand,
-
-            vehicle.model,
-
-            str(memory.first_seen),
-
-            str(memory.last_seen),
-
-            memory.total_frames,
-
-            memory.max_speed,
-
-            vehicle.direction,
-
-            vehicle.zone,
-
-            vehicle.threat_level,
-
-            vehicle.threat_score,
-
-            vehicle.status,
-
-            len(memory.alerts),
-
-            len(vehicle.crossing_events),
-
-            str(memory.first_seen)
-
-        ))
-
-        self.connection.commit()
-
-    def total(self):
-
-        self.cursor.execute(
-
-            "SELECT COUNT(*) FROM vehicle_history"
-
+        trajectory = (
+            self._trajectory(
+                getattr(
+                    memory,
+                    "positions",
+                    []
+                )
+            )
         )
 
-        return self.cursor.fetchone()[0]
 
-    def find_by_uuid(self, uuid):
+        with self.lock:
 
-        self.cursor.execute(
+            self.cursor.execute(
+                """
+                INSERT OR REPLACE INTO vehicle_history(
 
-            "SELECT * FROM vehicle_history WHERE uuid=?",
+                    uuid,
+                    tracker_id,
+                    label,
+                    plate,
+                    color,
+                    brand,
+                    model,
+                    first_seen,
+                    last_seen,
+                    total_frames,
+                    max_speed,
+                    direction,
+                    zone,
+                    threat_level,
+                    threat_score,
+                    status,
+                    alerts,
+                    crossings,
+                    created_at,
+                    last_camera,
+                    cameras_seen,
+                    zones_history,
+                    trajectory
 
-            (uuid,)
+                )
 
+                VALUES(
+                    ?,?,?,?,?,?,?,?,?,?,
+                    ?,?,?,?,?,?,?,?,?,?,
+                    ?,?,?
+                )
+                """,
+
+                (
+
+                    vehicle.uuid,
+                    vehicle.tracker_id,
+                    vehicle.label,
+                    vehicle.plate,
+                    vehicle.color,
+                    vehicle.brand,
+                    vehicle.model,
+
+                    str(
+                        memory.first_seen
+                    ),
+
+                    str(
+                        memory.last_seen
+                    ),
+
+                    memory.total_frames,
+                    memory.max_speed,
+                    vehicle.direction,
+                    vehicle.zone,
+                    vehicle.threat_level,
+                    vehicle.threat_score,
+                    vehicle.status,
+
+                    len(
+                        memory.alerts
+                    ),
+
+                    len(
+                        vehicle.crossing_events
+                    ),
+
+                    str(
+                        memory.first_seen
+                    ),
+
+                    getattr(
+                        memory,
+                        "last_camera",
+                        None
+                    ),
+
+                    json.dumps(
+                        cameras_seen,
+                        ensure_ascii=False
+                    ),
+
+                    json.dumps(
+                        zones_history,
+                        ensure_ascii=False
+                    ),
+
+                    json.dumps(
+                        trajectory,
+                        ensure_ascii=False
+                    ),
+
+                )
+            )
+
+            self.connection.commit()
+
+
+        return True
+
+
+    def total(
+        self
+    ):
+
+        with self.lock:
+
+            row = self.connection.execute(
+                """
+                SELECT COUNT(*)
+                FROM vehicle_history
+                """
+            ).fetchone()
+
+
+        return int(
+            row[0]
+            if row
+            else 0
         )
 
-        return self.cursor.fetchone()
 
+    def today_total(
+        self
+    ):
 
-    def find_by_plate(self, plate):
-
-        self.cursor.execute(
-
-            "SELECT * FROM vehicle_history WHERE plate=?",
-
-            (plate,)
-
+        today = (
+            date.today()
+            .isoformat()
         )
 
-        return self.cursor.fetchall()
+
+        with self.lock:
+
+            row = self.connection.execute(
+                """
+                SELECT COUNT(*)
+                FROM vehicle_history
+                WHERE substr(created_at, 1, 10) = ?
+                """,
+                (
+                    today,
+                )
+            ).fetchone()
 
 
-    def find_by_color(self, color):
-
-        self.cursor.execute(
-
-            "SELECT * FROM vehicle_history WHERE color=?",
-
-            (color,)
-
+        return int(
+            row[0]
+            if row
+            else 0
         )
 
-        return self.cursor.fetchall()
+
+    def plates_total(
+        self
+    ):
+
+        with self.lock:
+
+            row = self.connection.execute(
+                """
+                SELECT COUNT(*)
+                FROM vehicle_history
+                WHERE plate IS NOT NULL
+                  AND TRIM(plate) != ''
+                """
+            ).fetchone()
 
 
-    def find_by_brand(self, brand):
-
-        self.cursor.execute(
-
-            "SELECT * FROM vehicle_history WHERE brand=?",
-
-            (brand,)
-
+        return int(
+            row[0]
+            if row
+            else 0
         )
 
-        return self.cursor.fetchall()
+
+    def threats_total(
+        self
+    ):
+
+        with self.lock:
+
+            row = self.connection.execute(
+                """
+                SELECT COUNT(*)
+                FROM vehicle_history
+                WHERE UPPER(
+                    COALESCE(
+                        threat_level,
+                        ''
+                    )
+                )
+                IN (
+                    'HIGH',
+                    'CRITICAL'
+                )
+                """
+            ).fetchone()
 
 
-    def find_by_model(self, model):
-
-        self.cursor.execute(
-
-            "SELECT * FROM vehicle_history WHERE model=?",
-
-            (model,)
-
+        return int(
+            row[0]
+            if row
+            else 0
         )
 
-        return self.cursor.fetchall()
+
+    @staticmethod
+    def _json_value(
+        value,
+        fallback
+    ):
+
+        if (
+            value is None
+            or
+            value == ""
+        ):
+
+            return fallback
 
 
-    def find_by_threat(self, threat):
+        try:
 
-        self.cursor.execute(
+            return json.loads(
+                value
+            )
 
-            "SELECT * FROM vehicle_history WHERE threat_level=?",
+        except (
+            TypeError,
+            json.JSONDecodeError
+        ):
 
-            (threat,)
+            return fallback
 
+
+    @classmethod
+    def row_to_dict(
+        cls,
+        row
+    ):
+
+        if row is None:
+
+            return None
+
+
+        record = {}
+
+
+        row_keys = set(
+            row.keys()
         )
 
-        return self.cursor.fetchall()
+
+        for column in cls.COLUMNS:
+
+            record[column] = (
+                row[column]
+                if column in row_keys
+                else None
+            )
+
+
+        record["cameras_seen"] = (
+            cls._json_value(
+                record["cameras_seen"],
+                []
+            )
+        )
+
+
+        record["zones_history"] = (
+            cls._json_value(
+                record["zones_history"],
+                []
+            )
+        )
+
+
+        record["trajectory"] = (
+            cls._json_value(
+                record["trajectory"],
+                []
+            )
+        )
+
+
+        return record
+
+
+    def recent(
+        self,
+        limit=250
+    ):
+
+        limit = max(
+            1,
+            min(
+                int(limit),
+                1000
+            )
+        )
+
+
+        with self.lock:
+
+            rows = self.connection.execute(
+                """
+                SELECT *
+                FROM vehicle_history
+                ORDER BY
+                    COALESCE(
+                        last_seen,
+                        created_at
+                    )
+                DESC
+                LIMIT ?
+                """,
+                (
+                    limit,
+                )
+            ).fetchall()
+
+
+        return [
+            self.row_to_dict(
+                row
+            )
+            for row in rows
+        ]
+
+
+    def find_by_uuid(
+        self,
+        uuid
+    ):
+
+        with self.lock:
+
+            return self.connection.execute(
+                """
+                SELECT *
+                FROM vehicle_history
+                WHERE uuid=?
+                """,
+                (
+                    uuid,
+                )
+            ).fetchone()
+
+
+    def find_by_plate(
+        self,
+        plate
+    ):
+
+        with self.lock:
+
+            return self.connection.execute(
+                """
+                SELECT *
+                FROM vehicle_history
+                WHERE plate=?
+                """,
+                (
+                    plate,
+                )
+            ).fetchall()
+
+
+    def find_by_color(
+        self,
+        color
+    ):
+
+        with self.lock:
+
+            return self.connection.execute(
+                """
+                SELECT *
+                FROM vehicle_history
+                WHERE color=?
+                """,
+                (
+                    color,
+                )
+            ).fetchall()
+
+
+    def find_by_brand(
+        self,
+        brand
+    ):
+
+        with self.lock:
+
+            return self.connection.execute(
+                """
+                SELECT *
+                FROM vehicle_history
+                WHERE brand=?
+                """,
+                (
+                    brand,
+                )
+            ).fetchall()
+
+
+    def find_by_model(
+        self,
+        model
+    ):
+
+        with self.lock:
+
+            return self.connection.execute(
+                """
+                SELECT *
+                FROM vehicle_history
+                WHERE model=?
+                """,
+                (
+                    model,
+                )
+            ).fetchall()
+
+
+    def find_by_threat(
+        self,
+        threat
+    ):
+
+        with self.lock:
+
+            return self.connection.execute(
+                """
+                SELECT *
+                FROM vehicle_history
+                WHERE threat_level=?
+                """,
+                (
+                    threat,
+                )
+            ).fetchall()
+
+
+    def stats(
+        self
+    ):
+
+        return {
+            "total":
+                self.total(),
+
+            "today":
+                self.today_total(),
+
+            "plates":
+                self.plates_total(),
+
+            "threats":
+                self.threats_total()
+        }
+
+
+history_database = (
+    HistoryDatabase()
+)

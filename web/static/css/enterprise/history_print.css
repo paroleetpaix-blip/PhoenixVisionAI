@@ -1,0 +1,254 @@
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    margin: 0;
+
+    background: #eef1f3;
+
+    color: #17232b;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+}
+
+
+.print-document {
+    width: 210mm;
+    min-height: 297mm;
+
+    margin: 20px auto;
+
+    padding: 18mm;
+
+    background: white;
+
+    box-shadow:
+        0 4px 24px
+        rgba(0, 0, 0, .14);
+}
+
+
+.print-header {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding-bottom: 18px;
+
+    border-bottom:
+        3px solid #183847;
+}
+
+
+.print-brand {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+.print-brand img {
+    width: 58px;
+    height: 58px;
+
+    object-fit: contain;
+}
+
+
+.print-brand strong {
+    display: block;
+
+    font-size: 20px;
+
+    letter-spacing: 3px;
+}
+
+
+.print-brand span {
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 9px;
+
+    letter-spacing: 4px;
+}
+
+
+.print-classification {
+    text-align: right;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+}
+
+
+.print-classification strong {
+    display: block;
+
+    margin-top: 8px;
+
+    font-size: 13px;
+}
+
+
+.print-reference {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 10px;
+
+    margin-top: 18px;
+}
+
+
+.print-reference div,
+.print-grid div {
+    padding: 10px;
+
+    border:
+        1px solid #d4dce0;
+}
+
+
+.print-reference span,
+.print-grid span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #60737d;
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+    letter-spacing: .7px;
+}
+
+
+.print-reference strong,
+.print-grid strong {
+    font-size: 10px;
+
+    font-weight: 600;
+}
+
+
+.print-section {
+    margin-top: 22px;
+}
+
+
+.print-section h2 {
+    margin:
+        0 0 10px;
+
+    padding-bottom: 7px;
+
+    border-bottom:
+        1px solid #aebbc2;
+
+    font-size: 12px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+}
+
+
+.print-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 8px;
+}
+
+
+.print-footer {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-top: 30px;
+
+    padding-top: 12px;
+
+    border-top:
+        1px solid #bfc9ce;
+
+    color: #60727c;
+
+    font-size: 7px;
+}
+
+
+.print-actions {
+    margin-top: 25px;
+
+    text-align: center;
+}
+
+
+#print-button {
+    padding:
+        12px 24px;
+
+    border: 0;
+
+    border-radius: 4px;
+
+    background: #173f53;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-weight: 700;
+
+    letter-spacing: .7px;
+}
+
+
+@page {
+    size: A4;
+    margin: 12mm;
+}
+
+
+@media print {
+
+    body {
+        background: white;
+    }
+
+
+    .print-document {
+        width: auto;
+        min-height: auto;
+
+        margin: 0;
+        padding: 0;
+
+        box-shadow: none;
+    }
+
+
+    .print-actions {
+        display: none;
+    }
+
+}

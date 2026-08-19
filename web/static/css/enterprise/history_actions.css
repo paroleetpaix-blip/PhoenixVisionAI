@@ -1,0 +1,84 @@
+.history-record-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin-top: 11px;
+    padding: 10px;
+
+    border:
+        1px solid rgba(50, 100, 132, .28);
+
+    border-radius: 5px;
+
+    background:
+        rgba(5, 19, 29, .78);
+}
+
+
+.history-action-button {
+    min-height: 36px;
+
+    padding:
+        0 14px;
+
+    border:
+        1px solid rgba(67, 116, 147, .38);
+
+    border-radius: 4px;
+
+    background:
+        rgba(9, 33, 48, .78);
+
+    color: #b8cbd6;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: .55px;
+
+    cursor: pointer;
+}
+
+
+.history-action-button:hover:not(:disabled) {
+    color: #f1f9fd;
+
+    border-color:
+        rgba(38, 156, 226, .65);
+
+    background:
+        rgba(12, 56, 81, .85);
+}
+
+
+.history-action-button.primary {
+    color: #e0f3fd;
+
+    border-color:
+        rgba(33, 145, 212, .55);
+
+    background:
+        rgba(14, 79, 116, .44);
+}
+
+
+.history-action-button.video {
+    border-color:
+        rgba(213, 157, 73, .40);
+}
+
+
+.history-action-button:disabled {
+    color: #627986;
+
+    border-color:
+        rgba(66, 91, 106, .22);
+
+    background:
+        rgba(7, 21, 30, .48);
+
+    cursor: not-allowed;
+
+    opacity: .68;
+}

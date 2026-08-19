@@ -50,6 +50,7 @@ from core.streaming.stream_service import StreamService
 
 
 from core.events.event_manager import event_manager
+from core.database.history_database import history_database
 
 
 from core.intelligence.intelligence_center import intelligence_center
@@ -95,6 +96,14 @@ class PhoenixEngine:
 
         # Une lecture déjà fiable n'est plus répétée.
         self.anpr_validation_confidence = 65.0
+
+        # ======================================
+        # Historique persistant
+        # ======================================
+
+        # Sauvegarde périodique légère.
+        # À 25 FPS : environ toutes les 6 secondes.
+        self.history_save_interval_frames = 150
 
         # ======================================
         # Frame Hub
@@ -192,6 +201,27 @@ class PhoenixEngine:
 
         print()
         print(f"Analyse de : {source}")
+
+        history_persistence = (
+            history_database
+            .should_persist_source(
+                source
+            )
+        )
+
+        if history_persistence:
+
+            print(
+                "[HISTORY] Mode opérationnel : "
+                "persistance SQLite active."
+            )
+
+        else:
+
+            print(
+                "[HISTORY] Source fichier locale : "
+                "persistance opérationnelle désactivée."
+            )
 
         camera = self.camera_manager.find_by_name("CAM01")
 
@@ -487,6 +517,28 @@ class PhoenixEngine:
                     vehicle
                 )
 
+
+                memory = (
+                    self.memory_manager
+                    .get_memory(
+                        vehicle.uuid
+                    )
+                )
+
+
+                if memory is not None:
+
+                    camera_name = getattr(
+                        camera,
+                        "name",
+                        "CAM01"
+                    )
+
+
+                    memory.set_camera(
+                        camera_name
+                    )
+
             # ====================================================
             # Détection des franchissements de lignes
             # ====================================================
@@ -516,9 +568,73 @@ class PhoenixEngine:
             # Synchronisation de la flotte
             # ====================================================
 
-            self.vehicle_manager.update(
-                vehicles
+            disappeared_vehicles = (
+                self.vehicle_manager.update(
+                    vehicles
+                )
+                or
+                []
             )
+
+
+            # ====================================================
+            # Historique persistant
+            # ====================================================
+
+            # Sauvegarde finale des véhicules
+            # qui viennent de quitter la scène.
+
+            for vehicle in disappeared_vehicles:
+
+                memory = (
+                    self.memory_manager
+                    .get_memory(
+                        vehicle.uuid
+                    )
+                )
+
+
+                if memory is not None:
+
+                    history_database.save_vehicle(
+                        vehicle,
+                        memory,
+                        source=source
+                    )
+
+
+            # Checkpoint périodique léger des
+            # véhicules encore actifs.
+
+            if (
+                frame_index
+                %
+                self.history_save_interval_frames
+                ==
+                0
+            ):
+
+                for vehicle in vehicles:
+
+                    memory = (
+                        self.memory_manager
+                        .get_memory(
+                            vehicle.uuid
+                        )
+                    )
+
+
+                    if memory is None:
+
+                        continue
+
+
+                    history_database.save_vehicle(
+                        vehicle,
+                        memory,
+                        source=source
+                    )
+
 
             # ====================================================
             # Intelligence / Alertes opérateur

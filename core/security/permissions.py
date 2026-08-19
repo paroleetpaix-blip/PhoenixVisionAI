@@ -1,0 +1,123 @@
+"""
+========================================================
+PHOENIX VISION AI
+
+Enterprise Permission System
+
+Phoenix Security Technologies
+SDK v0.6.0 Enterprise
+========================================================
+"""
+
+
+ROLE_PERMISSIONS = {
+
+    "ADMIN": {
+        "*"
+    },
+
+
+    "SUPERVISOR": {
+
+        "history.view",
+        "history.print",
+
+        "evidence.view",
+        "evidence.print",
+        "evidence.export_video",
+
+        "reports.view",
+        "reports.print",
+        "reports.export_pdf",
+
+    },
+
+
+    "ANALYST": {
+
+        "history.view",
+        "history.print",
+
+        "evidence.view",
+
+        "reports.view",
+        "reports.print",
+        "reports.export_pdf",
+
+    },
+
+
+    "OPERATOR": {
+
+        "history.view",
+
+        "evidence.view",
+
+    },
+
+}
+
+
+def normalize_role(
+    role
+):
+
+    return str(
+        role or ""
+    ).strip().upper()
+
+
+def permissions_for_role(
+    role
+):
+
+    role = normalize_role(
+        role
+    )
+
+    return set(
+        ROLE_PERMISSIONS.get(
+            role,
+            set()
+        )
+    )
+
+
+def has_permission(
+    role,
+    permission
+):
+
+    permissions = (
+        permissions_for_role(
+            role
+        )
+    )
+
+    return (
+        "*"
+        in permissions
+        or
+        permission
+        in permissions
+    )
+
+
+def session_has_permission(
+    session,
+    permission
+):
+
+    if not session:
+
+        return False
+
+    return has_permission(
+
+        session.get(
+            "role"
+        ),
+
+        permission
+
+    )
