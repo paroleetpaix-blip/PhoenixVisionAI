@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Carte opérationnelle — Phoenix Vision AI Enterprise
+    </title>
+
+    <link
+        rel="icon"
+        href="/static/images/favicon.png?v=1"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/theme.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/icons.css?v=4.1"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/cameras_console.css?v=4.2.3"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/enterprise_polish.css?v=4.4.2"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/map_console.css?v=4.6.4"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="camera-console map-console">
+
+
+    <aside class="console-sidebar">
+
+
+        <div class="console-brand">
+
+            <img
+                src="/static/images/logoS.png"
+                alt="Phoenix Vision AI"
+            >
+
+            <div>
+                <strong>PHOENIX</strong>
+                <span>VISION AI</span>
+            </div>
+
+        </div>
+
+
+        <div class="console-product">
+
+            <span class="product-status"></span>
+
+            <div>
+                <strong>ENTERPRISE</strong>
+                <span>Security Operations</span>
+            </div>
+
+        </div>
+
+
+        <nav class="console-navigation">
+
+
+            <div class="console-label">
+                SUPERVISION
+            </div>
+
+
+            <a
+                href="/enterprise"
+                class="console-nav-item"
+            >
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-dashboard"></use>
+                </svg>
+
+                <span>Tableau de bord</span>
+
+            </a>
+
+
+            <a
+                href="/cameras"
+                class="console-nav-item"
+            >
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-camera"></use>
+                </svg>
+
+                <span>Caméras</span>
+
+            </a>
+
+
+            <a
+                href="/events"
+                class="console-nav-item"
+            >
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-events"></use>
+                </svg>
+
+                <span>Événements</span>
+
+            </a>
+
+
+            <a
+                href="/alerts"
+                class="console-nav-item"
+            >
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-alert"></use>
+                </svg>
+
+                <span>Alertes IA</span>
+
+            </a>
+
+
+            <a
+                href="/history"
+                class="console-nav-item"
+            >
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-history"></use>
+                </svg>
+
+                <span>Historique</span>
+
+            </a>
+
+
+            <a
+                href="/map"
+                class="console-nav-item active"
+                aria-current="page"
+            >
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-map"></use>
+                </svg>
+
+                <span>Carte</span>
+
+            </a>
+
+
+            <a
+                href="/enterprise#anpr"
+                class="console-nav-item"
+            >
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-anpr"></use>
+                </svg>
+
+                <span>ANPR / Plaques</span>
+
+            </a>
+
+
+            <a
+                href="/enterprise#reports"
+                class="console-nav-item"
+            >
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-reports"></use>
+                </svg>
+
+                <span>Rapports</span>
+
+            </a>
+
+
+            <div class="console-label administration">
+                ADMINISTRATION
+            </div>
+
+
+            <a
+                href="/enterprise#settings"
+                class="console-nav-item"
+            >
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-settings"></use>
+                </svg>
+
+                <span>Paramètres</span>
+
+            </a>
+
+
+            <a
+                href="/admin/requests"
+                class="console-nav-item"
+            >
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-users"></use>
+                </svg>
+
+                <span>Utilisateurs</span>
+
+            </a>
+
+
+        </nav>
+
+
+    </aside>
+
+
+    <main class="map-main">
+
+
+        <header class="map-header">
+
+
+            <div>
+
+                <div class="map-kicker">
+                    PHOENIX OPERATIONAL INTELLIGENCE
+                </div>
+
+                <h1>
+                    CARTE OPÉRATIONNELLE
+                </h1>
+
+                <p>
+                    Supervision topologique des caméras,
+                    zones et données de localisation.
+                </p>
+
+            </div>
+
+
+            <div
+                id="map-mode"
+                class="map-mode-badge"
+            >
+                CHARGEMENT
+            </div>
+
+
+        </header>
+
+
+        <section class="map-stats">
+
+
+            <article class="map-stat">
+
+                <span>CAMÉRAS</span>
+
+                <strong id="map-total-cameras">
+                    0
+                </strong>
+
+            </article>
+
+
+            <article class="map-stat">
+
+                <span>EN LIGNE</span>
+
+                <strong id="map-online">
+                    0
+                </strong>
+
+            </article>
+
+
+            <article class="map-stat">
+
+                <span>ZONES VIDÉO</span>
+
+                <strong id="map-zones">
+                    0
+                </strong>
+
+            </article>
+
+
+            <article class="map-stat">
+
+                <span>GPS CONFIGURÉS</span>
+
+                <strong id="map-gps">
+                    0
+                </strong>
+
+            </article>
+
+
+            <article class="map-stat alert-stat">
+
+                <span>ALERTES OUVERTES</span>
+
+                <strong id="map-alerts">
+                    0
+                </strong>
+
+            </article>
+
+
+        </section>
+
+
+        <section class="map-layout">
+
+
+            <div class="map-stage-panel">
+
+
+                <div class="map-toolbar">
+
+
+                    <div>
+
+                        <strong>
+                            VUE DU SYSTÈME
+                        </strong>
+
+                        <span id="map-stage-subtitle">
+                            Données opérationnelles
+                        </span>
+
+                    </div>
+
+
+                    <div class="map-layer-controls">
+
+                        <button
+                            id="map-toggle-cameras"
+                            class="map-layer-button active"
+                            type="button"
+                        >
+                            CAMÉRAS
+                        </button>
+
+                        <button
+                            id="map-toggle-zones"
+                            class="map-layer-button active"
+                            type="button"
+                        >
+                            ZONES
+                        </button>
+
+                        <button
+                            id="map-geographic-button"
+                            class="map-layer-button"
+                            type="button"
+                            disabled
+                        >
+                            GPS
+                        </button>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="map-stage">
+
+
+                    <div class="map-grid-background"></div>
+
+
+                    <div
+                        class="topology-road topology-road-horizontal"
+                    ></div>
+
+                    <div
+                        class="topology-road topology-road-vertical"
+                    ></div>
+
+                    <div
+                        class="topology-road topology-road-diagonal-one"
+                    ></div>
+
+                    <div
+                        class="topology-road topology-road-diagonal-two"
+                    ></div>
+
+
+                    <div class="topology-center-zone">
+
+                        <span>
+                            ZONE_TEST
+                        </span>
+
+                        <small>
+                            ZONE VIDÉO
+                        </small>
+
+                    </div>
+
+
+                    <div
+                        id="map-camera-layer"
+                        class="map-camera-layer"
+                    ></div>
+
+
+                    <div
+                        id="map-empty"
+                        class="map-empty"
+                        hidden
+                    >
+                        AUCUNE CAMÉRA DISPONIBLE
+                    </div>
+
+
+                </div>
+
+
+                <div
+                    id="map-zone-layer"
+                    class="map-zone-layer"
+                >
+
+                    <div class="map-zone-header">
+
+                        <strong>
+                            ZONES VIDÉO
+                        </strong>
+
+                        <span>
+                            Coordonnées relatives aux images caméra
+                        </span>
+
+                    </div>
+
+                    <div id="map-zone-list"></div>
+
+                </div>
+
+
+                <div
+                    id="map-gps-notice"
+                    class="map-gps-notice"
+                >
+                    Vérification de la configuration géographique…
+                </div>
+
+
+            </div>
+
+
+            <aside class="map-detail-panel">
+
+
+                <div class="map-detail-kicker">
+                    CAMÉRA SÉLECTIONNÉE
+                </div>
+
+
+                <h2 id="map-detail-name">
+                    —
+                </h2>
+
+
+                <div
+                    id="map-detail-status"
+                    class="map-detail-status"
+                >
+                    AUCUNE SÉLECTION
+                </div>
+
+
+                <section class="map-detail-section">
+
+                    <h3>
+                        SOURCE
+                    </h3>
+
+                    <div class="map-detail-row">
+
+                        <span>Type</span>
+
+                        <strong id="map-detail-type">
+                            —
+                        </strong>
+
+                    </div>
+
+                    <div class="map-detail-row">
+
+                        <span>Origine</span>
+
+                        <strong id="map-detail-source">
+                            —
+                        </strong>
+
+                    </div>
+
+                </section>
+
+
+                <section class="map-detail-section">
+
+                    <h3>
+                        GÉOLOCALISATION
+                    </h3>
+
+                    <div class="map-detail-row">
+
+                        <span>Site</span>
+
+                        <strong id="map-detail-site">
+                            Non configuré
+                        </strong>
+
+                    </div>
+
+                    <div class="map-detail-row">
+
+                        <span>Emplacement</span>
+
+                        <strong id="map-detail-location">
+                            Non configuré
+                        </strong>
+
+                    </div>
+
+                    <div class="map-detail-row">
+
+                        <span>Ville</span>
+
+                        <strong id="map-detail-city">
+                            Non configurée
+                        </strong>
+
+                    </div>
+
+                    <div class="map-detail-row">
+
+                        <span>GPS</span>
+
+                        <strong id="map-detail-gps">
+                            Non configuré
+                        </strong>
+
+                    </div>
+
+                </section>
+
+
+                <section class="map-detail-section">
+
+                    <h3>
+                        COORDONNÉES
+                    </h3>
+
+                    <div class="map-detail-row">
+
+                        <span>Latitude</span>
+
+                        <strong id="map-detail-latitude">
+                            —
+                        </strong>
+
+                    </div>
+
+                    <div class="map-detail-row">
+
+                        <span>Longitude</span>
+
+                        <strong id="map-detail-longitude">
+                            —
+                        </strong>
+
+                    </div>
+
+                </section>
+
+
+                <div class="map-security-note">
+
+                    Phoenix n'affiche aucune position
+                    géographique qui n'a pas été
+                    explicitement configurée.
+
+                </div>
+
+
+            </aside>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+<script
+    src="/static/js/enterprise/navigation_state.js?v=4.4.2"
+></script>
+
+<script
+    src="/static/js/enterprise/map_console.js?v=4.6.4"
+></script>
+
+
+</body>
+
+</html>

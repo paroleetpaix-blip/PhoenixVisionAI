@@ -47,6 +47,65 @@ class Camera:
 
         self.reconnects = 0
 
+        # ==================================================
+        # LOCALISATION GÉOGRAPHIQUE
+        # ==================================================
+
+        self.site = None
+
+        self.location_name = None
+
+        self.address = None
+
+        self.city = None
+
+        self.latitude = None
+
+        self.longitude = None
+
+    def set_location(
+        self,
+        site=None,
+        location_name=None,
+        address=None,
+        city=None,
+        latitude=None,
+        longitude=None
+    ):
+
+        self.site = site
+        self.location_name = location_name
+        self.address = address
+        self.city = city
+
+        try:
+            self.latitude = (
+                float(latitude)
+                if latitude is not None
+                else None
+            )
+        except (TypeError, ValueError):
+            self.latitude = None
+
+        try:
+            self.longitude = (
+                float(longitude)
+                if longitude is not None
+                else None
+            )
+        except (TypeError, ValueError):
+            self.longitude = None
+
+
+    def has_geolocation(self):
+
+        return (
+            self.latitude is not None
+            and
+            self.longitude is not None
+        )
+
+
     def set_online(self):
 
         self.status = CameraStatus.ONLINE
@@ -85,6 +144,27 @@ class Camera:
 
             ),
 
-            "reconnects": self.reconnects
+            "reconnects": self.reconnects,
+
+            "site":
+                self.site,
+
+            "location_name":
+                self.location_name,
+
+            "address":
+                self.address,
+
+            "city":
+                self.city,
+
+            "latitude":
+                self.latitude,
+
+            "longitude":
+                self.longitude,
+
+            "gps_configured":
+                self.has_geolocation()
 
         }

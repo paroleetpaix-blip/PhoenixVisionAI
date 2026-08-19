@@ -1,0 +1,1198 @@
+/*
+========================================================
+PHOENIX VISION AI
+Enterprise Operational Map
+v4.6.2
+========================================================
+*/
+
+
+.map-console {
+    height: 100vh;
+    overflow: hidden;
+}
+
+
+.map-main {
+    flex: 1;
+    min-width: 0;
+    height: 100vh;
+
+    padding: 22px;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 55% 20%,
+            rgba(18, 64, 87, .16),
+            transparent 34%
+        ),
+        #071018;
+}
+
+
+.map-header {
+    min-height: 84px;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+
+.map-kicker {
+    color: #4e809b;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 1.8px;
+}
+
+
+.map-header h1 {
+    margin: 7px 0 4px;
+
+    color: #e4f0f6;
+
+    font-size: 21px;
+    font-weight: 650;
+
+    letter-spacing: .7px;
+}
+
+
+.map-header p {
+    margin: 0;
+
+    color: #819aa8;
+
+    font-size: 10px;
+}
+
+
+.map-mode-badge {
+    min-width: 116px;
+
+    padding: 9px 12px;
+
+    border:
+        1px solid rgba(59, 137, 177, .34);
+
+    border-radius: 4px;
+
+    background:
+        rgba(8, 34, 49, .74);
+
+    color: #9dc7dc;
+
+    text-align: center;
+
+    font-size: 8px;
+    font-weight: 800;
+
+    letter-spacing: 1.1px;
+}
+
+
+.map-stats {
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, minmax(100px, 1fr));
+
+    gap: 8px;
+
+    margin-bottom: 12px;
+}
+
+
+.map-stat {
+    min-height: 60px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding: 10px 13px;
+
+    border:
+        1px solid rgba(58, 92, 110, .26);
+
+    border-radius: 4px;
+
+    background:
+        rgba(8, 24, 34, .76);
+}
+
+
+.map-stat span {
+    color: #718996;
+
+    font-size: 7px;
+    font-weight: 700;
+
+    letter-spacing: .9px;
+}
+
+
+.map-stat strong {
+    margin-top: 5px;
+
+    color: #d4e6ef;
+
+    font-size: 18px;
+    font-weight: 650;
+}
+
+
+.map-stat.alert-stat strong {
+    color: #d7b775;
+}
+
+
+.map-layout {
+    height:
+        calc(
+            100vh - 190px
+        );
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        300px;
+
+    gap: 12px;
+}
+
+
+.map-stage-panel {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    border:
+        1px solid rgba(54, 91, 111, .28);
+
+    border-radius: 5px;
+
+    overflow: hidden;
+
+    background:
+        rgba(6, 18, 27, .90);
+}
+
+
+.map-toolbar {
+    min-height: 51px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 16px;
+
+    padding:
+        8px 12px;
+
+    border-bottom:
+        1px solid rgba(54, 91, 111, .24);
+}
+
+
+.map-toolbar strong {
+    display: block;
+
+    color: #c4d8e3;
+
+    font-size: 9px;
+
+    letter-spacing: .8px;
+}
+
+
+.map-toolbar span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #607987;
+
+    font-size: 8px;
+}
+
+
+.map-layer-controls {
+    display: flex;
+
+    gap: 5px;
+}
+
+
+.map-layer-button {
+    min-height: 28px;
+
+    padding:
+        0 11px;
+
+    border:
+        1px solid rgba(61, 100, 120, .30);
+
+    border-radius: 3px;
+
+    background:
+        rgba(8, 29, 41, .72);
+
+    color: #667f8c;
+
+    font-size: 7px;
+    font-weight: 700;
+
+    letter-spacing: .65px;
+
+    cursor: pointer;
+}
+
+
+.map-layer-button.active {
+    border-color:
+        rgba(43, 137, 188, .50);
+
+    color: #cce7f5;
+
+    background:
+        rgba(11, 70, 100, .38);
+}
+
+
+.map-layer-button:disabled {
+    opacity: .45;
+
+    cursor: not-allowed;
+}
+
+
+.map-stage {
+    position: relative;
+
+    flex: 1;
+
+    min-height: 220px;
+
+    overflow: auto;
+}
+
+
+.map-grid-background {
+    position: absolute;
+
+    inset: 0;
+
+    opacity: .23;
+
+    background-image:
+        linear-gradient(
+            rgba(55, 94, 114, .25) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(55, 94, 114, .25) 1px,
+            transparent 1px
+        );
+
+    background-size:
+        32px 32px;
+
+    pointer-events: none;
+}
+
+
+.map-camera-layer {
+    position: relative;
+    z-index: 2;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(120px, 1fr));
+
+    gap: 18px;
+
+    padding:
+        30px;
+}
+
+
+.map-camera-node {
+    position: relative;
+
+    min-height: 86px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding:
+        13px;
+
+    border:
+        1px solid rgba(55, 99, 121, .34);
+
+    border-radius: 5px;
+
+    background:
+        rgba(8, 26, 37, .90);
+
+    color: #adc3cf;
+
+    text-align: left;
+
+    cursor: pointer;
+}
+
+
+.map-camera-node:hover,
+.map-camera-node.selected {
+    border-color:
+        rgba(42, 148, 207, .65);
+
+    background:
+        rgba(11, 47, 65, .94);
+}
+
+
+.map-camera-node-head {
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+}
+
+
+.map-camera-status-dot {
+    width: 7px;
+    height: 7px;
+
+    flex: 0 0 7px;
+
+    border-radius: 50%;
+
+    background: #697983;
+}
+
+
+.map-camera-status-dot.online {
+    background: #62b592;
+
+    box-shadow:
+        0 0 8px
+        rgba(98, 181, 146, .42);
+}
+
+
+.map-camera-status-dot.connecting {
+    background: #c59b5e;
+}
+
+
+.map-camera-node strong {
+    color: #e0edf3;
+
+    font-size: 11px;
+
+    letter-spacing: .6px;
+}
+
+
+.map-camera-node small {
+    margin-top: 10px;
+
+    color: #66808e;
+
+    font-size: 8px;
+
+    letter-spacing: .4px;
+}
+
+
+.map-camera-gps {
+    margin-top: 5px;
+
+    color: #526d7b;
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+    letter-spacing: .5px;
+}
+
+
+.map-camera-gps.configured {
+    color: #77bca0;
+}
+
+
+.map-zone-layer {
+    min-height: 92px;
+
+    padding:
+        10px 12px;
+
+    border-top:
+        1px solid rgba(54, 91, 111, .24);
+
+    background:
+        rgba(5, 15, 22, .82);
+}
+
+
+.map-zone-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 8px;
+}
+
+
+.map-zone-header strong {
+    color: #9eb6c3;
+
+    font-size: 8px;
+
+    letter-spacing: .75px;
+}
+
+
+.map-zone-header span {
+    color: #536b78;
+
+    font-size: 7px;
+}
+
+
+#map-zone-list {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+}
+
+
+.map-zone-item {
+    padding:
+        7px 10px;
+
+    border:
+        1px solid rgba(57, 105, 129, .28);
+
+    border-radius: 3px;
+
+    background:
+        rgba(8, 30, 42, .62);
+}
+
+
+.map-zone-item strong {
+    display: block;
+
+    color: #b8cfdb;
+
+    font-size: 8px;
+}
+
+
+.map-zone-item span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #647e8c;
+
+    font-size: 7px;
+}
+
+
+.map-gps-notice {
+    min-height: 29px;
+
+    display: flex;
+    align-items: center;
+
+    padding:
+        0 12px;
+
+    border-top:
+        1px solid rgba(54, 91, 111, .20);
+
+    background:
+        rgba(7, 22, 31, .92);
+
+    color: #78909d;
+
+    font-size: 7px;
+    font-weight: 700;
+
+    letter-spacing: .55px;
+}
+
+
+.map-detail-panel {
+    min-width: 0;
+
+    padding: 15px;
+
+    overflow-y: auto;
+
+    border:
+        1px solid rgba(54, 91, 111, .28);
+
+    border-radius: 5px;
+
+    background:
+        rgba(6, 18, 27, .92);
+}
+
+
+.map-detail-kicker {
+    color: #567b8e;
+
+    font-size: 7px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+
+.map-detail-panel h2 {
+    margin:
+        7px 0 7px;
+
+    color: #e0edf3;
+
+    font-size: 18px;
+}
+
+
+.map-detail-status {
+    display: inline-flex;
+
+    padding:
+        5px 8px;
+
+    border:
+        1px solid rgba(75, 103, 117, .28);
+
+    border-radius: 3px;
+
+    color: #718895;
+
+    font-size: 7px;
+    font-weight: 700;
+
+    letter-spacing: .7px;
+}
+
+
+.map-detail-status.online {
+    color: #79bda0;
+
+    border-color:
+        rgba(87, 165, 131, .34);
+}
+
+
+.map-detail-status.connecting {
+    color: #c2a16c;
+
+    border-color:
+        rgba(188, 148, 84, .34);
+}
+
+
+.map-detail-section {
+    margin-top: 18px;
+}
+
+
+.map-detail-section h3 {
+    margin:
+        0 0 7px;
+
+    padding-bottom: 6px;
+
+    border-bottom:
+        1px solid rgba(61, 91, 107, .22);
+
+    color: #718d9b;
+
+    font-size: 7px;
+
+    letter-spacing: .8px;
+}
+
+
+.map-detail-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding:
+        7px 0;
+}
+
+
+.map-detail-row span {
+    color: #647c89;
+
+    font-size: 8px;
+}
+
+
+.map-detail-row strong {
+    max-width: 165px;
+
+    color: #b8cbd5;
+
+    font-size: 8px;
+    font-weight: 600;
+
+    text-align: right;
+
+    overflow-wrap: anywhere;
+}
+
+
+.map-security-note {
+    margin-top: 20px;
+
+    padding: 10px;
+
+    border:
+        1px solid rgba(54, 98, 121, .22);
+
+    border-radius: 4px;
+
+    background:
+        rgba(8, 29, 40, .52);
+
+    color: #657e8b;
+
+    font-size: 7px;
+
+    line-height: 1.6;
+}
+
+
+.map-empty {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 5;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #607984;
+
+    font-size: 9px;
+
+    letter-spacing: 1px;
+}
+
+
+.layer-hidden {
+    display: none !important;
+}
+
+
+@media (
+    max-width: 1100px
+) {
+
+    .map-layout {
+        grid-template-columns:
+            minmax(0, 1fr)
+            260px;
+    }
+
+
+    .map-camera-layer {
+        grid-template-columns:
+            repeat(2, minmax(120px, 1fr));
+    }
+
+}
+
+
+@media (
+    max-width: 850px
+) {
+
+    .map-main {
+        overflow-y: auto;
+    }
+
+
+    .map-stats {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    .map-layout {
+        height: auto;
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .map-stage-panel {
+        min-height: 620px;
+    }
+
+
+    .map-detail-panel {
+        min-height: 350px;
+    }
+
+}
+
+
+/*
+========================================================
+PHOENIX MAP READABILITY v4.6.3
+========================================================
+*/
+
+
+.map-kicker {
+    font-size: 11px;
+}
+
+
+.map-header h1 {
+    font-size: 24px;
+}
+
+
+.map-header p {
+    font-size: 12px;
+}
+
+
+.map-mode-badge {
+    font-size: 10px;
+}
+
+
+.map-stat span {
+    font-size: 9px;
+}
+
+
+.map-stat strong {
+    font-size: 21px;
+}
+
+
+.map-toolbar strong {
+    font-size: 11px;
+}
+
+
+.map-toolbar span {
+    font-size: 10px;
+}
+
+
+.map-layer-button {
+    min-height: 32px;
+
+    font-size: 9px;
+}
+
+
+.map-detail-kicker {
+    font-size: 9px;
+}
+
+
+.map-detail-panel h2 {
+    font-size: 21px;
+}
+
+
+.map-detail-status {
+    font-size: 9px;
+}
+
+
+.map-detail-section h3 {
+    font-size: 9px;
+}
+
+
+.map-detail-row {
+    padding:
+        9px 0;
+}
+
+
+.map-detail-row span {
+    font-size: 10px;
+}
+
+
+.map-detail-row strong {
+    font-size: 10px;
+}
+
+
+.map-security-note {
+    font-size: 9px;
+}
+
+
+.map-zone-header strong {
+    font-size: 10px;
+}
+
+
+.map-zone-header span {
+    font-size: 9px;
+}
+
+
+.map-zone-item strong {
+    font-size: 10px;
+}
+
+
+.map-zone-item span {
+    font-size: 9px;
+}
+
+
+.map-gps-notice {
+    min-height: 34px;
+
+    font-size: 9px;
+}
+
+
+/*
+========================================================
+PHOENIX TOPOLOGICAL MAP v4.6.3
+========================================================
+*/
+
+
+.map-stage {
+    min-height: 390px;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(17, 62, 82, .15),
+            transparent 58%
+        ),
+        #07141d;
+}
+
+
+.map-camera-layer {
+    position: absolute;
+
+    inset: 0;
+
+    display: block;
+
+    padding: 0;
+
+    z-index: 4;
+}
+
+
+/*
+Positions topologiques.
+Ce ne sont PAS des coordonnées GPS.
+*/
+
+.map-camera-node {
+    position: absolute;
+
+    width: 112px;
+    min-height: 54px;
+
+    padding:
+        8px 10px;
+
+    border:
+        1px solid rgba(56, 123, 159, .42);
+
+    border-radius: 5px;
+
+    background:
+        rgba(6, 28, 40, .94);
+
+    box-shadow:
+        0 5px 15px
+        rgba(0, 0, 0, .22);
+
+    transform:
+        translate(
+            -50%,
+            -50%
+        );
+}
+
+
+.map-camera-node:nth-child(1) {
+    left: 18%;
+    top: 22%;
+}
+
+
+.map-camera-node:nth-child(2) {
+    left: 50%;
+    top: 16%;
+}
+
+
+.map-camera-node:nth-child(3) {
+    left: 82%;
+    top: 22%;
+}
+
+
+.map-camera-node:nth-child(4) {
+    left: 12%;
+    top: 52%;
+}
+
+
+.map-camera-node:nth-child(5) {
+    left: 50%;
+    top: 48%;
+}
+
+
+.map-camera-node:nth-child(6) {
+    left: 88%;
+    top: 52%;
+}
+
+
+.map-camera-node:nth-child(7) {
+    left: 22%;
+    top: 80%;
+}
+
+
+.map-camera-node:nth-child(8) {
+    left: 50%;
+    top: 84%;
+}
+
+
+.map-camera-node:nth-child(9) {
+    left: 78%;
+    top: 80%;
+}
+
+
+.map-camera-node strong {
+    font-size: 11px;
+}
+
+
+.map-camera-node small {
+    margin-top: 5px;
+
+    font-size: 8px;
+}
+
+
+.map-camera-gps {
+    margin-top: 4px;
+
+    font-size: 8px;
+}
+
+
+.map-camera-node.selected {
+    border-color:
+        rgba(50, 171, 232, .92);
+
+    background:
+        rgba(10, 58, 82, .96);
+
+    box-shadow:
+        0 0 0 1px
+        rgba(50, 171, 232, .14),
+        0 0 18px
+        rgba(33, 141, 197, .20);
+}
+
+
+.topology-road {
+    position: absolute;
+
+    z-index: 1;
+
+    background:
+        rgba(54, 97, 118, .18);
+
+    border:
+        1px solid rgba(75, 121, 143, .12);
+
+    pointer-events: none;
+}
+
+
+.topology-road-horizontal {
+    left: 7%;
+    right: 7%;
+
+    top: 50%;
+
+    height: 22px;
+
+    transform:
+        translateY(-50%);
+}
+
+
+.topology-road-vertical {
+    top: 8%;
+    bottom: 8%;
+
+    left: 50%;
+
+    width: 22px;
+
+    transform:
+        translateX(-50%);
+}
+
+
+.topology-road-diagonal-one {
+    width: 70%;
+    height: 14px;
+
+    left: 15%;
+    top: 42%;
+
+    transform:
+        rotate(22deg);
+}
+
+
+.topology-road-diagonal-two {
+    width: 70%;
+    height: 14px;
+
+    left: 15%;
+    top: 56%;
+
+    transform:
+        rotate(-22deg);
+}
+
+
+.topology-center-zone {
+    position: absolute;
+
+    z-index: 3;
+
+    left: 50%;
+    top: 50%;
+
+    width: 160px;
+    height: 88px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    transform:
+        translate(
+            -50%,
+            -50%
+        );
+
+    border:
+        1px dashed
+        rgba(50, 156, 208, .48);
+
+    background:
+        rgba(9, 53, 73, .40);
+
+    pointer-events: none;
+}
+
+
+.topology-center-zone span {
+    color: #b7dbea;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: .8px;
+}
+
+
+.topology-center-zone small {
+    margin-top: 5px;
+
+    color: #638697;
+
+    font-size: 8px;
+
+    letter-spacing: .7px;
+}
+
+
+.map-empty[hidden] {
+    display: none !important;
+}
+
+
+@keyframes phoenix-map-selection {
+
+    from {
+        background:
+            rgba(19, 92, 126, .20);
+    }
+
+    to {
+        background:
+            transparent;
+    }
+
+}
+
+
+.map-detail-panel.selection-changed {
+    animation:
+        phoenix-map-selection
+        .45s ease-out;
+}
