@@ -18,6 +18,15 @@ ROLE_PERMISSIONS = {
 
 
     "SUPERVISOR": {
+        "watchlist.match",
+        "watchlist.view",
+        "watchlist.propose",
+        "watchlist.approve_local",
+
+
+        "anpr.view",
+        "anpr.search",
+
 
         "history.view",
         "history.print",
@@ -34,6 +43,14 @@ ROLE_PERMISSIONS = {
 
 
     "ANALYST": {
+        "watchlist.match",
+        "watchlist.view",
+        "watchlist.propose",
+
+
+        "anpr.view",
+        "anpr.search",
+
 
         "history.view",
         "history.print",
@@ -48,6 +65,12 @@ ROLE_PERMISSIONS = {
 
 
     "OPERATOR": {
+        "watchlist.match",
+
+
+        "anpr.view",
+        "anpr.search",
+
 
         "history.view",
 

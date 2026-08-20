@@ -25,6 +25,10 @@ class HistoryDatabase:
         "tracker_id",
         "label",
         "plate",
+        "plate_raw",
+        "plate_confidence",
+        "plate_status",
+        "plate_last_seen",
         "color",
         "brand",
         "model",
@@ -93,6 +97,10 @@ class HistoryDatabase:
                     tracker_id INTEGER,
                     label TEXT,
                     plate TEXT,
+                    plate_raw TEXT,
+                    plate_confidence REAL DEFAULT 0,
+                    plate_status TEXT,
+                    plate_last_seen TEXT,
                     color TEXT,
                     brand TEXT,
                     model TEXT,
@@ -122,6 +130,8 @@ class HistoryDatabase:
 
         self.migrate_schema()
 
+        self.create_anpr_indexes()
+
 
     def migrate_schema(
         self
@@ -133,6 +143,10 @@ class HistoryDatabase:
             "tracker_id": "INTEGER",
             "label": "TEXT",
             "plate": "TEXT",
+            "plate_raw": "TEXT",
+            "plate_confidence": "REAL DEFAULT 0",
+            "plate_status": "TEXT",
+            "plate_last_seen": "TEXT",
             "color": "TEXT",
             "brand": "TEXT",
             "model": "TEXT",
@@ -447,6 +461,43 @@ class HistoryDatabase:
         return True
 
 
+    def create_anpr_indexes(
+        self
+    ):
+
+        """
+        Index utilisés par les recherches LAPI.
+        """
+
+        with self.lock:
+
+            self.connection.execute(
+                """
+                CREATE INDEX IF NOT EXISTS
+                idx_vehicle_history_plate
+                ON vehicle_history(plate)
+                """
+            )
+
+            self.connection.execute(
+                """
+                CREATE INDEX IF NOT EXISTS
+                idx_vehicle_history_plate_status
+                ON vehicle_history(plate_status)
+                """
+            )
+
+            self.connection.execute(
+                """
+                CREATE INDEX IF NOT EXISTS
+                idx_vehicle_history_plate_last_seen
+                ON vehicle_history(plate_last_seen)
+                """
+            )
+
+            self.connection.commit()
+
+
     def save_vehicle(
         self,
         vehicle,
@@ -513,6 +564,10 @@ class HistoryDatabase:
                     tracker_id,
                     label,
                     plate,
+                    plate_raw,
+                    plate_confidence,
+                    plate_status,
+                    plate_last_seen,
                     color,
                     brand,
                     model,
@@ -538,7 +593,7 @@ class HistoryDatabase:
                 VALUES(
                     ?,?,?,?,?,?,?,?,?,?,
                     ?,?,?,?,?,?,?,?,?,?,
-                    ?,?,?
+                    ?,?,?,?,?,?,?
                 )
                 """,
 
@@ -548,6 +603,40 @@ class HistoryDatabase:
                     vehicle.tracker_id,
                     vehicle.label,
                     vehicle.plate,
+
+                    getattr(
+                        vehicle,
+                        "plate_raw",
+                        None
+                    ),
+
+                    getattr(
+                        vehicle,
+                        "plate_confidence",
+                        0.0
+                    ),
+
+                    getattr(
+                        vehicle,
+                        "plate_status",
+                        None
+                    ),
+
+                    (
+                        str(
+                            getattr(
+                                vehicle,
+                                "plate_last_seen"
+                            )
+                        )
+                        if getattr(
+                            vehicle,
+                            "plate_last_seen",
+                            None
+                        ) is not None
+                        else None
+                    ),
+
                     vehicle.color,
                     vehicle.brand,
                     vehicle.model,
@@ -683,6 +772,103 @@ class HistoryDatabase:
             if row
             else 0
         )
+
+
+    def anpr_stats(
+        self
+    ):
+
+        with self.lock:
+
+            row = self.connection.execute(
+                """
+                SELECT
+
+                    SUM(
+                        CASE
+                            WHEN plate IS NOT NULL
+                             AND TRIM(plate) != ''
+                            THEN 1
+                            ELSE 0
+                        END
+                    ) AS plates_detected,
+
+                    SUM(
+                        CASE
+                            WHEN UPPER(
+                                COALESCE(
+                                    plate_status,
+                                    ''
+                                )
+                            ) = 'VALIDATED'
+                            THEN 1
+                            ELSE 0
+                        END
+                    ) AS validated,
+
+                    SUM(
+                        CASE
+                            WHEN UPPER(
+                                COALESCE(
+                                    plate_status,
+                                    ''
+                                )
+                            )
+                            IN (
+                                'LOW_CONFIDENCE',
+                                'INVALID_TEXT'
+                            )
+                            THEN 1
+                            ELSE 0
+                        END
+                    ) AS to_review,
+
+                    AVG(
+                        CASE
+                            WHEN COALESCE(
+                                plate_confidence,
+                                0
+                            ) > 0
+                            THEN plate_confidence
+                            ELSE NULL
+                        END
+                    ) AS average_confidence
+
+                FROM vehicle_history
+                """
+            ).fetchone()
+
+
+        return {
+
+            "plates_detected":
+                int(
+                    row["plates_detected"]
+                    or 0
+                ),
+
+            "validated":
+                int(
+                    row["validated"]
+                    or 0
+                ),
+
+            "to_review":
+                int(
+                    row["to_review"]
+                    or 0
+                ),
+
+            "average_confidence":
+                round(
+                    float(
+                        row["average_confidence"]
+                        or 0.0
+                    ),
+                    1
+                )
+
+        }
 
 
     def threats_total(
@@ -842,6 +1028,84 @@ class HistoryDatabase:
         ]
 
 
+    def anpr_recent(
+        self,
+        limit=250
+    ):
+
+        limit = max(
+            1,
+            min(
+                int(limit),
+                1000
+            )
+        )
+
+
+        with self.lock:
+
+            rows = self.connection.execute(
+                """
+                SELECT *
+                FROM vehicle_history
+
+                WHERE
+
+                    (
+                        plate IS NOT NULL
+                        AND
+                        TRIM(plate) != ''
+                    )
+
+                    OR
+
+                    (
+                        plate_raw IS NOT NULL
+                        AND
+                        TRIM(plate_raw) != ''
+                    )
+
+                    OR
+
+                    (
+                        plate_status IS NOT NULL
+                        AND
+                        TRIM(plate_status) != ''
+                        AND
+                        UPPER(plate_status)
+                        !=
+                        'NOT_DETECTED'
+                    )
+
+                ORDER BY
+
+                    COALESCE(
+                        plate_last_seen,
+                        last_seen,
+                        created_at
+                    )
+
+                DESC
+
+                LIMIT ?
+                """,
+                (
+                    limit,
+                )
+            ).fetchall()
+
+
+        return [
+
+            self.row_to_dict(
+                row
+            )
+
+            for row in rows
+
+        ]
+
+
     def find_by_uuid(
         self,
         uuid
@@ -859,6 +1123,386 @@ class HistoryDatabase:
                     uuid,
                 )
             ).fetchone()
+
+
+    def plate_forensic(
+        self,
+        plate,
+        limit=1000
+    ):
+
+        normalized_plate = str(
+            plate or ""
+        ).strip().upper()
+
+
+        if not normalized_plate:
+
+            return {
+
+                "plate":
+                    None,
+
+                "occurrences":
+                    0,
+
+                "first_detection":
+                    None,
+
+                "last_detection":
+                    None,
+
+                "max_confidence":
+                    0.0,
+
+                "validated":
+                    0,
+
+                "to_review":
+                    0,
+
+                "cameras":
+                    [],
+
+                "zones":
+                    [],
+
+                "records":
+                    []
+
+            }
+
+
+        limit = max(
+            1,
+            min(
+                int(limit),
+                5000
+            )
+        )
+
+
+        with self.lock:
+
+            rows = self.connection.execute(
+                """
+                SELECT *
+                FROM vehicle_history
+
+                WHERE UPPER(
+                    TRIM(
+                        COALESCE(
+                            plate,
+                            ''
+                        )
+                    )
+                ) = ?
+
+                ORDER BY
+
+                    COALESCE(
+                        plate_last_seen,
+                        last_seen,
+                        created_at
+                    )
+
+                DESC
+
+                LIMIT ?
+                """,
+                (
+                    normalized_plate,
+                    limit
+                )
+            ).fetchall()
+
+
+        records = [
+
+            self.row_to_dict(
+                row
+            )
+
+            for row in rows
+
+        ]
+
+
+        if not records:
+
+            return {
+
+                "plate":
+                    normalized_plate,
+
+                "occurrences":
+                    0,
+
+                "first_detection":
+                    None,
+
+                "last_detection":
+                    None,
+
+                "max_confidence":
+                    0.0,
+
+                "validated":
+                    0,
+
+                "to_review":
+                    0,
+
+                "cameras":
+                    [],
+
+                "zones":
+                    [],
+
+                "records":
+                    []
+
+            }
+
+
+        first_candidates = [
+
+            str(
+                record.get(
+                    "first_seen"
+                )
+            )
+
+            for record in records
+
+            if record.get(
+                "first_seen"
+            )
+
+        ]
+
+
+        last_candidates = [
+
+            str(
+                record.get(
+                    "plate_last_seen"
+                )
+                or
+                record.get(
+                    "last_seen"
+                )
+                or
+                record.get(
+                    "created_at"
+                )
+            )
+
+            for record in records
+
+            if (
+                record.get(
+                    "plate_last_seen"
+                )
+                or
+                record.get(
+                    "last_seen"
+                )
+                or
+                record.get(
+                    "created_at"
+                )
+            )
+
+        ]
+
+
+        confidences = []
+
+
+        for record in records:
+
+            try:
+
+                value = float(
+                    record.get(
+                        "plate_confidence"
+                    )
+                    or 0
+                )
+
+            except (
+                TypeError,
+                ValueError
+            ):
+
+                value = 0.0
+
+
+            if value > 0:
+
+                confidences.append(
+                    value
+                )
+
+
+        cameras = []
+
+        zones = []
+
+
+        def append_unique(
+            target,
+            value
+        ):
+
+            if (
+                value is None
+                or
+                str(value).strip() == ""
+            ):
+
+                return
+
+
+            value = str(
+                value
+            )
+
+
+            if value not in target:
+
+                target.append(
+                    value
+                )
+
+
+        validated = 0
+
+        to_review = 0
+
+
+        for record in records:
+
+            append_unique(
+                cameras,
+                record.get(
+                    "last_camera"
+                )
+            )
+
+
+            for camera in (
+                record.get(
+                    "cameras_seen"
+                )
+                or
+                []
+            ):
+
+                append_unique(
+                    cameras,
+                    camera
+                )
+
+
+            append_unique(
+                zones,
+                record.get(
+                    "zone"
+                )
+            )
+
+
+            for zone in (
+                record.get(
+                    "zones_history"
+                )
+                or
+                []
+            ):
+
+                append_unique(
+                    zones,
+                    zone
+                )
+
+
+            status = str(
+                record.get(
+                    "plate_status"
+                )
+                or ""
+            ).upper()
+
+
+            if status == "VALIDATED":
+
+                validated += 1
+
+
+            if status in {
+                "LOW_CONFIDENCE",
+                "INVALID_TEXT"
+            }:
+
+                to_review += 1
+
+
+        return {
+
+            "plate":
+                normalized_plate,
+
+            "occurrences":
+                len(
+                    records
+                ),
+
+            "first_detection":
+                (
+                    min(
+                        first_candidates
+                    )
+                    if first_candidates
+                    else None
+                ),
+
+            "last_detection":
+                (
+                    max(
+                        last_candidates
+                    )
+                    if last_candidates
+                    else None
+                ),
+
+            "max_confidence":
+                round(
+                    max(
+                        confidences
+                    )
+                    if confidences
+                    else 0.0,
+                    1
+                ),
+
+            "validated":
+                validated,
+
+            "to_review":
+                to_review,
+
+            "cameras":
+                cameras,
+
+            "zones":
+                zones,
+
+            "records":
+                records
+
+        }
 
 
     def find_by_plate(

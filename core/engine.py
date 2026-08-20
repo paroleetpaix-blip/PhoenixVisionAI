@@ -52,6 +52,10 @@ from core.streaming.stream_service import StreamService
 from core.events.event_manager import event_manager
 from core.database.history_database import history_database
 
+from core.watchlist.watchlist_database import (
+    watchlist_database
+)
+
 
 from core.intelligence.intelligence_center import intelligence_center
 
@@ -633,6 +637,178 @@ class PhoenixEngine:
                         vehicle,
                         memory,
                         source=source
+                    )
+
+
+            # ====================================================
+            # LAPI / Liste de surveillance locale
+            # ====================================================
+
+            for vehicle in vehicles:
+
+                plate = getattr(
+                    vehicle,
+                    "plate",
+                    None
+                )
+
+
+                plate_status = str(
+                    getattr(
+                        vehicle,
+                        "plate_status",
+                        "NOT_DETECTED"
+                    )
+                ).upper()
+
+
+                if (
+                    not plate
+                    or
+                    plate_status != "VALIDATED"
+                ):
+
+                    continue
+
+
+                try:
+
+                    plate_confidence = float(
+                        getattr(
+                            vehicle,
+                            "plate_confidence",
+                            0.0
+                        )
+                        or 0.0
+                    )
+
+                except (
+                    TypeError,
+                    ValueError
+                ):
+
+                    plate_confidence = 0.0
+
+
+                # Une lecture incertaine ne peut jamais
+                # déclencher automatiquement une alerte
+                # de surveillance.
+
+                if (
+                    plate_confidence
+                    <
+                    self.anpr_validation_confidence
+                ):
+
+                    continue
+
+
+                frames_seen = int(
+                    getattr(
+                        vehicle,
+                        "frames_seen",
+                        0
+                    )
+                    or 0
+                )
+
+
+                # Réduire les requêtes SQLite :
+                # vérification selon l'intervalle LAPI.
+
+                if (
+                    frames_seen
+                    %
+                    self.anpr_interval_frames
+                    !=
+                    0
+                ):
+
+                    continue
+
+
+                matches = (
+                    watchlist_database
+                    .active_by_plate(
+                        plate
+                    )
+                )
+
+
+                for entry in matches:
+
+                    watchlist_alert = (
+                        intelligence_center
+                        .create_watchlist_match(
+
+                            vehicle,
+
+                            entry,
+
+                            plate_confidence
+
+                        )
+                    )
+
+
+                    if watchlist_alert is None:
+
+                        continue
+
+
+                    alert_event = (
+                        event_manager.create(
+
+                            "WATCHLIST_MATCH",
+
+                            vehicle,
+
+                            watchlist_alert.message
+
+                        )
+                    )
+
+
+                    if (
+                        watchlist_alert.level
+                        ==
+                        "CRITICAL"
+                    ):
+
+                        alert_event.critical()
+
+                    else:
+
+                        alert_event.warning()
+
+
+                    watchlist_database.add_audit(
+
+                        entry["uuid"],
+
+                        "MATCH_DETECTED",
+
+                        "SYSTEM",
+
+                        "SYSTEM",
+
+                        (
+                            f"Plaque={plate}; "
+                            f"Confiance={plate_confidence:.1f}; "
+                            f"Caméra={getattr(camera, 'name', None)}; "
+                            f"Zone={getattr(vehicle, 'zone', None)}; "
+                            f"VehicleUUID={getattr(vehicle, 'uuid', None)}"
+                        )
+
+                    )
+
+
+                    print(
+
+                        "[PHOENIX SURVEILLANCE]",
+
+                        watchlist_alert.to_dict()
+
                     )
 
 

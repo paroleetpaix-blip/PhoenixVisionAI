@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Plaques / LAPI — Phoenix Vision AI Enterprise
+    </title>
+
+    <link
+        rel="icon"
+        href="/static/images/favicon.png?v=1"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/theme.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/icons.css?v=4.1"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/cameras_console.css?v=4.2.3"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/enterprise_polish.css?v=4.4.2"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/phoenix_design_system.css?v=1.0"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/plates_console.css?v=4.7.12"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="camera-console phoenix-premium plates-console">
+
+
+    <aside class="console-sidebar">
+
+
+        <div class="console-brand">
+
+            <img
+                src="/static/images/logoS.png"
+                alt="Phoenix Vision AI"
+            >
+
+            <div>
+                <strong>PHOENIX</strong>
+                <span>VISION AI</span>
+            </div>
+
+        </div>
+
+
+        <div class="console-product">
+
+            <span class="product-status"></span>
+
+            <div>
+                <strong>ENTERPRISE</strong>
+                <span>Opérations de sécurité</span>
+            </div>
+
+        </div>
+
+
+        <nav class="console-navigation">
+
+
+            <div class="console-label">
+                SUPERVISION
+            </div>
+
+
+            <a href="/enterprise" class="console-nav-item">
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-dashboard"></use>
+                </svg>
+
+                <span>Tableau de bord</span>
+
+            </a>
+
+
+            <a href="/cameras" class="console-nav-item">
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-camera"></use>
+                </svg>
+
+                <span>Caméras</span>
+
+            </a>
+
+
+            <a href="/events" class="console-nav-item">
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-events"></use>
+                </svg>
+
+                <span>Événements</span>
+
+            </a>
+
+
+            <a href="/alerts" class="console-nav-item">
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-alert"></use>
+                </svg>
+
+                <span>Alertes IA</span>
+
+            </a>
+
+
+            <a href="/history" class="console-nav-item">
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-history"></use>
+                </svg>
+
+                <span>Historique</span>
+
+            </a>
+
+
+            <a href="/map" class="console-nav-item">
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-map"></use>
+                </svg>
+
+                <span>Carte</span>
+
+            </a>
+
+
+            <a
+                href="/plaques"
+                class="console-nav-item active"
+                aria-current="page"
+            >
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-anpr"></use>
+                </svg>
+
+                <span>Plaques / LAPI</span>
+
+            </a>
+
+
+            <a
+                href="/enterprise#reports"
+                class="console-nav-item"
+            >
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-reports"></use>
+                </svg>
+
+                <span>Rapports</span>
+
+            </a>
+
+
+            <div class="console-label administration">
+                ADMINISTRATION
+            </div>
+
+
+            <a
+                href="/enterprise#settings"
+                class="console-nav-item"
+            >
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-settings"></use>
+                </svg>
+
+                <span>Paramètres</span>
+
+            </a>
+
+
+            <a
+                href="/admin/requests"
+                class="console-nav-item"
+            >
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-users"></use>
+                </svg>
+
+                <span>Utilisateurs</span>
+
+            </a>
+
+
+        </nav>
+
+
+    </aside>
+
+
+    <main class="plates-main">
+
+
+        <header class="plates-header">
+
+
+            <div>
+
+                <div class="phx-page-kicker">
+                    PHOENIX · IDENTIFICATION VÉHICULE
+                </div>
+
+                <h1 class="phx-page-title">
+                    PLAQUES / LAPI
+                </h1>
+
+                <p class="phx-page-description">
+                    Lecture automatisée,
+                    recherche et analyse des plaques
+                    d'immatriculation.
+                </p>
+
+            </div>
+
+
+            <div
+                id="lapi-engine-status"
+                class="plates-engine-status"
+            >
+
+                <span class="engine-dot"></span>
+
+                <div>
+
+                    <small>
+                        MOTEUR LAPI
+                    </small>
+
+                    <strong>
+                        VÉRIFICATION
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+        </header>
+
+
+        <section class="plates-kpis">
+
+
+            <article class="plates-kpi phx-panel">
+
+                <span>
+                    PLAQUES DÉTECTÉES
+                </span>
+
+                <strong id="plates-total">
+                    0
+                </strong>
+
+                <small>
+                    Historique persistant
+                </small>
+
+            </article>
+
+
+            <article class="plates-kpi phx-panel">
+
+                <span>
+                    VALIDÉES
+                </span>
+
+                <strong id="plates-validated">
+                    0
+                </strong>
+
+                <small>
+                    Lecture fiable
+                </small>
+
+            </article>
+
+
+            <article class="plates-kpi phx-panel">
+
+                <span>
+                    À VÉRIFIER
+                </span>
+
+                <strong id="plates-review">
+                    0
+                </strong>
+
+                <small>
+                    Lecture incertaine
+                </small>
+
+            </article>
+
+
+            <article class="plates-kpi phx-panel">
+
+                <span>
+                    CONFIANCE MOYENNE
+                </span>
+
+                <strong id="plates-confidence">
+                    —
+                </strong>
+
+                <small>
+                    Confiance OCR enregistrée
+                </small>
+
+            </article>
+
+
+        </section>
+
+
+        <section class="plates-search phx-panel">
+
+
+            <div>
+
+                <div class="phx-label">
+                    RECHERCHE DE PLAQUE
+                </div>
+
+                <div class="plates-search-row">
+
+                    <input
+                        id="plates-search-input"
+                        class="phx-input"
+                        type="search"
+                        autocomplete="off"
+                        spellcheck="false"
+                        placeholder="Saisir une plaque, ex. 2431AB01"
+                    >
+
+                    <button
+                        id="plates-search-button"
+                        class="phx-button"
+                        type="button"
+                    >
+                        RECHERCHER
+                    </button>
+
+
+                    <button
+                        id="plates-search-reset"
+                        class="phx-button plates-reset-button"
+                        type="button"
+                        hidden
+                    >
+                        RÉINITIALISER
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="plates-filters">
+
+                <button
+                    type="button"
+                    class="plates-filter active"
+                    data-filter="ALL"
+                >
+                    Toutes
+                </button>
+
+                <button
+                    type="button"
+                    class="plates-filter"
+                    data-filter="VALIDATED"
+                >
+                    Validées
+                </button>
+
+                <button
+                    type="button"
+                    class="plates-filter"
+                    data-filter="REVIEW"
+                >
+                    À vérifier
+                </button>
+
+                <button
+                    type="button"
+                    class="plates-filter"
+                    data-filter="LOW_CONFIDENCE"
+                >
+                    Confiance faible
+                </button>
+
+            </div>
+
+
+        </section>
+
+
+        <section class="plates-workspace">
+
+
+            <section class="plates-list-panel phx-panel">
+
+
+                <div class="plates-panel-header">
+
+                    <div>
+
+                        <div class="phx-section-title">
+                            LECTURES LAPI RÉCENTES
+                        </div>
+
+                        <span id="plates-result-count">
+                            0 résultat
+                        </span>
+
+                    </div>
+
+
+                    <span id="plates-last-refresh">
+                        —
+                    </span>
+
+                </div>
+
+
+                <div class="plates-table-header">
+
+                    <span>PLAQUE</span>
+                    <span>CONFIANCE</span>
+                    <span>ÉTAT</span>
+                    <span>CAMÉRA</span>
+                    <span>ZONE</span>
+                    <span>DERNIÈRE LECTURE</span>
+
+                </div>
+
+
+                <div
+                    id="plates-list"
+                    class="plates-list"
+                ></div>
+
+
+                <div
+                    id="plates-empty"
+                    class="plates-empty"
+                >
+
+                    <div class="plates-empty-mark">
+                        LAPI
+                    </div>
+
+                    <strong>
+                        AUCUNE LECTURE ENREGISTRÉE
+                    </strong>
+
+                    <span>
+                        Les prochaines lectures LAPI
+                        apparaîtront automatiquement ici.
+                    </span>
+
+                </div>
+
+
+            </section>
+
+
+            <aside class="plates-detail phx-panel">
+
+
+                <div class="phx-page-kicker">
+                    DOSSIER LAPI
+                </div>
+
+
+                <div
+                    id="plates-detail-plate"
+                    class="plates-detail-plate"
+                >
+                    —
+                </div>
+
+
+                <div
+                    id="plates-detail-status"
+                    class="phx-status neutral"
+                >
+                    AUCUNE SÉLECTION
+                </div>
+
+
+                <section class="plates-detail-section">
+
+                    <div class="phx-label">
+                        ANALYSE OCR
+                    </div>
+
+
+                    <div class="plates-detail-row">
+
+                        <span>
+                            Confiance
+                        </span>
+
+                        <strong id="plates-detail-confidence">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="plates-confidence-track">
+
+                        <span
+                            id="plates-confidence-bar"
+                        ></span>
+
+                    </div>
+
+
+                    <div class="plates-detail-row">
+
+                        <span>
+                            Lecture brute
+                        </span>
+
+                        <strong id="plates-detail-raw">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="plates-detail-row">
+
+                        <span>
+                            Dernière lecture
+                        </span>
+
+                        <strong id="plates-detail-last-seen">
+                            —
+                        </strong>
+
+                    </div>
+
+                </section>
+
+
+                <section
+                    id="plates-forensic-section"
+                    class="plates-detail-section"
+                >
+
+                    <div class="phx-label">
+                        SYNTHÈSE FORENSIC
+                    </div>
+
+
+                    <div class="plates-forensic-grid">
+
+
+                        <div>
+
+                            <span>
+                                Passages
+                            </span>
+
+                            <strong id="plates-forensic-occurrences">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Confiance max.
+                            </span>
+
+                            <strong id="plates-forensic-confidence">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="plates-detail-row">
+
+                        <span>
+                            Première détection
+                        </span>
+
+                        <strong id="plates-forensic-first">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="plates-detail-row">
+
+                        <span>
+                            Dernière détection
+                        </span>
+
+                        <strong id="plates-forensic-last">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="plates-detail-row">
+
+                        <span>
+                            Caméras observées
+                        </span>
+
+                        <strong id="plates-forensic-cameras">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="plates-detail-row">
+
+                        <span>
+                            Zones observées
+                        </span>
+
+                        <strong id="plates-forensic-zones">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                </section>
+
+
+                <section class="plates-detail-section">
+
+                    <div class="phx-label">
+                        TRAÇABILITÉ
+                    </div>
+
+
+                    <div class="plates-detail-row">
+
+                        <span>
+                            Caméra
+                        </span>
+
+                        <strong id="plates-detail-camera">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="plates-detail-row">
+
+                        <span>
+                            Zone
+                        </span>
+
+                        <strong id="plates-detail-zone">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="plates-detail-row">
+
+                        <span>
+                            Type
+                        </span>
+
+                        <strong id="plates-detail-type">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="plates-detail-row">
+
+                        <span>
+                            Tracker
+                        </span>
+
+                        <strong id="plates-detail-tracker">
+                            —
+                        </strong>
+
+                    </div>
+
+                </section>
+
+
+                <section class="plates-detail-section">
+
+                    <div class="phx-label">
+                        IDENTIFIANT PHOENIX
+                    </div>
+
+                    <div
+                        id="plates-detail-uuid"
+                        class="plates-detail-uuid"
+                    >
+                        —
+                    </div>
+
+                </section>
+
+
+                <div class="plates-detail-actions">
+
+                    <button
+                        id="plates-watchlist-button"
+                        type="button"
+                        class="phx-button plates-watchlist-button"
+                        hidden
+                        disabled
+                        aria-disabled="true"
+                        title="Saisissez ou sélectionnez d'abord une plaque"
+                        onclick="window.phoenixOpenWatchlist(event)"
+                    >
+                        PROPOSER À LA SURVEILLANCE
+                    </button>
+
+
+                    <button
+                        id="plates-history-button"
+                        type="button"
+                        class="phx-button"
+                        disabled
+                    >
+                        OUVRIR L'HISTORIQUE
+                    </button>
+
+                </div>
+
+
+                <div class="plates-integrity-note">
+
+                    Phoenix distingue la lecture OCR
+                    de toute décision administrative
+                    concernant le véhicule.
+
+                </div>
+
+
+            </aside>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+
+
+
+<div
+    id="watchlist-modal"
+    class="watchlist-modal"
+    hidden
+>
+
+    <div
+        id="watchlist-modal-backdrop"
+        class="watchlist-modal-backdrop"
+    ></div>
+
+
+    <section
+        class="watchlist-dialog phx-panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="watchlist-dialog-title"
+    >
+
+
+        <header class="watchlist-dialog-header">
+
+            <div class="watchlist-dialog-identity">
+
+                <img
+                    class="watchlist-dialog-logo"
+                    src="/static/images/logoS.png"
+                    alt="Phoenix Vision AI"
+                >
+
+                <div class="phx-page-kicker">
+                    PHOENIX · GOUVERNANCE LOCALE
+                </div>
+
+                <h2 id="watchlist-dialog-title">
+                    SURVEILLANCE VÉHICULE
+                </h2>
+
+                <p>
+                    Toute proposition nécessite une validation
+                    avant de devenir active.
+                </p>
+
+            </div>
+
+
+            <button
+                id="watchlist-close"
+                type="button"
+                class="watchlist-close"
+                aria-label="Fermer"
+            >
+                ×
+            </button>
+
+        </header>
+
+
+        <div class="watchlist-dialog-body">
+
+
+            <section class="watchlist-proposal-panel">
+
+
+                <div class="watchlist-section-heading">
+
+                    <div>
+
+                        <div class="phx-section-title">
+                            NOUVELLE PROPOSITION
+                        </div>
+
+                        <span>
+                            La lecture LAPI ne décide jamais
+                            du statut administratif du véhicule.
+                        </span>
+
+                    </div>
+
+
+                    <span
+                        id="watchlist-proposal-state"
+                        class="phx-status neutral"
+                    >
+                        À RENSEIGNER
+                    </span>
+
+                </div>
+
+
+                <form
+                    id="watchlist-form"
+                    autocomplete="off"
+                >
+
+
+                    <div class="watchlist-form-grid">
+
+
+                        <label class="watchlist-field">
+
+                            <span>
+                                Plaque
+                            </span>
+
+                            <input
+                                id="watchlist-plate"
+                                class="phx-input"
+                                type="text"
+                                required
+                                maxlength="20"
+                                placeholder="Ex. 2431AB01"
+                            >
+
+                        </label>
+
+
+                        <label class="watchlist-field">
+
+                            <span>
+                                Catégorie
+                            </span>
+
+                            <select
+                                id="watchlist-category"
+                                class="phx-input"
+                                required
+                            >
+
+                                <option value="SUSPICIOUS">
+                                    Véhicule à surveiller
+                                </option>
+
+                                <option value="STOLEN">
+                                    Véhicule volé
+                                </option>
+
+                                <option value="WANTED">
+                                    Véhicule recherché
+                                </option>
+
+                                <option value="SECURITY">
+                                    Signalement de sécurité
+                                </option>
+
+                            </select>
+
+                        </label>
+
+
+                        <label class="watchlist-field">
+
+                            <span>
+                                Priorité
+                            </span>
+
+                            <select
+                                id="watchlist-priority"
+                                class="phx-input"
+                            >
+
+                                <option value="LOW">
+                                    Faible
+                                </option>
+
+                                <option
+                                    value="MEDIUM"
+                                    selected
+                                >
+                                    Normale
+                                </option>
+
+                                <option value="HIGH">
+                                    Haute
+                                </option>
+
+                                <option value="CRITICAL">
+                                    Critique
+                                </option>
+
+                            </select>
+
+                        </label>
+
+
+                        <label class="watchlist-field">
+
+                            <span>
+                                Fin de validité
+                            </span>
+
+                            <input
+                                id="watchlist-valid-until"
+                                class="phx-input"
+                                type="datetime-local"
+                            >
+
+                        </label>
+
+
+                        <label class="watchlist-field watchlist-wide">
+
+                            <span>
+                                Motif du signalement
+                            </span>
+
+                            <textarea
+                                id="watchlist-reason"
+                                class="watchlist-textarea"
+                                required
+                                minlength="5"
+                                maxlength="1000"
+                                placeholder="Décrire clairement la raison de la proposition..."
+                            ></textarea>
+
+                        </label>
+
+
+                        <label class="watchlist-field">
+
+                            <span>
+                                Référence dossier
+                            </span>
+
+                            <input
+                                id="watchlist-case-reference"
+                                class="phx-input"
+                                type="text"
+                                maxlength="120"
+                                placeholder="Ex. DOS-2026-00418"
+                            >
+
+                        </label>
+
+
+                        <label class="watchlist-field">
+
+                            <span>
+                                Service / autorité
+                            </span>
+
+                            <input
+                                id="watchlist-authority"
+                                class="phx-input"
+                                type="text"
+                                maxlength="160"
+                                placeholder="Service ayant demandé le signalement"
+                            >
+
+                        </label>
+
+
+                    </div>
+
+
+                    <div
+                        id="watchlist-form-message"
+                        class="watchlist-form-message"
+                        hidden
+                    ></div>
+
+
+                    <div class="watchlist-form-actions">
+
+                        <button
+                            id="watchlist-submit"
+                            type="submit"
+                            class="phx-button"
+                        >
+                            ENVOYER POUR VALIDATION
+                        </button>
+
+                    </div>
+
+
+                </form>
+
+
+            </section>
+
+
+            <section
+                id="watchlist-review-panel"
+                class="watchlist-review-panel"
+            >
+
+
+                <div class="watchlist-section-heading">
+
+                    <div>
+
+                        <div class="phx-section-title">
+                            DOSSIERS EN ATTENTE
+                        </div>
+
+                        <span id="watchlist-pending-count">
+                            0 dossier
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="watchlist-pending-list"
+                    class="watchlist-pending-list"
+                >
+
+
+                    <div class="watchlist-empty-state">
+
+                        <strong>
+                            AUCUNE PROPOSITION EN ATTENTE
+                        </strong>
+
+                        <span>
+                            Les nouvelles propositions
+                            apparaîtront ici.
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+                <section
+                    id="watchlist-audit-panel"
+                    class="watchlist-audit-panel"
+                    hidden
+                >
+
+                    <div class="phx-section-title">
+                        JOURNAL DU DOSSIER
+                    </div>
+
+                    <div
+                        id="watchlist-audit-list"
+                        class="watchlist-audit-list"
+                    ></div>
+
+                </section>
+
+
+            </section>
+
+
+        </div>
+
+
+        <footer class="watchlist-dialog-footer">
+
+            <span>
+                BASE LOCALE CLIENT
+            </span>
+
+            <strong>
+                Les données de cette liste ne sont pas
+                partagées automatiquement avec d'autres clients.
+            </strong>
+
+        </footer>
+
+
+    </section>
+
+</div>
+
+
+<script
+    src="/static/js/enterprise/navigation_state.js?v=4.4.2"
+></script>
+
+<script
+    src="/static/js/enterprise/plates_console.js?v=4.7.5"
+></script>
+
+<script
+    src="/static/js/enterprise/plates_watchlist.js?v=4.7.11"
+></script>
+
+
+</body>
+
+</html>

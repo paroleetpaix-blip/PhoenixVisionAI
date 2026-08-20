@@ -22,7 +22,8 @@ class Alert:
         message,
         tracker_id=None,
         threat_score=0,
-        alert_type="VEHICLE_THREAT"
+        alert_type="VEHICLE_THREAT",
+        metadata=None
     ):
 
         self.uuid = str(
@@ -35,6 +36,15 @@ class Alert:
 
         self.vehicle_uuid = (
             vehicle_uuid
+        )
+
+        self.metadata = (
+            dict(metadata)
+            if isinstance(
+                metadata,
+                dict
+            )
+            else {}
         )
 
         self.tracker_id = (
@@ -141,6 +151,11 @@ class Alert:
 
             "tracker_id":
                 self.tracker_id,
+
+            "metadata":
+                dict(
+                    self.metadata
+                ),
 
             "level":
                 self.level,

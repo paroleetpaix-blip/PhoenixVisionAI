@@ -1,0 +1,391 @@
+/*
+========================================================
+PHOENIX VISION AI
+PHOENIX ENTERPRISE DESIGN SYSTEM
+Version 1.0
+========================================================
+*/
+
+
+.phoenix-premium {
+
+    --phx-bg:
+        #071018;
+
+    --phx-bg-elevated:
+        #0b1822;
+
+    --phx-panel:
+        rgba(10, 25, 35, .94);
+
+    --phx-panel-soft:
+        rgba(13, 31, 43, .78);
+
+    --phx-border:
+        rgba(87, 126, 148, .24);
+
+    --phx-border-strong:
+        rgba(69, 148, 193, .42);
+
+    --phx-primary:
+        #28a8f0;
+
+    --phx-primary-soft:
+        rgba(40, 168, 240, .14);
+
+    --phx-text:
+        #edf7fc;
+
+    --phx-text-secondary:
+        #b1c5d1;
+
+    --phx-text-muted:
+        #7e98a7;
+
+    --phx-success:
+        #67c79e;
+
+    --phx-warning:
+        #d4a55e;
+
+    --phx-danger:
+        #e16c78;
+
+    --phx-radius:
+        6px;
+
+    --phx-shadow:
+        0 18px 45px
+        rgba(0, 0, 0, .26);
+
+}
+
+
+/*
+========================================================
+TYPOGRAPHIE
+========================================================
+*/
+
+
+.phoenix-premium {
+    font-size: 13px;
+}
+
+
+.phx-page-kicker {
+
+    color:
+        var(--phx-text-muted);
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.4px;
+
+    text-transform: uppercase;
+}
+
+
+.phx-page-title {
+
+    color:
+        var(--phx-text);
+
+    font-size: 25px;
+
+    font-weight: 650;
+
+    letter-spacing: .3px;
+}
+
+
+.phx-page-description {
+
+    color:
+        var(--phx-text-secondary);
+
+    font-size: 12px;
+
+    line-height: 1.55;
+}
+
+
+.phx-section-title {
+
+    color:
+        var(--phx-text);
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: .6px;
+}
+
+
+.phx-label {
+
+    color:
+        var(--phx-text-muted);
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: .65px;
+
+    text-transform: uppercase;
+}
+
+
+/*
+========================================================
+PANNEAUX
+========================================================
+*/
+
+
+.phx-panel {
+
+    border:
+        1px solid
+        var(--phx-border);
+
+    border-radius:
+        var(--phx-radius);
+
+    background:
+        var(--phx-panel);
+
+    box-shadow:
+        var(--phx-shadow);
+}
+
+
+.phx-soft-panel {
+
+    border:
+        1px solid
+        var(--phx-border);
+
+    border-radius:
+        var(--phx-radius);
+
+    background:
+        var(--phx-panel-soft);
+}
+
+
+/*
+========================================================
+BOUTONS
+========================================================
+*/
+
+
+.phx-button {
+
+    min-height: 38px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    padding:
+        0 16px;
+
+    border:
+        1px solid
+        var(--phx-border-strong);
+
+    border-radius:
+        5px;
+
+    background:
+        rgba(15, 57, 78, .74);
+
+    color:
+        #d8eef9;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: .35px;
+
+    cursor: pointer;
+
+    transition:
+        .16s ease;
+}
+
+
+.phx-button:hover {
+
+    border-color:
+        rgba(62, 178, 239, .75);
+
+    background:
+        rgba(18, 79, 108, .88);
+
+    color:
+        white;
+}
+
+
+.phx-button:disabled {
+
+    opacity: .46;
+
+    cursor: not-allowed;
+}
+
+
+/*
+========================================================
+FORMULAIRES
+========================================================
+*/
+
+
+.phx-input {
+
+    width: 100%;
+
+    height: 42px;
+
+    padding:
+        0 14px;
+
+    border:
+        1px solid
+        rgba(77, 118, 140, .34);
+
+    border-radius:
+        5px;
+
+    outline: none;
+
+    background:
+        rgba(4, 16, 24, .92);
+
+    color:
+        var(--phx-text);
+
+    font-size: 12px;
+}
+
+
+.phx-input::placeholder {
+
+    color:
+        #667f8e;
+}
+
+
+.phx-input:focus {
+
+    border-color:
+        rgba(45, 164, 226, .72);
+
+    box-shadow:
+        0 0 0 2px
+        rgba(45, 164, 226, .08);
+}
+
+
+/*
+========================================================
+BADGES
+========================================================
+*/
+
+
+.phx-status {
+
+    min-height: 25px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding:
+        0 9px;
+
+    border-radius:
+        4px;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: .4px;
+}
+
+
+.phx-status.success {
+
+    color:
+        #9be0c1;
+
+    border:
+        1px solid
+        rgba(103, 199, 158, .32);
+
+    background:
+        rgba(54, 128, 96, .12);
+}
+
+
+.phx-status.warning {
+
+    color:
+        #e0bd82;
+
+    border:
+        1px solid
+        rgba(212, 165, 94, .30);
+
+    background:
+        rgba(146, 96, 35, .13);
+}
+
+
+.phx-status.neutral {
+
+    color:
+        #9db3c0;
+
+    border:
+        1px solid
+        rgba(109, 139, 157, .28);
+
+    background:
+        rgba(70, 94, 108, .12);
+}
+
+
+/*
+========================================================
+SCROLLBAR
+========================================================
+*/
+
+
+.phoenix-premium * {
+
+    scrollbar-width:
+        thin;
+
+    scrollbar-color:
+        #274658
+        #08141c;
+}

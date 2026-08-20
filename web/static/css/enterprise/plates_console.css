@@ -1,0 +1,2034 @@
+/*
+========================================================
+PHOENIX VISION AI
+Console Plaques / LAPI
+v4.7.3
+========================================================
+*/
+
+
+.plates-console {
+
+    height: 100vh;
+
+    overflow: hidden;
+
+    background:
+        #071018;
+}
+
+
+.plates-main {
+
+    flex: 1;
+
+    min-width: 0;
+
+    height: 100vh;
+
+    padding:
+        22px 24px;
+
+    overflow: hidden;
+
+    background:
+
+        radial-gradient(
+            circle at 75% -10%,
+            rgba(29, 113, 156, .15),
+            transparent 35%
+        ),
+
+        #071018;
+}
+
+
+/*
+========================================================
+EN-TÊTE
+========================================================
+*/
+
+
+.plates-header {
+
+    min-height: 84px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 24px;
+}
+
+
+.plates-header h1 {
+
+    margin:
+        6px 0 3px;
+}
+
+
+.plates-engine-status {
+
+    min-width: 165px;
+
+    min-height: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding:
+        9px 12px;
+
+    border:
+        1px solid
+        var(--phx-border);
+
+    border-radius:
+        5px;
+
+    background:
+        rgba(8, 28, 40, .84);
+}
+
+
+.engine-dot {
+
+    width: 9px;
+    height: 9px;
+
+    flex:
+        0 0 9px;
+
+    border-radius:
+        50%;
+
+    background:
+        #6c7c85;
+}
+
+
+.plates-engine-status.online
+.engine-dot {
+
+    background:
+        var(--phx-success);
+
+    box-shadow:
+        0 0 12px
+        rgba(103, 199, 158, .50);
+}
+
+
+.plates-engine-status.offline
+.engine-dot {
+
+    background:
+        var(--phx-danger);
+}
+
+
+.plates-engine-status small {
+
+    display: block;
+
+    color:
+        var(--phx-text-muted);
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: .7px;
+}
+
+
+.plates-engine-status strong {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color:
+        var(--phx-text);
+
+    font-size: 11px;
+}
+
+
+/*
+========================================================
+KPI
+========================================================
+*/
+
+
+.plates-kpis {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            4,
+            minmax(
+                130px,
+                1fr
+            )
+        );
+
+    gap: 10px;
+
+    margin-bottom: 11px;
+}
+
+
+.plates-kpi {
+
+    min-height: 82px;
+
+    padding:
+        13px 15px;
+}
+
+
+.plates-kpi > span {
+
+    color:
+        var(--phx-text-muted);
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: .65px;
+}
+
+
+.plates-kpi > strong {
+
+    display: block;
+
+    margin-top: 5px;
+
+    color:
+        var(--phx-text);
+
+    font-size: 25px;
+
+    font-weight: 650;
+}
+
+
+.plates-kpi > small {
+
+    display: block;
+
+    margin-top: 2px;
+
+    color:
+        #708996;
+
+    font-size: 10px;
+}
+
+
+/*
+========================================================
+RECHERCHE
+========================================================
+*/
+
+
+.plates-search {
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(340px, 1fr)
+        auto;
+
+    align-items: end;
+
+    gap: 18px;
+
+    padding:
+        13px 15px;
+
+    margin-bottom: 11px;
+}
+
+
+.plates-search-row {
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        auto;
+
+    gap: 8px;
+
+    margin-top: 7px;
+}
+
+
+.plates-filters {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 6px;
+}
+
+
+.plates-filter {
+
+    min-height: 34px;
+
+    padding:
+        0 12px;
+
+    border:
+        1px solid
+        rgba(70, 108, 128, .28);
+
+    border-radius:
+        4px;
+
+    background:
+        rgba(8, 27, 38, .78);
+
+    color:
+        #91a9b6;
+
+    font-size: 10px;
+
+    font-weight: 650;
+
+    cursor: pointer;
+}
+
+
+.plates-filter.active {
+
+    border-color:
+        rgba(43, 158, 220, .55);
+
+    background:
+        rgba(21, 92, 126, .35);
+
+    color:
+        #e0f3fd;
+}
+
+
+/*
+========================================================
+ZONE DE TRAVAIL
+========================================================
+*/
+
+
+.plates-workspace {
+
+    height:
+        calc(
+            100vh - 292px
+        );
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        330px;
+
+    gap: 11px;
+}
+
+
+.plates-list-panel {
+
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    overflow: hidden;
+}
+
+
+.plates-panel-header {
+
+    min-height: 58px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding:
+        10px 14px;
+
+    border-bottom:
+        1px solid
+        var(--phx-border);
+}
+
+
+.plates-panel-header span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color:
+        var(--phx-text-muted);
+
+    font-size: 10px;
+}
+
+
+#plates-last-refresh {
+
+    margin-top: 0;
+
+    text-align: right;
+}
+
+
+/*
+========================================================
+TABLE
+========================================================
+*/
+
+
+.plates-table-header,
+.plates-row {
+
+    display: grid;
+
+    grid-template-columns:
+
+        minmax(110px, 1.1fr)
+
+        minmax(85px, .8fr)
+
+        minmax(130px, 1fr)
+
+        minmax(85px, .8fr)
+
+        minmax(90px, .9fr)
+
+        minmax(135px, 1.2fr);
+
+    gap: 10px;
+
+    align-items: center;
+}
+
+
+.plates-table-header {
+
+    min-height: 40px;
+
+    padding:
+        0 14px;
+
+    border-bottom:
+        1px solid
+        rgba(78, 111, 129, .22);
+
+    background:
+        rgba(4, 16, 24, .52);
+
+    color:
+        #8299a7;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: .45px;
+}
+
+
+.plates-list {
+
+    flex: 1;
+
+    min-height: 0;
+
+    overflow-y: auto;
+}
+
+
+.plates-row {
+
+    width: 100%;
+
+    min-height: 55px;
+
+    padding:
+        0 14px;
+
+    border: 0;
+
+    border-bottom:
+        1px solid
+        rgba(69, 101, 118, .16);
+
+    background:
+        transparent;
+
+    color:
+        var(--phx-text-secondary);
+
+    text-align: left;
+
+    font-size: 11px;
+
+    cursor: pointer;
+}
+
+
+.plates-row:hover {
+
+    background:
+        rgba(17, 61, 82, .28);
+}
+
+
+.plates-row.selected {
+
+    background:
+        rgba(20, 92, 127, .32);
+
+    box-shadow:
+        inset 3px 0
+        #29a5ec;
+}
+
+
+.plates-number {
+
+    color:
+        #eaf7fd;
+
+    font-family:
+        "DejaVu Sans Mono",
+        "Liberation Mono",
+        monospace;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    letter-spacing: .7px;
+}
+
+
+.plates-confidence {
+
+    color:
+        #bad0dc;
+}
+
+
+/*
+========================================================
+ÉTAT VIDE
+========================================================
+*/
+
+
+.plates-empty {
+
+    flex: 1;
+
+    min-height: 250px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding:
+        30px;
+
+    text-align: center;
+}
+
+
+.plates-empty[hidden] {
+
+    display: none !important;
+}
+
+
+.plates-empty-mark {
+
+    width: 72px;
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-bottom: 16px;
+
+    border:
+        1px solid
+        rgba(63, 132, 165, .32);
+
+    border-radius:
+        5px;
+
+    background:
+        rgba(10, 50, 68, .32);
+
+    color:
+        #70a9c3;
+
+    font-family:
+        monospace;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+
+.plates-empty strong {
+
+    color:
+        #c4d7e1;
+
+    font-size: 12px;
+}
+
+
+.plates-empty span {
+
+    max-width: 420px;
+
+    margin-top: 7px;
+
+    color:
+        #78919f;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+
+/*
+========================================================
+DOSSIER LATÉRAL
+========================================================
+*/
+
+
+.plates-detail {
+
+    min-width: 0;
+
+    padding:
+        16px;
+
+    overflow-y: auto;
+}
+
+
+.plates-detail-plate {
+
+    margin:
+        8px 0 10px;
+
+    color:
+        #eef9ff;
+
+    font-family:
+        "DejaVu Sans Mono",
+        "Liberation Mono",
+        monospace;
+
+    font-size: 24px;
+
+    font-weight: 750;
+
+    letter-spacing: 1.3px;
+
+    overflow-wrap: anywhere;
+}
+
+
+.plates-detail-section {
+
+    margin-top: 22px;
+}
+
+
+.plates-detail-row {
+
+    min-height: 37px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 16px;
+
+    padding:
+        8px 0;
+
+    border-bottom:
+        1px solid
+        rgba(73, 104, 121, .15);
+}
+
+
+.plates-detail-row span {
+
+    color:
+        var(--phx-text-muted);
+
+    font-size: 11px;
+}
+
+
+.plates-detail-row strong {
+
+    max-width: 180px;
+
+    color:
+        var(--phx-text-secondary);
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    text-align: right;
+
+    overflow-wrap: anywhere;
+}
+
+
+.plates-confidence-track {
+
+    height: 6px;
+
+    margin:
+        6px 0 9px;
+
+    overflow: hidden;
+
+    border-radius:
+        4px;
+
+    background:
+        rgba(71, 99, 114, .22);
+}
+
+
+.plates-confidence-track span {
+
+    display: block;
+
+    width: 0;
+    height: 100%;
+
+    border-radius: inherit;
+
+    background:
+        #36a9e7;
+
+    transition:
+        width .25s ease;
+}
+
+
+.plates-detail-uuid {
+
+    margin-top: 7px;
+
+    padding: 9px;
+
+    border:
+        1px solid
+        rgba(73, 109, 128, .22);
+
+    border-radius:
+        4px;
+
+    background:
+        rgba(4, 16, 23, .54);
+
+    color:
+        #829ca9;
+
+    font-family:
+        monospace;
+
+    font-size: 10px;
+
+    line-height: 1.5;
+
+    overflow-wrap: anywhere;
+}
+
+
+.plates-detail-actions {
+
+    margin-top: 20px;
+}
+
+
+.plates-detail-actions
+.phx-button {
+
+    width: 100%;
+}
+
+
+.plates-integrity-note {
+
+    margin-top: 18px;
+
+    padding: 10px;
+
+    border:
+        1px solid
+        rgba(68, 111, 133, .22);
+
+    border-radius:
+        4px;
+
+    background:
+        rgba(9, 34, 47, .38);
+
+    color:
+        #78919f;
+
+    font-size: 10px;
+
+    line-height: 1.55;
+}
+
+
+/*
+========================================================
+RESPONSIVE
+========================================================
+*/
+
+
+@media (
+    max-width: 1150px
+) {
+
+    .plates-workspace {
+
+        grid-template-columns:
+            minmax(0, 1fr)
+            285px;
+    }
+
+}
+
+
+@media (
+    max-width: 900px
+) {
+
+    .plates-main {
+
+        overflow-y: auto;
+    }
+
+
+    .plates-kpis {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    .plates-search {
+
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .plates-workspace {
+
+        height: auto;
+
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .plates-list-panel {
+
+        min-height: 520px;
+    }
+
+}
+
+
+/*
+========================================================
+PHOENIX PLAQUES / LAPI
+Premium Readability v4.7.4
+========================================================
+*/
+
+
+.plates-header .phx-page-kicker {
+    font-size: 11px;
+    color: #8ca8b8;
+}
+
+
+.plates-header .phx-page-description {
+    font-size: 13px;
+    color: #aebfca;
+}
+
+
+.plates-kpi > span {
+    font-size: 11px;
+    color: #98adba;
+}
+
+
+.plates-kpi > strong {
+    font-size: 27px;
+}
+
+
+.plates-kpi > small {
+    font-size: 11px;
+    color: #8298a5;
+}
+
+
+.plates-search .phx-label {
+    font-size: 11px;
+    color: #98adba;
+}
+
+
+.plates-filter {
+    font-size: 11px;
+}
+
+
+.plates-table-header {
+    min-height: 42px;
+
+    color: #9aafbc;
+
+    font-size: 10px;
+}
+
+
+.plates-row {
+    font-size: 12px;
+}
+
+
+.plates-panel-header .phx-section-title {
+    font-size: 13px;
+}
+
+
+.plates-panel-header span {
+    font-size: 11px;
+}
+
+
+.plates-empty strong {
+    font-size: 13px;
+    color: #d4e4ec;
+}
+
+
+.plates-empty span {
+    font-size: 12px;
+    color: #8da3af;
+}
+
+
+.plates-detail .phx-page-kicker {
+    font-size: 11px;
+    color: #92a9b7;
+}
+
+
+.plates-detail-section .phx-label {
+    font-size: 11px;
+    color: #91a8b6;
+}
+
+
+.plates-detail-row span {
+    font-size: 12px;
+    color: #8da3af;
+}
+
+
+.plates-detail-row strong {
+    font-size: 12px;
+    color: #c6d7e0;
+}
+
+
+.plates-integrity-note {
+    font-size: 11px;
+    color: #8da4b1;
+}
+
+
+.plates-engine-status small {
+    font-size: 10px;
+    color: #91a7b4;
+}
+
+
+.plates-engine-status strong {
+    font-size: 12px;
+}
+
+
+/*
+========================================================
+PHOENIX LAPI FORENSIC SEARCH v4.7.5
+========================================================
+*/
+
+
+.plates-search-row {
+    grid-template-columns:
+        minmax(0, 1fr)
+        auto
+        auto;
+}
+
+
+.plates-reset-button {
+    border-color:
+        rgba(93, 118, 133, .30);
+
+    background:
+        rgba(14, 34, 45, .72);
+
+    color:
+        #9eb3bf;
+}
+
+
+.plates-reset-button[hidden] {
+    display: none !important;
+}
+
+
+.plates-forensic-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 8px;
+
+    margin-top: 8px;
+    margin-bottom: 7px;
+}
+
+
+.plates-forensic-grid > div {
+    min-height: 62px;
+
+    padding: 10px;
+
+    border:
+        1px solid
+        rgba(67, 112, 135, .24);
+
+    border-radius: 4px;
+
+    background:
+        rgba(7, 27, 38, .56);
+}
+
+
+.plates-forensic-grid span {
+    display: block;
+
+    color:
+        #879eab;
+
+    font-size: 10px;
+
+    font-weight: 650;
+}
+
+
+.plates-forensic-grid strong {
+    display: block;
+
+    margin-top: 5px;
+
+    color:
+        #e4f2f8;
+
+    font-size: 18px;
+
+    font-weight: 680;
+}
+
+
+.plates-search-active {
+    border-color:
+        rgba(40, 168, 240, .45);
+
+    box-shadow:
+        inset 3px 0
+        rgba(40, 168, 240, .82);
+}
+
+
+/*
+========================================================
+PHOENIX WATCHLIST GOVERNANCE
+v4.7.6
+========================================================
+*/
+
+
+.plates-watchlist-button {
+    margin-bottom: 8px;
+
+    border-color:
+        rgba(212, 165, 94, .42);
+
+    background:
+        rgba(115, 76, 31, .18);
+
+    color:
+        #e1c18c;
+}
+
+
+.plates-watchlist-button:hover {
+    border-color:
+        rgba(225, 180, 108, .70);
+
+    background:
+        rgba(138, 91, 35, .28);
+
+    color:
+        #f1d8ae;
+}
+
+
+.watchlist-modal {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 5000;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 24px;
+}
+
+
+.watchlist-modal[hidden] {
+    display: none !important;
+}
+
+
+.watchlist-modal-backdrop {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        rgba(2, 8, 12, .78);
+
+    backdrop-filter:
+        blur(4px);
+}
+
+
+.watchlist-dialog {
+    position: relative;
+
+    z-index: 1;
+
+    width:
+        min(
+            1080px,
+            calc(100vw - 48px)
+        );
+
+    max-height:
+        calc(100vh - 48px);
+
+    display: flex;
+
+    flex-direction: column;
+
+    overflow: hidden;
+
+    border-color:
+        rgba(75, 139, 171, .38);
+
+    background:
+        #091720;
+
+    box-shadow:
+        0 30px 80px
+        rgba(0, 0, 0, .52);
+}
+
+
+.watchlist-dialog-header {
+    min-height: 88px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+    padding:
+        18px 20px;
+
+    border-bottom:
+        1px solid
+        rgba(82, 121, 141, .24);
+}
+
+
+.watchlist-dialog-header h2 {
+    margin:
+        5px 0 3px;
+
+    color:
+        #edf8fd;
+
+    font-size: 20px;
+
+    font-weight: 680;
+
+    letter-spacing: .4px;
+}
+
+
+.watchlist-dialog-header p {
+    margin: 0;
+
+    color:
+        #8fa6b3;
+
+    font-size: 11px;
+}
+
+
+.watchlist-close {
+    width: 38px;
+    height: 38px;
+
+    flex:
+        0 0 38px;
+
+    border:
+        1px solid
+        rgba(94, 126, 143, .28);
+
+    border-radius:
+        4px;
+
+    background:
+        rgba(13, 34, 45, .72);
+
+    color:
+        #9eb3be;
+
+    font-size: 22px;
+
+    cursor: pointer;
+}
+
+
+.watchlist-close:hover {
+    color:
+        white;
+
+    border-color:
+        rgba(94, 165, 200, .52);
+}
+
+
+.watchlist-dialog-body {
+    flex: 1;
+
+    min-height: 0;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.2fr)
+        minmax(330px, .8fr);
+
+    overflow: hidden;
+}
+
+
+.watchlist-proposal-panel,
+.watchlist-review-panel {
+    min-width: 0;
+
+    padding: 18px;
+
+    overflow-y: auto;
+}
+
+
+.watchlist-review-panel {
+    border-left:
+        1px solid
+        rgba(78, 113, 131, .22);
+
+    background:
+        rgba(5, 18, 26, .42);
+}
+
+
+.watchlist-section-heading {
+    min-height: 50px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 18px;
+
+    margin-bottom: 13px;
+}
+
+
+.watchlist-section-heading > div > span {
+    display: block;
+
+    margin-top: 4px;
+
+    color:
+        #7e96a4;
+
+    font-size: 11px;
+
+    line-height: 1.45;
+}
+
+
+.watchlist-form-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0, 1fr)
+        );
+
+    gap: 13px;
+}
+
+
+.watchlist-field {
+    display: block;
+}
+
+
+.watchlist-field > span {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color:
+        #93aab7;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: .45px;
+
+    text-transform: uppercase;
+}
+
+
+.watchlist-wide {
+    grid-column:
+        1 / -1;
+}
+
+
+.watchlist-textarea {
+    width: 100%;
+
+    min-height: 105px;
+
+    resize: vertical;
+
+    padding: 11px 13px;
+
+    border:
+        1px solid
+        rgba(77, 118, 140, .34);
+
+    border-radius: 5px;
+
+    outline: none;
+
+    background:
+        rgba(4, 16, 24, .92);
+
+    color:
+        #edf7fc;
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+}
+
+
+.watchlist-textarea:focus {
+    border-color:
+        rgba(45, 164, 226, .72);
+
+    box-shadow:
+        0 0 0 2px
+        rgba(45, 164, 226, .08);
+}
+
+
+.watchlist-form-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    margin-top: 16px;
+}
+
+
+.watchlist-form-message {
+    margin-top: 13px;
+
+    padding: 10px 12px;
+
+    border:
+        1px solid
+        rgba(77, 118, 140, .30);
+
+    border-radius: 4px;
+
+    background:
+        rgba(6, 25, 35, .72);
+
+    color:
+        #afc3ce;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+
+.watchlist-form-message.success {
+    border-color:
+        rgba(103, 199, 158, .32);
+
+    color:
+        #a9dec6;
+}
+
+
+.watchlist-form-message.error {
+    border-color:
+        rgba(225, 108, 120, .36);
+
+    color:
+        #e4a0a7;
+}
+
+
+.watchlist-pending-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+.watchlist-empty-state {
+    min-height: 150px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 25px;
+
+    text-align: center;
+
+    border:
+        1px dashed
+        rgba(76, 110, 127, .26);
+
+    border-radius: 5px;
+
+    color:
+        #7c929f;
+}
+
+
+.watchlist-empty-state strong {
+    color:
+        #aebfc8;
+
+    font-size: 11px;
+}
+
+
+.watchlist-empty-state span {
+    margin-top: 6px;
+
+    font-size: 10px;
+}
+
+
+.watchlist-card {
+    padding: 12px;
+
+    border:
+        1px solid
+        rgba(76, 111, 130, .25);
+
+    border-radius: 5px;
+
+    background:
+        rgba(8, 28, 39, .74);
+}
+
+
+.watchlist-card:hover {
+    border-color:
+        rgba(61, 150, 195, .42);
+}
+
+
+.watchlist-card-top {
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 15px;
+}
+
+
+.watchlist-card-plate {
+    color:
+        #e9f6fc;
+
+    font-family:
+        "DejaVu Sans Mono",
+        "Liberation Mono",
+        monospace;
+
+    font-size: 15px;
+
+    font-weight: 750;
+
+    letter-spacing: .8px;
+}
+
+
+.watchlist-card-category {
+    display: block;
+
+    margin-top: 4px;
+
+    color:
+        #92a9b6;
+
+    font-size: 10px;
+}
+
+
+.watchlist-card-meta {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0, 1fr)
+        );
+
+    gap: 7px;
+
+    margin-top: 10px;
+}
+
+
+.watchlist-card-meta div {
+    padding: 7px 8px;
+
+    border-radius: 3px;
+
+    background:
+        rgba(3, 15, 22, .44);
+}
+
+
+.watchlist-card-meta span {
+    display: block;
+
+    color:
+        #708995;
+
+    font-size: 9px;
+
+    text-transform: uppercase;
+}
+
+
+.watchlist-card-meta strong {
+    display: block;
+
+    margin-top: 3px;
+
+    color:
+        #aec1cb;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    overflow-wrap: anywhere;
+}
+
+
+.watchlist-card-actions {
+    display: flex;
+
+    gap: 7px;
+
+    margin-top: 10px;
+}
+
+
+.watchlist-card-actions .phx-button {
+    min-height: 32px;
+
+    padding:
+        0 10px;
+
+    font-size: 9px;
+}
+
+
+.watchlist-audit-panel {
+    margin-top: 18px;
+
+    padding-top: 16px;
+
+    border-top:
+        1px solid
+        rgba(75, 109, 127, .24);
+}
+
+
+.watchlist-audit-panel[hidden] {
+    display: none !important;
+}
+
+
+.watchlist-audit-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+    margin-top: 10px;
+}
+
+
+.watchlist-audit-event {
+    position: relative;
+
+    padding:
+        9px 10px 9px 16px;
+
+    border-left:
+        2px solid
+        rgba(46, 155, 211, .58);
+
+    background:
+        rgba(7, 25, 35, .58);
+}
+
+
+.watchlist-audit-event strong {
+    display: block;
+
+    color:
+        #c5d7e0;
+
+    font-size: 10px;
+}
+
+
+.watchlist-audit-event span {
+    display: block;
+
+    margin-top: 3px;
+
+    color:
+        #7d95a2;
+
+    font-size: 9px;
+
+    line-height: 1.45;
+}
+
+
+.watchlist-dialog-footer {
+    min-height: 47px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding:
+        9px 18px;
+
+    border-top:
+        1px solid
+        rgba(76, 111, 129, .22);
+
+    background:
+        rgba(4, 16, 23, .66);
+}
+
+
+.watchlist-dialog-footer span {
+    flex: 0 0 auto;
+
+    padding:
+        4px 7px;
+
+    border:
+        1px solid
+        rgba(103, 199, 158, .28);
+
+    border-radius: 3px;
+
+    color:
+        #91cbb0;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: .6px;
+}
+
+
+.watchlist-dialog-footer strong {
+    color:
+        #7f96a3;
+
+    font-size: 10px;
+
+    font-weight: 500;
+}
+
+
+@media (
+    max-width: 900px
+) {
+
+    .watchlist-dialog-body {
+        grid-template-columns:
+            1fr;
+
+        overflow-y: auto;
+    }
+
+
+    .watchlist-proposal-panel,
+    .watchlist-review-panel {
+        overflow: visible;
+    }
+
+
+    .watchlist-review-panel {
+        border-left: 0;
+
+        border-top:
+            1px solid
+            rgba(78, 113, 131, .22);
+    }
+
+}
+
+
+/*
+========================================================
+PHOENIX WATCHLIST
+Identité visuelle v4.7.8
+========================================================
+*/
+
+
+.watchlist-dialog-identity {
+    position: relative;
+
+    min-height: 48px;
+
+    padding-left: 58px;
+}
+
+
+.watchlist-dialog-logo {
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 44px;
+    height: 44px;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(
+            0 5px 12px
+            rgba(0, 0, 0, .35)
+        );
+}
+
+
+/*
+========================================================
+WATCHLIST BUTTON STATE
+v4.7.9
+========================================================
+*/
+
+
+.plates-watchlist-button:disabled {
+    opacity: .38;
+
+    border-color:
+        rgba(96, 111, 119, .24);
+
+    background:
+        rgba(42, 48, 52, .18);
+
+    color:
+        #77858c;
+
+    cursor:
+        not-allowed;
+
+    box-shadow:
+        none;
+}
+
+
+.plates-watchlist-button:not(:disabled) {
+    opacity: 1;
+}
+
+
+/*
+========================================================
+WATCHLIST VISIBILITY SECURITY
+v4.7.10
+========================================================
+*/
+
+
+.plates-watchlist-button[hidden] {
+    display: none !important;
+}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+
+/*
+========================================================
+PHOENIX WATCHLIST
+Lisibilité Enterprise v4.7.11
+========================================================
+*/
+
+
+.watchlist-dialog-identity {
+    min-height: 58px;
+    padding-left: 70px;
+}
+
+
+.watchlist-dialog-logo {
+    width: 56px;
+    height: 56px;
+
+    top: -2px;
+}
+
+
+.watchlist-dialog-header p {
+    font-size: 12px;
+
+    color: #9db1bc;
+
+    line-height: 1.5;
+}
+
+
+.watchlist-dialog-header .phx-page-kicker {
+    font-size: 11px;
+
+    color: #a0b6c2;
+}
+
+
+.watchlist-section-heading .phx-section-title {
+    font-size: 13px;
+}
+
+
+.watchlist-section-heading > div > span {
+    font-size: 12px;
+
+    color: #8fa5b1;
+}
+
+
+.watchlist-field > span {
+    font-size: 11px;
+
+    color: #a0b5c0;
+}
+
+
+.watchlist-field .phx-input {
+    font-size: 13px;
+}
+
+
+.watchlist-textarea {
+    font-size: 13px;
+}
+
+
+#watchlist-pending-count {
+    font-size: 11px;
+
+    color: #91a7b3;
+}
+
+
+.watchlist-empty-state strong {
+    font-size: 12px;
+
+    color: #bdcdd5;
+}
+
+
+.watchlist-empty-state span {
+    font-size: 11px;
+
+    color: #869da9;
+}
+
+
+.watchlist-dialog-footer span {
+    font-size: 10px;
+}
+
+
+.watchlist-dialog-footer strong {
+    font-size: 11px;
+
+    color: #8da4b0;
+}
+
+
+/*
+========================================================
+PHOENIX WATCHLIST
+Logo Final v4.7.12
+========================================================
+*/
+
+
+.watchlist-dialog-identity {
+    min-height: 68px;
+    padding-left: 82px;
+}
+
+
+.watchlist-dialog-logo {
+    width: 68px;
+    height: 68px;
+
+    top: -5px;
+}
