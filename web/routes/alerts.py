@@ -24,6 +24,10 @@ from core.intelligence.intelligence_center import (
     intelligence_center
 )
 
+from core.intelligence.alert_database import (
+    alert_database
+)
+
 from core.security.session import (
     session_manager
 )
@@ -130,20 +134,15 @@ async def alerts_api(
         )
 
 
-    alerts = []
-
-
-    for alert in intelligence_center.recent(
-        limit
-    ):
-
-        alerts.append(
-            alert.to_dict()
+    alerts = (
+        alert_database.recent(
+            limit
         )
+    )
 
 
     stats = (
-        intelligence_center.stats()
+        alert_database.stats()
     )
 
 
@@ -205,7 +204,23 @@ async def acknowledge_alert(
     )
 
 
-    if alert is None:
+    if alert is not None:
+
+        data = (
+            alert.to_dict()
+        )
+
+    else:
+
+        data = (
+            alert_database
+            .acknowledge(
+                alert_uuid
+            )
+        )
+
+
+    if data is None:
 
         return JSONResponse(
             {
@@ -222,6 +237,6 @@ async def acknowledge_alert(
             True,
 
         "alert":
-            alert.to_dict()
+            data
 
     }

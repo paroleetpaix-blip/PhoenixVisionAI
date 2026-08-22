@@ -612,6 +612,363 @@ class WatchlistDatabase:
         ]
 
 
+    @staticmethod
+    def _normalize_period_bound(
+        value
+    ):
+
+        if value is None:
+
+            return None
+
+
+        if hasattr(
+            value,
+            "isoformat"
+        ):
+
+            return value.isoformat()
+
+
+        return str(
+            value
+        )
+
+
+    def between(
+        self,
+        start,
+        end,
+        limit=1000
+    ):
+
+        start = self._normalize_period_bound(
+            start
+        )
+
+        end = self._normalize_period_bound(
+            end
+        )
+
+
+        if not start or not end:
+
+            raise ValueError(
+                "start et end sont obligatoires."
+            )
+
+
+        if start > end:
+
+            raise ValueError(
+                "start doit être antérieur ou égal à end."
+            )
+
+
+        limit = max(
+            1,
+            min(
+                int(limit),
+                10000
+            )
+        )
+
+
+        with self.lock:
+
+            rows = self.connection.execute(
+                """
+                SELECT *
+
+                FROM watchlist_entries
+
+                WHERE created_at >= ?
+                  AND created_at <= ?
+
+                ORDER BY created_at DESC
+
+                LIMIT ?
+                """,
+                (
+                    start,
+                    end,
+                    limit
+                )
+            ).fetchall()
+
+
+        return [
+            dict(
+                row
+            )
+            for row in rows
+        ]
+
+
+    def audit_between(
+        self,
+        start,
+        end,
+        limit=10000
+    ):
+
+        start = self._normalize_period_bound(
+            start
+        )
+
+        end = self._normalize_period_bound(
+            end
+        )
+
+
+        if not start or not end:
+
+            raise ValueError(
+                "start et end sont obligatoires."
+            )
+
+
+        if start > end:
+
+            raise ValueError(
+                "start doit être antérieur ou égal à end."
+            )
+
+
+        limit = max(
+            1,
+            min(
+                int(limit),
+                50000
+            )
+        )
+
+
+        with self.lock:
+
+            rows = self.connection.execute(
+                """
+                SELECT *
+
+                FROM watchlist_audit
+
+                WHERE timestamp >= ?
+                  AND timestamp <= ?
+
+                ORDER BY timestamp DESC
+
+                LIMIT ?
+                """,
+                (
+                    start,
+                    end,
+                    limit
+                )
+            ).fetchall()
+
+
+        return [
+            dict(
+                row
+            )
+            for row in rows
+        ]
+
+
+    def stats_between(
+        self,
+        start,
+        end
+    ):
+
+        start = self._normalize_period_bound(
+            start
+        )
+
+        end = self._normalize_period_bound(
+            end
+        )
+
+
+        if not start or not end:
+
+            raise ValueError(
+                "start et end sont obligatoires."
+            )
+
+
+        if start > end:
+
+            raise ValueError(
+                "start doit être antérieur ou égal à end."
+            )
+
+
+        with self.lock:
+
+            entries = self.connection.execute(
+                """
+                SELECT
+
+                    SUM(
+                        CASE
+                            WHEN created_at >= ?
+                             AND created_at <= ?
+                            THEN 1
+                            ELSE 0
+                        END
+                    ) AS created,
+
+                    SUM(
+                        CASE
+                            WHEN approved_at IS NOT NULL
+                             AND approved_at >= ?
+                             AND approved_at <= ?
+                            THEN 1
+                            ELSE 0
+                        END
+                    ) AS approved,
+
+                    SUM(
+                        CASE
+                            WHEN created_at <= ?
+                             AND (
+                                approved_at IS NULL
+                                OR approved_at > ?
+                             )
+                            THEN 1
+                            ELSE 0
+                        END
+                    ) AS pending_at_end,
+
+                    SUM(
+                        CASE
+                            WHEN approved_at IS NOT NULL
+                             AND approved_at <= ?
+
+                             AND (
+                                valid_from IS NULL
+                                OR TRIM(valid_from) = ''
+                                OR valid_from <= ?
+                             )
+
+                             AND (
+                                valid_until IS NULL
+                                OR TRIM(valid_until) = ''
+                                OR valid_until >= ?
+                             )
+
+                            THEN 1
+                            ELSE 0
+                        END
+                    ) AS active_in_period
+
+                FROM watchlist_entries
+                """,
+                (
+                    start,
+                    end,
+
+                    start,
+                    end,
+
+                    end,
+                    end,
+
+                    end,
+                    end,
+                    start
+                )
+            ).fetchone()
+
+
+            audit = self.connection.execute(
+                """
+                SELECT
+
+                    SUM(
+                        CASE
+                            WHEN action = 'MATCH_DETECTED'
+                            THEN 1
+                            ELSE 0
+                        END
+                    ) AS matches,
+
+                    SUM(
+                        CASE
+                            WHEN action = 'EXPIRED'
+                            THEN 1
+                            ELSE 0
+                        END
+                    ) AS expired,
+
+                    COUNT(*) AS audit_events
+
+                FROM watchlist_audit
+
+                WHERE timestamp >= ?
+                  AND timestamp <= ?
+                """,
+                (
+                    start,
+                    end
+                )
+            ).fetchone()
+
+
+        pending_at_end = int(
+            entries["pending_at_end"]
+            or 0
+        )
+
+
+        return {
+
+            "created":
+                int(
+                    entries["created"]
+                    or 0
+                ),
+
+            "approved":
+                int(
+                    entries["approved"]
+                    or 0
+                ),
+
+            "pending":
+                pending_at_end,
+
+            "pending_at_end":
+                pending_at_end,
+
+            "active_in_period":
+                int(
+                    entries["active_in_period"]
+                    or 0
+                ),
+
+            "matches":
+                int(
+                    audit["matches"]
+                    or 0
+                ),
+
+            "expired":
+                int(
+                    audit["expired"]
+                    or 0
+                ),
+
+            "audit_events":
+                int(
+                    audit["audit_events"]
+                    or 0
+                )
+
+        }
+
+
     def audit_for_entry(
         self,
         entry_uuid

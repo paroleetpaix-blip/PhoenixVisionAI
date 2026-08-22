@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Rapports — Phoenix Vision AI</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/theme.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/icons.css?v=4.1"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/cameras_console.css?v=4.2.3"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/enterprise_polish.css?v=4.4.2"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/phoenix_design_system.css?v=1.0"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/reports_console.css?v=4.8.7"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="camera-console phoenix-premium reports-console">
+
+
+    <aside class="console-sidebar">
+
+
+        <div class="console-brand">
+
+            <img
+                src="/static/images/logoS.png"
+                alt="Phoenix Vision AI"
+            >
+
+            <div>
+                <strong>PHOENIX</strong>
+                <span>VISION AI</span>
+            </div>
+
+        </div>
+
+
+        <div class="console-product">
+
+            <span class="product-status"></span>
+
+            <div>
+                <strong>ENTERPRISE</strong>
+                <span>Opérations de sécurité</span>
+            </div>
+
+        </div>
+
+
+        <nav class="console-navigation">
+
+
+            <div class="console-label">
+                SUPERVISION
+            </div>
+
+
+            <a href="/enterprise" class="console-nav-item">
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-dashboard"></use>
+                </svg>
+
+                <span>Tableau de bord</span>
+
+            </a>
+
+
+            <a href="/cameras" class="console-nav-item">
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-camera"></use>
+                </svg>
+
+                <span>Caméras</span>
+
+            </a>
+
+
+            <a href="/events" class="console-nav-item">
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-events"></use>
+                </svg>
+
+                <span>Événements</span>
+
+            </a>
+
+
+            <a href="/alerts" class="console-nav-item">
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-alert"></use>
+                </svg>
+
+                <span>Alertes IA</span>
+
+            </a>
+
+
+            <a href="/history" class="console-nav-item">
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-history"></use>
+                </svg>
+
+                <span>Historique</span>
+
+            </a>
+
+
+            <a href="/map" class="console-nav-item">
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-map"></use>
+                </svg>
+
+                <span>Carte</span>
+
+            </a>
+
+
+            <a href="/plaques" class="console-nav-item">
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-anpr"></use>
+                </svg>
+
+                <span>Plaques / LAPI</span>
+
+            </a>
+
+
+            <a
+                href="/reports"
+                class="console-nav-item active"
+                aria-current="page"
+            >
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-reports"></use>
+                </svg>
+
+                <span>Rapports</span>
+
+            </a>
+
+
+            <div class="console-label administration">
+                ADMINISTRATION
+            </div>
+
+
+            <a
+                href="/enterprise#settings"
+                class="console-nav-item"
+            >
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-settings"></use>
+                </svg>
+
+                <span>Paramètres</span>
+
+            </a>
+
+
+            <a
+                href="/admin/requests"
+                class="console-nav-item"
+            >
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-users"></use>
+                </svg>
+
+                <span>Utilisateurs</span>
+
+            </a>
+
+
+        </nav>
+
+
+    </aside>
+
+
+    <main class="reports-main">
+
+
+        <header class="reports-header">
+
+
+            <div>
+
+                <div class="phx-page-kicker">
+                    PHOENIX · ANALYSE ET TRAÇABILITÉ
+                </div>
+
+                <h1 class="phx-page-title">
+                    RAPPORTS
+                </h1>
+
+                <p class="phx-page-description">
+                    Génération, consultation et recherche
+                    des rapports opérationnels Phoenix.
+                </p>
+
+            </div>
+
+
+            <div class="reports-engine-status">
+
+                <span></span>
+
+                <div>
+                    <small>SYSTÈME DE RAPPORTS</small>
+                    <strong>EN LIGNE</strong>
+                </div>
+
+            </div>
+
+
+        </header>
+
+
+        <section class="reports-kpi-grid">
+
+            <article class="report-kpi">
+                <span>VÉHICULES</span>
+                <strong id="report-kpi-vehicles">0</strong>
+                <small>Période sélectionnée</small>
+            </article>
+
+            <article class="report-kpi">
+                <span>ÉVÉNEMENTS</span>
+                <strong id="report-kpi-events">0</strong>
+                <small>Données persistantes</small>
+            </article>
+
+            <article class="report-kpi">
+                <span>ALERTES</span>
+                <strong id="report-kpi-alerts">0</strong>
+                <small>Déclenchements enregistrés</small>
+            </article>
+
+            <article class="report-kpi">
+                <span>PLAQUES / LAPI</span>
+                <strong id="report-kpi-plates">0</strong>
+                <small>Lectures enregistrées</small>
+            </article>
+
+            <article class="report-kpi">
+                <span>SURVEILLANCE</span>
+                <strong id="report-kpi-watchlist">0</strong>
+                <small>Actives dans la période</small>
+            </article>
+
+            <article class="report-kpi">
+                <span>CORRESPONDANCES</span>
+                <strong id="report-kpi-matches">0</strong>
+                <small>Liste de surveillance</small>
+            </article>
+
+        </section>
+
+
+        <div
+            id="reports-message"
+            class="reports-message"
+            hidden
+        ></div>
+
+
+        <section class="reports-workspace">
+
+
+            <article class="phx-panel report-generator-panel">
+
+
+                <div class="report-panel-heading">
+
+                    <div>
+                        <div class="phx-page-kicker">
+                            CRÉATION
+                        </div>
+
+                        <h2 class="phx-section-title">
+                            GÉNÉRER UN RAPPORT
+                        </h2>
+                    </div>
+
+                    <span class="report-secure-label">
+                        DONNÉES RÉELLES
+                    </span>
+
+                </div>
+
+
+                <div class="report-form-grid">
+
+
+                    <label class="report-field report-field-wide">
+
+                        <span>PÉRIODE</span>
+
+                        <select
+                            id="report-period-preset"
+                            class="phx-input"
+                        >
+                            <option value="today">Aujourd'hui</option>
+                            <option value="yesterday">Hier</option>
+                            <option value="week">Cette semaine</option>
+                            <option value="previous_week">Semaine précédente</option>
+                            <option value="month">Ce mois</option>
+                            <option value="previous_month">Mois précédent</option>
+                            <option value="quarter">Ce trimestre</option>
+                            <option value="semester">Ce semestre</option>
+                            <option value="year">Cette année</option>
+                            <option value="custom">Période personnalisée</option>
+                        </select>
+
+                    </label>
+
+
+                    <label class="report-field">
+
+                        <span>DU</span>
+
+                        <input
+                            id="report-period-start"
+                            class="phx-input"
+                            type="date"
+                        >
+
+                    </label>
+
+
+                    <label class="report-field">
+
+                        <span>AU</span>
+
+                        <input
+                            id="report-period-end"
+                            class="phx-input"
+                            type="date"
+                        >
+
+                    </label>
+
+
+                    <label class="report-field">
+
+                        <span>TYPE</span>
+
+                        <select
+                            id="report-type"
+                            class="phx-input"
+                        >
+                            <option value="OPERATIONAL">
+                                Rapport opérationnel
+                            </option>
+                        </select>
+
+                    </label>
+
+
+                    <label class="report-field">
+
+                        <span>PÉRIMÈTRE</span>
+
+                        <select
+                            id="report-scope"
+                            class="phx-input"
+                        >
+                            <option value="LOCAL_SITE">
+                                Site local
+                            </option>
+                        </select>
+
+                    </label>
+
+
+                </div>
+
+
+                <div class="report-sections">
+
+                    <span class="report-sections-title">
+                        SECTIONS À INCLURE
+                    </span>
+
+                    <div class="report-section-options">
+
+                        <label>
+                            <input
+                                type="checkbox"
+                                value="summary"
+                                checked
+                            >
+                            Synthèse
+                        </label>
+
+                        <label>
+                            <input
+                                type="checkbox"
+                                value="vehicles"
+                                checked
+                            >
+                            Véhicules
+                        </label>
+
+                        <label>
+                            <input
+                                type="checkbox"
+                                value="events"
+                                checked
+                            >
+                            Événements
+                        </label>
+
+                        <label>
+                            <input
+                                type="checkbox"
+                                value="alerts"
+                                checked
+                            >
+                            Alertes
+                        </label>
+
+                        <label>
+                            <input
+                                type="checkbox"
+                                value="anpr"
+                                checked
+                            >
+                            Plaques / LAPI
+                        </label>
+
+                        <label>
+                            <input
+                                type="checkbox"
+                                value="watchlist"
+                                checked
+                            >
+                            Surveillance
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <div class="report-generator-actions">
+
+                    <button
+                        id="report-preview-button"
+                        class="phx-button report-secondary-button"
+                        type="button"
+                    >
+                        ACTUALISER LA SYNTHÈSE
+                    </button>
+
+                    <button
+                        id="report-generate-button"
+                        class="phx-button"
+                        type="button"
+                    >
+                        GÉNÉRER LE RAPPORT
+                    </button>
+
+                </div>
+
+
+            </article>
+
+
+            <article class="phx-panel report-search-panel">
+
+
+                <div class="report-panel-heading">
+
+                    <div>
+                        <div class="phx-page-kicker">
+                            ARCHIVES
+                        </div>
+
+                        <h2 class="phx-section-title">
+                            RECHERCHER UN RAPPORT
+                        </h2>
+                    </div>
+
+                </div>
+
+
+                <label class="report-field">
+
+                    <span>NUMÉRO / RÉFÉRENCE</span>
+
+                    <input
+                        id="report-search-reference"
+                        class="phx-input"
+                        type="text"
+                        placeholder="PHX-RPT-..."
+                        autocomplete="off"
+                    >
+
+                </label>
+
+
+                <div class="report-search-grid">
+
+                    <label class="report-field">
+
+                        <span>AUTEUR</span>
+
+                        <input
+                            id="report-search-author"
+                            class="phx-input"
+                            type="text"
+                            placeholder="Utilisateur"
+                        >
+
+                    </label>
+
+
+                    <label class="report-field">
+
+                        <span>STATUT</span>
+
+                        <select
+                            id="report-search-status"
+                            class="phx-input"
+                        >
+                            <option value="">Tous</option>
+                            <option value="FINAL">Final</option>
+                        </select>
+
+                    </label>
+
+
+                    <label class="report-field">
+
+                        <span>DU</span>
+
+                        <input
+                            id="report-search-start"
+                            class="phx-input"
+                            type="date"
+                        >
+
+                    </label>
+
+
+                    <label class="report-field">
+
+                        <span>AU</span>
+
+                        <input
+                            id="report-search-end"
+                            class="phx-input"
+                            type="date"
+                        >
+
+                    </label>
+
+                </div>
+
+
+                <div class="report-search-actions">
+
+                    <button
+                        id="report-search-reset"
+                        class="phx-button report-secondary-button"
+                        type="button"
+                    >
+                        RÉINITIALISER
+                    </button>
+
+                    <button
+                        id="report-search-button"
+                        class="phx-button"
+                        type="button"
+                    >
+                        RECHERCHER
+                    </button>
+
+                </div>
+
+
+            </article>
+
+
+        </section>
+
+
+        <section class="phx-panel report-list-panel">
+
+
+            <div class="report-panel-heading">
+
+                <div>
+                    <div class="phx-page-kicker">
+                        REGISTRE PERSISTANT
+                    </div>
+
+                    <h2 class="phx-section-title">
+                        RAPPORTS RÉCENTS
+                    </h2>
+                </div>
+
+                <span id="reports-count">
+                    0 rapport
+                </span>
+
+            </div>
+
+
+            <div class="report-table-wrap">
+
+                <table class="report-table">
+
+                    <thead>
+
+                        <tr>
+                            <th>RÉFÉRENCE</th>
+                            <th>TYPE</th>
+                            <th>PÉRIODE</th>
+                            <th>AUTEUR</th>
+                            <th>STATUT</th>
+                            <th>ACTIONS</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="reports-table-body"></tbody>
+
+                </table>
+
+
+                <div
+                    id="reports-empty"
+                    class="report-empty-state"
+                >
+                    <strong>
+                        Aucun rapport enregistré
+                    </strong>
+
+                    <span>
+                        Les rapports générés apparaîtront ici
+                        et resteront consultables par leur référence.
+                    </span>
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+    <aside
+        id="report-detail-panel"
+        class="report-detail-panel"
+        hidden
+    >
+
+
+        <div class="report-detail-header">
+
+            <div class="report-detail-brand">
+
+                <img
+                    src="/static/images/logoS.png"
+                    alt="Phoenix"
+                >
+
+                <div>
+                    <span>PHOENIX SECURITY TECHNOLOGIES</span>
+                    <strong>RAPPORT OPÉRATIONNEL</strong>
+                </div>
+
+            </div>
+
+
+            <button
+                id="report-detail-close"
+                class="report-detail-close"
+                type="button"
+                aria-label="Fermer"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div id="report-detail-content"></div>
+
+
+    </aside>
+
+
+</div>
+
+
+<script
+    src="/static/js/enterprise/reports_console.js?v=4.8.7"
+></script>
+
+
+</body>
+
+</html>

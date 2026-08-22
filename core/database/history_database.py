@@ -1600,6 +1600,298 @@ class HistoryDatabase:
             ).fetchall()
 
 
+    @staticmethod
+    def _normalize_period_bound(
+        value
+    ):
+
+        if value is None:
+
+            return None
+
+
+        if hasattr(
+            value,
+            "isoformat"
+        ):
+
+            return value.isoformat()
+
+
+        return str(
+            value
+        )
+
+
+    def between(
+        self,
+        start,
+        end,
+        limit=1000
+    ):
+
+        start = self._normalize_period_bound(
+            start
+        )
+
+        end = self._normalize_period_bound(
+            end
+        )
+
+
+        if not start or not end:
+
+            raise ValueError(
+                "start et end sont obligatoires."
+            )
+
+
+        if start > end:
+
+            raise ValueError(
+                "start doit être antérieur ou égal à end."
+            )
+
+
+        limit = max(
+            1,
+            min(
+                int(limit),
+                10000
+            )
+        )
+
+
+        with self.lock:
+
+            rows = self.connection.execute(
+                """
+                SELECT *
+
+                FROM vehicle_history
+
+                WHERE
+                    COALESCE(
+                        first_seen,
+                        created_at
+                    ) <= ?
+
+                AND
+
+                    COALESCE(
+                        last_seen,
+                        first_seen,
+                        created_at
+                    ) >= ?
+
+                ORDER BY
+                    COALESCE(
+                        last_seen,
+                        created_at
+                    )
+                DESC
+
+                LIMIT ?
+                """,
+                (
+                    end,
+                    start,
+                    limit
+                )
+            ).fetchall()
+
+
+        return [
+            self.row_to_dict(
+                row
+            )
+            for row in rows
+        ]
+
+
+    def stats_between(
+        self,
+        start,
+        end
+    ):
+
+        start = self._normalize_period_bound(
+            start
+        )
+
+        end = self._normalize_period_bound(
+            end
+        )
+
+
+        if not start or not end:
+
+            raise ValueError(
+                "start et end sont obligatoires."
+            )
+
+
+        if start > end:
+
+            raise ValueError(
+                "start doit être antérieur ou égal à end."
+            )
+
+
+        with self.lock:
+
+            row = self.connection.execute(
+                """
+                SELECT
+
+                    COUNT(*) AS vehicles,
+
+                    SUM(
+                        CASE
+                            WHEN UPPER(
+                                COALESCE(
+                                    threat_level,
+                                    ''
+                                )
+                            )
+                            IN (
+                                'HIGH',
+                                'CRITICAL'
+                            )
+                            THEN 1
+                            ELSE 0
+                        END
+                    ) AS threats,
+
+                    SUM(
+                        CASE
+                            WHEN plate IS NOT NULL
+                             AND TRIM(plate) != ''
+                            THEN 1
+                            ELSE 0
+                        END
+                    ) AS plates_detected,
+
+                    SUM(
+                        CASE
+                            WHEN UPPER(
+                                COALESCE(
+                                    plate_status,
+                                    ''
+                                )
+                            ) = 'VALIDATED'
+                            THEN 1
+                            ELSE 0
+                        END
+                    ) AS plates_validated,
+
+                    SUM(
+                        CASE
+                            WHEN UPPER(
+                                COALESCE(
+                                    plate_status,
+                                    ''
+                                )
+                            )
+                            IN (
+                                'LOW_CONFIDENCE',
+                                'INVALID_TEXT'
+                            )
+                            THEN 1
+                            ELSE 0
+                        END
+                    ) AS plates_to_review,
+
+                    AVG(
+                        CASE
+                            WHEN COALESCE(
+                                plate_confidence,
+                                0
+                            ) > 0
+                            THEN plate_confidence
+                            ELSE NULL
+                        END
+                    ) AS average_plate_confidence
+
+                FROM vehicle_history
+
+                WHERE
+                    COALESCE(
+                        first_seen,
+                        created_at
+                    ) <= ?
+
+                AND
+
+                    COALESCE(
+                        last_seen,
+                        first_seen,
+                        created_at
+                    ) >= ?
+                """,
+                (
+                    end,
+                    start
+                )
+            ).fetchone()
+
+
+        return {
+
+            "vehicles":
+                int(
+                    row[
+                        "vehicles"
+                    ]
+                    or 0
+                ),
+
+            "threats":
+                int(
+                    row[
+                        "threats"
+                    ]
+                    or 0
+                ),
+
+            "plates_detected":
+                int(
+                    row[
+                        "plates_detected"
+                    ]
+                    or 0
+                ),
+
+            "plates_validated":
+                int(
+                    row[
+                        "plates_validated"
+                    ]
+                    or 0
+                ),
+
+            "plates_to_review":
+                int(
+                    row[
+                        "plates_to_review"
+                    ]
+                    or 0
+                ),
+
+            "average_plate_confidence":
+                round(
+                    float(
+                        row[
+                            "average_plate_confidence"
+                        ]
+                        or 0.0
+                    ),
+                    1
+                )
+
+        }
+
+
     def stats(
         self
     ):

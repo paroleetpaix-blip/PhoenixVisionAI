@@ -56,3 +56,6 @@ requests>=2.31,<3
 # PaddleOCR is intentionally not required by the current
 # Tesseract-based PlateReader.
 # ============================================================
+# Official Phoenix PDF reports
+pillow==12.3.0
+reportlab==5.0.1

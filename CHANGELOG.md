@@ -6,7 +6,7 @@ Le projet est encore en développement. Les entrées **Unreleased** ne constitue
 
 ---
 
-## [Unreleased] — SDK v0.5.0 Enterprise
+## [Unreleased] — SDK v0.6.0 Enterprise
 
 ### Interface Enterprise
 - Launcher Enterprise.
@@ -63,6 +63,61 @@ Le projet est encore en développement. Les entrées **Unreleased** ne constitue
 - API session.
 - API véhicule courant.
 - routes Launcher, Login, Enterprise, Admin, changement de mot de passe et demande de compte.
+
+### Historique / Forensic
+- Persistance SQLite de l’historique véhicule.
+- Conservation des trajectoires, zones et caméras observées.
+- Recherche forensic par véhicule et plaque.
+- Impression sécurisée des fiches historiques.
+- Contrôle RBAC pour consultation, preuves et impression.
+- Exclusion des sources de démonstration locales de l’historique officiel.
+
+### Carte opérationnelle
+- Console Carte Enterprise.
+- Représentation topologique des caméras et zones.
+- Métadonnées de localisation préparées pour GPS réel.
+- L’interface distingue explicitement le mode topologique d’une future cartographie géographique.
+
+### Plaques / LAPI
+- Console Enterprise dédiée aux plaques d’immatriculation.
+- Persistance des lectures ANPR/LAPI dans l’historique.
+- Recherche par plaque et analyse forensic.
+- Statistiques de confiance et statuts de validation.
+- Liste de surveillance locale persistante.
+- Workflow proposition → validation → activation.
+- Permissions Watchlist selon rôle.
+- Journal d’audit des actions Watchlist.
+- Détection des correspondances actives sans permettre à l’IA de modifier le statut administratif d’un véhicule.
+- Les données locales de surveillance ne sont pas propagées automatiquement aux autres clients.
+
+### Persistance Événements / Alertes
+- Ajout de `data/events.db`.
+- Ajout de `data/alerts.db`.
+- Les événements et alertes survivent désormais aux redémarrages.
+- Acquittement persistant des alertes.
+- APIs temporelles communes pour historique, événements, alertes et Watchlist.
+
+### Rapports Enterprise
+- Ajout d’un registre persistant `reports.db`.
+- Références uniques de type `PHX-RPT-YYYYMMDD-XXXXXXXX`.
+- Snapshots figés des données utilisées pour chaque rapport.
+- Intégrité SHA-256 des snapshots.
+- Journal d’audit chaîné et vérifiable.
+- Recherche de rapports par référence, auteur, statut et période.
+- Permissions `reports.view`, `reports.generate`, `reports.print` et `reports.export_pdf`.
+- Console Rapports Enterprise avec génération et recherche historique.
+- Rapport officiel imprimable A4 avec identité et logo Phoenix.
+- Traçabilité `PRINT_VIEWED` et `PRINT_REQUESTED`.
+- Export PDF côté serveur avec ReportLab.
+- Optimisation du logo PDF avec Pillow.
+- Empreinte SHA-256 du PDF généré.
+- Traçabilité `PDF_EXPORT_REQUESTED` et `PDF_GENERATED`.
+- Les bases d’exploitation restent exclues du dépôt Git.
+
+### Compatibilité Web
+- Firefox / Lubuntu validé pour la console Rapports, l’impression et le téléchargement PDF.
+- Architecture Web basée sur standards HTML/CSS/JavaScript et API HTTP.
+- Chrome/Chromium, Edge et Safari restent à valider sur les plateformes cibles avant production.
 
 ### Gouvernance
 Adoption de :

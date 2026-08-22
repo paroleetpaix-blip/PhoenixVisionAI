@@ -36,6 +36,7 @@ ROLE_PERMISSIONS = {
         "evidence.export_video",
 
         "reports.view",
+        "reports.generate",
         "reports.print",
         "reports.export_pdf",
 
@@ -58,6 +59,7 @@ ROLE_PERMISSIONS = {
         "evidence.view",
 
         "reports.view",
+        "reports.generate",
         "reports.print",
         "reports.export_pdf",
 

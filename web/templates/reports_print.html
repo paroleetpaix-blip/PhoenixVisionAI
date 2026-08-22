@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Rapport — Phoenix Vision AI
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/reports_print.css?v=4.8.6"
+    >
+
+</head>
+
+
+<body>
+
+
+<main class="report-print-document">
+
+
+    <header class="report-print-header">
+
+
+        <div class="report-print-brand">
+
+            <img
+                src="/static/images/logoS.png"
+                alt="Phoenix Vision AI"
+            >
+
+            <div>
+
+                <strong>
+                    PHOENIX
+                </strong>
+
+                <span>
+                    VISION AI
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="report-print-classification">
+
+            <span>
+                PHOENIX SECURITY TECHNOLOGIES
+            </span>
+
+            <strong>
+                RAPPORT OPÉRATIONNEL
+            </strong>
+
+            <small>
+                Document officiel généré
+                par Phoenix Vision AI
+            </small>
+
+        </div>
+
+
+    </header>
+
+
+    <section class="report-print-reference">
+
+
+        <div class="reference-main">
+
+            <span>
+                RÉFÉRENCE PHOENIX
+            </span>
+
+            <strong id="p-reference">
+                —
+            </strong>
+
+        </div>
+
+
+        <div>
+
+            <span>
+                STATUT
+            </span>
+
+            <strong id="p-status">
+                —
+            </strong>
+
+        </div>
+
+
+        <div>
+
+            <span>
+                VERSION
+            </span>
+
+            <strong id="p-version">
+                —
+            </strong>
+
+        </div>
+
+
+    </section>
+
+
+    <section class="report-print-metadata">
+
+
+        <div>
+
+            <span>PÉRIODE DU</span>
+
+            <strong id="p-period-start">
+                —
+            </strong>
+
+        </div>
+
+
+        <div>
+
+            <span>AU</span>
+
+            <strong id="p-period-end">
+                —
+            </strong>
+
+        </div>
+
+
+        <div>
+
+            <span>PÉRIMÈTRE</span>
+
+            <strong id="p-scope">
+                —
+            </strong>
+
+        </div>
+
+
+        <div>
+
+            <span>GÉNÉRÉ PAR</span>
+
+            <strong id="p-generated-by">
+                —
+            </strong>
+
+        </div>
+
+
+        <div>
+
+            <span>RÔLE</span>
+
+            <strong id="p-generated-role">
+                —
+            </strong>
+
+        </div>
+
+
+        <div>
+
+            <span>DATE DE GÉNÉRATION</span>
+
+            <strong id="p-generated-at">
+                —
+            </strong>
+
+        </div>
+
+
+    </section>
+
+
+    <section class="report-print-trace">
+
+
+        <div>
+
+            <span>PRÉPARÉ POUR IMPRESSION PAR</span>
+
+            <strong id="p-prepared-by">
+                —
+            </strong>
+
+        </div>
+
+
+        <div>
+
+            <span>RÔLE</span>
+
+            <strong id="p-prepared-role">
+                —
+            </strong>
+
+        </div>
+
+
+        <div>
+
+            <span>PRÉPARÉ LE</span>
+
+            <strong id="p-prepared-at">
+                —
+            </strong>
+
+        </div>
+
+
+        <div>
+
+            <span>DEMANDE D'IMPRESSION</span>
+
+            <strong id="p-print-requested">
+                Non demandée
+            </strong>
+
+        </div>
+
+
+    </section>
+
+
+    <section
+        id="print-section-summary"
+        class="report-print-section"
+    >
+
+        <h2>
+            SYNTHÈSE OPÉRATIONNELLE
+        </h2>
+
+
+        <div class="report-print-kpis">
+
+
+            <div>
+
+                <span>VÉHICULES</span>
+
+                <strong id="kpi-vehicles">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>ÉVÉNEMENTS</span>
+
+                <strong id="kpi-events">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>ALERTES</span>
+
+                <strong id="kpi-alerts">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>PLAQUES / LAPI</span>
+
+                <strong id="kpi-plates">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>SURVEILLANCES</span>
+
+                <strong id="kpi-watchlist">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>CORRESPONDANCES</span>
+
+                <strong id="kpi-matches">
+                    0
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="report-print-summary-secondary">
+
+            <div>
+                <span>Véhicules à risque</span>
+                <strong id="sum-threats">0</strong>
+            </div>
+
+            <div>
+                <span>Alertes critiques</span>
+                <strong id="sum-critical-alerts">0</strong>
+            </div>
+
+            <div>
+                <span>Alertes acquittées</span>
+                <strong id="sum-ack-alerts">0</strong>
+            </div>
+
+            <div>
+                <span>Plaques validées</span>
+                <strong id="sum-validated-plates">0</strong>
+            </div>
+
+            <div>
+                <span>Plaques à vérifier</span>
+                <strong id="sum-review-plates">0</strong>
+            </div>
+
+            <div>
+                <span>Surveillances approuvées</span>
+                <strong id="sum-approved-watchlist">0</strong>
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+    <section
+        id="print-section-vehicles"
+        class="report-print-section"
+    >
+
+        <h2>
+            VÉHICULES OBSERVÉS
+        </h2>
+
+        <div class="report-table-wrapper">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>UUID</th>
+                        <th>TYPE</th>
+                        <th>PLAQUE</th>
+                        <th>DERNIÈRE DÉTECTION</th>
+                        <th>CAMÉRA</th>
+                        <th>MENACE</th>
+                    </tr>
+                </thead>
+
+                <tbody id="table-vehicles"></tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <section
+        id="print-section-events"
+        class="report-print-section"
+    >
+
+        <h2>
+            ÉVÉNEMENTS
+        </h2>
+
+        <div class="report-table-wrapper">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>TYPE</th>
+                        <th>NIVEAU</th>
+                        <th>DESCRIPTION</th>
+                        <th>VÉHICULE</th>
+                        <th>DATE / HEURE</th>
+                    </tr>
+                </thead>
+
+                <tbody id="table-events"></tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <section
+        id="print-section-alerts"
+        class="report-print-section"
+    >
+
+        <h2>
+            ALERTES
+        </h2>
+
+        <div class="report-table-wrapper">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>TYPE</th>
+                        <th>NIVEAU</th>
+                        <th>STATUT</th>
+                        <th>MESSAGE</th>
+                        <th>DATE / HEURE</th>
+                    </tr>
+                </thead>
+
+                <tbody id="table-alerts"></tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <section
+        id="print-section-anpr"
+        class="report-print-section"
+    >
+
+        <h2>
+            PLAQUES / LAPI
+        </h2>
+
+        <div class="report-table-wrapper">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>PLAQUE</th>
+                        <th>CONFIANCE</th>
+                        <th>STATUT</th>
+                        <th>DERNIÈRE LECTURE</th>
+                        <th>CAMÉRA</th>
+                    </tr>
+                </thead>
+
+                <tbody id="table-anpr"></tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <section
+        id="print-section-watchlist"
+        class="report-print-section"
+    >
+
+        <h2>
+            LISTE DE SURVEILLANCE
+        </h2>
+
+        <div class="report-table-wrapper">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>PLAQUE</th>
+                        <th>CATÉGORIE</th>
+                        <th>PRIORITÉ</th>
+                        <th>STATUT</th>
+                        <th>CRÉATION</th>
+                        <th>VALIDÉ PAR</th>
+                    </tr>
+                </thead>
+
+                <tbody id="table-watchlist"></tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <section class="report-print-section">
+
+        <h2>
+            SOURCES ET COUVERTURE DES DONNÉES
+        </h2>
+
+        <div
+            id="data-coverage"
+            class="report-coverage-grid"
+        ></div>
+
+    </section>
+
+
+    <section class="report-print-section">
+
+        <h2>
+            INTÉGRITÉ DU DOCUMENT
+        </h2>
+
+
+        <div class="report-integrity-grid">
+
+
+            <div>
+
+                <span>SNAPSHOT</span>
+
+                <strong id="integrity-snapshot">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>JOURNAL D'AUDIT</span>
+
+                <strong id="integrity-audit">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="integrity-hash">
+
+                <span>SHA-256</span>
+
+                <code id="integrity-hash">
+                    —
+                </code>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+    <section class="report-print-section">
+
+        <h2>
+            TRAÇABILITÉ
+        </h2>
+
+        <div
+            id="audit-list"
+            class="report-print-audit"
+        ></div>
+
+    </section>
+
+
+    <footer class="report-print-footer">
+
+
+        <div>
+
+            <strong>
+                PHOENIX SECURITY TECHNOLOGIES
+            </strong>
+
+            <span>
+                L’innovation au service de la protection.
+            </span>
+
+        </div>
+
+
+        <div>
+
+            <span id="footer-reference">
+                —
+            </span>
+
+            <span>
+                Document généré par Phoenix Vision AI
+            </span>
+
+        </div>
+
+
+    </footer>
+
+
+    <div class="report-print-actions">
+
+        <div
+            id="print-message"
+            class="print-message"
+            hidden
+        ></div>
+
+        <button
+            id="print-button"
+            type="button"
+        >
+            IMPRIMER LE RAPPORT
+        </button>
+
+    </div>
+
+
+</main>
+
+
+<script
+    src="/static/js/enterprise/reports_print.js?v=4.8.6"
+></script>
+
+
+</body>
+
+</html>

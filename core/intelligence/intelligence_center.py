@@ -14,6 +14,10 @@ from threading import RLock
 from core.intelligence.alert import Alert
 
 
+from core.intelligence.alert_database import (
+    alert_database
+)
+
 class IntelligenceCenter:
 
     def __init__(
@@ -189,6 +193,10 @@ class IntelligenceCenter:
 
                     existing.resolve()
 
+                    alert_database.save(
+                        existing
+                    )
+
                     self._active_by_vehicle.pop(
                         vehicle_uuid,
                         None
@@ -215,6 +223,10 @@ class IntelligenceCenter:
                     threat_score
                 )
 
+                alert_database.save(
+                    existing
+                )
+
                 return None
 
 
@@ -224,6 +236,10 @@ class IntelligenceCenter:
             if existing:
 
                 existing.resolve()
+
+                alert_database.save(
+                    existing
+                )
 
                 self._active_by_vehicle.pop(
                     vehicle_uuid,
@@ -252,6 +268,10 @@ class IntelligenceCenter:
 
 
             self.alerts.append(
+                alert
+            )
+
+            alert_database.save(
                 alert
             )
 
@@ -462,6 +482,11 @@ class IntelligenceCenter:
                     )
 
 
+                alert_database.save(
+                    existing
+                )
+
+
                 return None
 
 
@@ -523,6 +548,10 @@ class IntelligenceCenter:
 
 
             self.alerts.append(
+                alert
+            )
+
+            alert_database.save(
                 alert
             )
 
@@ -622,6 +651,11 @@ class IntelligenceCenter:
 
 
         alert.acknowledge()
+
+
+        alert_database.save(
+            alert
+        )
 
 
         return alert

@@ -19,7 +19,7 @@
 
 Le projet est porté par **Phoenix Security Technologies** avec l’ambition de construire une solution adaptée aux réalités opérationnelles de la République démocratique du Congo, puis extensible à d’autres marchés africains.
 
-Phoenix Vision AI est actuellement en **phase de développement Enterprise / SDK v0.5.0-dev**. Certaines briques sont fonctionnelles, d’autres sont encore en cours d’intégration ou de validation terrain.
+Phoenix Vision AI est actuellement en **phase de développement Enterprise / SDK v0.6.0-dev**. Certaines briques sont fonctionnelles, d’autres sont encore en cours d’intégration ou de validation terrain.
 
 > **Important :** le dépôt ne doit pas présenter comme “terminées” les fonctions qui ne sont pas encore validées sur données réelles.
 
@@ -59,9 +59,12 @@ Phoenix Vision AI vise notamment à permettre :
 | Profil et rôles | ✅ Session serveur |
 | Vue véhicule courant | ✅ VehicleManager |
 | Statut ANPR | ✅ Connecté au moteur |
-| Événements réels | 🔄 À connecter complètement |
-| Carte réelle | 🔄 À connecter |
-| Rapports Enterprise | 🔄 À finaliser |
+| Historique forensic | ✅ Persistant + recherche + impression |
+| Console Plaques / LAPI | ✅ Recherche + analyse + statistiques |
+| Liste de surveillance locale | ✅ Proposition, validation, audit et correspondances |
+| Événements persistants | ✅ SQLite + API + console |
+| Carte opérationnelle | ✅ Mode topologique ; GPS réel à configurer |
+| Rapports Enterprise | ✅ Génération, recherche, impression, PDF et audit |
 | Sauvegardes Enterprise | 🔄 À construire |
 
 ### Vision IA et ANPR
@@ -106,6 +109,7 @@ PhoenixVisionAI/
 │   ├── lines/
 │   ├── memory/
 │   ├── pipeline/
+│   ├── reports/
 │   ├── search/
 │   ├── security/
 │   ├── server/
@@ -115,6 +119,7 @@ PhoenixVisionAI/
 │   ├── ui/
 │   ├── users/
 │   ├── vehicle/
+│   ├── watchlist/
 │   ├── workspace/
 │   └── zones/
 │
@@ -247,6 +252,28 @@ Chaque bouton doit progressivement ouvrir une fonction réelle.
 | Notifications | Centre de notifications |
 | Profil | Identité, photo et sécurité du compte |
 
+### Rapports Enterprise — état actuel
+
+Phoenix Vision AI possède maintenant un système de rapports persistant :
+
+- génération de rapports sur une période réelle ;
+- archivage durable avec référence unique `PHX-RPT-...` ;
+- recherche ultérieure par numéro de rapport, auteur, statut ou période ;
+- snapshot figé des données au moment de la génération ;
+- vérification d’intégrité SHA-256 ;
+- journal d’audit traçable ;
+- document officiel A4 avec identité Phoenix ;
+- impression selon les permissions du compte ;
+- export PDF côté serveur avec ReportLab ;
+- empreinte SHA-256 du fichier PDF généré.
+
+Les données utilisées proviennent des sources persistantes disponibles :
+historique véhicule, LAPI, événements, alertes et liste de surveillance.
+
+Le navigateur Firefox sous Lubuntu est actuellement validé pour cette
+fonction. Chrome/Chromium, Edge et Safari devront être validés sur les
+plateformes cibles avant une diffusion de production.
+
 ---
 
 ## 9. Sécurité
@@ -266,7 +293,7 @@ Phoenix Vision AI applique déjà plusieurs principes :
 - HTTPS obligatoire ;
 - expiration et rotation des sessions ;
 - stockage de session persistant ;
-- journalisation d’audit ;
+- généralisation de la journalisation d’audit à tous les modules ;
 - politique de rétention ;
 - chiffrement des sauvegardes ;
 - secrets hors du code ;
@@ -326,10 +353,21 @@ python -m pytest tests -q
 Moteur vidéo, détection/tracking, Vehicle Intelligence, Dashboard Enterprise, comptes/rôles, ANPR V1, événements, historique, rapports et administration.
 
 ### V2 — Smart Traffic & Security
-Détecteur de plaques spécialisé, ANPR multi-frame, alertes IA avancées, multi-site, cartes, recherche avancée, API d’intégration et haute disponibilité.
+Détecteur de plaques spécialisé, ANPR multi-frame, alertes IA avancées,
+multi-site, cartographie géographique, recherche avancée, API d’intégration,
+Centre de notifications et d’actions Phoenix, supervision système et haute
+disponibilité.
 
 ### V3 — National / African Platform
-Centre de commandement multi-ville, corrélation inter-caméras, analyses avancées, Edge + Cloud et déploiements nationaux/régionaux.
+Centre de commandement multi-ville, corrélation inter-caméras, Edge + Cloud
+et déploiements nationaux/régionaux.
+
+La plateforme devra également exploiter les données réellement collectées par
+les caméras Phoenix afin de produire des analyses statistiques routières :
+densité par zone, heures de pointe, embouteillages récurrents, tendances,
+comparaisons territoriales et indicateurs utiles à la planification de la
+mobilité. Ces fonctions restent dans la roadmap et ne sont pas présentées
+comme déjà opérationnelles.
 
 ---
 

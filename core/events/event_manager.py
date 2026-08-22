@@ -17,6 +17,11 @@ from datetime import (
 from core.events.event import Event
 
 
+from core.events.event_database import (
+    event_database
+)
+
+
 class EventManager:
 
     def __init__(
@@ -61,6 +66,11 @@ class EventManager:
 
 
         self.events.append(
+            event
+        )
+
+
+        event_database.save(
             event
         )
 

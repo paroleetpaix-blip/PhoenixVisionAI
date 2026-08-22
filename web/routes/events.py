@@ -20,8 +20,8 @@ from fastapi.responses import (
     RedirectResponse
 )
 
-from core.events.event_manager import (
-    event_manager
+from core.events.event_database import (
+    event_database
 )
 
 from core.security.session import (
@@ -139,28 +139,16 @@ async def events_api(
     )
 
 
-    serialized = []
-
-
-    for event in event_manager.recent(
-        limit
-    ):
-
-        try:
-
-            data = event.to_dict()
-
-        except Exception:
-
-            continue
-
-
-        serialized.append(
-            data
+    serialized = (
+        event_database.recent(
+            limit
         )
+    )
 
 
-    stats = event_manager.stats()
+    stats = (
+        event_database.stats()
+    )
 
 
     return {
