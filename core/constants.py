@@ -17,13 +17,13 @@ APP_NAME = "Phoenix Vision AI"
 
 COMPANY = "Phoenix Security Technologies"
 
-VERSION = "0.4.0"
+VERSION = "0.6.0-dev"
 
-CODENAME = "Foundation"
+CODENAME = "Enterprise"
 
 AUTHOR = "Ritchi Biongo"
 
-LICENSE = "Phoenix Vision AI Commercial License"
+LICENSE = "Phoenix Vision AI Proprietary Software License"
 
 # ======================================================
 # DOSSIERS

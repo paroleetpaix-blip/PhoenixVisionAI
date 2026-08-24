@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Paramètres — Phoenix Vision AI</title>
+
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/theme.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/icons.css?v=4.1"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/cameras_console.css?v=4.2.3"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/enterprise_polish.css?v=4.4.2"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/phoenix_design_system.css?v=1.0"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/settings_console.css?v=4.9.6"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="camera-console phoenix-premium settings-console">
+
+
+    <!-- ==================================================
+         SIDEBAR PHOENIX
+    =================================================== -->
+
+    <aside class="console-sidebar">
+
+
+        <div class="console-brand">
+
+            <img
+                src="/static/images/logoS.png"
+                alt="Phoenix Vision AI"
+            >
+
+            <div>
+                <strong>PHOENIX</strong>
+                <span>VISION AI</span>
+            </div>
+
+        </div>
+
+
+        <div class="console-product">
+
+            <span class="product-status"></span>
+
+            <div>
+                <strong>ENTERPRISE</strong>
+                <span>Opérations de sécurité</span>
+            </div>
+
+        </div>
+
+
+        <nav class="console-navigation">
+
+
+            <div class="console-label">
+                SUPERVISION
+            </div>
+
+
+            <a
+                href="/enterprise"
+                class="console-nav-item"
+            >
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-dashboard"></use>
+                </svg>
+
+                <span>Tableau de bord</span>
+            </a>
+
+
+            <a
+                href="/cameras"
+                class="console-nav-item"
+            >
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-camera"></use>
+                </svg>
+
+                <span>Caméras</span>
+            </a>
+
+
+            <a
+                href="/events"
+                class="console-nav-item"
+            >
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-events"></use>
+                </svg>
+
+                <span>Événements</span>
+            </a>
+
+
+            <a
+                href="/alerts"
+                class="console-nav-item"
+            >
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-alert"></use>
+                </svg>
+
+                <span>Alertes IA</span>
+            </a>
+
+
+            <a
+                href="/history"
+                class="console-nav-item"
+            >
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-history"></use>
+                </svg>
+
+                <span>Historique</span>
+            </a>
+
+
+            <a
+                href="/map"
+                class="console-nav-item"
+            >
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-map"></use>
+                </svg>
+
+                <span>Carte</span>
+            </a>
+
+
+            <a
+                href="/plaques"
+                class="console-nav-item"
+            >
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-anpr"></use>
+                </svg>
+
+                <span>Plaques / LAPI</span>
+            </a>
+
+
+            <a
+                href="/reports"
+                class="console-nav-item"
+            >
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-reports"></use>
+                </svg>
+
+                <span>Rapports</span>
+            </a>
+
+
+            <div class="console-label administration">
+                ADMINISTRATION
+            </div>
+
+
+            <a
+                href="/settings"
+                class="console-nav-item active"
+                aria-current="page"
+            >
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-settings"></use>
+                </svg>
+
+                <span>Paramètres</span>
+            </a>
+
+
+            <a
+                href="/admin/requests"
+                class="console-nav-item"
+            >
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-users"></use>
+                </svg>
+
+                <span>Utilisateurs</span>
+            </a>
+
+
+        </nav>
+
+
+    </aside>
+
+
+    <!-- ==================================================
+         WORKSPACE
+    =================================================== -->
+
+    <main class="settings-main">
+
+
+        <header class="settings-header">
+
+
+            <div>
+
+                <div class="phx-page-kicker">
+                    PHOENIX · CONFIGURATION ET CONTRÔLE
+                </div>
+
+                <h1 class="phx-page-title">
+                    PARAMÈTRES
+                </h1>
+
+                <p class="phx-page-description">
+                    Configuration locale de Phoenix Vision AI,
+                    règles opérationnelles, autorisations et
+                    informations de l'installation.
+                </p>
+
+            </div>
+
+
+            <div class="settings-engine-status">
+
+                <span></span>
+
+                <div>
+                    <small>SETTINGS DATABASE</small>
+                    <strong>EN LIGNE</strong>
+                </div>
+
+            </div>
+
+
+        </header>
+
+
+        <!-- ==================================================
+             SYNTHÈSE
+        =================================================== -->
+
+        <section class="settings-kpi-grid">
+
+
+            <article class="settings-kpi">
+
+                <span>PARAMÈTRES</span>
+
+                <strong
+                    id="settings-kpi-total"
+                >
+                    —
+                </strong>
+
+                <small>
+                    Configuration enregistrée
+                </small>
+
+            </article>
+
+
+            <article class="settings-kpi">
+
+                <span>MODIFIABLES</span>
+
+                <strong
+                    id="settings-kpi-mutable"
+                >
+                    —
+                </strong>
+
+                <small>
+                    Selon rôle et politique
+                </small>
+
+            </article>
+
+
+            <article class="settings-kpi">
+
+                <span>PROTÉGÉS</span>
+
+                <strong
+                    id="settings-kpi-readonly"
+                >
+                    —
+                </strong>
+
+                <small>
+                    Lecture seule système
+                </small>
+
+            </article>
+
+
+            <article class="settings-kpi">
+
+                <span>AUDIT</span>
+
+                <strong
+                    id="settings-kpi-audit"
+                >
+                    —
+                </strong>
+
+                <small
+                    id="settings-kpi-audit-caption"
+                >
+                    Vérification en cours
+                </small>
+
+            </article>
+
+
+        </section>
+
+
+        <div
+            id="settings-message"
+            class="settings-message"
+            hidden
+        ></div>
+
+
+        <!-- ==================================================
+             ESPACE PARAMÈTRES
+        =================================================== -->
+
+        <section class="settings-workspace">
+
+
+            <!-- ==============================================
+                 NAVIGATION INTERNE
+            =============================================== -->
+
+            <aside class="settings-section-navigation phx-panel">
+
+
+                <div class="settings-section-nav-header">
+
+                    <div class="phx-page-kicker">
+                        CONFIGURATION
+                    </div>
+
+                    <strong>
+                        CENTRE DE PARAMÈTRES
+                    </strong>
+
+                </div>
+
+
+                <button
+                    class="settings-section-link active"
+                    type="button"
+                    data-section="overview"
+                >
+                    Vue générale
+                </button>
+
+
+                <div class="settings-section-label">
+                    INSTALLATION LOCALE
+                </div>
+
+
+                <button
+                    class="settings-section-link"
+                    type="button"
+                    data-section="GENERAL"
+                >
+                    Général
+                </button>
+
+
+                <button
+                    class="settings-section-link"
+                    type="button"
+                    data-section="INTERFACE"
+                >
+                    Interface
+                </button>
+
+
+                <button
+                    class="settings-section-link"
+                    type="button"
+                    data-section="OPERATIONS"
+                >
+                    Exploitation
+                </button>
+
+
+                <button
+                    class="settings-section-link"
+                    type="button"
+                    data-section="ANPR"
+                >
+                    LAPI / ANPR
+                </button>
+
+
+                <button
+                    class="settings-section-link"
+                    type="button"
+                    data-section="REPORTS"
+                >
+                    Rapports
+                </button>
+
+
+                <div class="settings-section-label">
+                    SÉCURITÉ
+                </div>
+
+
+                <button
+                    class="settings-section-link"
+                    type="button"
+                    data-section="security"
+                >
+                    Autorisations
+                </button>
+
+
+                <button
+                    class="settings-section-link"
+                    type="button"
+                    data-section="audit"
+                    id="settings-audit-navigation"
+                    hidden
+                >
+                    Journal des modifications
+                </button>
+
+
+                <div class="settings-section-label">
+                    SYSTÈME
+                </div>
+
+
+                <button
+                    class="settings-section-link"
+                    type="button"
+                    data-section="installation"
+                >
+                    Installation
+                </button>
+
+
+                <button
+                    class="settings-section-link"
+                    type="button"
+                    data-section="legal"
+                >
+                    Version & légal
+                </button>
+
+
+            </aside>
+
+
+            <!-- ==============================================
+                 CONTENU
+            =============================================== -->
+
+            <div class="settings-content">
+
+
+                <!-- ==========================================
+                     OVERVIEW
+                =========================================== -->
+
+                <section
+                    class="settings-view active"
+                    data-settings-view="overview"
+                >
+
+
+                    <article class="phx-panel settings-overview-hero">
+
+
+                        <div>
+
+                            <div class="phx-page-kicker">
+                                INSTALLATION PHOENIX VISION AI
+                            </div>
+
+                            <h2>
+                                Configuration opérationnelle
+                            </h2>
+
+                            <p>
+                                Les paramètres affichés ici proviennent
+                                de la base locale sécurisée de Phoenix Vision AI.
+                                Les modifications autorisées sont
+                                journalisées et vérifiables.
+                            </p>
+
+                        </div>
+
+
+                        <span
+                            class="phx-status success"
+                            id="settings-overview-status"
+                        >
+                            OPÉRATIONNEL
+                        </span>
+
+
+                    </article>
+
+
+                    <div class="settings-overview-grid">
+
+
+                        <article class="phx-panel settings-info-card">
+
+                            <span>
+                                VERSION INSTALLÉE
+                            </span>
+
+                            <strong
+                                id="settings-overview-version"
+                            >
+                                —
+                            </strong>
+
+                            <small>
+                                Version locale Phoenix Vision AI
+                            </small>
+
+                        </article>
+
+
+                        <article class="phx-panel settings-info-card">
+
+                            <span>
+                                LANGUE PAR DÉFAUT
+                            </span>
+
+                            <strong
+                                id="settings-overview-language"
+                            >
+                                —
+                            </strong>
+
+                            <small>
+                                Français par défaut
+                            </small>
+
+                        </article>
+
+
+                        <article class="phx-panel settings-info-card">
+
+                            <span>
+                                MON RÔLE
+                            </span>
+
+                            <strong
+                                id="settings-overview-role"
+                            >
+                                —
+                            </strong>
+
+                            <small>
+                                Autorisations déterminées côté serveur
+                            </small>
+
+                        </article>
+
+
+                        <article class="phx-panel settings-info-card">
+
+                            <span>
+                                SITE
+                            </span>
+
+                            <strong
+                                id="settings-overview-site"
+                            >
+                                NON CONFIGURÉ
+                            </strong>
+
+                            <small>
+                                Installation locale
+                            </small>
+
+                        </article>
+
+
+                    </div>
+
+
+                    <article class="phx-panel settings-control-center-card">
+
+
+                        <div>
+
+                            <span class="settings-card-label">
+                                MISES À JOUR
+                            </span>
+
+                            <h3>
+                                Phoenix Control Center
+                            </h3>
+
+                            <p>
+                                La distribution centralisée des versions,
+                                licences et mises à jour sera pilotée par
+                                Phoenix Control Center. Cette installation
+                                n'est pas encore reliée au service central
+                                de déploiement.
+                            </p>
+
+                        </div>
+
+
+                        <span class="phx-status warning">
+                            NON CONNECTÉ
+                        </span>
+
+
+                    </article>
+
+
+                    <article class="phx-panel settings-customer-card">
+
+
+                        <div>
+
+                            <span class="settings-card-label">
+                                ORGANISATION CLIENTE
+                            </span>
+
+                            <h3 id="settings-customer-name">
+                                À CONFIGURER
+                            </h3>
+
+                            <p>
+                                L'identité officielle du client, son logo,
+                                sa licence et son contrat seront fournis
+                                par Phoenix Admin et Phoenix Control Center.
+                            </p>
+
+                        </div>
+
+
+                        <div class="settings-customer-logo-placeholder">
+                            CLIENT
+                        </div>
+
+
+                    </article>
+
+
+                </section>
+
+
+                <!-- ==========================================
+                     CATEGORIES DYNAMIQUES
+                =========================================== -->
+
+                <section
+                    class="settings-view"
+                    data-settings-view="GENERAL"
+                >
+
+                    <div class="settings-view-heading">
+                        <div>
+                            <div class="phx-page-kicker">
+                                INSTALLATION LOCALE
+                            </div>
+
+                            <h2>GÉNÉRAL</h2>
+
+                            <p>
+                                Identification du site, localisation
+                                générale et fuseau horaire.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div
+                        class="settings-fields"
+                        data-settings-category="GENERAL"
+                    ></div>
+
+                    <button
+                        class="phx-button settings-save-category"
+                        type="button"
+                        data-save-category="GENERAL"
+                        hidden
+                    >
+                        ENREGISTRER LES MODIFICATIONS
+                    </button>
+
+                </section>
+
+
+                <section
+                    class="settings-view"
+                    data-settings-view="INTERFACE"
+                >
+
+                    <div class="settings-view-heading">
+                        <div>
+                            <div class="phx-page-kicker">
+                                EXPÉRIENCE UTILISATEUR
+                            </div>
+
+                            <h2>INTERFACE</h2>
+
+                            <p>
+                                Langue par défaut et formats
+                                d'affichage de l'installation.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="settings-language-notice">
+                        Français est la langue opérationnelle actuelle.
+                        English est préparé côté configuration mais sera
+                        activé lorsque la traduction complète de Phoenix Vision AI
+                        sera disponible.
+                    </div>
+
+
+                    <div
+                        class="settings-fields"
+                        data-settings-category="INTERFACE"
+                    ></div>
+
+                    <button
+                        class="phx-button settings-save-category"
+                        type="button"
+                        data-save-category="INTERFACE"
+                        hidden
+                    >
+                        ENREGISTRER LES MODIFICATIONS
+                    </button>
+
+                </section>
+
+
+                <section
+                    class="settings-view"
+                    data-settings-view="OPERATIONS"
+                >
+
+                    <div class="settings-view-heading">
+                        <div>
+                            <div class="phx-page-kicker">
+                                POLITIQUES LOCALES
+                            </div>
+
+                            <h2>EXPLOITATION</h2>
+
+                            <p>
+                                Règles opérationnelles applicables
+                                à cette installation Phoenix Vision AI.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div
+                        class="settings-fields"
+                        data-settings-category="OPERATIONS"
+                    ></div>
+
+                    <button
+                        class="phx-button settings-save-category"
+                        type="button"
+                        data-save-category="OPERATIONS"
+                        hidden
+                    >
+                        ENREGISTRER LES MODIFICATIONS
+                    </button>
+
+                </section>
+
+
+                <section
+                    class="settings-view"
+                    data-settings-view="ANPR"
+                >
+
+                    <div class="settings-view-heading">
+                        <div>
+                            <div class="phx-page-kicker">
+                                IDENTIFICATION VÉHICULE
+                            </div>
+
+                            <h2>LAPI / ANPR</h2>
+
+                            <p>
+                                Préférences locales de lecture
+                                et de vérification des plaques.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div
+                        class="settings-fields"
+                        data-settings-category="ANPR"
+                    ></div>
+
+                    <button
+                        class="phx-button settings-save-category"
+                        type="button"
+                        data-save-category="ANPR"
+                        hidden
+                    >
+                        ENREGISTRER LES MODIFICATIONS
+                    </button>
+
+                </section>
+
+
+                <section
+                    class="settings-view"
+                    data-settings-view="REPORTS"
+                >
+
+                    <div class="settings-view-heading">
+                        <div>
+                            <div class="phx-page-kicker">
+                                DOCUMENTATION OPÉRATIONNELLE
+                            </div>
+
+                            <h2>RAPPORTS</h2>
+
+                            <p>
+                                Valeurs par défaut utilisées lors
+                                de la génération des rapports.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div
+                        class="settings-fields"
+                        data-settings-category="REPORTS"
+                    ></div>
+
+                    <button
+                        class="phx-button settings-save-category"
+                        type="button"
+                        data-save-category="REPORTS"
+                        hidden
+                    >
+                        ENREGISTRER LES MODIFICATIONS
+                    </button>
+
+                </section>
+
+
+                <!-- ==========================================
+                     SECURITY
+                =========================================== -->
+
+                <section
+                    class="settings-view"
+                    data-settings-view="security"
+                >
+
+                    <div class="settings-view-heading">
+
+                        <div>
+                            <div class="phx-page-kicker">
+                                CONTRÔLE D'ACCÈS
+                            </div>
+
+                            <h2>
+                                SÉCURITÉ & AUTORISATIONS
+                            </h2>
+
+                            <p>
+                                Consultation des droits effectifs.
+                                La gestion des utilisateurs et des rôles
+                                reste réservée à Phoenix Admin.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <article class="phx-panel settings-security-card">
+
+                        <div class="settings-security-role">
+
+                            <span>
+                                UTILISATEUR
+                            </span>
+
+                            <strong
+                                id="settings-security-user"
+                            >
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="settings-security-role">
+
+                            <span>
+                                RÔLE
+                            </span>
+
+                            <strong
+                                id="settings-security-role"
+                            >
+                                —
+                            </strong>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="phx-panel settings-rules-card">
+
+                        <div class="settings-card-heading">
+
+                            <div>
+                                <span class="settings-card-label">
+                                    RÈGLES OBLIGATOIRES
+                                </span>
+
+                                <h3>
+                                    Protection Phoenix Vision AI
+                                </h3>
+                            </div>
+
+                            <span class="phx-status success">
+                                ACTIVES
+                            </span>
+
+                        </div>
+
+
+                        <div
+                            id="settings-mandatory-rules"
+                            class="settings-mandatory-rules"
+                        >
+                            Chargement des règles…
+                        </div>
+
+                    </article>
+
+
+                    <article class="phx-panel settings-permissions-card">
+
+                        <div class="settings-card-heading">
+
+                            <div>
+                                <span class="settings-card-label">
+                                    MES AUTORISATIONS
+                                </span>
+
+                                <h3>
+                                    Droits effectifs
+                                </h3>
+                            </div>
+
+                        </div>
+
+
+                        <div class="settings-permission-summary">
+
+                            <div class="settings-permission-counter">
+                                <span>AUTORISÉES</span>
+
+                                <strong
+                                    id="settings-permissions-allowed"
+                                >
+                                    —
+                                </strong>
+                            </div>
+
+
+                            <div class="settings-permission-counter restricted">
+                                <span>RESTREINTES</span>
+
+                                <strong
+                                    id="settings-permissions-restricted"
+                                >
+                                    —
+                                </strong>
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            id="settings-my-permissions"
+                            class="settings-permission-groups"
+                        >
+                            Chargement…
+                        </div>
+
+                    </article>
+
+
+                    <article class="phx-panel settings-admin-transition-card">
+
+                        <div>
+
+                            <span class="settings-card-label">
+                                GESTION DES UTILISATEURS
+                            </span>
+
+                            <h3>
+                                Phoenix Admin
+                            </h3>
+
+                            <p>
+                                La gestion complète des dossiers utilisateurs,
+                                rôles, accès, suspensions et documents sera
+                                centralisée dans Phoenix Admin.
+                            </p>
+
+                            <p class="settings-admin-transition-note">
+                                Pendant le développement, le menu Utilisateurs
+                                de Phoenix Vision AI reste disponible pour la
+                                création et la validation des comptes de test.
+                            </p>
+
+                        </div>
+
+
+                        <span class="phx-status warning">
+                            TRANSITION
+                        </span>
+
+                    </article>
+
+
+                    <article
+                        id="settings-permission-matrix-card"
+                        class="phx-panel settings-permissions-card"
+                        hidden
+                    >
+
+                        <div class="settings-card-heading">
+
+                            <div>
+                                <span class="settings-card-label">
+                                    MATRICE DES RÔLES
+                                </span>
+
+                                <h3>
+                                    Vue en lecture seule
+                                </h3>
+                            </div>
+
+                        </div>
+
+
+                        <div class="settings-table-scroll">
+
+                            <table class="settings-table">
+
+                                <thead>
+                                    <tr>
+                                        <th>Autorisation</th>
+                                        <th>Admin</th>
+                                        <th>Superviseur</th>
+                                        <th>Analyste</th>
+                                        <th>Opérateur</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody
+                                    id="settings-permission-matrix"
+                                ></tbody>
+
+                            </table>
+
+                        </div>
+
+                    </article>
+
+
+                </section>
+
+
+                <!-- ==========================================
+                     AUDIT
+                =========================================== -->
+
+                <section
+                    class="settings-view"
+                    data-settings-view="audit"
+                >
+
+                    <div class="settings-view-heading">
+
+                        <div>
+                            <div class="phx-page-kicker">
+                                TRAÇABILITÉ
+                            </div>
+
+                            <h2>
+                                JOURNAL DES MODIFICATIONS
+                            </h2>
+
+                            <p>
+                                Historique des changements apportés
+                                aux paramètres de cette installation.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <article class="phx-panel settings-audit-card">
+
+                        <div class="settings-card-heading">
+
+                            <div>
+                                <span class="settings-card-label">
+                                    CHAÎNE D'AUDIT
+                                </span>
+
+                                <h3 id="settings-audit-integrity">
+                                    Vérification…
+                                </h3>
+                            </div>
+
+                        </div>
+
+
+                        <div class="settings-table-scroll">
+
+                            <table class="settings-table">
+
+                                <thead>
+                                    <tr>
+                                        <th>Action</th>
+                                        <th>Paramètre</th>
+                                        <th>Acteur</th>
+                                        <th>Rôle</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody
+                                    id="settings-audit-table"
+                                ></tbody>
+
+                            </table>
+
+                        </div>
+
+                    </article>
+
+
+                </section>
+
+
+                <!-- ==========================================
+                     INSTALLATION
+                =========================================== -->
+
+                <section
+                    class="settings-view"
+                    data-settings-view="installation"
+                >
+
+                    <div class="settings-view-heading">
+
+                        <div>
+                            <div class="phx-page-kicker">
+                                SYSTÈME LOCAL
+                            </div>
+
+                            <h2>
+                                INFORMATIONS D'INSTALLATION
+                            </h2>
+
+                            <p>
+                                Informations techniques non sensibles
+                                de l'installation Phoenix Vision AI.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="settings-installation-grid"
+                        class="settings-installation-grid"
+                    ></div>
+
+
+                    <article class="phx-panel settings-update-card">
+
+                        <div>
+
+                            <span class="settings-card-label">
+                                DERNIÈRE MISE À JOUR
+                            </span>
+
+                            <h3 id="settings-last-update-version">
+                                Version actuelle
+                            </h3>
+
+                            <p>
+                                Le service de distribution centralisée
+                                sera fourni par Phoenix Control Center.
+                                Aucune mise à jour distante n'est
+                                actuellement exécutée depuis cette page.
+                            </p>
+
+                        </div>
+
+
+                        <span class="phx-status warning">
+                            MODE LOCAL
+                        </span>
+
+                    </article>
+
+
+                </section>
+
+
+                <!-- ==========================================
+                     LEGAL
+                =========================================== -->
+
+                <section
+                    class="settings-view"
+                    data-settings-view="legal"
+                >
+
+                    <div class="settings-view-heading">
+
+                        <div>
+                            <div
+                                class="phx-page-kicker"
+                                id="settings-legal-publisher-kicker"
+                            >
+                                ÉDITEUR
+                            </div>
+
+                            <h2>
+                                VERSION & INFORMATIONS LÉGALES
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <article class="phx-panel settings-about-card">
+
+
+                        <img
+                            src="/static/images/logoS.png"
+                            alt="Phoenix"
+                        >
+
+
+                        <div>
+
+                            <span class="settings-card-label">
+                                PRODUIT
+                            </span>
+
+                            <h2
+                                id="settings-about-product"
+                            >
+                                —
+                            </h2>
+
+                            <p
+                                id="settings-about-version"
+                            >
+                                Version —
+                            </p>
+
+                            <p
+                                id="settings-about-copyright"
+                            >
+                                —
+                            </p>
+
+                        </div>
+
+
+                    </article>
+
+
+                    <article class="phx-panel settings-legal-card">
+
+                        <span class="settings-card-label">
+                            LICENCE
+                        </span>
+
+                        <h3
+                            id="settings-license-name"
+                        >
+                            —
+                        </h3>
+
+                        <span
+                            class="phx-status success"
+                            id="settings-license-status"
+                        >
+                            LOGICIEL PROPRIÉTAIRE
+                        </span>
+
+                        <p
+                            id="settings-license-description"
+                        >
+                            Logiciel propriétaire.
+                            Les composants tiers restent soumis à leurs
+                            licences respectives.
+                        </p>
+
+                        <p class="settings-legal-note">
+                            Les informations de cette page sont informatives.
+                            Le fichier LICENSE du projet et les contrats
+                            signés constituent les références applicables.
+                        </p>
+
+                    </article>
+
+
+                    <article class="phx-panel settings-help-card">
+
+                        <span class="settings-card-label">
+                            GUIDE D'UTILISATION
+                        </span>
+
+                        <h3>
+                            Centre d'aide Phoenix Vision AI
+                        </h3>
+
+                        <p>
+                            Le guide intégré accompagnera les opérations
+                            quotidiennes. Les formations opérateur,
+                            superviseur et administrateur resteront des
+                            prestations professionnelles distinctes.
+                        </p>
+
+                        <span class="phx-status warning">
+                            GUIDE EN PRÉPARATION
+                        </span>
+
+                    </article>
+
+
+                </section>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+<script
+    src="/static/js/enterprise/settings_console.js?v=4.9.6"
+></script>
+
+
+</body>
+
+</html>

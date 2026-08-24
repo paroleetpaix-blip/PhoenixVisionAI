@@ -46,6 +46,10 @@ document.addEventListener(
 
         let records = [];
 
+        let showConfidence = true;
+
+        let reviewUncertainReads = true;
+
         let currentFilter =
             "ALL";
 
@@ -145,9 +149,141 @@ document.addEventListener(
         }
 
 
+        async function loadAnprDisplaySettings() {
+
+            try {
+
+                const response = await fetch(
+                    "/api/settings/category/ANPR",
+                    {
+                        credentials:
+                            "same-origin"
+                    }
+                );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        (
+                            "Erreur HTTP "
+                            +
+                            response.status
+                        )
+                    );
+
+                }
+
+
+                const data =
+                    await response.json();
+
+
+                const settings = (
+                    Array.isArray(
+                        data.settings
+                    )
+                    ?
+                    data.settings
+                    :
+                    []
+                );
+
+
+                const confidenceSetting =
+                    settings.find(
+                        item =>
+                            item.key
+                            ===
+                            "anpr.show_confidence"
+                    );
+
+
+                const reviewSetting =
+                    settings.find(
+                        item =>
+                            item.key
+                            ===
+                            "anpr.review_uncertain_reads"
+                    );
+
+
+                showConfidence = (
+                    confidenceSetting
+                    ?
+                    Boolean(
+                        confidenceSetting.value
+                    )
+                    :
+                    true
+                );
+
+
+                reviewUncertainReads = (
+                    reviewSetting
+                    ?
+                    Boolean(
+                        reviewSetting.value
+                    )
+                    :
+                    true
+                );
+
+
+            }
+            catch (error) {
+
+                /*
+                Valeur de repli :
+                en cas d'indisponibilité de Settings,
+                la console LAPI reste fonctionnelle.
+                */
+
+                showConfidence =
+                    true;
+
+                reviewUncertainReads =
+                    true;
+
+
+                console.warn(
+                    (
+                        "Phoenix Vision AI : "
+                        +
+                        "paramètre d'affichage "
+                        +
+                        "de la confiance LAPI "
+                        +
+                        "indisponible."
+                    ),
+                    error
+                );
+
+            }
+
+
+            document
+                .documentElement
+                .classList
+                .toggle(
+                    "anpr-confidence-hidden",
+                    !showConfidence
+                );
+
+        }
+
+
         function confidence(
             value
         ) {
+
+            if (!showConfidence) {
+
+                return "MASQUÉ";
+
+            }
+
+
 
             const number =
                 Number(
@@ -242,6 +378,24 @@ document.addEventListener(
         function isReview(
             record
         ) {
+
+            if (!reviewUncertainReads) {
+
+                return false;
+
+            }
+
+
+            if (
+                typeof record.review_required
+                ===
+                "boolean"
+            ) {
+
+                return record.review_required;
+
+            }
+
 
             const status =
                 safe(
@@ -1208,7 +1362,14 @@ document.addEventListener(
         );
 
 
-        loadRecent();
+        loadAnprDisplaySettings()
+            .then(
+                () => {
+
+                    loadRecent();
+
+                }
+            );
 
 
         window.setInterval(

@@ -1011,10 +1011,152 @@ document.addEventListener(
         }
 
 
+        async function confirmWatchlistSensitiveAction() {
+
+            let label =
+                "Valider une surveillance";
+
+
+            try {
+
+                const response = await fetch(
+                    "/api/settings/security-policy",
+                    {
+                        credentials:
+                            "same-origin"
+                    }
+                );
+
+
+                if (response.ok) {
+
+                    const data =
+                        await response.json();
+
+
+                    const policy = (
+                        data
+                        &&
+                        data.sensitive_actions
+                        ?
+                        data.sensitive_actions
+                        :
+                        null
+                    );
+
+
+                    if (
+                        policy
+                        &&
+                        policy.enabled
+                        ===
+                        false
+                    ) {
+
+                        return true;
+
+                    }
+
+
+                    const action = (
+                        policy
+                        &&
+                        policy.actions
+                        ?
+                        policy.actions[
+                            "WATCHLIST_APPROVE"
+                        ]
+                        :
+                        null
+                    );
+
+
+                    if (
+                        action
+                        &&
+                        action.label
+                    ) {
+
+                        label =
+                            action.label;
+
+                    }
+
+                }
+
+            }
+            catch (error) {
+
+                /*
+                Mode conservateur :
+                en cas d'indisponibilité de la politique,
+                la confirmation reste obligatoire.
+                */
+
+                console.warn(
+                    (
+                        "Phoenix Vision AI : "
+                        +
+                        "politique de confirmation "
+                        +
+                        "indisponible."
+                    ),
+                    error
+                );
+
+            }
+
+
+            return window.confirm(
+                (
+                    "CONFIRMER CETTE ACTION SENSIBLE\n\n"
+                    +
+                    label
+                    +
+                    "\n\n"
+                    +
+                    "Cette validation sera soumise "
+                    +
+                    "aux droits de votre compte "
+                    +
+                    "et restera traçable."
+                )
+            );
+
+        }
+
+
         async function approveEntry(
             entryUuid,
             button
         ) {
+
+            /*
+            La vérification RBAC serveur reste obligatoire.
+            Cette confirmation protège uniquement
+            l'intention humaine avant l'action.
+            */
+
+            if (
+                !capabilities.approve_local
+            ) {
+
+                return;
+
+            }
+
+
+            const approvalConfirmed =
+                await confirmWatchlistSensitiveAction();
+
+
+            if (!approvalConfirmed) {
+
+                return;
+
+            }
+
+
 
             if(
                 !capabilities.approve_local

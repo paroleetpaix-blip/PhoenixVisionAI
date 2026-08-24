@@ -97,6 +97,25 @@ Le projet est encore en développement. Les entrées **Unreleased** ne constitue
 - Acquittement persistant des alertes.
 - APIs temporelles communes pour historique, événements, alertes et Watchlist.
 
+### Paramètres Enterprise
+- Nouvelle console Paramètres Enterprise accessible via `/settings`.
+- Base Settings persistante locale avec révisions et journal d’audit à chaîne d’intégrité.
+- Paramètres organisés par catégories : Général, Interface, Exploitation, LAPI / ANPR, Rapports et Installation.
+- Validation centralisée des valeurs et protection des paramètres système en lecture seule.
+- Contrôle d’accès Settings par rôles et permissions côté serveur.
+- Matrice des autorisations et règles de sécurité obligatoires consultables depuis la console.
+- Configuration du site, pays, ville et fuseau horaire.
+- Infrastructure i18n préparée : français actif et anglais préparé mais non activable.
+- Paramètres Rapports réellement raccordés à la période et aux sections par défaut.
+- Affichage de la confiance LAPI configurable sans suppression des données internes.
+- Politique de vérification humaine des lectures LAPI incertaines.
+- Politique centralisée des actions sensibles avec confirmation avant impression, export PDF et validation locale de surveillance.
+- Informations produit, version, édition, éditeur et licence reliées à la source canonique `core/constants.py`.
+- Informations techniques d'installation locale exposées sans données sensibles.
+- Gestion future des mises à jour explicitement réservée à Phoenix Control Center ; aucun faux mécanisme distant n'est simulé.
+- Navigation Paramètres harmonisée sur les consoles Enterprise.
+- Firefox / Lubuntu validé pour la console Paramètres et les interactions testées de cette phase.
+
 ### Rapports Enterprise
 - Ajout d’un registre persistant `reports.db`.
 - Références uniques de type `PHX-RPT-YYYYMMDD-XXXXXXXX`.

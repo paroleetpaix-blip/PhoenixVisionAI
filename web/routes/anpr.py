@@ -36,6 +36,12 @@ from core.security.session import (
     session_manager
 )
 
+from core.anpr.review_policy import (
+    requires_human_review,
+    review_policy_status,
+    review_uncertain_reads_enabled,
+)
+
 from core.watchlist.watchlist_database import (
     watchlist_database
 )
@@ -398,6 +404,52 @@ async def anpr_api(
     )
 
 
+    review_enabled = (
+        review_uncertain_reads_enabled()
+    )
+
+
+    serialized_records = []
+
+    for record in recent:
+
+        serialized = (
+            serialize_record(
+                record
+            )
+        )
+
+        serialized[
+            "review_required"
+        ] = requires_human_review(
+            serialized,
+            enabled=
+                review_enabled,
+        )
+
+        serialized_records.append(
+            serialized
+        )
+
+
+    stats_payload = dict(
+        stats
+        or
+        {}
+    )
+
+    stats_payload[
+        "review_required"
+    ] = sum(
+        1
+        for record
+        in serialized_records
+        if record[
+            "review_required"
+        ]
+    )
+
+
     return {
 
         "success":
@@ -422,18 +474,14 @@ async def anpr_api(
 
         },
 
+        "review_policy":
+            review_policy_status(),
+
         "stats":
-            stats,
+            stats_payload,
 
-        "records": [
-
-            serialize_record(
-                record
-            )
-
-            for record in recent
-
-        ]
+        "records":
+            serialized_records
 
     }
 

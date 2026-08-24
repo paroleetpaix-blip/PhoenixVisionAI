@@ -20,6 +20,7 @@ from web.routes.map import router as map_router
 
 from web.routes.anpr import router as anpr_router
 from web.routes.reports import router as reports_router
+from web.routes.settings import router as settings_router
 from web.routes.enterprise import router as enterprise_router
 
 from web.routes.current_vehicle import router as current_vehicle_router
@@ -79,6 +80,7 @@ app.include_router(map_router)
 
 app.include_router(anpr_router)
 app.include_router(reports_router)
+app.include_router(settings_router)
 app.include_router(current_vehicle_router)
 
 app.include_router(auth_router)

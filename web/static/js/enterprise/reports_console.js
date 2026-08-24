@@ -16,7 +16,25 @@
             export_pdf: false
         },
 
-        reports: []
+        reports: [],
+
+        reportSettings: {},
+
+        securityPolicy: {
+            enabled: true,
+
+            actions: {
+                "REPORT_PRINT": {
+                    label:
+                        "Imprimer un rapport officiel"
+                },
+
+                "REPORT_EXPORT_PDF": {
+                    label:
+                        "Exporter un rapport PDF"
+                }
+            }
+        }
 
     };
 
@@ -375,6 +393,151 @@
         }
 
         return data;
+
+    }
+
+
+    async function loadReportSettings() {
+
+        try {
+
+            const data = await fetchJson(
+                "/api/settings/category/REPORTS"
+            );
+
+
+            const settings = (
+                Array.isArray(
+                    data.settings
+                )
+                ?
+                data.settings
+                :
+                []
+            );
+
+
+            state.reportSettings = {};
+
+
+            settings.forEach(
+                setting => {
+
+                    state.reportSettings[
+                        setting.key
+                    ] = setting.value;
+
+                }
+            );
+
+
+            return true;
+
+        }
+        catch (error) {
+
+            console.warn(
+                (
+                    "Phoenix Vision AI : "
+                    +
+                    "paramètres Rapports indisponibles."
+                ),
+                error
+            );
+
+
+            state.reportSettings = {};
+
+
+            /*
+            La console Rapports reste utilisable
+            avec ses valeurs HTML par défaut.
+            */
+
+            return false;
+
+        }
+
+    }
+
+
+    function applyReportSettings() {
+
+        const defaultPeriod = (
+            state.reportSettings[
+                "reports.default_period"
+            ]
+        );
+
+
+        const periodSelect = byId(
+            "report-period-preset"
+        );
+
+
+        if (
+            defaultPeriod
+            &&
+            periodSelect
+        ) {
+
+            const optionExists = (
+                Array.from(
+                    periodSelect.options
+                )
+                .some(
+                    option =>
+                        option.value
+                        ===
+                        defaultPeriod
+                )
+            );
+
+
+            if (optionExists) {
+
+                periodSelect.value =
+                    defaultPeriod;
+
+            }
+
+        }
+
+
+        const defaultSections = (
+            state.reportSettings[
+                "reports.default_sections"
+            ]
+        );
+
+
+        if (
+            Array.isArray(
+                defaultSections
+            )
+        ) {
+
+            document
+                .querySelectorAll(
+                    (
+                        ".report-section-options "
+                        +
+                        'input[type="checkbox"]'
+                    )
+                )
+                .forEach(
+                    checkbox => {
+
+                        checkbox.checked = (
+                            defaultSections.includes(
+                                checkbox.value
+                            )
+                        );
+
+                    }
+                );
+
+        }
 
     }
 
@@ -1200,6 +1363,113 @@
     }
 
 
+    async function loadSecurityPolicy() {
+
+        try {
+
+            const data = await fetchJson(
+                "/api/settings/security-policy"
+            );
+
+
+            if (
+                data
+                &&
+                data.sensitive_actions
+            ) {
+
+                state.securityPolicy =
+                    data.sensitive_actions;
+
+            }
+
+        }
+        catch (error) {
+
+            /*
+            Mode conservateur :
+            si la politique n'est pas disponible,
+            les confirmations sensibles restent actives.
+            */
+
+            console.warn(
+                (
+                    "Phoenix Vision AI : "
+                    +
+                    "politique des actions sensibles "
+                    +
+                    "indisponible."
+                ),
+                error
+            );
+
+        }
+
+    }
+
+
+    function confirmSensitiveAction(
+        action
+    ) {
+
+        const policy = (
+            state.securityPolicy
+            ||
+            {}
+        );
+
+
+        if (
+            policy.enabled
+            ===
+            false
+        ) {
+
+            return true;
+
+        }
+
+
+        const actionPolicy = (
+            policy.actions
+            &&
+            policy.actions[
+                action
+            ]
+        );
+
+
+        if (!actionPolicy) {
+
+            return true;
+
+        }
+
+
+        const label = (
+            actionPolicy.label
+            ||
+            "Action sensible"
+        );
+
+
+        return window.confirm(
+            (
+                "CONFIRMER CETTE ACTION SENSIBLE\n\n"
+                +
+                label
+                +
+                "\n\n"
+                +
+                "Cette opération est soumise "
+                +
+                "aux autorisations de Phoenix Vision AI."
+            )
+        );
+
+    }
+
+
     function exportPdf(
         reference
     ) {
@@ -1208,6 +1478,17 @@
             !reference
             ||
             !state.capabilities.export_pdf
+        ) {
+
+            return;
+
+        }
+
+
+        if (
+            !confirmSensitiveAction(
+                "REPORT_EXPORT_PDF"
+            )
         ) {
 
             return;
@@ -1265,6 +1546,17 @@
             !reference
             ||
             !state.capabilities.print
+        ) {
+
+            return;
+
+        }
+
+
+        if (
+            !confirmSensitiveAction(
+                "REPORT_PRINT"
+            )
         ) {
 
             return;
@@ -1431,6 +1723,10 @@
         "DOMContentLoaded",
         async () => {
 
+            await loadReportSettings();
+
+            applyReportSettings();
+
             setPeriodPreset();
 
 
@@ -1577,6 +1873,8 @@
 
 
             try {
+
+                await loadSecurityPolicy();
 
                 await loadCapabilities();
 

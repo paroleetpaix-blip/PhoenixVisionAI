@@ -40,6 +40,15 @@ ROLE_PERMISSIONS = {
         "reports.print",
         "reports.export_pdf",
 
+        "settings.view",
+        "settings.view_installation",
+        "settings.permissions.view_self",
+        "settings.permissions.view_matrix",
+        "settings.update_operations",
+        "settings.update_anpr",
+        "settings.update_reports",
+        "settings.audit.view",
+
     },
 
 
@@ -63,6 +72,10 @@ ROLE_PERMISSIONS = {
         "reports.print",
         "reports.export_pdf",
 
+        "settings.view",
+        "settings.view_installation",
+        "settings.permissions.view_self",
+
     },
 
 
@@ -77,6 +90,10 @@ ROLE_PERMISSIONS = {
         "history.view",
 
         "evidence.view",
+
+        "settings.view",
+        "settings.view_installation",
+        "settings.permissions.view_self",
 
     },
 

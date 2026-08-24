@@ -65,6 +65,7 @@ Phoenix Vision AI vise notamment à permettre :
 | Événements persistants | ✅ SQLite + API + console |
 | Carte opérationnelle | ✅ Mode topologique ; GPS réel à configurer |
 | Rapports Enterprise | ✅ Génération, recherche, impression, PDF et audit |
+| Paramètres Enterprise | ✅ Configuration persistante, RBAC, audit, LAPI, Rapports et installation |
 | Sauvegardes Enterprise | 🔄 À construire |
 
 ### Vision IA et ANPR
@@ -230,6 +231,34 @@ Les deux fichiers ont actuellement :
 `route.avi` reste utile comme **référence visuelle de détection**.
 
 ---
+
+### Paramètres Enterprise — état actuel
+
+La console `/settings` constitue le centre de configuration locale de Phoenix Vision AI.
+
+Fonctions actuellement intégrées :
+
+- persistance des paramètres dans une base Settings locale ;
+- révisions et journal d'audit avec contrôle d'intégrité ;
+- validation des paramètres et valeurs système protégées ;
+- permissions Settings contrôlées côté serveur ;
+- configuration du site, de la localisation et du fuseau horaire ;
+- français actif comme langue d'interface, anglais préparé mais non activable ;
+- consultation des droits effectifs et des règles de sécurité obligatoires ;
+- période et sections par défaut réellement appliquées à la console Rapports ;
+- affichage de la confiance LAPI configurable ;
+- vérification humaine configurable pour les lectures LAPI incertaines ;
+- confirmation obligatoire des opérations classées sensibles ;
+- informations d'installation et de runtime non sensibles ;
+- identité produit et version issues de `core/constants.py` ;
+- licence propriétaire affichée depuis la source canonique ;
+- navigation `/settings` harmonisée avec les consoles Enterprise.
+
+Les données techniques de confiance LAPI restent conservées même lorsque leur affichage est masqué. Une lecture OCR incertaine ne constitue pas, à elle seule, un véhicule suspect ou recherché.
+
+La distribution centralisée des mises à jour n'est pas encore implémentée dans Phoenix Vision AI. Elle est prévue comme fonction de Phoenix Control Center.
+
+La console a été validée pendant le développement sous Firefox / Lubuntu. Les autres navigateurs majeurs restent à tester avant une validation de compatibilité générale.
 
 ## 8. Dashboard Enterprise
 
