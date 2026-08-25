@@ -30,6 +30,10 @@ import json
 
 from pathlib import Path
 
+from core.users_registry.user_service import (
+    user_registry_service,
+)
+
 router = APIRouter()
 
 APPROVED_USERS_FILE = Path(
@@ -277,6 +281,111 @@ def login(
 
                 "message":
                     "Identifiants incorrects"
+
+            }
+
+        )
+
+
+    # ====================================================
+    # ENTERPRISE USER REGISTRY — LOGIN
+    # ====================================================
+
+    try:
+
+        user_registry_service.record_login(
+            user[
+                "username"
+            ],
+            actor_role=
+                user.get(
+                    "role"
+                )
+                or
+                "OPERATOR",
+        )
+
+    except Exception as error:
+
+        print(
+            "Phoenix User Registry "
+            "login synchronization warning:",
+            type(
+                error
+            ).__name__,
+        )
+
+
+    if (
+        user.get(
+            "access_allowed",
+            True
+        )
+        is False
+    ):
+
+        error = str(
+            user.get(
+                "access_error"
+            )
+            or
+            "ACCOUNT_NOT_ACTIVE"
+        )
+
+
+        messages = {
+
+            "ACCOUNT_SUSPENDED":
+                (
+                    "Votre accès à Phoenix Vision AI "
+                    "est temporairement suspendu."
+                ),
+
+            "ACCOUNT_DISABLED":
+                (
+                    "Ce compte n'est plus autorisé "
+                    "à accéder au système."
+                ),
+
+            "ACCOUNT_EXPIRED":
+                (
+                    "La période d'autorisation "
+                    "de ce compte est terminée."
+                ),
+
+            "ACCOUNT_NOT_ACTIVE":
+                (
+                    "Ce compte n'est pas actuellement "
+                    "autorisé à accéder au système."
+                ),
+
+        }
+
+
+        return JSONResponse(
+
+            status_code=403,
+
+            content={
+
+                "success":
+                    False,
+
+                "error":
+                    error,
+
+                "account_status":
+                    user.get(
+                        "account_status"
+                    ),
+
+                "message":
+                    messages.get(
+                        error,
+                        messages[
+                            "ACCOUNT_NOT_ACTIVE"
+                        ]
+                    )
 
             }
 

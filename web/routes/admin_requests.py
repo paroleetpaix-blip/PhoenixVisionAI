@@ -35,6 +35,11 @@ from fastapi.responses import (
 )
 
 
+from core.security.permissions import (
+    session_has_permission,
+)
+
+
 from core.security.session import (
     session_manager
 )
@@ -48,6 +53,10 @@ from web.routes.account_request import (
     save_requests
 )
 
+
+from core.users_registry.user_service import (
+    user_registry_service,
+)
 
 router = APIRouter()
 
@@ -120,9 +129,10 @@ def get_admin_session(
         return None
 
 
-    if session.get(
-        "role"
-    ) != "ADMIN":
+    if not session_has_permission(
+        session,
+        "users.approve_request",
+    ):
 
         return None
 
@@ -974,6 +984,43 @@ async def approve_account_request(
     save_approved_users(
         approved_users
     )
+
+    # ====================================================
+    # ENTERPRISE USER REGISTRY
+    # ====================================================
+
+    try:
+
+        user_registry_service.sync_approved_account(
+            existing_account,
+            request=
+                target,
+            actor_username=
+                admin_session.get(
+                    "username"
+                )
+                or
+                "SYSTEM",
+            actor_role=
+                admin_session.get(
+                    "role"
+                )
+                or
+                "ADMIN",
+            reason=
+                "Approbation ou mise à jour du compte",
+        )
+
+    except Exception as error:
+
+        print(
+            "Phoenix User Registry "
+            "approval synchronization warning:",
+            type(
+                error
+            ).__name__,
+        )
+
 
     # ====================================================
     # EMAIL D'ACTIVATION

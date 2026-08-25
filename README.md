@@ -66,6 +66,7 @@ Phoenix Vision AI vise notamment à permettre :
 | Carte opérationnelle | ✅ Mode topologique ; GPS réel à configurer |
 | Rapports Enterprise | ✅ Génération, recherche, impression, PDF et audit |
 | Paramètres Enterprise | ✅ Configuration persistante, RBAC, audit, LAPI, Rapports et installation |
+| Utilisateurs Enterprise | ✅ Registre, cycle de vie, RBAC, console, audit, impression A4 et QR interne |
 | Sauvegardes Enterprise | 🔄 À construire |
 
 ### Vision IA et ANPR
@@ -259,6 +260,37 @@ Les données techniques de confiance LAPI restent conservées même lorsque leur
 La distribution centralisée des mises à jour n'est pas encore implémentée dans Phoenix Vision AI. Elle est prévue comme fonction de Phoenix Control Center.
 
 La console a été validée pendant le développement sous Firefox / Lubuntu. Les autres navigateurs majeurs restent à tester avant une validation de compatibilité générale.
+
+
+### Utilisateurs Enterprise — état actuel
+
+La gestion des utilisateurs dispose désormais d'un registre administratif
+Enterprise distinct du stockage des identifiants d'authentification.
+
+Fonctionnalités actuellement opérationnelles :
+
+- registre persistant local `users.db` avec identifiant utilisateur stable ;
+- synchronisation avec le workflow historique de demandes et d'approbation ;
+- cycle de vie `APPROVED`, `ACTIVE`, `SUSPENDED`, `DISABLED` et `EXPIRED` ;
+- contrôle réel de l'accès lors de la connexion et pendant les sessions ;
+- révocation des sessions après suspension, désactivation ou changement de rôle ;
+- permissions d'administration utilisateurs intégrées au RBAC central ;
+- accès complet pour ADMIN et consultation limitée pour SUPERVISOR ;
+- protection des informations sensibles selon les permissions ;
+- console `/users` avec recherche, filtres, dossiers et états de compte ;
+- compteur réel des demandes de comptes encore en attente ;
+- modification administrative contrôlée des dossiers ;
+- suspension, désactivation et réactivation avec motif obligatoire ;
+- changement de rôle contrôlé entre OPERATOR, ANALYST et SUPERVISOR ;
+- promotion directe vers ADMIN interdite depuis Phoenix Vision AI ;
+- journal d'audit utilisateur à chaîne d'intégrité ;
+- fiche utilisateur officielle A4 avec photo, rôle, statut et droits effectifs ;
+- QR interne ne contenant que la référence Phoenix `PHX-USER:<user_id>` ;
+- aucun hash, sel ou mot de passe n'est enregistré dans le registre administratif.
+
+Le workflow temporaire `/admin/requests` reste utilisé pendant le développement
+pour l'approbation initiale et la génération du mot de passe temporaire.
+À terme, la gouvernance complète des comptes sera intégrée à Phoenix Admin.
 
 ## 8. Dashboard Enterprise
 

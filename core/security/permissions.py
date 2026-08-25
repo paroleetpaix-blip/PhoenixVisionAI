@@ -49,6 +49,11 @@ ROLE_PERMISSIONS = {
         "settings.update_reports",
         "settings.audit.view",
 
+        # Utilisateurs — supervision en lecture
+        "users.view",
+        "users.view_audit",
+        "users.print",
+
     },
 
 

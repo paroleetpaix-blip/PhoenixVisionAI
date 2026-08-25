@@ -45,6 +45,8 @@ from web.routes.change_password import (
 
 from web.routes.logout import router as logout_router
 
+from web.routes.users import router as users_router
+
 app = FastAPI(
     title="Phoenix Vision AI"
 )
@@ -98,3 +100,5 @@ app.include_router(
 app.include_router(
     change_password_router
 )
+
+app.include_router(users_router)

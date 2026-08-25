@@ -90,6 +90,44 @@ PERMISSION_GROUPS = {
     },
 
 
+    "USERS": {
+        "label":
+            "Utilisateurs",
+
+        "permissions": {
+            "users.view":
+                "Consulter les utilisateurs",
+
+            "users.view_sensitive":
+                "Consulter les données administratives sensibles",
+
+            "users.edit":
+                "Modifier un dossier utilisateur",
+
+            "users.approve_request":
+                "Approuver une demande de compte",
+
+            "users.suspend":
+                "Suspendre un compte",
+
+            "users.disable":
+                "Désactiver un compte",
+
+            "users.reactivate":
+                "Réactiver un compte",
+
+            "users.change_role":
+                "Modifier le rôle d'un utilisateur",
+
+            "users.view_audit":
+                "Consulter l'historique administratif d'un utilisateur",
+
+            "users.print":
+                "Imprimer une fiche utilisateur",
+        },
+    },
+
+
     "SETTINGS": {
         "label":
             "Paramètres",
@@ -185,6 +223,22 @@ MANDATORY_SECURITY_RULES = [
             (
                 "Phoenix Vision AI ne peut pas déclarer seul "
                 "un véhicule officiellement recherché."
+            ),
+    },
+
+    {
+        "id":
+            "restricted_admin_promotion",
+
+        "label":
+            "Promotion ADMIN renforcée",
+
+        "description":
+            (
+                "Phoenix Vision AI n'autorise pas une promotion "
+                "directe vers le rôle ADMIN. Cette opération "
+                "est réservée à une procédure administrative "
+                "renforcée de Phoenix Admin."
             ),
     },
 

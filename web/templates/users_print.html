@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Fiche utilisateur — Phoenix Vision AI
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/users_print.css"
+    >
+
+</head>
+
+
+<body
+    data-username="__PHOENIX_USERNAME__"
+>
+
+
+<div class="print-toolbar">
+
+    <button
+        id="print-user-sheet"
+        type="button"
+    >
+        Imprimer la fiche
+    </button>
+
+    <button
+        id="close-user-sheet"
+        type="button"
+    >
+        Fermer
+    </button>
+
+</div>
+
+
+<main
+    id="user-sheet"
+    class="user-sheet loading"
+>
+
+
+    <header class="sheet-header">
+
+        <div class="sheet-brand">
+
+            <img
+                src="/static/images/logoS.png"
+                alt="Phoenix"
+            >
+
+            <div>
+                <strong>
+                    PHOENIX SECURITY TECHNOLOGIES
+                </strong>
+
+                <span>
+                    PHOENIX VISION AI
+                </span>
+            </div>
+
+        </div>
+
+
+        <div class="sheet-classification">
+
+            <span>
+                DOCUMENT ADMINISTRATIF
+            </span>
+
+            <strong>
+                FICHE UTILISATEUR
+            </strong>
+
+        </div>
+
+    </header>
+
+
+    <section class="sheet-title">
+
+        <div>
+
+            <span>
+                DOSSIER D'ACCÈS · PHOENIX VISION AI
+            </span>
+
+            <h1>
+                FICHE UTILISATEUR
+            </h1>
+
+        </div>
+
+
+        <div class="sheet-reference">
+
+            <span>
+                RÉFÉRENCE
+            </span>
+
+            <strong id="sheet-user-id">
+                —
+            </strong>
+
+        </div>
+
+    </section>
+
+
+    <section class="sheet-profile">
+
+        <img
+            id="sheet-photo"
+            class="sheet-photo"
+            alt=""
+        >
+
+
+        <div class="sheet-profile-content">
+
+            <h2 id="sheet-name">
+                —
+            </h2>
+
+            <p id="sheet-username">
+                —
+            </p>
+
+
+            <div class="sheet-badges">
+
+                <span id="sheet-role">
+                    —
+                </span>
+
+                <span id="sheet-status">
+                    —
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="sheet-qr-box">
+
+            <img
+                id="sheet-qr"
+                alt="QR d'identification Phoenix"
+            >
+
+            <span>
+                IDENTIFICATION INTERNE
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <section class="sheet-section">
+
+        <header>
+            IDENTITÉ ET AFFECTATION
+        </header>
+
+
+        <div class="sheet-grid">
+
+            <div>
+                <span>NOM</span>
+                <strong id="sheet-last-name">—</strong>
+            </div>
+
+            <div>
+                <span>POSTNOM</span>
+                <strong id="sheet-middle-name">—</strong>
+            </div>
+
+            <div>
+                <span>PRÉNOM</span>
+                <strong id="sheet-first-name">—</strong>
+            </div>
+
+            <div>
+                <span>MATRICULE</span>
+                <strong id="sheet-matricule">—</strong>
+            </div>
+
+            <div>
+                <span>ORGANISATION</span>
+                <strong id="sheet-organisation">—</strong>
+            </div>
+
+            <div>
+                <span>DÉPARTEMENT</span>
+                <strong id="sheet-department">—</strong>
+            </div>
+
+            <div>
+                <span>FONCTION</span>
+                <strong id="sheet-job">—</strong>
+            </div>
+
+            <div>
+                <span>SITE D'AFFECTATION</span>
+                <strong id="sheet-site">—</strong>
+            </div>
+
+            <div>
+                <span>RESPONSABLE</span>
+                <strong id="sheet-manager">—</strong>
+            </div>
+
+            <div class="sensitive-field">
+                <span>E-MAIL</span>
+                <strong id="sheet-email">—</strong>
+            </div>
+
+            <div class="sensitive-field">
+                <span>TÉLÉPHONE</span>
+                <strong id="sheet-phone">—</strong>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="sheet-section">
+
+        <header>
+            SÉCURITÉ ET AUTORISATION
+        </header>
+
+
+        <div class="sheet-grid">
+
+            <div>
+                <span>IDENTIFIANT PHOENIX</span>
+                <strong id="sheet-login">—</strong>
+            </div>
+
+            <div>
+                <span>RÔLE</span>
+                <strong id="sheet-role-text">—</strong>
+            </div>
+
+            <div>
+                <span>STATUT DU COMPTE</span>
+                <strong id="sheet-status-text">—</strong>
+            </div>
+
+            <div>
+                <span>APPROBATION</span>
+                <strong id="sheet-approved-at">—</strong>
+            </div>
+
+            <div>
+                <span>APPROUVÉ PAR</span>
+                <strong id="sheet-approved-by">—</strong>
+            </div>
+
+            <div>
+                <span>EXPIRATION</span>
+                <strong id="sheet-expiry">—</strong>
+            </div>
+
+            <div>
+                <span>DERNIÈRE CONNEXION</span>
+                <strong id="sheet-last-login">—</strong>
+            </div>
+
+            <div>
+                <span>RÉVISION DOSSIER</span>
+                <strong id="sheet-revision">—</strong>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="sheet-section">
+
+        <header>
+            DROITS EFFECTIFS
+        </header>
+
+        <div
+            id="sheet-permissions"
+            class="sheet-permissions"
+        >
+            Chargement...
+        </div>
+
+    </section>
+
+
+    <footer class="sheet-footer">
+
+        <div>
+
+            <strong>
+                Phoenix Security Technologies
+            </strong>
+
+            <span>
+                Document généré par Phoenix Vision AI
+            </span>
+
+        </div>
+
+
+        <div>
+
+            <span>
+                Généré le
+            </span>
+
+            <strong id="sheet-generated-at">
+                —
+            </strong>
+
+        </div>
+
+
+        <div>
+
+            <span>
+                Référence interne
+            </span>
+
+            <strong id="sheet-footer-id">
+                —
+            </strong>
+
+        </div>
+
+    </footer>
+
+
+</main>
+
+
+<div
+    id="sheet-error"
+    class="sheet-error hidden"
+>
+    Impossible de charger la fiche utilisateur.
+</div>
+
+
+<script src="/static/js/enterprise/users_print.js"></script>
+
+</body>
+</html>

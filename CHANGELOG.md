@@ -133,6 +133,34 @@ Le projet est encore en développement. Les entrées **Unreleased** ne constitue
 - Traçabilité `PDF_EXPORT_REQUESTED` et `PDF_GENERATED`.
 - Les bases d’exploitation restent exclues du dépôt Git.
 
+
+### Utilisateurs Enterprise
+- Ajout du registre administratif persistant `users.db`.
+- Identifiants utilisateur stables de type `USR-...`.
+- Séparation entre données administratives et secrets d'authentification.
+- Aucun hash, sel ou mot de passe stocké dans le registre utilisateurs.
+- Synchronisation avec les demandes et comptes approuvés existants.
+- Cycle de vie utilisateur : APPROVED, ACTIVE, SUSPENDED, DISABLED et EXPIRED.
+- Activation après changement obligatoire du mot de passe temporaire.
+- Contrôle du statut utilisateur lors de la connexion et pendant les sessions actives.
+- Révocation des sessions après suspension, désactivation et changement de rôle.
+- Ajout des permissions d'administration utilisateurs au RBAC central.
+- ADMIN autorisé à administrer les utilisateurs selon les permissions.
+- SUPERVISOR limité à la consultation, l'audit et l'impression.
+- ANALYST et OPERATOR sans accès à l'administration utilisateurs.
+- Promotion directe vers ADMIN interdite depuis Phoenix Vision AI.
+- Protection du rôle ADMIN contre les modifications directes.
+- API Enterprise pour consultation, modification, audit et cycle de vie utilisateur.
+- Console `/users` avec recherche, filtres, statistiques, photos et dossiers professionnels.
+- Compteur réel des demandes de comptes en attente.
+- Données sensibles masquées lorsque le rôle ne possède pas l'autorisation correspondante.
+- Suspension, désactivation et réactivation avec motif obligatoire.
+- Journal d'audit utilisateur chaîné et vérifiable.
+- Fiche utilisateur officielle imprimable au format A4.
+- QR d'identification interne limité à `PHX-USER:<user_id>`.
+- Impression de fiche soumise à la permission `users.print`.
+- Firefox / Lubuntu validé pour la console Utilisateurs et l'aperçu d'impression A4.
+
 ### Compatibilité Web
 - Firefox / Lubuntu validé pour la console Rapports, l’impression et le téléchargement PDF.
 - Architecture Web basée sur standards HTML/CSS/JavaScript et API HTTP.

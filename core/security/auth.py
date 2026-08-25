@@ -25,6 +25,11 @@ from core.security.session import (
 )
 
 
+from core.users_registry.user_service import (
+    user_registry_service,
+)
+
+
 APPROVED_USERS_FILE = Path(
     "data/approved_users.json"
 )
@@ -211,6 +216,58 @@ def authenticate(
             return None
 
 
+        access = (
+            user_registry_service
+            .access_decision(
+                username
+            )
+        )
+
+
+        if (
+            access.get(
+                "known"
+            )
+            and
+            not access.get(
+                "allowed"
+            )
+        ):
+
+            return {
+                "username":
+                    username,
+
+                "role":
+                    approved_user.get(
+                        "role",
+                        "OPERATOR"
+                    ),
+
+                "token":
+                    None,
+
+                "must_change_password":
+                    approved_user.get(
+                        "must_change_password",
+                        True
+                    ),
+
+                "access_allowed":
+                    False,
+
+                "account_status":
+                    access.get(
+                        "status"
+                    ),
+
+                "access_error":
+                    access.get(
+                        "code"
+                    ),
+            }
+
+
         token = (
             session_manager.create(
 
@@ -243,6 +300,15 @@ def authenticate(
                 approved_user.get(
                     "must_change_password",
                     True
+                ),
+
+            "access_allowed":
+                True,
+
+            "account_status":
+                access.get(
+                    "status",
+                    "ACTIVE"
                 )
 
         }

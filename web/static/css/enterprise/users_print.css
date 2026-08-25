@@ -1,0 +1,822 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    min-height: 100%;
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+}
+
+body {
+    padding: 28px;
+    background: #111820;
+    color: #17212b;
+}
+
+.hidden {
+    display: none !important;
+}
+
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
+
+.print-toolbar {
+    width: 210mm;
+    max-width: 100%;
+    margin: 0 auto 18px;
+
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.print-toolbar button {
+    min-height: 38px;
+    padding: 0 15px;
+
+    border: 1px solid #40546a;
+    border-radius: 6px;
+
+    background: #1b2835;
+    color: #e7edf4;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   SHEET
+========================================================= */
+
+.user-sheet {
+    width: 210mm;
+    min-height: 297mm;
+
+    max-width: 100%;
+
+    margin: auto;
+    padding: 15mm 16mm 13mm;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 24px 80px
+        rgba(0, 0, 0, .35);
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.sheet-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding-bottom: 13px;
+
+    border-bottom: 2px solid #17212b;
+}
+
+.sheet-brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.sheet-brand img {
+    width: 45px;
+    height: 45px;
+
+    object-fit: contain;
+}
+
+.sheet-brand div {
+    display: flex;
+    flex-direction: column;
+}
+
+.sheet-brand strong {
+    font-size: 13px;
+    letter-spacing: .08em;
+}
+
+.sheet-brand span {
+    margin-top: 4px;
+
+    color: #66717d;
+
+    font-size: 10px;
+    letter-spacing: .13em;
+}
+
+.sheet-classification {
+    display: flex;
+    flex-direction: column;
+
+    text-align: right;
+}
+
+.sheet-classification span {
+    color: #66717d;
+
+    font-size: 8px;
+    letter-spacing: .13em;
+}
+
+.sheet-classification strong {
+    margin-top: 4px;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.sheet-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    gap: 20px;
+
+    padding: 25px 0 19px;
+}
+
+.sheet-title > div:first-child > span {
+    color: #4f6d89;
+
+    font-size: 8px;
+    font-weight: 700;
+
+    letter-spacing: .15em;
+}
+
+.sheet-title h1 {
+    margin: 6px 0 0;
+
+    font-size: 25px;
+    letter-spacing: -.025em;
+}
+
+.sheet-reference {
+    min-width: 160px;
+
+    text-align: right;
+}
+
+.sheet-reference span {
+    display: block;
+
+    color: #73808c;
+
+    font-size: 8px;
+}
+
+.sheet-reference strong {
+    display: block;
+
+    margin-top: 4px;
+
+    font-size: 11px;
+
+    word-break: break-all;
+}
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+.sheet-profile {
+    display: grid;
+
+    grid-template-columns:
+        92px
+        minmax(0, 1fr)
+        130px;
+
+    gap: 18px;
+
+    align-items: center;
+
+    padding: 17px;
+
+    border: 1px solid #d7dde3;
+    border-radius: 8px;
+
+    background: #f7f9fb;
+}
+
+.sheet-photo {
+    width: 88px;
+    height: 88px;
+
+    border-radius: 8px;
+
+    object-fit: cover;
+
+    background: #e5e9ed;
+}
+
+.sheet-profile-content h2 {
+    margin: 0;
+
+    font-size: 21px;
+}
+
+.sheet-profile-content p {
+    margin: 5px 0 0;
+
+    color: #5c6975;
+
+    font-size: 12px;
+}
+
+.sheet-badges {
+    display: flex;
+    gap: 6px;
+
+    margin-top: 12px;
+}
+
+.sheet-badges span {
+    padding: 5px 8px;
+
+    border: 1px solid #ccd4dc;
+    border-radius: 4px;
+
+    background: #ffffff;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: .06em;
+}
+
+.sheet-qr-box {
+    text-align: center;
+}
+
+.sheet-qr-box img {
+    width: 105px;
+    height: 105px;
+}
+
+.sheet-qr-box span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #687681;
+
+    font-size: 7px;
+    letter-spacing: .08em;
+}
+
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+.sheet-section {
+    margin-top: 18px;
+
+    border: 1px solid #d9dfe5;
+    border-radius: 7px;
+
+    overflow: hidden;
+}
+
+.sheet-section > header {
+    padding: 9px 11px;
+
+    background: #eff3f6;
+
+    border-bottom: 1px solid #d9dfe5;
+
+    color: #455563;
+
+    font-size: 9px;
+    font-weight: 750;
+
+    letter-spacing: .11em;
+}
+
+.sheet-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(0, 1fr)
+        );
+
+    gap: 0;
+
+    padding: 3px 10px 10px;
+}
+
+.sheet-grid > div {
+    min-height: 58px;
+
+    padding: 11px 8px;
+
+    border-bottom: 1px solid #edf0f2;
+}
+
+.sheet-grid span {
+    display: block;
+
+    color: #77838e;
+
+    font-size: 7.5px;
+
+    letter-spacing: .07em;
+}
+
+.sheet-grid strong {
+    display: block;
+
+    margin-top: 5px;
+
+    color: #17212b;
+
+    font-size: 10.5px;
+    font-weight: 650;
+
+    line-height: 1.35;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   PERMISSIONS
+========================================================= */
+
+.sheet-permissions {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0, 1fr)
+        );
+
+    gap: 7px;
+
+    padding: 13px;
+}
+
+.sheet-permission {
+    padding: 7px 9px;
+
+    border: 1px solid #dbe1e6;
+    border-radius: 4px;
+
+    background: #f8fafb;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.sheet-footer {
+    display: grid;
+
+    grid-template-columns:
+        1.2fr
+        .8fr
+        .8fr;
+
+    gap: 16px;
+
+    margin-top: 20px;
+
+    padding-top: 12px;
+
+    border-top: 1px solid #bbc5ce;
+}
+
+.sheet-footer div {
+    display: flex;
+    flex-direction: column;
+}
+
+.sheet-footer span {
+    color: #78848f;
+
+    font-size: 7px;
+}
+
+.sheet-footer strong {
+    margin-top: 3px;
+
+    font-size: 8.5px;
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.sheet-error {
+    width: 210mm;
+    max-width: 100%;
+
+    margin: auto;
+
+    padding: 30px;
+
+    background: #ffffff;
+    color: #9b2631;
+}
+
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+@page {
+    size: A4;
+    margin: 0;
+}
+
+@media print {
+
+    html,
+    body {
+        width: 210mm;
+
+        margin: 0;
+        padding: 0;
+
+        background: #ffffff;
+    }
+
+    .print-toolbar {
+        display: none !important;
+    }
+
+    .user-sheet {
+        width: 210mm;
+        min-height: 297mm;
+
+        margin: 0;
+
+        box-shadow: none;
+
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+
+    .sheet-section,
+    .sheet-profile {
+        break-inside: avoid;
+    }
+
+}
+
+
+/* =========================================================
+   PHOENIX USER SHEET — A4 COMPACT PRINT PASS
+========================================================= */
+
+@media print {
+
+    /*
+       Optimisation de la fiche pour utiliser réellement
+       la surface A4 sans sacrifier la lisibilité.
+    */
+
+    .user-sheet {
+        width: 210mm;
+        min-height: 0;
+
+        padding:
+            9mm
+            11mm
+            8mm;
+
+        margin: 0;
+
+        box-shadow: none;
+    }
+
+
+    /* -----------------------------------------------------
+       EN-TÊTE
+    ------------------------------------------------------ */
+
+    .sheet-header {
+        padding-bottom: 8px;
+    }
+
+    .sheet-brand img {
+        width: 36px;
+        height: 36px;
+    }
+
+    .sheet-brand {
+        gap: 8px;
+    }
+
+    .sheet-brand strong {
+        font-size: 10.5px;
+    }
+
+    .sheet-brand span {
+        margin-top: 2px;
+
+        font-size: 8px;
+    }
+
+    .sheet-classification span {
+        font-size: 6.8px;
+    }
+
+    .sheet-classification strong {
+        font-size: 9px;
+    }
+
+
+    /* -----------------------------------------------------
+       TITRE
+    ------------------------------------------------------ */
+
+    .sheet-title {
+        padding:
+            13px
+            0
+            10px;
+
+        gap: 12px;
+    }
+
+    .sheet-title > div:first-child > span {
+        font-size: 6.8px;
+    }
+
+    .sheet-title h1 {
+        margin-top: 4px;
+
+        font-size: 19px;
+    }
+
+    .sheet-reference {
+        min-width: 135px;
+    }
+
+    .sheet-reference span {
+        font-size: 6.5px;
+    }
+
+    .sheet-reference strong {
+        font-size: 8.5px;
+    }
+
+
+    /* -----------------------------------------------------
+       PROFIL
+    ------------------------------------------------------ */
+
+    .sheet-profile {
+        grid-template-columns:
+            68px
+            minmax(0, 1fr)
+            92px;
+
+        gap: 11px;
+
+        padding: 10px;
+    }
+
+    .sheet-photo {
+        width: 65px;
+        height: 65px;
+    }
+
+    .sheet-profile-content h2 {
+        font-size: 16px;
+    }
+
+    .sheet-profile-content p {
+        margin-top: 3px;
+
+        font-size: 9px;
+    }
+
+    .sheet-badges {
+        margin-top: 7px;
+    }
+
+    .sheet-badges span {
+        padding:
+            3px
+            6px;
+
+        font-size: 7px;
+    }
+
+    .sheet-qr-box img {
+        width: 76px;
+        height: 76px;
+    }
+
+    .sheet-qr-box span {
+        font-size: 5.8px;
+    }
+
+
+    /* -----------------------------------------------------
+       SECTIONS
+    ------------------------------------------------------ */
+
+    .sheet-section {
+        margin-top: 9px;
+
+        break-inside: avoid;
+    }
+
+    .sheet-section > header {
+        padding:
+            6px
+            8px;
+
+        font-size: 7px;
+    }
+
+
+    /* -----------------------------------------------------
+       INFORMATIONS
+    ------------------------------------------------------ */
+
+    .sheet-grid {
+        grid-template-columns:
+            repeat(
+                4,
+                minmax(0, 1fr)
+            );
+
+        padding:
+            2px
+            6px
+            5px;
+    }
+
+    .sheet-grid > div {
+        min-height: 40px;
+
+        padding:
+            6px
+            5px;
+    }
+
+    .sheet-grid span {
+        font-size: 6px;
+    }
+
+    .sheet-grid strong {
+        margin-top: 3px;
+
+        font-size: 8px;
+
+        line-height: 1.25;
+    }
+
+
+    /* -----------------------------------------------------
+       DROITS EFFECTIFS
+    ------------------------------------------------------ */
+
+    .sheet-section:last-of-type {
+        break-inside: auto;
+    }
+
+    .sheet-permissions {
+        grid-template-columns:
+            repeat(
+                3,
+                minmax(0, 1fr)
+            );
+
+        gap: 4px;
+
+        padding: 7px;
+    }
+
+    .sheet-permission {
+        padding:
+            4px
+            5px;
+
+        font-size: 6.8px;
+
+        line-height: 1.2;
+
+        break-inside: avoid;
+    }
+
+
+    /* -----------------------------------------------------
+       PIED DE PAGE
+    ------------------------------------------------------ */
+
+    .sheet-footer {
+        margin-top: 9px;
+
+        padding-top: 7px;
+
+        gap: 10px;
+    }
+
+    .sheet-footer span {
+        font-size: 5.8px;
+    }
+
+    .sheet-footer strong {
+        margin-top: 2px;
+
+        font-size: 7px;
+    }
+
+}
+
+
+/* =========================================================
+   PHOENIX USER SHEET — FINAL READABILITY
+========================================================= */
+
+@media print {
+
+    /* Libellés des informations */
+    .sheet-grid span {
+        font-size: 6.8px;
+        font-weight: 600;
+    }
+
+    /* Valeurs importantes */
+    .sheet-grid strong {
+        font-size: 8.8px;
+        font-weight: 650;
+        line-height: 1.3;
+    }
+
+    /* En-têtes des blocs */
+    .sheet-section > header {
+        font-size: 7.6px;
+        font-weight: 750;
+    }
+
+    /* Droits effectifs */
+    .sheet-permission {
+        font-size: 7.5px;
+        line-height: 1.3;
+        padding: 4.5px 6px;
+    }
+
+    /* Identité */
+    .sheet-profile-content h2 {
+        font-size: 17px;
+    }
+
+    .sheet-profile-content p {
+        font-size: 9.5px;
+    }
+
+    .sheet-badges span {
+        font-size: 7.5px;
+    }
+
+    /* Référence */
+    .sheet-reference strong {
+        font-size: 9px;
+    }
+
+    /* Pied de page */
+    .sheet-footer span {
+        font-size: 6.4px;
+    }
+
+    .sheet-footer strong {
+        font-size: 7.6px;
+    }
+
+}

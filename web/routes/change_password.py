@@ -39,6 +39,10 @@ from core.security.session import (
 )
 
 
+from core.users_registry.user_service import (
+    user_registry_service,
+)
+
 router = APIRouter()
 
 
@@ -685,6 +689,33 @@ async def change_password(
             "OPERATOR"
         )
     )
+
+
+    # ====================================================
+    # ENTERPRISE USER REGISTRY — PASSWORD
+    # ====================================================
+
+    try:
+
+        user_registry_service.record_password_change(
+            username,
+            actor_role=
+                role,
+            changed_at=
+                user.get(
+                    "password_changed_at"
+                ),
+        )
+
+    except Exception as error:
+
+        print(
+            "Phoenix User Registry "
+            "password synchronization warning:",
+            type(
+                error
+            ).__name__,
+        )
 
 
     session_manager.remove(

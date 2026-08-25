@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Utilisateurs — Phoenix Vision AI
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/icons.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/phoenix_design_system.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/users_console.css"
+    >
+
+</head>
+
+
+<body>
+
+<div class="users-shell">
+
+
+    <!-- ==================================================
+         SIDEBAR
+    =================================================== -->
+
+    <aside class="console-sidebar">
+
+
+        <div class="console-brand">
+
+            <img
+                src="/static/images/logoS.png"
+                alt="Phoenix"
+            >
+
+            <div>
+                <strong>PHOENIX</strong>
+                <span>VISION AI</span>
+            </div>
+
+        </div>
+
+
+        <div class="console-product">
+
+            <span class="product-status"></span>
+
+            <div>
+                <strong>ENTERPRISE</strong>
+                <span>Opérations de sécurité</span>
+            </div>
+
+        </div>
+
+
+        <nav class="console-navigation">
+
+
+            <div class="console-label">
+                SUPERVISION
+            </div>
+
+
+            <a href="/enterprise" class="console-nav-item">
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-dashboard"></use>
+                </svg>
+                <span>Tableau de bord</span>
+            </a>
+
+
+            <a href="/cameras" class="console-nav-item">
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-camera"></use>
+                </svg>
+                <span>Caméras</span>
+            </a>
+
+
+            <a href="/events" class="console-nav-item">
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-events"></use>
+                </svg>
+                <span>Événements</span>
+            </a>
+
+
+            <a href="/alerts" class="console-nav-item">
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-alert"></use>
+                </svg>
+                <span>Alertes IA</span>
+            </a>
+
+
+            <a href="/history" class="console-nav-item">
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-history"></use>
+                </svg>
+                <span>Historique</span>
+            </a>
+
+
+            <a href="/map" class="console-nav-item">
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-map"></use>
+                </svg>
+                <span>Carte</span>
+            </a>
+
+
+            <a href="/plaques" class="console-nav-item">
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-anpr"></use>
+                </svg>
+                <span>Plaques / LAPI</span>
+            </a>
+
+
+            <a href="/reports" class="console-nav-item">
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-reports"></use>
+                </svg>
+                <span>Rapports</span>
+            </a>
+
+
+            <div class="console-label administration">
+                ADMINISTRATION
+            </div>
+
+
+            <a href="/settings" class="console-nav-item">
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-settings"></use>
+                </svg>
+                <span>Paramètres</span>
+            </a>
+
+
+            <a
+                href="/users"
+                class="console-nav-item active"
+                aria-current="page"
+            >
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-users"></use>
+                </svg>
+
+                <span>Utilisateurs</span>
+            </a>
+
+
+        </nav>
+
+    </aside>
+
+
+    <!-- ==================================================
+         WORKSPACE
+    =================================================== -->
+
+    <main class="users-main">
+
+
+        <header class="users-topbar">
+
+            <div class="users-breadcrumb">
+                PHOENIX / ADMINISTRATION / UTILISATEURS
+            </div>
+
+
+            <div class="users-topbar-actions">
+
+                <time id="users-clock">
+                    --:--:--
+                </time>
+
+
+                <button
+                    id="users-fullscreen"
+                    class="users-icon-button"
+                    type="button"
+                    title="Plein écran"
+                >
+                    <svg class="phoenix-icon">
+                        <use href="/static/icons/phoenix-ui.svg#icon-fullscreen"></use>
+                    </svg>
+                </button>
+
+
+                <div class="users-session">
+
+                    <img
+                        id="users-session-photo"
+                        alt=""
+                    >
+
+                    <div>
+                        <strong id="users-session-name">
+                            —
+                        </strong>
+
+                        <span id="users-session-role">
+                            —
+                        </span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <section class="users-page-header">
+
+            <div>
+
+                <div class="users-kicker">
+                    PHOENIX · GOUVERNANCE DES ACCÈS
+                </div>
+
+                <h1>
+                    UTILISATEURS
+                </h1>
+
+                <p>
+                    Dossiers professionnels, rôles, états de compte,
+                    droits effectifs et historique administratif.
+                </p>
+
+            </div>
+
+
+            <div
+                id="users-registry-status"
+                class="users-registry-status loading"
+            >
+
+                <span></span>
+
+                <div>
+                    <small>USER REGISTRY</small>
+                    <strong>CONNEXION</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             KPI
+        =================================================== -->
+
+        <section class="users-kpi-grid">
+
+            <article class="users-kpi">
+                <span>UTILISATEURS</span>
+                <strong id="users-kpi-total">0</strong>
+                <small>Dossiers enregistrés</small>
+            </article>
+
+            <article class="users-kpi">
+                <span>ACTIFS</span>
+                <strong id="users-kpi-active">0</strong>
+                <small>Accès opérationnel</small>
+            </article>
+
+            <article class="users-kpi">
+                <span>À SÉCURISER</span>
+                <strong id="users-kpi-approved">0</strong>
+                <small>Mot de passe temporaire</small>
+            </article>
+
+            <article class="users-kpi critical">
+                <span>ACCÈS RESTREINTS</span>
+                <strong id="users-kpi-restricted">0</strong>
+                <small>Suspendus, désactivés ou expirés</small>
+            </article>
+
+        </section>
+
+
+        <!-- ==================================================
+             TOOLBAR
+        =================================================== -->
+
+        <section class="users-toolbar">
+
+            <div class="users-search">
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-search"></use>
+                </svg>
+
+                <input
+                    id="users-search"
+                    type="search"
+                    placeholder="Rechercher par nom, identifiant, fonction, site..."
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <select id="users-filter-role">
+                <option value="">Tous les rôles</option>
+                <option value="ADMIN">ADMIN</option>
+                <option value="SUPERVISOR">SUPERVISOR</option>
+                <option value="ANALYST">ANALYST</option>
+                <option value="OPERATOR">OPERATOR</option>
+            </select>
+
+
+            <select id="users-filter-status">
+                <option value="">Tous les statuts</option>
+                <option value="ACTIVE">Actif</option>
+                <option value="APPROVED">À sécuriser</option>
+                <option value="SUSPENDED">Suspendu</option>
+                <option value="DISABLED">Désactivé</option>
+                <option value="EXPIRED">Expiré</option>
+            </select>
+
+
+            <select id="users-filter-site">
+                <option value="">Tous les sites</option>
+            </select>
+
+
+            <button
+                id="users-refresh"
+                class="users-secondary-button"
+                type="button"
+            >
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-refresh"></use>
+                </svg>
+
+                Actualiser
+            </button>
+
+
+            <a
+                id="users-account-requests"
+                class="users-primary-button hidden"
+                href="/admin/requests"
+            >
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-users"></use>
+                </svg>
+
+                Demandes de comptes
+
+                <span
+                    id="users-request-count"
+                    class="users-request-count hidden"
+                    aria-label="Demandes en attente"
+                >
+                    0
+                </span>
+
+            </a>
+
+        </section>
+
+
+        <!-- ==================================================
+             CONTENT
+        =================================================== -->
+
+        <section class="users-content-grid">
+
+
+            <article class="users-list-panel">
+
+                <header class="users-panel-header">
+
+                    <div>
+                        <span>REGISTRE</span>
+                        <strong>Utilisateurs enregistrés</strong>
+                    </div>
+
+                    <small id="users-visible-count">
+                        0 résultat
+                    </small>
+
+                </header>
+
+
+                <div class="users-table-scroll">
+
+                    <table class="users-table">
+
+                        <thead>
+                            <tr>
+                                <th>Identité</th>
+                                <th>Identifiant</th>
+                                <th>Rôle</th>
+                                <th>Site</th>
+                                <th>Statut</th>
+                                <th>Dernière connexion</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="users-table-body">
+
+                            <tr>
+                                <td colspan="6" class="users-empty-cell">
+                                    Chargement du registre...
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </article>
+
+
+            <aside
+                id="users-detail-panel"
+                class="users-detail-panel"
+            >
+
+                <div class="users-detail-empty">
+
+                    <svg class="phoenix-icon">
+                        <use href="/static/icons/phoenix-ui.svg#icon-users"></use>
+                    </svg>
+
+                    <strong>
+                        DOSSIER UTILISATEUR
+                    </strong>
+
+                    <p>
+                        Sélectionnez un utilisateur pour consulter
+                        son dossier professionnel, ses droits et
+                        son historique administratif.
+                    </p>
+
+                </div>
+
+            </aside>
+
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<!-- ======================================================
+     MODALE PHOENIX
+======================================================= -->
+
+<div
+    id="users-modal"
+    class="users-modal hidden"
+    aria-hidden="true"
+>
+
+    <div class="users-modal-backdrop"></div>
+
+
+    <section
+        class="users-modal-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="users-modal-title"
+    >
+
+        <header>
+
+            <div>
+                <span>PHOENIX · ADMINISTRATION</span>
+                <h2 id="users-modal-title">
+                    Action utilisateur
+                </h2>
+            </div>
+
+
+            <button
+                id="users-modal-close"
+                type="button"
+                class="users-icon-button"
+                aria-label="Fermer"
+            >
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-close"></use>
+                </svg>
+            </button>
+
+        </header>
+
+
+        <form id="users-modal-form">
+
+            <div id="users-modal-body"></div>
+
+
+            <div class="users-modal-actions">
+
+                <button
+                    id="users-modal-cancel"
+                    class="users-secondary-button"
+                    type="button"
+                >
+                    Annuler
+                </button>
+
+                <button
+                    id="users-modal-submit"
+                    class="users-primary-button"
+                    type="submit"
+                >
+                    Confirmer
+                </button>
+
+            </div>
+
+        </form>
+
+    </section>
+
+</div>
+
+
+<div
+    id="users-toast"
+    class="users-toast hidden"
+    role="status"
+></div>
+
+
+<script src="/static/js/enterprise/users_console.js"></script>
+
+</body>
+</html>
