@@ -67,6 +67,7 @@ Phoenix Vision AI vise notamment à permettre :
 | Rapports Enterprise | ✅ Génération, recherche, impression, PDF et audit |
 | Paramètres Enterprise | ✅ Configuration persistante, RBAC, audit, LAPI, Rapports et installation |
 | Utilisateurs Enterprise | ✅ Registre, cycle de vie, RBAC, console, audit, impression A4 et QR interne |
+| Système Enterprise | ✅ Santé système, runtime, composants, bases, diagnostics, audit et RBAC |
 | Sauvegardes Enterprise | 🔄 À construire |
 
 ### Vision IA et ANPR
@@ -291,6 +292,45 @@ Fonctionnalités actuellement opérationnelles :
 Le workflow temporaire `/admin/requests` reste utilisé pendant le développement
 pour l'approbation initiale et la génération du mot de passe temporaire.
 À terme, la gouvernance complète des comptes sera intégrée à Phoenix Admin.
+
+
+### Système Enterprise — état actuel
+
+La console `/system` fournit une vue locale et opérationnelle de l'état
+de Phoenix Vision AI sans modifier directement la configuration du système.
+
+Fonctionnalités actuellement opérationnelles :
+
+- état global calculé à partir de mesures réelles ;
+- utilisation CPU, mémoire et stockage via `psutil` ;
+- informations de runtime et de processus Phoenix Vision AI ;
+- liaison réelle de `PhoenixEngine` et `Stream Service` au registre runtime ;
+- supervision des principaux composants locaux du moteur ;
+- détection dynamique des bases SQLite présentes dans `data/` ;
+- contrôle de disponibilité des bases sans modification de leur contenu ;
+- diagnostic général non destructif ;
+- vérification SQLite à la demande avec `PRAGMA quick_check` en lecture seule ;
+- journal local des diagnostics avec chaîne d'intégrité SHA-256 ;
+- permissions `system.view`, `system.diagnostics` et `system.database_check` ;
+- ADMIN autorisé à consulter et exécuter les diagnostics ;
+- SUPERVISOR limité à la consultation de l'état système ;
+- ANALYST et OPERATOR sans accès à la console Système ;
+- validation stricte des noms de bases transmis à l'API ;
+- contrôle d'origine des opérations POST sensibles ;
+- console terminal allégée en fonctionnement normal.
+
+Le nombre de bases affiché par la console n'est pas figé : Phoenix Vision AI
+détecte dynamiquement les bases SQLite locales disponibles. Lors de la
+validation de cette phase, l'installation de développement comportait sept
+bases accessibles.
+
+Le cookie de session utilise actuellement `HttpOnly` et `SameSite=Strict`.
+Le mode `Secure` reste désactivé pendant le développement local en HTTP et
+devra être activé lors d'un déploiement de production sous HTTPS.
+
+La console Système a été validée pendant le développement sous Firefox /
+Lubuntu.
+
 
 ## 8. Dashboard Enterprise
 

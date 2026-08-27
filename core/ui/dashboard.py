@@ -8,6 +8,8 @@ Phoenix Security Technologies
 ========================================================
 """
 
+import os
+
 
 class Dashboard:
 
@@ -45,6 +47,27 @@ class Dashboard:
 
 
     def display(self):
+
+
+        verbose = (
+            os.getenv(
+                "PHOENIX_VERBOSE_CONSOLE",
+                "0"
+            )
+            .strip()
+            .lower()
+            in {
+                "1",
+                "true",
+                "yes",
+                "on",
+            }
+        )
+
+
+        if not verbose:
+
+            return
 
 
         print()

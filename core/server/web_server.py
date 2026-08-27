@@ -53,7 +53,11 @@ class WebServer:
 
                 port=self.port,
 
-                reload=False
+                reload=False,
+
+                access_log=False,
+
+                log_level="warning"
 
             )
 

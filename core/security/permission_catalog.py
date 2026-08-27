@@ -128,6 +128,23 @@ PERMISSION_GROUPS = {
     },
 
 
+    "SYSTEM": {
+        "label":
+            "Système",
+
+        "permissions": {
+            "system.view":
+                "Consulter l'état système",
+
+            "system.diagnostics":
+                "Exécuter les diagnostics système",
+
+            "system.database_check":
+                "Vérifier l'intégrité des bases",
+        },
+    },
+
+
     "SETTINGS": {
         "label":
             "Paramètres",

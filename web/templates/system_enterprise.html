@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Système — Phoenix Vision AI</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/icons.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/phoenix_design_system.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/system_console.css"
+    >
+
+</head>
+
+
+<body>
+
+<div class="system-shell">
+
+
+    <aside class="console-sidebar">
+
+        <div class="console-brand">
+
+            <img
+                src="/static/images/logoS.png"
+                alt="Phoenix"
+            >
+
+            <div>
+                <strong>PHOENIX</strong>
+                <span>VISION AI</span>
+            </div>
+
+        </div>
+
+
+        <div class="console-product">
+
+            <span class="product-status"></span>
+
+            <div>
+                <strong>ENTERPRISE</strong>
+                <span>Opérations de sécurité</span>
+            </div>
+
+        </div>
+
+
+        <nav class="console-navigation">
+
+            <div class="console-label">
+                SUPERVISION
+            </div>
+
+            <a href="/enterprise" class="console-nav-item">
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-dashboard"></use>
+                </svg>
+                <span>Tableau de bord</span>
+            </a>
+
+            <a href="/cameras" class="console-nav-item">
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-camera"></use>
+                </svg>
+                <span>Caméras</span>
+            </a>
+
+            <a href="/events" class="console-nav-item">
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-events"></use>
+                </svg>
+                <span>Événements</span>
+            </a>
+
+            <a href="/alerts" class="console-nav-item">
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-alert"></use>
+                </svg>
+                <span>Alertes IA</span>
+            </a>
+
+            <a href="/history" class="console-nav-item">
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-history"></use>
+                </svg>
+                <span>Historique</span>
+            </a>
+
+            <a href="/map" class="console-nav-item">
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-map"></use>
+                </svg>
+                <span>Carte</span>
+            </a>
+
+            <a href="/plaques" class="console-nav-item">
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-anpr"></use>
+                </svg>
+                <span>Plaques / LAPI</span>
+            </a>
+
+            <a href="/reports" class="console-nav-item">
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-reports"></use>
+                </svg>
+                <span>Rapports</span>
+            </a>
+
+
+            <div class="console-label administration">
+                ADMINISTRATION
+            </div>
+
+            <a href="/settings" class="console-nav-item">
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-settings"></use>
+                </svg>
+                <span>Paramètres</span>
+            </a>
+
+            <a href="/users" class="console-nav-item">
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-users"></use>
+                </svg>
+                <span>Utilisateurs</span>
+            </a>
+
+            <a
+                href="/system"
+                class="console-nav-item active"
+                aria-current="page"
+            >
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-system"></use>
+                </svg>
+                <span>Système</span>
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <main class="system-main">
+
+
+        <header class="system-topbar">
+
+            <div class="system-breadcrumb">
+                PHOENIX / ADMINISTRATION / SYSTÈME
+            </div>
+
+            <div class="system-topbar-actions">
+
+                <time id="system-clock">
+                    --:--:--
+                </time>
+
+                <button
+                    id="system-refresh"
+                    class="system-icon-button"
+                    type="button"
+                    title="Actualiser"
+                >
+                    <svg class="phoenix-icon">
+                        <use href="/static/icons/phoenix-ui.svg#icon-refresh"></use>
+                    </svg>
+                </button>
+
+                <button
+                    id="system-fullscreen"
+                    class="system-icon-button"
+                    type="button"
+                    title="Plein écran"
+                >
+                    <svg class="phoenix-icon">
+                        <use href="/static/icons/phoenix-ui.svg#icon-fullscreen"></use>
+                    </svg>
+                </button>
+
+                <div class="system-session">
+
+                    <img
+                        id="system-session-photo"
+                        alt=""
+                    >
+
+                    <div>
+                        <strong id="system-session-name">—</strong>
+                        <span id="system-session-role">—</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <section class="system-page-header">
+
+            <div>
+
+                <div class="system-kicker">
+                    PHOENIX · ÉTAT OPÉRATIONNEL
+                </div>
+
+                <h1>SYSTÈME</h1>
+
+                <p>
+                    Santé de l'installation, ressources machine,
+                    moteur Phoenix, composants, bases de données
+                    et environnement d'exécution.
+                </p>
+
+            </div>
+
+
+            <div
+                id="system-global-status"
+                class="system-global-status loading"
+            >
+                <span></span>
+
+                <div>
+                    <small>ÉTAT GLOBAL</small>
+                    <strong>CONNEXION</strong>
+                </div>
+            </div>
+
+        </section>
+
+
+        <section class="system-kpi-grid">
+
+            <article class="system-kpi">
+
+                <div class="system-kpi-icon">
+                    <svg class="phoenix-icon">
+                        <use href="/static/icons/phoenix-ui.svg#icon-cpu"></use>
+                    </svg>
+                </div>
+
+                <div>
+                    <span>PROCESSEUR</span>
+                    <strong id="system-cpu">—</strong>
+                    <small id="system-cpu-detail">—</small>
+                </div>
+
+            </article>
+
+
+            <article class="system-kpi">
+
+                <div class="system-kpi-icon">
+                    <svg class="phoenix-icon">
+                        <use href="/static/icons/phoenix-ui.svg#icon-memory"></use>
+                    </svg>
+                </div>
+
+                <div>
+                    <span>MÉMOIRE</span>
+                    <strong id="system-memory">—</strong>
+                    <small id="system-memory-detail">—</small>
+                </div>
+
+            </article>
+
+
+            <article class="system-kpi">
+
+                <div class="system-kpi-icon">
+                    <svg class="phoenix-icon">
+                        <use href="/static/icons/phoenix-ui.svg#icon-disk"></use>
+                    </svg>
+                </div>
+
+                <div>
+                    <span>STOCKAGE</span>
+                    <strong id="system-disk">—</strong>
+                    <small id="system-disk-detail">—</small>
+                </div>
+
+            </article>
+
+
+            <article class="system-kpi">
+
+                <div class="system-kpi-icon">
+                    <svg class="phoenix-icon">
+                        <use href="/static/icons/phoenix-ui.svg#icon-database"></use>
+                    </svg>
+                </div>
+
+                <div>
+                    <span>BASES PHOENIX</span>
+                    <strong id="system-databases">—</strong>
+                    <small id="system-databases-detail">—</small>
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <section class="system-grid">
+
+
+            <article class="system-panel">
+
+                <header class="system-panel-header">
+
+                    <div>
+                        <span>RUNTIME</span>
+                        <strong>Moteur Phoenix</strong>
+                    </div>
+
+                    <svg class="phoenix-icon">
+                        <use href="/static/icons/phoenix-ui.svg#icon-server"></use>
+                    </svg>
+
+                </header>
+
+
+                <div class="system-status-list">
+
+                    <div class="system-status-row">
+                        <div>
+                            <strong>PhoenixEngine</strong>
+                            <span>Moteur principal d'analyse</span>
+                        </div>
+                        <span id="system-engine-status" class="system-state">—</span>
+                    </div>
+
+                    <div class="system-status-row">
+                        <div>
+                            <strong>Stream Service</strong>
+                            <span>Diffusion des flux</span>
+                        </div>
+                        <span id="system-stream-status" class="system-state">—</span>
+                    </div>
+
+                    <div class="system-status-row">
+                        <div>
+                            <strong>Processus serveur</strong>
+                            <span id="system-process-detail">—</span>
+                        </div>
+                        <span id="system-process-status" class="system-state">—</span>
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <article class="system-panel">
+
+                <header class="system-panel-header">
+                    <div>
+                        <span>COMPOSANTS</span>
+                        <strong>Services locaux</strong>
+                    </div>
+                </header>
+
+                <div
+                    id="system-components"
+                    class="system-status-list"
+                >
+                    <div class="system-loading-row">
+                        Chargement...
+                    </div>
+                </div>
+
+            </article>
+
+
+            <article class="system-panel system-panel-wide">
+
+                <header class="system-panel-header">
+
+                    <div>
+                        <span>STOCKAGE LOCAL</span>
+                        <strong>Bases de données Phoenix</strong>
+                    </div>
+
+                    <small id="system-database-summary">—</small>
+
+                </header>
+
+                <div class="system-table-scroll">
+
+                    <table class="system-table">
+
+                        <thead>
+                            <tr>
+                                <th>Base</th>
+                                <th>État</th>
+                                <th>Taille</th>
+                                <th>Tables</th>
+                                <th>Modification</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="system-database-body">
+
+                            <tr>
+                                <td colspan="5" class="system-empty">
+                                    Chargement...
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </article>
+
+
+            <article class="system-panel">
+
+                <header class="system-panel-header">
+                    <div>
+                        <span>INSTALLATION</span>
+                        <strong>Environnement</strong>
+                    </div>
+                </header>
+
+                <div
+                    id="system-environment"
+                    class="system-info-grid"
+                ></div>
+
+            </article>
+
+
+            <article class="system-panel">
+
+                <header class="system-panel-header">
+                    <div>
+                        <span>RÉPERTOIRES</span>
+                        <strong>Stockage Phoenix</strong>
+                    </div>
+                </header>
+
+                <div
+                    id="system-directories"
+                    class="system-status-list"
+                ></div>
+
+            </article>
+
+
+        </section>
+
+
+        <section
+            id="system-diagnostics-section"
+            class="system-diagnostics-section"
+        >
+
+            <div class="system-diagnostics-header">
+
+                <div>
+
+                    <div class="system-kicker">
+                        CONTRÔLE TECHNIQUE
+                    </div>
+
+                    <h2>
+                        Diagnostics
+                    </h2>
+
+                    <p>
+                        Vérifications non destructives de
+                        Phoenix Vision AI et de ses bases locales.
+                    </p>
+
+                </div>
+
+
+                <div
+                    id="system-diagnostics-actions"
+                    class="system-diagnostics-actions"
+                >
+
+                    <button
+                        id="system-run-diagnostic"
+                        class="system-action-button"
+                        type="button"
+                        disabled
+                    >
+                        Lancer un diagnostic
+                    </button>
+
+                    <button
+                        id="system-check-databases"
+                        class="system-action-button secondary"
+                        type="button"
+                        disabled
+                    >
+                        Vérifier les bases
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="system-diagnostics-permission"
+                class="system-diagnostics-permission hidden"
+            >
+                Les diagnostics avancés sont réservés
+                aux administrateurs autorisés.
+            </div>
+
+
+            <div class="system-diagnostics-grid">
+
+                <article class="system-panel">
+
+                    <header class="system-panel-header">
+
+                        <div>
+                            <span>RÉSULTAT</span>
+                            <strong>
+                                Dernier diagnostic
+                            </strong>
+                        </div>
+
+                        <span
+                            id="system-diagnostic-result"
+                            class="system-state available"
+                        >
+                            NON EXÉCUTÉ
+                        </span>
+
+                    </header>
+
+
+                    <div
+                        id="system-diagnostic-checks"
+                        class="system-diagnostic-checks"
+                    >
+
+                        <div class="system-loading-row">
+                            Aucun diagnostic lancé.
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <article class="system-panel">
+
+                    <header class="system-panel-header">
+
+                        <div>
+                            <span>TRAÇABILITÉ</span>
+                            <strong>
+                                Journal des diagnostics
+                            </strong>
+                        </div>
+
+                        <span
+                            id="system-audit-integrity"
+                            class="system-state available"
+                        >
+                            —
+                        </span>
+
+                    </header>
+
+
+                    <div class="system-table-scroll">
+
+                        <table class="system-table">
+
+                            <thead>
+
+                                <tr>
+                                    <th>Date / heure</th>
+                                    <th>Action</th>
+                                    <th>Auteur</th>
+                                    <th>Résultat</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody
+                                id="system-diagnostic-audit-body"
+                            >
+
+                                <tr>
+                                    <td
+                                        colspan="4"
+                                        class="system-empty"
+                                    >
+                                        Chargement...
+                                    </td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+
+        <footer class="system-footer">
+            <span id="system-generated-at">
+                Dernière mesure : —
+            </span>
+
+            <span>
+                Les mesures sont collectées localement par Phoenix Vision AI.
+            </span>
+        </footer>
+
+
+    </main>
+
+</div>
+
+
+<div
+    id="system-toast"
+    class="system-toast hidden"
+    role="status"
+></div>
+
+
+<script src="/static/js/enterprise/system_console.js"></script>
+
+
+<script src="/static/js/enterprise/system_diagnostics.js"></script>
+
+</body>
+</html>

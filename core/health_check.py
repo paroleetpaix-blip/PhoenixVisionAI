@@ -7,7 +7,7 @@ Health Check
 Vérification de l'environnement
 
 Phoenix Security Technologies
-SDK v0.5.0 Enterprise
+Enterprise Runtime
 ========================================================
 """
 
@@ -51,5 +51,7 @@ class HealthCheck:
             ok = False
 
         print("\n===============================\n")
+
+        return ok
 
         return ok

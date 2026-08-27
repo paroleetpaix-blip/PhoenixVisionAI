@@ -298,6 +298,21 @@ document.addEventListener(
                     );
 
 
+                if(
+                    response.status === 401
+                ){
+
+                    hideAlertBadges();
+
+                    window.location.replace(
+                        "/login"
+                    );
+
+                    return;
+
+                }
+
+
                 if(!response.ok){
 
                     hideAlertBadges();

@@ -161,6 +161,37 @@ Le projet est encore en développement. Les entrées **Unreleased** ne constitue
 - Impression de fiche soumise à la permission `users.print`.
 - Firefox / Lubuntu validé pour la console Utilisateurs et l'aperçu d'impression A4.
 
+### Système Enterprise
+- Ajout de la console opérationnelle `/system`.
+- Ajout du service central `SystemHealthService`.
+- Mesures réelles CPU, mémoire, stockage, uptime et processus via `psutil`.
+- Correction du retour booléen du Health Check historique.
+- Ajout du registre runtime pour `PhoenixEngine` et `Stream Service`.
+- Liaison et libération contrôlées du moteur dans le runtime partagé.
+- Supervision des principaux composants locaux du moteur.
+- Détection dynamique des bases SQLite locales.
+- Ajout d'un diagnostic général non destructif.
+- Ajout du contrôle SQLite `PRAGMA quick_check` en lecture seule.
+- Ajout du journal local `system_diagnostics.db`.
+- Journal des diagnostics protégé par une chaîne d'intégrité SHA-256.
+- Ajout des permissions `system.view`, `system.diagnostics` et `system.database_check`.
+- ADMIN autorisé à consulter et exécuter les diagnostics.
+- SUPERVISOR limité à la consultation de l'état système.
+- ANALYST et OPERATOR sans accès à la console Système.
+- Validation stricte des noms de bases transmis au diagnostic.
+- Refus des chemins relatifs, absolus ou imbriqués pour les contrôles SQLite.
+- Protection d'origine des opérations POST sensibles de la console Système.
+- Conservation du cookie `HttpOnly` et `SameSite=Strict`.
+- Mode `Secure` réservé au futur déploiement HTTPS de production.
+- Réduction du bruit de la console serveur en fonctionnement normal.
+- Mode console détaillé disponible via `PHOENIX_VERBOSE_CONSOLE=1`.
+- Correction du comportement des anciennes sessions expirées lors du polling des alertes.
+- Ajout des icônes système nécessaires à l'interface Enterprise.
+- Harmonisation de l'indicateur visuel du menu actif pour Utilisateurs et Système.
+- Navigation Système harmonisée sur les consoles Enterprise.
+- Entrée Sauvegardes temporairement absente de la navigation jusqu'à l'implémentation réelle de la phase 4.12.
+- Firefox / Lubuntu validé pour la console Système et ses diagnostics.
+
 ### Compatibilité Web
 - Firefox / Lubuntu validé pour la console Rapports, l’impression et le téléchargement PDF.
 - Architecture Web basée sur standards HTML/CSS/JavaScript et API HTTP.

@@ -1530,3 +1530,33 @@ a {
 
     font-variant-numeric: tabular-nums;
 }
+
+/* PHOENIX ACTIVE NAV INDICATOR */
+
+.console-nav-item {
+    position: relative;
+}
+
+.console-nav-item.active::before {
+    content: "";
+
+    position: absolute;
+
+    left: -12px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 3px;
+    height: 26px;
+
+    border-radius:
+        0 2px 2px 0;
+
+    background:
+        var(--users-accent);
+
+    box-shadow:
+        0 0 10px
+        var(--users-accent);
+}

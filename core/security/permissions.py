@@ -54,6 +54,8 @@ ROLE_PERMISSIONS = {
         "users.view_audit",
         "users.print",
 
+        "system.view",
+
     },
 
 

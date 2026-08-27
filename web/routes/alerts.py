@@ -53,13 +53,6 @@ def get_valid_session(
         return None
 
 
-    if not session_manager.exists(
-        token
-    ):
-
-        return None
-
-
     return session_manager.get(
         token
     )

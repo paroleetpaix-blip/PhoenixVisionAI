@@ -35,6 +35,8 @@ logs/
 *.sqlite3
 *.sqlite
 *.db
+*.db-wal
+*.db-shm
 
 # Sensitive Phoenix user data
 data/account_requests.json

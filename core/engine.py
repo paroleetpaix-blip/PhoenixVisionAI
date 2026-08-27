@@ -10,6 +10,7 @@ SDK v0.5.0 Enterprise
 ========================================================
 """
 
+import os
 from core import config
 from core.utils import print_banner, ensure_directories
 
@@ -24,6 +25,7 @@ from core.video_reader import VideoReader
 from core.video_writer import VideoWriter
 from core.annotator import Annotator
 from core.health_check import HealthCheck
+from core import runtime
 
 from core.vehicle.vehicle_manager import VehicleManager
 from core.vehicle.vehicle_adapter import VehicleAdapter
@@ -191,6 +193,10 @@ class PhoenixEngine:
             )
 
         self.status = "Actif"
+
+        runtime.bind_engine(
+            self
+        )
 
         self.logger.info("PhoenixEngine démarré")
 
@@ -888,7 +894,22 @@ class PhoenixEngine:
             # Statistiques véhicules
             # ====================================================
 
-            if frame_index % 30 == 0:
+            if (
+                os.getenv(
+                    "PHOENIX_VERBOSE_CONSOLE",
+                    "0"
+                )
+                .strip()
+                .lower()
+                in {
+                    "1",
+                    "true",
+                    "yes",
+                    "on",
+                }
+                and
+                frame_index % 30 == 0
+            ):
 
                 print(
                     f"Véhicules actifs : "
@@ -931,7 +952,22 @@ class PhoenixEngine:
 
             frame_index += 1
 
-            if frame_index % 30 == 0:
+            if (
+                os.getenv(
+                    "PHOENIX_VERBOSE_CONSOLE",
+                    "0"
+                )
+                .strip()
+                .lower()
+                in {
+                    "1",
+                    "true",
+                    "yes",
+                    "on",
+                }
+                and
+                frame_index % 30 == 0
+            ):
 
                 print(
                     f"Frame : "
@@ -969,6 +1005,10 @@ class PhoenixEngine:
         self.detector.unload()
 
         self.status = "Arrêté"
+
+        runtime.unbind_engine(
+            self
+        )
 
         self.logger.info(
             "PhoenixEngine arrêté"
