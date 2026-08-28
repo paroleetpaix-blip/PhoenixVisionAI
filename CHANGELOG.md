@@ -192,6 +192,47 @@ Le projet est encore en développement. Les entrées **Unreleased** ne constitue
 - Entrée Sauvegardes temporairement absente de la navigation jusqu'à l'implémentation réelle de la phase 4.12.
 - Firefox / Lubuntu validé pour la console Système et ses diagnostics.
 
+### Sauvegardes Enterprise
+- Ajout du système complet de sauvegardes Phoenix.
+- Politique de sauvegarde centralisée pour les bases actives, configurations et données sensibles prévues.
+- Sauvegarde SQLite cohérente via l'API native SQLite Backup.
+- Ajout des manifestes SHA-256 et de `manifest.sha256`.
+- Vérification complète des sauvegardes avec SHA-256 et `PRAGMA quick_check`.
+- Catalogue local des sauvegardes Phoenix.
+- Types de sauvegarde `MANUAL`, `PRE_RESTORE`, `AUTOMATIC` et `MIGRATED`.
+- Permissions locales renforcées : répertoires `0700` et fichiers sensibles `0600`.
+- Ajout d'une architecture de restauration hors ligne avant l'ouverture des bases opérationnelles.
+- Ajout du verrou d'instance unique Phoenix avant Restore et démarrage serveur.
+- Ajout du stockage durable des demandes `restore_pending` et `restore_in_progress`.
+- Protection contre la reprise accidentelle d'une restauration interrompue.
+- Ajout du staging Restore isolé.
+- Ajout du plan de réconciliation des fichiers à restaurer.
+- Ajout du snapshot transactionnel de l'état actif avant écriture.
+- Gestion contrôlée des sidecars SQLite WAL/SHM.
+- Ajout de l'Executor transactionnel avec rollback vers le snapshot exact.
+- Détection et blocage des échecs critiques de restauration.
+- Maintien du commutateur `LIVE_RESTORE_ENABLED = False` tant que l'activation LIVE finale n'est pas autorisée.
+- Ajout d'un registre de migrations de sauvegardes inter-version.
+- Migration uniquement sur copie de travail ; backup original conservé immuable.
+- Refus des chaînes de migration incomplètes.
+- Validation SQLite après les étapes de migration.
+- Publication atomique des sauvegardes migrées avec nouveau manifest.
+- Ajout des permissions `backups.view`, `backups.create`, `backups.verify`, `backups.restore` et `backups.migrate`.
+- Accès Backup actuellement réservé à ADMIN.
+- Ajout de huit opérations API Backup.
+- Ajout de la console Enterprise `/backups`.
+- Réintroduction de l'entrée Sauvegardes dans les navigations Enterprise après disponibilité réelle du backend.
+- Ajout de l'heure et du mode plein écran dans la console Sauvegardes.
+- Ajout du scheduler de sauvegardes automatiques.
+- Création automatique au maximum une fois par heure.
+- Ajout d'une rotation GFS : 48 h horaires, 30 jours quotidiens, 12 semaines hebdomadaires et 12 mois mensuels.
+- Les sauvegardes MANUAL, PRE_RESTORE, MIGRATED et invalides sont protégées contre la rétention automatique.
+- Scheduler et rétention bloqués pendant une restauration pending ou in-progress.
+- Journal local de l'automatisation avec permission `0600`.
+- Première sauvegarde AUTOMATIC réelle validée avec succès.
+- Audit final de la Phase 4.12 : `PHASE BACKUPS SAINE : True`.
+- Firefox / Lubuntu validé pour la console Sauvegardes et les fonctions testées de cette phase.
+
 ### Compatibilité Web
 - Firefox / Lubuntu validé pour la console Rapports, l’impression et le téléchargement PDF.
 - Architecture Web basée sur standards HTML/CSS/JavaScript et API HTTP.

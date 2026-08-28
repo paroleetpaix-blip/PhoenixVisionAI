@@ -49,6 +49,8 @@ from web.routes.users import router as users_router
 
 from web.routes.system import router as system_router
 
+from web.routes.backups import router as backups_router
+
 app = FastAPI(
     title="Phoenix Vision AI"
 )
@@ -106,3 +108,5 @@ app.include_router(
 app.include_router(users_router)
 
 app.include_router(system_router)
+
+app.include_router(backups_router)

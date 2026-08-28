@@ -83,3 +83,18 @@ data/cameras.json
 data/config.json
 data/test.json
 data/workspaces.json
+
+# Phoenix runtime backups
+data/backups/
+database/backups/
+
+# Phoenix restore runtime
+data/restore_pending.json
+data/restore_last_result.json
+data/.restore-staging/
+
+# Phoenix runtime instance lock
+data/phoenix_runtime.lock
+data/restore_in_progress.json
+data/.backup-migrations/
+data/backup_automation_journal.jsonl

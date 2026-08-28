@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Sauvegardes — Phoenix Vision AI</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/icons.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/phoenix_design_system.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/system_console.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/css/enterprise/backups_console.css"
+    >
+
+</head>
+
+
+<body>
+
+<div class="system-shell">
+
+
+    <aside class="console-sidebar">
+
+        <div class="console-brand">
+
+            <img
+                src="/static/images/logoS.png"
+                alt="Phoenix"
+            >
+
+            <div>
+                <strong>PHOENIX</strong>
+                <span>VISION AI</span>
+            </div>
+
+        </div>
+
+
+        <div class="console-product">
+
+            <span class="product-status"></span>
+
+            <div>
+                <strong>ENTERPRISE</strong>
+                <span>Opérations de sécurité</span>
+            </div>
+
+        </div>
+
+
+        <nav class="console-navigation">
+
+            <div class="console-label">
+                SUPERVISION
+            </div>
+
+            <a href="/enterprise" class="console-nav-item">
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-dashboard"></use>
+                </svg>
+                <span>Tableau de bord</span>
+            </a>
+
+            <a href="/cameras" class="console-nav-item">
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-camera"></use>
+                </svg>
+                <span>Caméras</span>
+            </a>
+
+            <a href="/events" class="console-nav-item">
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-events"></use>
+                </svg>
+                <span>Événements</span>
+            </a>
+
+            <a href="/alerts" class="console-nav-item">
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-alert"></use>
+                </svg>
+                <span>Alertes IA</span>
+            </a>
+
+            <a href="/history" class="console-nav-item">
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-history"></use>
+                </svg>
+                <span>Historique</span>
+            </a>
+
+            <a href="/map" class="console-nav-item">
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-map"></use>
+                </svg>
+                <span>Carte</span>
+            </a>
+
+            <a href="/plaques" class="console-nav-item">
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-anpr"></use>
+                </svg>
+                <span>Plaques / LAPI</span>
+            </a>
+
+            <a href="/reports" class="console-nav-item">
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-reports"></use>
+                </svg>
+                <span>Rapports</span>
+            </a>
+
+
+            <div class="console-label administration">
+                ADMINISTRATION
+            </div>
+
+            <a href="/settings" class="console-nav-item">
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-settings"></use>
+                </svg>
+                <span>Paramètres</span>
+            </a>
+
+            <a href="/users" class="console-nav-item">
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-users"></use>
+                </svg>
+                <span>Utilisateurs</span>
+            </a>
+
+            <a href="/system" class="console-nav-item">
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-system"></use>
+                </svg>
+                <span>Système</span>
+            </a>
+
+            <a
+                href="/backups"
+                class="console-nav-item active"
+                aria-current="page"
+            >
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-database"></use>
+                </svg>
+                <span>Sauvegardes</span>
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <main class="system-main backup-main">
+
+
+        <header class="system-topbar">
+
+            <div>
+
+                <div class="system-breadcrumb">
+                    PHOENIX VISION AI / ADMINISTRATION / SAUVEGARDES
+                </div>
+
+                <h1 class="backup-page-title">
+                    Sauvegardes
+                </h1>
+
+            </div>
+
+
+            <div class="backup-topbar-actions">
+
+                <time id="backup-clock">
+                    --:--:--
+                </time>
+
+                <button
+                    id="backup-refresh"
+                    class="backup-icon-button"
+                    type="button"
+                    aria-label="Actualiser"
+                    title="Actualiser"
+                >
+                    <svg class="phoenix-icon">
+                        <use href="/static/icons/phoenix-ui.svg#icon-refresh"></use>
+                    </svg>
+                </button>
+
+                <button
+                    id="backup-fullscreen"
+                    class="backup-icon-button"
+                    type="button"
+                    aria-label="Plein écran"
+                    title="Plein écran"
+                >
+                    <svg class="phoenix-icon">
+                        <use href="/static/icons/phoenix-ui.svg#icon-fullscreen"></use>
+                    </svg>
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <section class="backup-content">
+
+
+            <div class="backup-hero">
+
+                <div>
+
+                    <span class="backup-eyebrow">
+                        CONTINUITÉ OPÉRATIONNELLE
+                    </span>
+
+                    <h2>
+                        Protection des données Phoenix Vision AI
+                    </h2>
+
+                    <p>
+                        Création, contrôle d'intégrité,
+                        migration et préparation sécurisée
+                        des restaurations.
+                    </p>
+
+                </div>
+
+
+                <button
+                    id="backup-create"
+                    class="backup-primary-button"
+                    type="button"
+                    hidden
+                >
+                    <svg class="phoenix-icon">
+                        <use href="/static/icons/phoenix-ui.svg#icon-database"></use>
+                    </svg>
+
+                    <span>
+                        Créer une sauvegarde
+                    </span>
+                </button>
+
+            </div>
+
+
+            <div
+                id="backup-live-banner"
+                class="backup-live-banner"
+            >
+                <div class="backup-live-indicator"></div>
+
+                <div>
+                    <strong id="backup-live-title">
+                        Vérification de la restauration
+                    </strong>
+
+                    <span id="backup-live-text">
+                        Chargement de l'état de sécurité…
+                    </span>
+                </div>
+
+            </div>
+
+
+            <section class="backup-automation-panel">
+
+                <div class="backup-automation-item">
+                    <span>SAUVEGARDES AUTOMATIQUES</span>
+                    <strong id="backup-auto-status">—</strong>
+                </div>
+
+                <div class="backup-automation-item">
+                    <span>INTERVALLE</span>
+                    <strong id="backup-auto-interval">—</strong>
+                </div>
+
+                <div class="backup-automation-item">
+                    <span>PROCHAINE ÉCHÉANCE</span>
+                    <strong id="backup-auto-next">—</strong>
+                </div>
+
+                <div class="backup-automation-item">
+                    <span>RÉTENTION</span>
+                    <strong id="backup-auto-retention">—</strong>
+                </div>
+
+            </section>
+
+
+            <section class="backup-stat-grid">
+
+                <article class="backup-stat-card">
+
+                    <div class="backup-stat-icon">
+                        <svg class="phoenix-icon">
+                            <use href="/static/icons/phoenix-ui.svg#icon-database"></use>
+                        </svg>
+                    </div>
+
+                    <div>
+                        <span>Sauvegardes disponibles</span>
+                        <strong id="backup-stat-count">—</strong>
+                    </div>
+
+                </article>
+
+
+                <article class="backup-stat-card">
+
+                    <div class="backup-stat-icon">
+                        <svg class="phoenix-icon">
+                            <use href="/static/icons/phoenix-ui.svg#icon-history"></use>
+                        </svg>
+                    </div>
+
+                    <div>
+                        <span>Dernière sauvegarde</span>
+                        <strong id="backup-stat-latest">—</strong>
+                    </div>
+
+                </article>
+
+
+                <article class="backup-stat-card">
+
+                    <div class="backup-stat-icon">
+                        <svg class="phoenix-icon">
+                            <use href="/static/icons/phoenix-ui.svg#icon-system"></use>
+                        </svg>
+                    </div>
+
+                    <div>
+                        <span>État restauration</span>
+                        <strong id="backup-stat-restore">—</strong>
+                    </div>
+
+                </article>
+
+
+                <article class="backup-stat-card">
+
+                    <div class="backup-stat-icon">
+                        <svg class="phoenix-icon">
+                            <use href="/static/icons/phoenix-ui.svg#icon-server"></use>
+                        </svg>
+                    </div>
+
+                    <div>
+                        <span>Version Phoenix Vision AI</span>
+                        <strong id="backup-stat-version">—</strong>
+                    </div>
+
+                </article>
+
+            </section>
+
+
+            <section class="backup-panel">
+
+                <div class="backup-panel-header">
+
+                    <div>
+                        <span class="backup-panel-kicker">
+                            CATALOGUE
+                        </span>
+
+                        <h3>
+                            Sauvegardes enregistrées
+                        </h3>
+                    </div>
+
+
+                    <div
+                        id="backup-catalog-state"
+                        class="backup-catalog-state"
+                    >
+                        Chargement…
+                    </div>
+
+                </div>
+
+
+                <div class="backup-table-wrapper">
+
+                    <table class="backup-table">
+
+                        <thead>
+                            <tr>
+                                <th>Sauvegarde</th>
+                                <th>Type</th>
+                                <th>Date</th>
+                                <th>Version</th>
+                                <th>Fichiers</th>
+                                <th>État</th>
+                                <th class="backup-actions-column">
+                                    Actions
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="backup-table-body">
+
+                            <tr>
+                                <td
+                                    colspan="7"
+                                    class="backup-loading-cell"
+                                >
+                                    Chargement du catalogue…
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+            <section class="backup-security-note">
+
+                <svg class="phoenix-icon">
+                    <use href="/static/icons/phoenix-ui.svg#icon-system"></use>
+                </svg>
+
+                <div>
+                    <strong>
+                        Protection des restaurations
+                    </strong>
+
+                    <p>
+                        Une restauration ne peut pas être
+                        exécutée tant que le moteur LIVE reste
+                        verrouillé. Les opérations critiques
+                        sont contrôlées par les autorisations
+                        Phoenix Vision AI.
+                    </p>
+                </div>
+
+            </section>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<dialog
+    id="backup-details-dialog"
+    class="backup-dialog"
+>
+
+    <div class="backup-dialog-header">
+
+        <div>
+            <span>SAUVEGARDE PHOENIX</span>
+            <h3>Détails</h3>
+        </div>
+
+        <button
+            type="button"
+            class="backup-dialog-close"
+            data-close-dialog="backup-details-dialog"
+            aria-label="Fermer"
+        >
+            ×
+        </button>
+
+    </div>
+
+    <div
+        id="backup-details-content"
+        class="backup-details-grid"
+    ></div>
+
+    <div class="backup-dialog-footer">
+
+        <button
+            type="button"
+            class="backup-secondary-button"
+            data-close-dialog="backup-details-dialog"
+        >
+            Fermer
+        </button>
+
+    </div>
+
+</dialog>
+
+
+<dialog
+    id="backup-restore-dialog"
+    class="backup-dialog backup-restore-dialog"
+>
+
+    <div class="backup-dialog-header">
+
+        <div>
+            <span>OPÉRATION CRITIQUE</span>
+            <h3>Préparer une restauration</h3>
+        </div>
+
+        <button
+            type="button"
+            class="backup-dialog-close"
+            data-close-dialog="backup-restore-dialog"
+            aria-label="Fermer"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+    <div class="backup-warning-box">
+
+        <strong>
+            Confirmation renforcée requise
+        </strong>
+
+        <p>
+            La restauration peut remplacer les données
+            opérationnelles Phoenix. Saisissez exactement
+            l'identifiant de la sauvegarde pour confirmer.
+        </p>
+
+    </div>
+
+
+    <label
+        class="backup-confirm-label"
+        for="backup-restore-confirm"
+    >
+        Identifiant attendu
+        <strong id="backup-restore-id"></strong>
+    </label>
+
+    <input
+        id="backup-restore-confirm"
+        class="backup-confirm-input"
+        type="text"
+        autocomplete="off"
+        spellcheck="false"
+    >
+
+
+    <div class="backup-dialog-footer">
+
+        <button
+            type="button"
+            class="backup-secondary-button"
+            data-close-dialog="backup-restore-dialog"
+        >
+            Annuler
+        </button>
+
+        <button
+            id="backup-restore-submit"
+            type="button"
+            class="backup-danger-button"
+            disabled
+        >
+            Préparer la restauration
+        </button>
+
+    </div>
+
+</dialog>
+
+
+<div
+    id="backup-toast"
+    class="backup-toast"
+    role="status"
+    aria-live="polite"
+></div>
+
+
+<script src="/static/js/enterprise/backups_console.js"></script>
+
+</body>
+</html>

@@ -128,6 +128,29 @@ PERMISSION_GROUPS = {
     },
 
 
+    "BACKUPS": {
+        "label":
+            "Sauvegardes",
+
+        "permissions": {
+            "backups.view":
+                "Consulter les sauvegardes",
+
+            "backups.create":
+                "Créer une sauvegarde",
+
+            "backups.verify":
+                "Vérifier l'intégrité d'une sauvegarde",
+
+            "backups.restore":
+                "Préparer une restauration",
+
+            "backups.migrate":
+                "Migrer une sauvegarde",
+        },
+    },
+
+
     "SYSTEM": {
         "label":
             "Système",

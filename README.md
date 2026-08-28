@@ -68,7 +68,7 @@ Phoenix Vision AI vise notamment à permettre :
 | Paramètres Enterprise | ✅ Configuration persistante, RBAC, audit, LAPI, Rapports et installation |
 | Utilisateurs Enterprise | ✅ Registre, cycle de vie, RBAC, console, audit, impression A4 et QR interne |
 | Système Enterprise | ✅ Santé système, runtime, composants, bases, diagnostics, audit et RBAC |
-| Sauvegardes Enterprise | 🔄 À construire |
+| Sauvegardes Enterprise | ✅ Opérationnel |
 
 ### Vision IA et ANPR
 
@@ -494,6 +494,84 @@ Phoenix Vision AI est actuellement un **logiciel en développement**. Il ne doit
 **PHOENIX SECURITY TECHNOLOGIES**
 
 *L’innovation au service de la protection.*
+
+
+## Sauvegardes Enterprise — Phase 4.12
+
+Phoenix Vision AI dispose désormais d'un système local complet de sauvegarde, de vérification, de restauration sécurisée et de rétention.
+
+### Protection des données
+
+- sauvegardes SQLite cohérentes via l'API native SQLite Backup ;
+- sauvegarde des bases actives, configurations et données sensibles prévues par la politique Phoenix ;
+- manifestes SHA-256 avec contrôle d'intégrité ;
+- `PRAGMA quick_check` sur les bases sauvegardées ;
+- permissions locales renforcées : répertoires `0700` et fichiers sensibles `0600` ;
+- catalogue des sauvegardes avec types `MANUAL`, `PRE_RESTORE`, `AUTOMATIC` et `MIGRATED`.
+
+### Restauration sécurisée
+
+- validation stricte des destinations de restauration ;
+- sauvegarde automatique `PRE_RESTORE` avant une restauration ;
+- staging isolé avant toute écriture active ;
+- snapshot transactionnel de l'état courant ;
+- plan de réconciliation contrôlé ;
+- gestion des sidecars SQLite WAL/SHM ;
+- rollback transactionnel vers l'état exact précédent en cas d'échec ;
+- état persistant `restore_pending` puis `restore_in_progress` pour résister aux interruptions ;
+- verrou d'instance Phoenix avant le traitement Restore ;
+- démarrage bloqué automatiquement lorsqu'une restauration reste dans un état non sûr ;
+- écriture LIVE volontairement maintenue désactivée tant que l'activation finale contrôlée n'est pas validée.
+
+### Migration des sauvegardes
+
+- registre ordonné des migrations inter-version ;
+- refus d'une chaîne de migration incomplète ;
+- backup original conservé immuable ;
+- migration effectuée uniquement sur une copie de travail ;
+- validation SQLite après chaque étape ;
+- journal et état de migration ;
+- reconstruction du manifest et publication atomique d'un nouveau backup compatible.
+
+### RBAC et API
+
+Les fonctions Backup sont actuellement réservées au rôle `ADMIN` via :
+
+- `backups.view` ;
+- `backups.create` ;
+- `backups.verify` ;
+- `backups.restore` ;
+- `backups.migrate`.
+
+La console Enterprise `/backups` expose le catalogue, l'intégrité, la version, l'état Restore, les capacités administratives et l'automatisation.
+
+### Sauvegardes automatiques et rétention
+
+Le scheduler Phoenix crée au maximum une sauvegarde automatique par heure.
+
+Politique de rétention :
+
+- conservation horaire : 48 heures ;
+- conservation quotidienne : 30 jours ;
+- conservation hebdomadaire : 12 semaines ;
+- conservation mensuelle : 12 mois.
+
+Les sauvegardes `MANUAL`, `PRE_RESTORE`, `MIGRATED` et les sauvegardes invalides ne sont pas supprimées par la rétention automatique.
+
+Le scheduler est bloqué lorsqu'une restauration est en attente ou en cours.
+
+### Validation
+
+La Phase 4.12 a été validée sous Firefox / Lubuntu avec :
+
+- sauvegardes MANUAL, PRE_RESTORE et AUTOMATIC valides ;
+- console Enterprise fonctionnelle ;
+- RBAC fonctionnel ;
+- API Backup fonctionnelle ;
+- rétention testée en environnement isolé ;
+- première sauvegarde automatique réelle créée avec succès ;
+- audit final : `PHASE BACKUPS SAINE : True`.
+
 
 © 2026 Phoenix Security Technologies. Tous droits réservés.
 
